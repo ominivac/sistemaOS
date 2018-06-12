@@ -13,15 +13,16 @@
         <property name="hibernate.current_session_context_class">thread</property>
         <property name="hibernate.show_sql">true</property>
        	
-       	<property name="hibernate.hbm2ddl.auto">create-drop</property>
+       	<property name="hibernate.hbm2ddl.auto">update</property>
        
         <property name="hibernate.dialect"></property>
         
         <!-- mapeamento das entidades -->
-        <mapping class="br.com.os.domain.ItemOS"/>
+        
         <mapping class="br.com.os.domain.OS"/>
         <mapping class="br.com.os.domain.ProdutoOS"/>
         <mapping class="br.com.os.domain.Usuario"/>
+        <mapping class="br.com.os.domain.ResponsavelOS"/>
 
         
     </session-factory>
