@@ -40,6 +40,25 @@ public class GenericDAO<Entidade>{
 		}
 	}
 	
+	public void merge(Entidade entidade) {
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Transaction transaction = null;
+		
+		try {
+			transaction = session.beginTransaction();
+			session.merge(entidade);
+			transaction.commit();
+			
+		} catch (RuntimeException e) {
+			if(transaction != null) {
+				transaction.rollback();
+			}
+			throw e;
+		}finally {
+			session.close();
+		}
+	}
+	
 	
 	public void editar(Entidade entidade) {
 		Session session = HibernateUtil.getSessionFactory().openSession();
