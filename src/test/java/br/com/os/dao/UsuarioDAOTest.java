@@ -13,10 +13,24 @@ public class UsuarioDAOTest {
 	@Test
 	@Ignore
 	public void salvar() {
+		// testado
 		Usuario usuario = new Usuario();
-		usuario.setNome("roberto");
+		usuario.setNome("maria");
 		usuario.setTipo('A');
-		usuario.setSenha("123");
+		usuario.setSenha("maria123");
+		
+		
+		UsuarioDAO usuarioDAO = new UsuarioDAO();
+		usuarioDAO.salvar(usuario);
+	}
+	@Test
+	@Ignore
+	public void mergeIncluir() {
+		Usuario usuario = new Usuario();
+		usuario.setCodigo(2);
+		usuario.setNome("maria rita");
+		usuario.setTipo('U');
+		usuario.setSenha("maria1234");
 		
 		
 		UsuarioDAO usuarioDAO = new UsuarioDAO();
@@ -37,7 +51,8 @@ public class UsuarioDAOTest {
 	@Test
 	@Ignore
 	public void buscar() {
-		String nome = "roberto";
+		//testado ok
+		String nome = "ma";
 		UsuarioDAO usuarioDAO = new UsuarioDAO();
 		System.out.println(usuarioDAO.buscarPorNome(nome) );
 	}
@@ -57,13 +72,14 @@ public class UsuarioDAOTest {
 	}
 	
 	@Test
+	//@Ignore
 	public void editar() {
 		UsuarioDAO usuarioDAO = new UsuarioDAO();
 		Usuario ueditado = new Usuario();
 		
-		ueditado.setCodigo(3);
-		ueditado.setNome("NOME EDITADO");
-		ueditado.setSenha("SENHA EDITADA");
+		ueditado.setCodigo(2);
+		ueditado.setNome("Maria Rita");
+		ueditado.setSenha("maria12345");
 		ueditado.setTipo('U');
 		
 		usuarioDAO.editar(ueditado);

@@ -19,6 +19,8 @@
 				paginator="true">
 				<f:facet name="footer">
 						<p:commandButton value="Novo Usuário"
+							actionListener="#{usuarioBean.novo()}"
+							update=":formCadastroUsuario:pnlFormCadUsuario"
 							oncomplete="PF('dlgUsuario').show();"/>
 					</f:facet>
 				
@@ -41,26 +43,27 @@
 	
 	<p:dialog widgetVar="dlgUsuario" draggable="false" 
 		resizable="false" modal="true" header="Usuários - Cadastro">
-		<h:form>
-			<h:panelGrid columns="2">
+		<h:form id="formCadastroUsuario">
+			<h:panelGrid id="pnlFormCadUsuario" columns="2">
 		
-			<p:outputLabel value="Nome: "/>
-			<p:inputText required="" size="30" maxlength="100"/>
-			
-			<p:outputLabel value="Senha: "/>
-			<p:password size="10" maxlength="8"/>
-			
-			<p:outputLabel value="Repita a Senha: "/>
-			<p:inputText  size="10" maxlength="8"/>
-			
-			<p:outputLabel value="Tipo Usuário: "/>
-			<p:selectOneRadio>
+				<p:outputLabel value="Nome: "/>
+				<p:inputText value="#{usuarioBean.usuario.nome}" required="" size="30" maxlength="100"/>
 				
-				<f:selectItem itemLabel="ADMINISTRADOR" 
-					itemValue="A" />
-				<f:selectItem itemLabel="USUÁRIO - SOMENTE LEITURA" 
-					itemValue="U" />
-			</p:selectOneRadio>
+				<p:outputLabel value="Senha: "/>
+				<p:password value="#{usuarioBean.usuario.senha}" size="10" maxlength="8"/>
+				
+				<p:outputLabel value="Repita a Senha: "/>
+				<p:inputText  size="10" maxlength="8"/>
+				
+				<p:outputLabel value="Tipo Usuário: "/>
+				<p:selectOneRadio>
+					
+					<f:selectItem itemLabel="ADMINISTRADOR" 
+						itemValue="A" />
+					| 
+					<f:selectItem itemLabel="USUÁRIO - SOMENTE LEITURA" 
+						itemValue="U" />
+				</p:selectOneRadio>
 			
 			</h:panelGrid>
 			<h:panelGrid columns="2">

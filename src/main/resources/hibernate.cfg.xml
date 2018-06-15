@@ -20,6 +20,7 @@
         <!-- mapeamento das entidades -->
         
         <mapping class="br.com.os.domain.OS"/>
+        <mapping class="br.com.os.domain.Item"/>
         <mapping class="br.com.os.domain.ProdutoOS"/>
         <mapping class="br.com.os.domain.Usuario"/>
         <mapping class="br.com.os.domain.ResponsavelOS"/>

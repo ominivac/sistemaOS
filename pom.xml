@@ -11,7 +11,18 @@
 	<properties>
 		<project.build.sourceEnconding>UTF-8</project.build.sourceEnconding>
 	</properties>
-
+	
+	<!--  repositorios necessario para os themas do primefaces -->
+	<repositories>	
+		<!-- For 3.5 and older -->
+		<repository>
+			<id>prime-repo</id>
+			<name>PrimeFaces Maven Repository</name>
+			<url>http://repository.primefaces.org</url>
+			<layout>default</layout>
+		</repository>
+	</repositories>
+	
 
 	<dependencies>
 		<!-- https://mvnrepository.com/artifact/org.hibernate/hibernate-core -->
@@ -55,6 +66,19 @@
 			<artifactId>omnifaces</artifactId>
 			<version>1.14</version>
 		</dependency>
+
+		<dependency>
+			<groupId>org.primefaces.themes</groupId>
+			<artifactId>all-themes</artifactId>
+			<version>1.0.10</version>
+		</dependency>
+		<!-- https://mvnrepository.com/artifact/javax.annotation/javax.annotation-api -->
+		<dependency>
+			<groupId>javax.annotation</groupId>
+			<artifactId>javax.annotation-api</artifactId>
+			<version>1.2</version>
+		</dependency>
+
 
 
 	</dependencies>

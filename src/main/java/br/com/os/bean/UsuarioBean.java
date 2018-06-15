@@ -1,22 +1,54 @@
 package br.com.os.bean;
 
-import javax.faces.application.FacesMessage;
+import java.io.Serializable;
+
 import javax.faces.bean.ManagedBean;
-import javax.faces.context.FacesContext;
+import javax.faces.bean.ViewScoped;
 
 import org.omnifaces.util.Messages;
 
-@ManagedBean
-public class UsuarioBean {
+import br.com.os.dao.UsuarioDAO;
+import br.com.os.domain.Usuario;
 
+@ManagedBean
+@ViewScoped
+public class UsuarioBean implements Serializable{
+
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private Usuario usuario;
+	
+	public Usuario getUsuario() {
+		return usuario;
+	}
+	
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+	
+	public void novo() {
+		usuario = new Usuario();
+	}
+	
 	public void salvar() {
-		String msg = "programacao";
+		try {
+			UsuarioDAO usuarioDAO = new UsuarioDAO();
+			usuarioDAO.salvar(usuario);
+			
+			novo();
+			
+			Messages.addGlobalInfo("Usuário salvo com sucesso");
+			
+			
+		}catch (RuntimeException e) {
+			Messages.addGlobalError("Erro ao salvar usuário");
+			e.printStackTrace();
+		}
 		
-		//FacesMessage message = new FacesMessage(FacesMessage.SEVERITY_INFO, msg, msg);
-		//FacesContext contexto = FacesContext.getCurrentInstance();
-		//contexto.addMessage(null, message);
 		
-		Messages.addGlobalInfo(msg);
+		
 		
 	}
 	

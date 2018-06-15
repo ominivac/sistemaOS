@@ -7,46 +7,71 @@
 
 <h:head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Responsáveis</title>
+<title>Responsáveis pela OS</title>
 </h:head>
 <h:body>
-	<h:form>
-		<p:panel header="Reponsáveis pela OS - Listagem">
-			<p:dataTable emptyMessage="Nenhum registro encontrado."
-				paginator="true">
-				<f:facet name="footer">
-						<p:commandButton value="Novo Resposável"
-							oncomplete="PF('dlgResponsavel').show();"/>
-					</f:facet>
+	<p:growl id="mensagem"/>
+	
+
+	<h:form id="formListagem">
+		<p:panel header="Responsáveis pela OS - Listagem">
+			<p:dataTable id="tabela" emptyMessage="Nenhum registro encontrado."
+				value="#{responsavelOSBean.responsaveis}" var="resp" paginator="true">
 				
-				<p:column headerText="Nome">
-					
+				<f:facet name="header">
+						<p:commandButton value="Novo Responsavel"
+							actionListener="#{responsavelOSBean.novo()}"
+							update=":formCadastroResponsavel:pnlFormCadResponsavel"
+							oncomplete="PF('dlgResponsavel').show();"/>
+				</f:facet>
+				
+				<p:column headerText="Id" width="10%">
+					<h:outputText value="#{resp.codigo}" />
 				</p:column>
 				
+				<p:column headerText="Nome" sortBy="#{resp.nome}" filterBy="#{resp.nome}">
+					<h:outputText value="#{resp.nome}" />
+				</p:column>
 				
-				
-				<p:column headerText="Opções">
-				
+				<p:column headerText="Opções" width="25%">
+					<p:commandButton icon="ui-icon-trash"
+						actionListener="#{responsavelOSBean.excluir}"
+						update=":mensagem">
+						<p:confirm header="Confirmação" message="Deseja excluir o responsável?"
+							icon="ui-icon-alert"/>
+						<f:attribute name="respSelecionado" value="#{resp}"/>		
+							
+					</p:commandButton>
 				</p:column>
 			
 			</p:dataTable>
+			
+			<p:confirmDialog global="true">
+				<p:commandButton value="Sim" type="button"
+					styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
+				
+				<p:commandButton value="Não" type="button"
+					styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>
+			</p:confirmDialog>
+			
 		</p:panel>
 	
 	</h:form>
 	
 	<p:dialog widgetVar="dlgResponsavel" draggable="false" 
-		resizable="false" modal="true" header="Responsável - Cadastro">
-		<h:form>
-			<h:panelGrid columns="2">
+		resizable="false" modal="true" header="Responsáveis pela OS - Cadastro">
+		<h:form id="formCadastroResponsavel">
+			<h:panelGrid id="pnlFormCadResponsavel" columns="2">
 		
-			<p:outputLabel value="Nome: "/>
-			<p:inputText required="" size="30" maxlength="100"/>
-			
-			
+				<p:outputLabel value="Nome: "/>
+				<p:inputText value="#{responsavelOSBean.responsavelOS.nome}" required="" size="30" maxlength="100"/>
+				
 			
 			</h:panelGrid>
 			<h:panelGrid columns="2">
-				<p:commandButton value="Salvar"/>
+				<p:commandButton value="Salvar" 
+					actionListener="#{responsavelOSBean.salvar()}" oncomplete="PF('dlgResponsavel').hide();"
+					update=":mensagem: formCadastroResponsavel:pnlFormCadResponsavel :formListagem:tabela "/>
 				<p:commandButton value="Fechar" oncomplete="PF('dlgResponsavel').hide();"/>
 			</h:panelGrid>
 			

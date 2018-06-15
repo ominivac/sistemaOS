@@ -117,11 +117,29 @@ public class GenericDAO<Entidade>{
 	}
 	
 	@SuppressWarnings("unchecked")
+	public Entidade buscarPorID(Integer id){
+		Session sessao = HibernateUtil.getSessionFactory().openSession();
+		try {
+			Criteria consulta = sessao.createCriteria(classe);
+			consulta.add(Restrictions.idEq(id));
+			Entidade resultado = (Entidade) consulta.uniqueResult();
+			
+			return resultado;
+			
+		}catch (RuntimeException e) {
+			throw e;
+		}finally {
+			sessao.close();
+		}
+	}
+	
+	
+	@SuppressWarnings("unchecked")
 	public Entidade buscarPorNome(String nome){
 		Session sessao = HibernateUtil.getSessionFactory().openSession();
 		try {
 			Criteria consulta = sessao.createCriteria(classe);
-			consulta.add(Restrictions.like("nome", nome));
+			consulta.add(Restrictions.ilike("nome", '%'+nome+'%'));
 			Entidade resultado = (Entidade) consulta.uniqueResult();
 			
 			return resultado;
