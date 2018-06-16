@@ -61,7 +61,7 @@ public class ResponsavelOSBean implements Serializable{
 		try {
 		
 		ResponsavelOsDAO responsavelOsDAO = new ResponsavelOsDAO();
-		responsavelOsDAO.salvar(responsavelOS);
+		responsavelOsDAO.merge(responsavelOS);
 		
 		responsavelOS = new ResponsavelOS();
 		responsaveis = responsavelOsDAO.listar();
@@ -75,9 +75,33 @@ public class ResponsavelOSBean implements Serializable{
 	}
 	
 	public void excluir(ActionEvent evento) {
-		ResponsavelOS respSelec = new ResponsavelOS();
-		respSelec = (ResponsavelOS) evento.getComponent().getAttributes().get("respSelecionado");
-		Messages.addGlobalInfo("nome "+ respSelec.getCodigo() + " " + respSelec.getNome() );
+		try {
+			ResponsavelOsDAO responsavelOsDAO = new ResponsavelOsDAO();
+			ResponsavelOS respSelec = new ResponsavelOS();
+			
+			responsavelOsDAO.excluir(respSelec);
+			
+			//respSelec = (ResponsavelOS) evento.getComponent().getAttributes().get("respSelecionado");
+			
+			responsaveis = responsavelOsDAO.listar();
+			Messages.addGlobalInfo("Resposável excluído com sucesso");
+			
+			
+		}catch (RuntimeException e) {
+			Messages.addGlobalError("Erro ao salvar responsável");
+			e.printStackTrace();
+		}
+	}
+	
+	
+	public void editar(ActionEvent evento) {
+		try {
+			responsavelOS = (ResponsavelOS)evento.getComponent().getAttributes().get("respSelecionado");
+			//Messages.addGlobalInfo("resp selecionado: " + responsavelOS.getNome());
+		}catch (RuntimeException e) {
+			Messages.addGlobalError("Erro ao editar responsável");
+			e.printStackTrace();
+		}
 	}
 	
 	

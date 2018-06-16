@@ -18,7 +18,7 @@
 			<p:dataTable id="tabela" emptyMessage="Nenhum registro encontrado."
 				value="#{responsavelOSBean.responsaveis}" var="resp" paginator="true">
 				
-				<f:facet name="header">
+				<f:facet name="footer">
 						<p:commandButton value="Novo Responsavel"
 							actionListener="#{responsavelOSBean.novo()}"
 							update=":formCadastroResponsavel:pnlFormCadResponsavel"
@@ -42,6 +42,14 @@
 						<f:attribute name="respSelecionado" value="#{resp}"/>		
 							
 					</p:commandButton>
+					<p:commandButton icon="ui-icon-pencil" 
+						actionListener="#{responsavelOSBean.editar}" 
+						update=":formCadastroResponsavel:pnlFormCadResponsavel"
+						oncomplete="PF('dlgResponsavel').show();">
+						<f:attribute name="respSelecionado" value="#{resp}"/>
+						
+					</p:commandButton>
+					
 				</p:column>
 			
 			</p:dataTable>
