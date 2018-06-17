@@ -34,6 +34,15 @@
 				</p:column>
 				
 				<p:column headerText="Opções" width="25%">
+				
+					<p:commandButton icon="ui-icon-pencil" 
+						actionListener="#{responsavelOSBean.editar}" 
+						update=":formCadastroResponsavel:pnlFormCadResponsavel"
+						oncomplete="PF('dlgResponsavel').show();">
+						<f:attribute name="respSelecionado" value="#{resp}"/>
+						
+					</p:commandButton>
+					
 					<p:commandButton icon="ui-icon-trash"
 						actionListener="#{responsavelOSBean.excluir}"
 						update=":mensagem">
@@ -41,13 +50,6 @@
 							icon="ui-icon-alert"/>
 						<f:attribute name="respSelecionado" value="#{resp}"/>		
 							
-					</p:commandButton>
-					<p:commandButton icon="ui-icon-pencil" 
-						actionListener="#{responsavelOSBean.editar}" 
-						update=":formCadastroResponsavel:pnlFormCadResponsavel"
-						oncomplete="PF('dlgResponsavel').show();">
-						<f:attribute name="respSelecionado" value="#{resp}"/>
-						
 					</p:commandButton>
 					
 				</p:column>

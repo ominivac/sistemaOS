@@ -11,6 +11,9 @@ public class Usuario extends GenericDomain {
 	private String nome;
 	@Column(length=32, nullable = false)
 	private String senha;
+	
+	
+	private String segSenha;
 
 	@Column(nullable = false)
 	private Character tipo;
@@ -31,11 +34,20 @@ public class Usuario extends GenericDomain {
 		this.senha = senha;
 	}
 
-	public Character getTipo() {
+	
+	public String getSegSenha() {
+		return segSenha;
+	}
+	
+	public void setSegSenha(String segSenha) {
+		this.segSenha = segSenha;
+	}
+	
+	public Character getRole() {
 		return tipo;
 	}
 
-	public void setTipo(Character tipo) {
+	public void setRole(Character tipo) {
 		this.tipo = tipo;
 	}
 
@@ -43,6 +55,7 @@ public class Usuario extends GenericDomain {
 	public String toString() {
 		return "Usuario [nome=" + nome + ", senha=" + senha + ", tipo=" + tipo + ", getCodigo()=" + getCodigo() + "]";
 	}
+	
 	
 	
 	

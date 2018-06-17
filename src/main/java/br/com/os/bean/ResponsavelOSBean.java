@@ -76,17 +76,15 @@ public class ResponsavelOSBean implements Serializable{
 	
 	public void excluir(ActionEvent evento) {
 		try {
+			responsavelOS = (ResponsavelOS) evento.getComponent().getAttributes().get("respSelecionado");
+			
 			ResponsavelOsDAO responsavelOsDAO = new ResponsavelOsDAO();
-			ResponsavelOS respSelec = new ResponsavelOS();
-			
-			responsavelOsDAO.excluir(respSelec);
-			
-			//respSelec = (ResponsavelOS) evento.getComponent().getAttributes().get("respSelecionado");
+			responsavelOsDAO.excluir(responsavelOS);
 			
 			responsaveis = responsavelOsDAO.listar();
+			
 			Messages.addGlobalInfo("Resposável excluído com sucesso");
-			
-			
+
 		}catch (RuntimeException e) {
 			Messages.addGlobalError("Erro ao salvar responsável");
 			e.printStackTrace();
@@ -97,6 +95,12 @@ public class ResponsavelOSBean implements Serializable{
 	public void editar(ActionEvent evento) {
 		try {
 			responsavelOS = (ResponsavelOS)evento.getComponent().getAttributes().get("respSelecionado");
+			ResponsavelOsDAO responsavelOsDAO = new ResponsavelOsDAO();
+			responsavelOsDAO.editar(responsavelOS);
+			responsaveis = responsavelOsDAO.listar();
+			
+			Messages.addGlobalInfo("Resposável editado com sucesso");
+			
 			//Messages.addGlobalInfo("resp selecionado: " + responsavelOS.getNome());
 		}catch (RuntimeException e) {
 			Messages.addGlobalError("Erro ao editar responsável");

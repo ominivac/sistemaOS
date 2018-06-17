@@ -10,57 +10,93 @@
 <title>Itens de OS</title>
 </h:head>
 <h:body>
-	<h:form>
+	<p:growl id="mensagem"/>
+	
+
+	<h:form id="formListagem">
 		<p:panel header="Itens de OS - Listagem">
-			<p:dataTable emptyMessage="Nenhum registro encontrado."
-				paginator="true">
+			<p:dataTable id="tabela" emptyMessage="Nenhum registro encontrado."
+				value="#{produtoOSBean.produtosOS}" var="produto" paginator="true">
+				
 				<f:facet name="footer">
 						<p:commandButton value="Novo Item de OS"
-							oncomplete="PF('dlgProdutoOs').show();"/>
-					</f:facet>
+							actionListener="#{produtoOSBean.novo()}"
+							update=":formCadastroProduto:pnlFormCadProduto"
+							oncomplete="PF('dlgProduto').show();"/>
+				</f:facet>
 				
-				<p:column headerText="Descrição">
+				<p:column headerText="Id" width="10%">
+					<h:outputText value="#{produto.codigo}" />
+				</p:column>
+				
+				<p:column headerText="Descrição" sortBy="#{produto.descricao}" filterBy="#{produto.descricao}">
+					<h:outputText value="#{produto.descricao}" />
+				</p:column>
+				
+				<p:column headerText="Valor por hora" >
+					<h:outputText value="#{produto.valorPorHora}" />
+				</p:column>
+				
+				<p:column headerText="Ano de ref." sortBy="#{produto.anoReferencia}" filterBy="#{produto.anoReferencia}">
+					<h:outputText value="#{produto.anoReferencia}" />
+				</p:column>
+				
+				<p:column headerText="Opções" width="25%">
+				
+					<p:commandButton icon="ui-icon-pencil" 
+						actionListener="#{produtoOSBean.editar}" 
+						update=":formCadastroProduto:pnlFormCadProduto"
+						oncomplete="PF('dlgProduto').show();">
+						<f:attribute name="produtoSelecionado" value="#{produto}"/>
+					</p:commandButton>
 					
-				</p:column>
-				
-				<p:column headerText="ano de ref.">
+					<p:commandButton icon="ui-icon-trash"
+						actionListener="#{produtoOSBean.excluir}"
+						update=":mensagem :formListagem:tabela">
+						<p:confirm header="Confirmação" message="Deseja excluir o Item de OS ?"
+							icon="ui-icon-alert"/>
+						<f:attribute name="produtoSelecionado" value="#{produto}"/>		
+							
+					</p:commandButton>
 					
-				</p:column>
-				
-				<p:column headerText="valor/hora">
-				
-				</p:column>
-				
-				<p:column headerText="Opções">
-				
 				</p:column>
 			
 			</p:dataTable>
+			
+			<p:confirmDialog global="true">
+				<p:commandButton value="Sim" type="button"
+					styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
+				
+				<p:commandButton value="Não" type="button"
+					styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>
+			</p:confirmDialog>
+			
 		</p:panel>
 	
 	</h:form>
 	
-	<p:dialog widgetVar="dlgProdutoOs" draggable="false" 
-		resizable="false" modal="true" header="Item de O.S. - Cadastro">
-		<h:form>
-			<h:panelGrid columns="2">
+	<p:dialog widgetVar="dlgProduto" draggable="false" 
+		resizable="false" modal="true" header="Itens de OS - Cadastro">
+		<h:form id="formCadastroProduto">
+			<h:panelGrid id="pnlFormCadProduto" columns="2">
 		
-			<p:outputLabel value="Descrição: "/>
-			<p:inputText required="true" size="60" maxlength="200"/>
-			
-			<p:outputLabel value="valor por hora: "/>
-			<p:inputText required="true" size="10" maxlength="8"/>
-			
-			<p:outputLabel value="ano de referência: "/>
-			<p:inputText required="true" size="10" maxlength="4"/>
-			
-			
+				<p:outputLabel value="Descricao: "/>
+				<p:inputText value="#{produtoOSBean.produtoOS.descricao}" required="" size="50" maxlength="100"/>
+				
+				
+				<p:outputLabel value="Valor por Hora: "/>
+				<p:inputText value="#{produtoOSBean.produtoOS.valorPorHora}" required="" size="30" maxlength="100"/>
+				
+				
+				<p:outputLabel value="Ano de referência: "/>
+				<p:inputText value="#{produtoOSBean.produtoOS.anoReferencia}" required="" size="30" maxlength="100"/>
 			
 			</h:panelGrid>
 			<h:panelGrid columns="2">
-				<p:commandButton widgetVar="saveButton" value="Salvar"
-					onclick="PF('saveButton').disable()" />
-				<p:commandButton value="Fechar" oncomplete="PF('dlgProdutoOs').hide();"/>
+				<p:commandButton value="Salvar" 
+					actionListener="#{produtoOSBean.salvar()}" oncomplete="PF('dlgProduto').hide();"
+					update=":mensagem: formCadastroProduto:pnlFormCadProduto :formListagem:tabela "/>
+				<p:commandButton value="Fechar" oncomplete="PF('dlgProduto').hide();"/>
 			</h:panelGrid>
 			
 		</h:form>

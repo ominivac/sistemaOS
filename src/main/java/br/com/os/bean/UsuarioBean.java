@@ -26,6 +26,7 @@ public class UsuarioBean implements Serializable{
 	
 	
 	
+	
 	public Usuario getUsuario() {
 		return usuario;
 	}
@@ -34,9 +35,7 @@ public class UsuarioBean implements Serializable{
 		this.usuario = usuario;
 	}
 	
-	public void novo() {
-		usuario = new Usuario();
-	}
+	
 	
 	public List<Usuario> getUsuarios() {
 		return usuarios;
@@ -45,6 +44,12 @@ public class UsuarioBean implements Serializable{
 	public void setUsuarios(List<Usuario> usuarios) {
 		this.usuarios = usuarios;
 	}
+	
+	public void novo() {
+		usuario = new Usuario();
+	}
+	
+	
 	
 	@PostConstruct
 	public void listar() {
@@ -57,15 +62,24 @@ public class UsuarioBean implements Serializable{
 		}
 	}
 	
+	
+	private boolean senhasIguais() {
+		if(usuario.getSenha().equals(usuario.getSegSenha() ) ) {
+			return true;
+		}
+		return false;
+	}
+	
+	
 	public void salvar() {
 		try {
 			UsuarioDAO usuarioDAO = new UsuarioDAO();
-			usuarioDAO.salvar(usuario);
+			usuarioDAO.merge(usuario);
 			
-			novo();
+			usuario = new Usuario();
+			usuarios = usuarioDAO.listar();
 			
 			Messages.addGlobalInfo("Usuário salvo com sucesso");
-			
 			
 		}catch (RuntimeException e) {
 			Messages.addGlobalError("Erro ao salvar usuário");

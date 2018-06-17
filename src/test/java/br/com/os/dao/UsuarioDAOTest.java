@@ -16,7 +16,7 @@ public class UsuarioDAOTest {
 		// testado
 		Usuario usuario = new Usuario();
 		usuario.setNome("maria");
-		usuario.setTipo('A');
+		usuario.setRole('A');
 		usuario.setSenha("maria123");
 		
 		
@@ -29,7 +29,7 @@ public class UsuarioDAOTest {
 		Usuario usuario = new Usuario();
 		usuario.setCodigo(2);
 		usuario.setNome("maria rita");
-		usuario.setTipo('U');
+		usuario.setRole('U');
 		usuario.setSenha("maria1234");
 		
 		
@@ -65,7 +65,7 @@ public class UsuarioDAOTest {
 		Usuario udeletado = new Usuario();
 		udeletado.setNome("rer");
 		udeletado.setSenha("jjds");
-		udeletado.setTipo('a');
+		udeletado.setRole('A');
 		udeletado.setCodigo(cod);
 		
 		usuarioDAO.excluir(udeletado);
@@ -80,7 +80,7 @@ public class UsuarioDAOTest {
 		ueditado.setCodigo(2);
 		ueditado.setNome("Maria Rita");
 		ueditado.setSenha("maria12345");
-		ueditado.setTipo('U');
+		ueditado.setRole('U');
 		
 		usuarioDAO.editar(ueditado);
 		
