@@ -5,19 +5,20 @@ import java.util.List;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import br.com.os.domain.Role;
 import br.com.os.domain.Usuario;
 
 
 public class UsuarioDAOTest {
 	
 	@Test
-	@Ignore
+	//@Ignore
 	public void salvar() {
 		// testado
 		Usuario usuario = new Usuario();
-		usuario.setNome("maria");
-		usuario.setRole('A');
-		usuario.setSenha("maria123");
+		usuario.setNome("new user 2");
+		usuario.setRole(Role.USUARIO);
+		usuario.setSenha("user2");
 		
 		
 		UsuarioDAO usuarioDAO = new UsuarioDAO();
@@ -29,7 +30,7 @@ public class UsuarioDAOTest {
 		Usuario usuario = new Usuario();
 		usuario.setCodigo(2);
 		usuario.setNome("maria rita");
-		usuario.setRole('U');
+		usuario.setRole(Role.ADMINISTRADOR);
 		usuario.setSenha("maria1234");
 		
 		
@@ -65,14 +66,14 @@ public class UsuarioDAOTest {
 		Usuario udeletado = new Usuario();
 		udeletado.setNome("rer");
 		udeletado.setSenha("jjds");
-		udeletado.setRole('A');
+		udeletado.setRole(Role.USUARIO);
 		udeletado.setCodigo(cod);
 		
 		usuarioDAO.excluir(udeletado);
 	}
 	
 	@Test
-	//@Ignore
+	@Ignore
 	public void editar() {
 		UsuarioDAO usuarioDAO = new UsuarioDAO();
 		Usuario ueditado = new Usuario();
@@ -80,7 +81,7 @@ public class UsuarioDAOTest {
 		ueditado.setCodigo(2);
 		ueditado.setNome("Maria Rita");
 		ueditado.setSenha("maria12345");
-		ueditado.setRole('U');
+		ueditado.setRole(Role.ADMINISTRADOR);
 		
 		usuarioDAO.editar(ueditado);
 		

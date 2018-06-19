@@ -30,15 +30,15 @@
 				</p:column>
 				
 				<p:column headerText="Descrição" sortBy="#{produto.descricao}" filterBy="#{produto.descricao}">
-					<h:outputText value="#{produto.descricao}" />
+					<h:outputText value="#{produto.descricao}" required="true" requiredMessage="o campo descrição é obrigatório!" />
 				</p:column>
 				
 				<p:column headerText="Valor por hora" >
-					<h:outputText value="#{produto.valorPorHora}" />
+					<h:outputText value="#{produto.valorPorHora}" required="true" requiredMessage="o campo valor é obrigatório!"/>
 				</p:column>
 				
 				<p:column headerText="Ano de ref." sortBy="#{produto.anoReferencia}" filterBy="#{produto.anoReferencia}">
-					<h:outputText value="#{produto.anoReferencia}" />
+					<h:outputText value="#{produto.anoReferencia}" required="true" requiredMessage="o campo ano é obrigatório!" />
 				</p:column>
 				
 				<p:column headerText="Opções" width="25%">

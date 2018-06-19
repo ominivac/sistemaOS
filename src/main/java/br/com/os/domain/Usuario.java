@@ -2,6 +2,8 @@ package br.com.os.domain;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 
 @SuppressWarnings("serial")
 @Entity
@@ -15,8 +17,8 @@ public class Usuario extends GenericDomain {
 	
 	private String segSenha;
 
-	@Column(nullable = false)
-	private Character tipo;
+	@Enumerated(EnumType.STRING)
+	private Role role;
 
 	public String getNome() {
 		return nome;
@@ -42,19 +44,20 @@ public class Usuario extends GenericDomain {
 	public void setSegSenha(String segSenha) {
 		this.segSenha = segSenha;
 	}
+
+	public Role getRole() {
+		return role;
+	}
+
+	public void setRole(Role role) {
+		this.role = role;
+	}
 	
-	public Character getRole() {
-		return tipo;
-	}
+	
 
-	public void setRole(Character tipo) {
-		this.tipo = tipo;
-	}
-
-	@Override
-	public String toString() {
-		return "Usuario [nome=" + nome + ", senha=" + senha + ", tipo=" + tipo + ", getCodigo()=" + getCodigo() + "]";
-	}
+	
+	
+	
 	
 	
 	

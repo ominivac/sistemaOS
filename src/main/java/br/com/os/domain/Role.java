@@ -6,7 +6,7 @@ public enum Role {
 	
 		private String descricao;
 		
-		private Role(String desc) {
+		Role(String desc) {
 			this.descricao = desc;
 		}
 		
@@ -33,6 +33,8 @@ public enum Role {
 		
 		*/
 	
+		
+		
 	
 
 }

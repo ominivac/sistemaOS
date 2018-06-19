@@ -15,6 +15,7 @@ import br.com.os.domain.Role;
 public class RoleBean {
 	
 	private List<Role> roles;
+	private Role role;
 	
 	@PostConstruct
 	public void init() {
@@ -22,7 +23,7 @@ public class RoleBean {
 	}
 	
 	
-	public SelectItem[] getRoleValues() {
+	public SelectItem[] getRoles() {
 	    SelectItem[] items = new SelectItem[Role.values().length];
 	    int i = 0;
 	    for(Role r: Role.values()) {
@@ -32,13 +33,20 @@ public class RoleBean {
 	  }
 	
 	
-	public List<Role> getRoles() {
-		return roles;
-	}
-	
 	public Role[] getAll() {
 		return Role.values();
 	}
+	
+	
+	public Role getRole() {
+		return role;
+	}
+	
+	public void setRole(Role role) {
+		this.role = role;
+	}
+	
+	
 	
 	
 }

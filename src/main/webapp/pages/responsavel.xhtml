@@ -74,7 +74,8 @@
 			<h:panelGrid id="pnlFormCadResponsavel" columns="2">
 		
 				<p:outputLabel value="Nome: "/>
-				<p:inputText value="#{responsavelOSBean.responsavelOS.nome}" required="" size="30" maxlength="100"/>
+				<p:inputText value="#{responsavelOSBean.responsavelOS.nome}" size="30" maxlength="100"
+					required="true" requiredMessage="o campo nome é obrigatório!"/>
 				
 			
 			</h:panelGrid>

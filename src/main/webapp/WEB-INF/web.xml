@@ -10,6 +10,8 @@
 		<param-name>javax.faces.PROJECT_STAGE</param-name>
 		<param-value>Development</param-value>
 	</context-param>
+	
+	
 
 	<!--Ttema do primefaces -->
 	<context-param>
@@ -28,7 +30,10 @@
 		<url-pattern>*.xhtml</url-pattern>
 	</servlet-mapping>
 
-
+	<!-- carregamento do hibernate -->
+	<listener>
+		<listener-class>br.com.os.util.HibernateContexto</listener-class>
+	</listener>
 
 	<welcome-file-list>
 		<welcome-file>index.html</welcome-file>
