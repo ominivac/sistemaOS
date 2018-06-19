@@ -6,8 +6,9 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Itens de OS</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+	<title>Itens de OS</title>
+	<h:outputScript library="js" name="scripts.js"/>
 </h:head>
 <h:body>
 	<p:growl id="mensagem"/>
@@ -30,15 +31,17 @@
 				</p:column>
 				
 				<p:column headerText="Descrição" sortBy="#{produto.descricao}" filterBy="#{produto.descricao}">
-					<h:outputText value="#{produto.descricao}" required="true" requiredMessage="o campo descrição é obrigatório!" />
+					<h:outputText value="#{produto.descricao}" />
 				</p:column>
 				
 				<p:column headerText="Valor por hora" >
-					<h:outputText value="#{produto.valorPorHora}" required="true" requiredMessage="o campo valor é obrigatório!"/>
+					<h:outputText value="#{produto.valorPorHora}" >
+						<f:convertNumber locale="pt_BR" minFractionDigits="2"/>
+					</h:outputText>
 				</p:column>
 				
 				<p:column headerText="Ano de ref." sortBy="#{produto.anoReferencia}" filterBy="#{produto.anoReferencia}">
-					<h:outputText value="#{produto.anoReferencia}" required="true" requiredMessage="o campo ano é obrigatório!" />
+					<h:outputText value="#{produto.anoReferencia}" />
 				</p:column>
 				
 				<p:column headerText="Opções" width="25%">
@@ -81,15 +84,23 @@
 			<h:panelGrid id="pnlFormCadProduto" columns="2">
 		
 				<p:outputLabel value="Descricao: "/>
-				<p:inputText value="#{produtoOSBean.produtoOS.descricao}" required="" size="50" maxlength="100"/>
+				<p:inputText value="#{produtoOSBean.produtoOS.descricao}" required="true" requiredMessage="o campo descrição é obrigatório!" 
+					 size="50" maxlength="100"/>
 				
 				
 				<p:outputLabel value="Valor por Hora: "/>
-				<p:inputText value="#{produtoOSBean.produtoOS.valorPorHora}" required="" size="30" maxlength="100"/>
+				<p:inputText value="#{produtoOSBean.produtoOS.valorPorHora}" required="true" requiredMessage="o campo valor é obrigatório!"
+					converterMessage="o valor deve ser no formato XX,YY" size="30" maxlength="100"
+					validatorMessage="O valor mínimo para o campo valor deve ser 1,00">
+					
+					<f:validateDoubleRange minimum="1.00"/>
+					<f:convertNumber locale="pt_BR" minFractionDigits="2"/>
+				</p:inputText>
 				
 				
 				<p:outputLabel value="Ano de referência: "/>
-				<p:inputText value="#{produtoOSBean.produtoOS.anoReferencia}" required="" size="30" maxlength="100"/>
+				<p:inputText value="#{produtoOSBean.produtoOS.anoReferencia}" required="true" requiredMessage="o campo ano é obrigatório!" 
+					converterMessage="o valor deve ser inteiro - formato XXXX" size="30" maxlength="100"/>
 			
 			</h:panelGrid>
 			<h:panelGrid columns="2">
