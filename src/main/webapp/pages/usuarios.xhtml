@@ -8,6 +8,7 @@
 <h:head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 <title>Usuários</title>
+<h:outputScript library="js" name="scripts.js"/>
 </h:head>
 <h:body>
 	<p:growl id="mensagem"/>
@@ -20,7 +21,7 @@
 				
 				<f:facet name="footer">
 						<p:commandButton value="Novo Usuário"
-							actionListener="#{usuarioBean.novo()}"
+							actionListener="#{usuarioBean.novo}"
 							update=":formCadastroUsuario:pnlFormCadUsuario"
 							oncomplete="PF('dlgUsuario').show();">
 							<f:actionListener type="org.omnifaces.eventlistener.ResetInputAjaxActionListener"/>
@@ -42,19 +43,19 @@
 				
 				<p:column headerText="Opções">
 					<p:commandButton icon="ui-icon-pencil" 
-						actionListener="#{responsavelOSBean.editar}" 
-						update=":formCadastroResponsavel:pnlFormCadResponsavel"
-						oncomplete="PF('dlgResponsavel').show();">
-						<f:attribute name="respSelecionado" value="#{resp}"/>
+						actionListener="#{usuarioBean.editar}" 
+						update=":formCadastroUsuario:pnlFormCadUsuario"
+						oncomplete="PF('dlgUsuario').show();">
+						<f:attribute name="usuarioSelecionado" value="#{usuario}"/>
 						<f:actionListener type="org.omnifaces.eventlistener.ResetInputAjaxActionListener"/>
 					</p:commandButton>
 					
 					<p:commandButton icon="ui-icon-trash"
-						actionListener="#{responsavelOSBean.excluir}"
+						actionListener="#{usuarioBean.excluir}"
 						update=":mensagem">
-						<p:confirm header="Confirmação" message="Deseja excluir o responsável?"
+						<p:confirm header="Confirmação" message="Deseja excluir o usuário?"
 							icon="ui-icon-alert"/>
-						<f:attribute name="respSelecionado" value="#{resp}"/>		
+						<f:attribute name="usuarioSelecionado" value="#{usuario}"/>		
 							
 					</p:commandButton>
 				</p:column>

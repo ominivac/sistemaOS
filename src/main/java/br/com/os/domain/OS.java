@@ -22,6 +22,11 @@ public class OS extends GenericDomain{
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date dataLancamento;
 	
+	
+	@Column(name="data_previsao", nullable = true)
+	@Temporal(TemporalType.TIMESTAMP)
+	private Date dataPrevisaoEntrega;
+	
 	@Column(name = "valor_total", precision = 8, scale = 2)
 	private BigDecimal valorTotal;
 	
@@ -32,6 +37,46 @@ public class OS extends GenericDomain{
 	@ManyToOne
 	@JoinColumn(nullable = true)
 	private ResponsavelOS responsavelOS;
+
+	public Date getDataLancamento() {
+		return dataLancamento;
+	}
+
+	public void setDataLancamento(Date dataLancamento) {
+		this.dataLancamento = dataLancamento;
+	}
+
+	public Date getDataPrevisaoEntrega() {
+		return dataPrevisaoEntrega;
+	}
+
+	public void setDataPrevisaoEntrega(Date dataPrevisaoEntrega) {
+		this.dataPrevisaoEntrega = dataPrevisaoEntrega;
+	}
+
+	public BigDecimal getValorTotal() {
+		return valorTotal;
+	}
+
+	public void setValorTotal(BigDecimal valorTotal) {
+		this.valorTotal = valorTotal;
+	}
+
+	public Usuario getUsuario() {
+		return usuario;
+	}
+
+	public void setUsuario(Usuario usuario) {
+		this.usuario = usuario;
+	}
+
+	public ResponsavelOS getResponsavelOS() {
+		return responsavelOS;
+	}
+
+	public void setResponsavelOS(ResponsavelOS responsavelOS) {
+		this.responsavelOS = responsavelOS;
+	}
 
 	
 	

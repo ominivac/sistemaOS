@@ -6,10 +6,13 @@ import java.util.List;
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.event.ActionEvent;
 
 import org.omnifaces.util.Messages;
 
+import br.com.os.dao.ResponsavelOsDAO;
 import br.com.os.dao.UsuarioDAO;
+import br.com.os.domain.ResponsavelOS;
 import br.com.os.domain.Usuario;
 
 @ManagedBean
@@ -85,10 +88,40 @@ public class UsuarioBean implements Serializable{
 			Messages.addGlobalError("Erro ao salvar usuário");
 			e.printStackTrace();
 		}
-		
-		
-		
-		
+	}
+	
+	
+	public void editar(ActionEvent evento) {
+		try {
+			usuario = (Usuario)evento.getComponent().getAttributes().get("usuarioSelecionado");
+			UsuarioDAO usuarioDAO = new UsuarioDAO();
+			usuarioDAO.editar(usuario);
+			usuarios = usuarioDAO.listar();
+			
+			
+			Messages.addGlobalInfo("Usuário editado com sucesso");
+			
+			//Messages.addGlobalInfo("resp selecionado: " + responsavelOS.getNome());
+		}catch (RuntimeException e) {
+			Messages.addGlobalError("Erro ao editar usuário");
+			e.printStackTrace();
+		}
+	}
+	
+	public void excluir() {
+		try {
+			UsuarioDAO usuarioDAO = new UsuarioDAO();
+			usuarioDAO.excluir(usuario);
+			
+			usuario = new Usuario();
+			usuarios = usuarioDAO.listar();
+			
+			Messages.addGlobalInfo("Usuário salvo com sucesso");
+			
+		}catch (RuntimeException e) {
+			Messages.addGlobalError("Erro ao salvar usuário");
+			e.printStackTrace();
+		}
 	}
 	
 	
