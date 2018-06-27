@@ -10,5 +10,11 @@
 		<converter-for-class>java.lang.Enum</converter-for-class>
 		<converter-class>javax.faces.convert.EnumConverter</converter-class>
 	</converter>
+	
+	<converter>
+    	<description>Converter generico</description>
+    	<converter-id>generic</converter-id>
+    	<converter-class>br.com.os.converter.GenericConverter</converter-class>
+	</converter>
 
 </faces-config>

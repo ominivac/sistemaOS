@@ -87,16 +87,14 @@ public class OsBean implements Serializable{
 
 	public void novo() {
 		os = new OS();
+		responsavelOS = new ResponsavelOS();
 	}
 	
 	@PostConstruct
 	public void nova() {
 		try {
-			os = new OS();
+			novo();
 			os.setValorTotal(new BigDecimal("0.00"));
-			
-			
-			
 			
 			ProdutoOSDAO pdao = new ProdutoOSDAO();
 			produtosOS = pdao.listar();

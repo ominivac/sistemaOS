@@ -115,18 +115,24 @@
 				
 				<p:outputLabel value="Responsável:"/>
 				
-				<h:selectOneMenu id="sltResponsavel" value="#{osBean.os.responsavelOS.nome}" 
-					required="true" requiredMessage="o campo responsável é obrigatório!">
+				<h:selectOneMenu id="sltResponsavel"
+					value="#{osBean.os.responsavelOS}" required="false">
 					<f:selectItem noSelectionOption="true" itemLabel="Selecione um responsável pela OS" />
 					
-					<f:selectItems value="#{osBean.responsaveis}" var="resp"
-						itemValue="#{resp}" itemLabel="#{resp.nome}"/>
+					<f:selectItems value="#{osBean.responsaveis}" 
+						var="responsavelOS" conveter="generic"
+						itemValue="#{responsavelOS}" itemLabel="#{responsavelOS.nome}"/>
 					
 				</h:selectOneMenu>
 				
 				
 				<p:outputLabel value="Data lançamento:"/>
-				<p:calendar locale="pt_BR" timeZone="America/Sao_Paulo">
+				<p:calendar value="#{osBean.os.dataLancamento}" locale="pt_BR" timeZone="America/Sao_Paulo">
+					<!-- <f:convertDateTime pattern="dd/MM/yyyy HH:mm "/> -->
+				</p:calendar>
+				
+				<p:outputLabel value="Data Previsão de Entrega:"/>
+				<p:calendar value="#{osBean.os.dataPrevisaoEntrega}" locale="pt_BR" timeZone="America/Sao_Paulo">
 					<!-- <f:convertDateTime pattern="dd/MM/yyyy HH:mm "/> -->
 				</p:calendar>
 				

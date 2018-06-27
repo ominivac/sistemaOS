@@ -94,7 +94,7 @@
 			</h:panelGrid>
 			<h:panelGrid columns="2">
 				<p:commandButton value="Salvar" 
-					actionListener="#{usuarioBean.salvar}"
+					actionListener="#{usuarioBean.salvar}" oncomplete="PF('dlgUsuario').hide();"
 					update=":mensagem: formCadastroUsuario:pnlFormCadUsuario :formListagem:tabela "/>
 					
 				<p:commandButton value="Fechar" oncomplete="PF('dlgUsuario').hide();"/>

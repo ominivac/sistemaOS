@@ -8,7 +8,7 @@ import br.com.os.domain.ResponsavelOS;
 public class ResponsavelDAOTest {
 
 	@Test
-	@Ignore
+	//@Ignore
 	public void salvar() {
 		//testado - ok
 		ResponsavelOS r = new ResponsavelOS();
@@ -31,6 +31,7 @@ public class ResponsavelDAOTest {
 	}
 	
 	@Test
+	@Ignore
 	public void deletar() {
 		ResponsavelOS r = new ResponsavelOS();
 		r.setCodigo(4);

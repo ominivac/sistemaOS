@@ -16,9 +16,9 @@ public class UsuarioDAOTest {
 	public void salvar() {
 		// testado
 		Usuario usuario = new Usuario();
-		usuario.setNome("new user 2");
+		usuario.setNome("USUARIO 1");
 		usuario.setRole(Role.USUARIO);
-		usuario.setSenha("user2");
+		usuario.setSenha("user1");
 		
 		
 		UsuarioDAO usuarioDAO = new UsuarioDAO();
