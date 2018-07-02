@@ -10,7 +10,7 @@ import javax.faces.event.ActionEvent;
 
 import org.omnifaces.util.Messages;
 
-import br.com.os.dao.ProdutoOSDAO;
+import br.com.os.dao.ProdutoOsDAO;
 import br.com.os.dao.ResponsavelOsDAO;
 import br.com.os.domain.ProdutoOS;
 import br.com.os.domain.ResponsavelOS;
@@ -54,7 +54,7 @@ public class ProdutoOSBean  implements Serializable {
 	@PostConstruct
 	public void listar() {
 		try {
-			ProdutoOSDAO produtoDAO = new ProdutoOSDAO();
+			ProdutoOsDAO produtoDAO = new ProdutoOsDAO();
 			produtosOS = produtoDAO.listar();
 			
 			
@@ -66,7 +66,7 @@ public class ProdutoOSBean  implements Serializable {
 	
 	public void salvar() {
 		try {
-			ProdutoOSDAO produtoDAO = new ProdutoOSDAO();
+			ProdutoOsDAO produtoDAO = new ProdutoOsDAO();
 			produtoDAO.merge(produtoOS);
 			
 			produtoOS = new ProdutoOS();
@@ -86,7 +86,7 @@ public class ProdutoOSBean  implements Serializable {
 		try {
 			produtoOS = (ProdutoOS) evento.getComponent().getAttributes().get("produtoSelecionado");
 			
-			ProdutoOSDAO produtoDAO = new ProdutoOSDAO();
+			ProdutoOsDAO produtoDAO = new ProdutoOsDAO();
 			produtoDAO.excluir(produtoOS);
 			
 			produtosOS = produtoDAO.listar();
@@ -104,8 +104,8 @@ public class ProdutoOSBean  implements Serializable {
 		try {
 			produtoOS = (ProdutoOS) evento.getComponent().getAttributes().get("produtoSelecionado");
 			
-			ProdutoOSDAO produtoDAO = new ProdutoOSDAO();
-			produtoDAO.editar(produtoOS);
+			ProdutoOsDAO produtoDAO = new ProdutoOsDAO();
+			produtoDAO.merge(produtoOS);
 			produtosOS = produtoDAO.listar();
 			
 			Messages.addGlobalInfo("Item de OS editado com sucesso");

@@ -61,7 +61,7 @@ public class ResponsavelOSBean implements Serializable{
 		try {
 		
 		ResponsavelOsDAO responsavelOsDAO = new ResponsavelOsDAO();
-		responsavelOsDAO.merge(responsavelOS);
+		responsavelOsDAO.salvar(responsavelOS);
 		
 		responsavelOS = new ResponsavelOS();
 		responsaveis = responsavelOsDAO.listar();

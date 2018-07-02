@@ -13,7 +13,7 @@ import javax.faces.event.ActionEvent;
 import org.omnifaces.util.Messages;
 
 import br.com.os.dao.OsDAO;
-import br.com.os.dao.ProdutoOSDAO;
+import br.com.os.dao.ProdutoOsDAO;
 import br.com.os.dao.ResponsavelOsDAO;
 import br.com.os.domain.Item;
 import br.com.os.domain.OS;
@@ -96,7 +96,7 @@ public class OsBean implements Serializable{
 			novo();
 			os.setValorTotal(new BigDecimal("0.00"));
 			
-			ProdutoOSDAO pdao = new ProdutoOSDAO();
+			ProdutoOsDAO pdao = new ProdutoOsDAO();
 			produtosOS = pdao.listar();
 			
 			itensOs = new ArrayList<Item>();
@@ -186,7 +186,7 @@ public class OsBean implements Serializable{
 			os.setResponsavelOS(responsavelOS);
 			
 			OsDAO osdao = new OsDAO();
-			osdao.save(os, itensOs);
+			osdao.salvar(os);
 			
 			novo();
 			

@@ -13,6 +13,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -22,6 +24,10 @@ import br.com.os.converter.SampleEntity;
 
 @Entity
 @Table(name="os")
+@NamedQueries({
+	@NamedQuery(name="OS.listar", query= "SELECT os FROM OS os"),
+	@NamedQuery(name="OS.buscarPorCodigo", query= "SELECT os FROM OS os WHERE os.codigoOs = :codigo" )
+})
 public class OS implements Serializable,SampleEntity{
 
 	private static final long serialVersionUID = 1L;

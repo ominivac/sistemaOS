@@ -31,6 +31,46 @@ public class ResponsavelOsDAO {
 		}
 	}
 	
+	public void editar(ResponsavelOS responsavelOS) {
+		Session sessao = HibernateUtil.getSessionFactory().openSession();
+		Transaction transacao =  null ;
+		
+		
+		try {
+			transacao = sessao.beginTransaction();
+			sessao.merge(responsavelOS);
+			transacao.commit();
+			
+		}catch (RuntimeException ex) {
+			if(transacao != null) {
+				transacao.rollback();
+			}
+			throw ex;
+		}finally {
+			sessao.close();
+		}
+	}
+	
+	public void excluir(ResponsavelOS responsavelOS) {
+		Session sessao = HibernateUtil.getSessionFactory().openSession();
+		Transaction transacao =  null ;
+		
+		
+		try {
+			transacao = sessao.beginTransaction();
+			sessao.delete(responsavelOS);
+			transacao.commit();
+			
+		}catch (RuntimeException ex) {
+			if(transacao != null) {
+				transacao.rollback();
+			}
+			throw ex;
+		}finally {
+			sessao.close();
+		}
+	}
+	
 	
 	@SuppressWarnings("unchecked")
 	public List<ResponsavelOS> listar(){

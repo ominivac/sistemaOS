@@ -12,7 +12,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-@Entity()
+@Entity
 @Table(name="responsavel_os")
 @NamedQueries({
 	@NamedQuery(name="ResponsavelOs.listar", query= "SELECT responsavelOs FROM ResponsavelOS responsavelOs"),
