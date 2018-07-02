@@ -12,9 +12,9 @@ import br.com.os.domain.Usuario;
 public class UsuarioDAOTest {
 	
 	@Test
-	//@Ignore
+	@Ignore
 	public void salvar() {
-		// testado
+		// TESTADO  - OK
 		Usuario usuario = new Usuario();
 		usuario.setNome("USUARIO 1");
 		usuario.setRole(Role.USUARIO);
@@ -27,20 +27,23 @@ public class UsuarioDAOTest {
 	@Test
 	@Ignore
 	public void mergeIncluir() {
+		//TESTADO - OK
 		Usuario usuario = new Usuario();
-		usuario.setCodigo(2);
-		usuario.setNome("maria rita");
+		usuario.setCodigo(1);
+		usuario.setNome("Roberto Sousa");
 		usuario.setRole(Role.ADMINISTRADOR);
-		usuario.setSenha("maria1234");
+		usuario.setSenha("admin123");
 		
 		
 		UsuarioDAO usuarioDAO = new UsuarioDAO();
-		usuarioDAO.salvar(usuario);
+		usuarioDAO.merge(usuario);
 	}
 	
 	@Test
 	@Ignore
 	public void listar() {
+		//TESTADO - OK
+		
 		UsuarioDAO usuarioDAO = new UsuarioDAO();
 		List<Usuario> resultado = usuarioDAO.listar();
 		
@@ -51,16 +54,17 @@ public class UsuarioDAOTest {
 	
 	@Test
 	@Ignore
-	public void buscar() {
-		//testado ok
-		String nome = "ma";
+	public void buscarPorCodigo() {
+	//TESTADO - OK
+		
 		UsuarioDAO usuarioDAO = new UsuarioDAO();
-		System.out.println(usuarioDAO.buscarPorNome(nome) );
+		System.out.println(usuarioDAO.buscarPorCodigo(11) );
 	}
 	
 	@Test
 	@Ignore
 	public void deletar() {
+	//TESTADO - OK	
 		int cod = 2;
 		UsuarioDAO usuarioDAO = new UsuarioDAO();
 		Usuario udeletado = new Usuario();
@@ -72,21 +76,7 @@ public class UsuarioDAOTest {
 		usuarioDAO.excluir(udeletado);
 	}
 	
-	@Test
-	@Ignore
-	public void editar() {
-		UsuarioDAO usuarioDAO = new UsuarioDAO();
-		Usuario ueditado = new Usuario();
-		
-		ueditado.setCodigo(2);
-		ueditado.setNome("Maria Rita");
-		ueditado.setSenha("maria12345");
-		ueditado.setRole(Role.ADMINISTRADOR);
-		
-		usuarioDAO.editar(ueditado);
-		
-		
-	}
+	
 	
 	
 	

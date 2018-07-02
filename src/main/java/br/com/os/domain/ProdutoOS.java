@@ -1,5 +1,6 @@
 package br.com.os.domain;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 import javax.persistence.Column;
@@ -7,13 +8,20 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 
-@Entity(name = "produto_os")
+@Entity()
 @Table(name="produto_os")
-public class ProdutoOS {
+@NamedQueries({
+	@NamedQuery(name="ProdutoOS.listar", query= "SELECT produtoOs FROM ProdutoOS produtoOs"),
+	@NamedQuery(name="ProdutoOS.buscarPorCodigo", query= "SELECT produtoOs FROM ProdutoOS produtoOs WHERE produtoOs.codigoProduto = :codigo" )
+	
+})
+public class ProdutoOS implements Serializable{
 	
 
 	private static final long serialVersionUID = 1L;
@@ -59,6 +67,55 @@ public class ProdutoOS {
 	}
 	public void setValorPorHora(BigDecimal valorPorHora) {
 		this.valorPorHora = valorPorHora;
+	}
+
+	@Override
+	public String toString() {
+		return "ProdutoOS [codigoProduto=" + codigoProduto + ", descricao=" + descricao + ", anoReferencia="
+				+ anoReferencia + ", valorPorHora=" + valorPorHora + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((anoReferencia == null) ? 0 : anoReferencia.hashCode());
+		result = prime * result + ((codigoProduto == null) ? 0 : codigoProduto.hashCode());
+		result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
+		result = prime * result + ((valorPorHora == null) ? 0 : valorPorHora.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		ProdutoOS other = (ProdutoOS) obj;
+		if (anoReferencia == null) {
+			if (other.anoReferencia != null)
+				return false;
+		} else if (!anoReferencia.equals(other.anoReferencia))
+			return false;
+		if (codigoProduto == null) {
+			if (other.codigoProduto != null)
+				return false;
+		} else if (!codigoProduto.equals(other.codigoProduto))
+			return false;
+		if (descricao == null) {
+			if (other.descricao != null)
+				return false;
+		} else if (!descricao.equals(other.descricao))
+			return false;
+		if (valorPorHora == null) {
+			if (other.valorPorHora != null)
+				return false;
+		} else if (!valorPorHora.equals(other.valorPorHora))
+			return false;
+		return true;
 	}
 	
 	

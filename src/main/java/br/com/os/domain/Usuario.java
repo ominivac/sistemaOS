@@ -7,12 +7,18 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 @SuppressWarnings("serial")
 @Entity()
 @Table(name="usuario")
+@NamedQueries({
+	@NamedQuery(name="Usuario.listar", query= "SELECT usuario FROM Usuario usuario"),
+	@NamedQuery(name="Usuario.buscarPorCodigo", query= "SELECT usuario FROM Usuario usuario WHERE usuario.codigoUsuario = :codigo" )
+})
 public class Usuario  {
 	
 	@Id
@@ -74,12 +80,19 @@ public class Usuario  {
 	}
 
 	@Override
+	public String toString() {
+		return "Usuario [codigoUsuario=" + codigoUsuario + ", nome=" + nome + ", senha=" + senha + ", role=" + role
+				+ "]";
+	}
+
+	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((codigoUsuario == null) ? 0 : codigoUsuario.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		result = prime * result + ((role == null) ? 0 : role.hashCode());
+		result = prime * result + ((segSenha == null) ? 0 : segSenha.hashCode());
 		result = prime * result + ((senha == null) ? 0 : senha.hashCode());
 		return result;
 	}
@@ -105,18 +118,17 @@ public class Usuario  {
 			return false;
 		if (role != other.role)
 			return false;
+		if (segSenha == null) {
+			if (other.segSenha != null)
+				return false;
+		} else if (!segSenha.equals(other.segSenha))
+			return false;
 		if (senha == null) {
 			if (other.senha != null)
 				return false;
 		} else if (!senha.equals(other.senha))
 			return false;
 		return true;
-	}
-
-	@Override
-	public String toString() {
-		return "Usuario [codigoUsuario=" + codigoUsuario + ", nome=" + nome + ", senha=" + senha + ", role=" + role
-				+ "]";
 	}
 	
 	

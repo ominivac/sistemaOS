@@ -6,20 +6,40 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-
-import br.com.os.domain.Usuario;
+import br.com.os.domain.ProdutoOS;
 import br.com.os.util.HibernateUtil;
 
-public class UsuarioDAO {
+public class ProdutoOsDAO {
 
-	public void salvar(Usuario usuario) {
+	
+	public void salvar(ProdutoOS produtoOS) {
 		Session sessao = HibernateUtil.getSessionFactory().openSession();
 		Transaction transacao =  null ;
 		
 		
 		try {
 			transacao = sessao.beginTransaction();
-			sessao.save(usuario);
+			sessao.save(produtoOS);
+			transacao.commit();
+			
+		}catch (RuntimeException ex) {
+			if(transacao != null) {
+				transacao.rollback();
+			}
+			throw ex;
+		}finally {
+			sessao.close();
+		}
+	}
+	
+	public void merge(ProdutoOS produtoOS) {
+		Session sessao = HibernateUtil.getSessionFactory().openSession();
+		Transaction transacao =  null ;
+		
+		
+		try {
+			transacao = sessao.beginTransaction();
+			sessao.merge(produtoOS);
 			transacao.commit();
 			
 		}catch (RuntimeException ex) {
@@ -32,35 +52,13 @@ public class UsuarioDAO {
 		}	
 	}
 	
-	
-	
-	public void merge(Usuario usuario) {
-		Session sessao = HibernateUtil.getSessionFactory().openSession();
-		Transaction transacao =  null ;
-		
-		
-		try {
-			transacao = sessao.beginTransaction();
-			sessao.merge(usuario);
-			transacao.commit();
-			
-		}catch (RuntimeException ex) {
-			if(transacao != null) {
-				transacao.rollback();
-			}
-			throw ex;
-		}finally {
-			sessao.close();
-		}	
-	}
-	
-	public void excluir(Usuario usuario) {
+	public void excluir(ProdutoOS produtoOS) {
 		Session sessao = HibernateUtil.getSessionFactory().openSession();
 		Transaction transacao =  null ;
 		
 		try {
 			transacao = sessao.beginTransaction();
-			sessao.delete(usuario);
+			sessao.delete(produtoOS);
 			transacao.commit();
 			
 		}catch (RuntimeException ex) {
@@ -74,15 +72,15 @@ public class UsuarioDAO {
 	}
 	
 	@SuppressWarnings("unchecked")
-	public List<Usuario> listar(){
+	public List<ProdutoOS> listar(){
 		Session sessao = HibernateUtil.getSessionFactory().openSession();
-		List<Usuario> usuarios = null;
+		List<ProdutoOS> produtos = null;
 		Query consulta = null;
 		
 		
 		try {
-			consulta = sessao.getNamedQuery("Usuario.listar");
-			usuarios =  consulta.list();
+			consulta = sessao.getNamedQuery("ProdutoOS.listar");
+			produtos =  consulta.list();
 			
 		}catch (RuntimeException ex) {
 
@@ -90,19 +88,19 @@ public class UsuarioDAO {
 		}finally {
 			sessao.close();
 		}
-		return usuarios;
+		return produtos;
 	}
 	
-	public Usuario buscarPorCodigo(Integer codigo){
+	public ProdutoOS buscarPorCodigo(Integer codigo){
 		Session sessao = HibernateUtil.getSessionFactory().openSession();
-		Usuario usuario  = null;
+		ProdutoOS produtoOS  = null;
 		Query consulta = null;
 		
 		
 		try {
-			consulta = sessao.getNamedQuery("Usuario.buscarPorCodigo");
+			consulta = sessao.getNamedQuery("ProdutoOS.buscarPorCodigo");
 			consulta.setInteger("codigo",codigo);
-			usuario =  (Usuario) consulta.uniqueResult();
+			produtoOS =  (ProdutoOS) consulta.uniqueResult();
 			
 		}catch (RuntimeException ex) {
 
@@ -110,7 +108,7 @@ public class UsuarioDAO {
 		}finally {
 			sessao.close();
 		}
-		return usuario;
+		return produtoOS;
 	}
 	
 	

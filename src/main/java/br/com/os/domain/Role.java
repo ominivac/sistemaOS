@@ -24,14 +24,8 @@ public enum Role {
 			return Role.values();
 		}
 		
-		/**
-		@Override
-		//para o coverter do omnifaces
-		public String toString() {
-			return String.format("%s[descricao=%s]", getClass().getSimpleName() , getDescricao() );
-		}
 		
-		*/
+		
 	
 		
 		

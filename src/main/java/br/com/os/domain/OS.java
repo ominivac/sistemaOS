@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -61,7 +61,7 @@ public class OS implements Serializable,SampleEntity{
 	private Usuario usuario;
 	
 	
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
 	@JoinColumn(name="responsavel_cod", referencedColumnName="cod_responsavel",columnDefinition="integer", nullable = true)
 	private ResponsavelOS responsavelOS;
 
@@ -103,6 +103,71 @@ public class OS implements Serializable,SampleEntity{
 
 	public void setResponsavelOS(ResponsavelOS responsavelOS) {
 		this.responsavelOS = responsavelOS;
+	}
+
+
+	@Override
+	public String toString() {
+		return "OS [codigoOs=" + codigoOs + ", dataLancamento=" + dataLancamento + ", dataPrevisaoEntrega="
+				+ dataPrevisaoEntrega + ", valorTotal=" + valorTotal + ", usuario=" + usuario + ", responsavelOS="
+				+ responsavelOS + "]";
+	}
+
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((codigoOs == null) ? 0 : codigoOs.hashCode());
+		result = prime * result + ((dataLancamento == null) ? 0 : dataLancamento.hashCode());
+		result = prime * result + ((dataPrevisaoEntrega == null) ? 0 : dataPrevisaoEntrega.hashCode());
+		result = prime * result + ((responsavelOS == null) ? 0 : responsavelOS.hashCode());
+		result = prime * result + ((usuario == null) ? 0 : usuario.hashCode());
+		result = prime * result + ((valorTotal == null) ? 0 : valorTotal.hashCode());
+		return result;
+	}
+
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		OS other = (OS) obj;
+		if (codigoOs == null) {
+			if (other.codigoOs != null)
+				return false;
+		} else if (!codigoOs.equals(other.codigoOs))
+			return false;
+		if (dataLancamento == null) {
+			if (other.dataLancamento != null)
+				return false;
+		} else if (!dataLancamento.equals(other.dataLancamento))
+			return false;
+		if (dataPrevisaoEntrega == null) {
+			if (other.dataPrevisaoEntrega != null)
+				return false;
+		} else if (!dataPrevisaoEntrega.equals(other.dataPrevisaoEntrega))
+			return false;
+		if (responsavelOS == null) {
+			if (other.responsavelOS != null)
+				return false;
+		} else if (!responsavelOS.equals(other.responsavelOS))
+			return false;
+		if (usuario == null) {
+			if (other.usuario != null)
+				return false;
+		} else if (!usuario.equals(other.usuario))
+			return false;
+		if (valorTotal == null) {
+			if (other.valorTotal != null)
+				return false;
+		} else if (!valorTotal.equals(other.valorTotal))
+			return false;
+		return true;
 	}
 
 	

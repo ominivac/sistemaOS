@@ -1,14 +1,16 @@
 package br.com.os.dao;
 
+import java.util.List;
+
 import org.junit.Ignore;
 import org.junit.Test;
 
 import br.com.os.domain.ResponsavelOS;
 
-public class ResponsavelDAOTest {
+public class ResponsavelOsDAOTest {
 
 	@Test
-	//@Ignore
+	@Ignore
 	public void salvar() {
 		//testado - ok
 		ResponsavelOS r = new ResponsavelOS();
@@ -20,6 +22,26 @@ public class ResponsavelDAOTest {
 	
 	@Test
 	@Ignore
+	public void listar() {
+		ResponsavelOsDAO rdao = new ResponsavelOsDAO();
+		List<ResponsavelOS> lista = rdao.listar();
+		
+		for(ResponsavelOS responsavelOS : lista) {
+			System.out.println(responsavelOS);
+		}
+		
+	}
+	
+	@Test
+	public void buscarPorCodigo() {
+		ResponsavelOsDAO rdao = new ResponsavelOsDAO();
+		ResponsavelOS responsavelOS =  rdao.buscarPorCodigo(5);
+		System.out.println(responsavelOS);
+		
+		
+	}
+	
+	/***
 	public void editar() {
 		//testado - ok
 		ResponsavelOS r = new ResponsavelOS();
@@ -28,11 +50,14 @@ public class ResponsavelDAOTest {
 		
 		ResponsavelOsDAO rdao = new ResponsavelOsDAO();
 		rdao.editar(r);
-	}
+	} **/
 	
-	@Test
-	@Ignore
+	
+	
+	
+	/**
 	public void deletar() {
+		//testado  - ok
 		ResponsavelOS r = new ResponsavelOS();
 		r.setCodigo(4);
 		r.setNome("T"); //esta requirindo campo mesmo para deleção
@@ -40,7 +65,7 @@ public class ResponsavelDAOTest {
 		ResponsavelOsDAO rdao = new ResponsavelOsDAO();
 		rdao.excluir(r);
 		
-	}
+	}*/
 	
 	
 	

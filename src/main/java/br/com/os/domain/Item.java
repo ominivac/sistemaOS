@@ -2,7 +2,7 @@ package br.com.os.domain;
 
 import java.math.BigDecimal;
 
-import javax.persistence.CascadeType;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -83,6 +83,62 @@ public class Item {
 		this.os = os;
 	}
 
+	@Override
+	public String toString() {
+		return "Item [codigoItem=" + codigoItem + ", quantidade=" + quantidade + ", valorParcial=" + valorParcial
+				+ ", produtoOS=" + produtoOS + ", os=" + os + "]";
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + ((codigoItem == null) ? 0 : codigoItem.hashCode());
+		result = prime * result + ((os == null) ? 0 : os.hashCode());
+		result = prime * result + ((produtoOS == null) ? 0 : produtoOS.hashCode());
+		result = prime * result + ((quantidade == null) ? 0 : quantidade.hashCode());
+		result = prime * result + ((valorParcial == null) ? 0 : valorParcial.hashCode());
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Item other = (Item) obj;
+		if (codigoItem == null) {
+			if (other.codigoItem != null)
+				return false;
+		} else if (!codigoItem.equals(other.codigoItem))
+			return false;
+		if (os == null) {
+			if (other.os != null)
+				return false;
+		} else if (!os.equals(other.os))
+			return false;
+		if (produtoOS == null) {
+			if (other.produtoOS != null)
+				return false;
+		} else if (!produtoOS.equals(other.produtoOS))
+			return false;
+		if (quantidade == null) {
+			if (other.quantidade != null)
+				return false;
+		} else if (!quantidade.equals(other.quantidade))
+			return false;
+		if (valorParcial == null) {
+			if (other.valorParcial != null)
+				return false;
+		} else if (!valorParcial.equals(other.valorParcial))
+			return false;
+		return true;
+	}
+
+	
 	
 	
 	
