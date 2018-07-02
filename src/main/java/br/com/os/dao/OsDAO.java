@@ -7,7 +7,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import br.com.os.domain.OS;
-import br.com.os.domain.ProdutoOS;
+
 import br.com.os.util.HibernateUtil;
 
 public class OsDAO {
@@ -97,7 +97,7 @@ public class OsDAO {
 		
 		try {
 			transacao = sessao.beginTransaction();
-			sessao.delete(os);
+			sessao.merge(os);
 			transacao.commit();
 			
 		}catch (RuntimeException ex) {

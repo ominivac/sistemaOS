@@ -11,9 +11,9 @@ import javax.faces.event.ActionEvent;
 import org.omnifaces.util.Messages;
 
 import br.com.os.dao.ProdutoOsDAO;
-import br.com.os.dao.ResponsavelOsDAO;
+
 import br.com.os.domain.ProdutoOS;
-import br.com.os.domain.ResponsavelOS;
+
 
 
 @ManagedBean
