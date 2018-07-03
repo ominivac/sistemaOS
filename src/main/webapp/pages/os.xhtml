@@ -108,22 +108,30 @@
 		draggable="false"  resizable="false" modal="true" closable="false">
 		<h:form id="formFinalizar">
 			<h:panelGrid id="pnlFinalizar" columns="2">
-				<p:outputLabel value="Valor Total:"/>
+				<p:outputLabel value="Data lançamento "/>
+				<h:outputText value="#{osBean.os.dataLancamento}">
+					<f:convertDateTime pattern="dd/MM/yyyy HH:mm" 
+						locale="pt_BR" timeZone="America/Sao_Paulo"/>
+				</h:outputText>
+			
+				<p:outputLabel value="Valor Total R$: "/>
 				<h:outputText value="#{osBean.os.valorTotal}">
 					<f:convertNumber locale="pt_BR" minFractionDigits="2"/>
 				</h:outputText>
 				
 				<p:outputLabel value="Responsável:"/>
-				
-				<h:selectOneMenu id="sltResponsavel"
-					value="#{osBean.os.responsavelOS}" required="false">
-					<f:selectItem noSelectionOption="true" itemLabel="Selecione um responsável pela OS" />
+				<h:selectOneMenu id="sltResponsavel" value="#{osBean.os.responsavelOS}"
+					conveter="responsavelConverter">
+					
+					<f:selectItem noSelectionOption="true"
+						itemLabel="Selecione um responsável pela OS" />
 					
 					<f:selectItems value="#{osBean.responsaveis}" 
-						var="responsavelOS" conveter="generic"
-						itemValue="#{responsavelOS}" itemLabel="#{responsavelOS.nome}"/>
+						var="respOS" itemValue="#{respOS}" 
+						itemLabel="#{respOS.nome}"/>
 					
 				</h:selectOneMenu>
+				
 				
 				
 				<p:outputLabel value="Data lançamento:"/>
@@ -136,6 +144,8 @@
 					<!-- <f:convertDateTime pattern="dd/MM/yyyy HH:mm "/> -->
 				</p:calendar>
 				
+				<p:outputLabel value="res selec." />
+				<h:outputText value="#{osBean.os.responsavelOS}" />
 				
 			</h:panelGrid>
 			
@@ -144,11 +154,8 @@
 					update=":mensagem :formOs:tabelaProdutos :formOs:finalizacao" oncomplete="PF('dialogo').hide();"/>
 				<p:commandButton value="Fechar"  oncomplete="PF('dialogo').hide();"/>
 			</h:panelGrid>
-		
-		
 		</h:form>
-		
-	
+
 	</p:dialog>
 	
 	

@@ -59,7 +59,6 @@ public class ResponsavelOS implements Serializable{
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((codigoResponsavel == null) ? 0 : codigoResponsavel.hashCode());
-		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
 		return result;
 	}
 
@@ -77,13 +76,11 @@ public class ResponsavelOS implements Serializable{
 				return false;
 		} else if (!codigoResponsavel.equals(other.codigoResponsavel))
 			return false;
-		if (nome == null) {
-			if (other.nome != null)
-				return false;
-		} else if (!nome.equals(other.nome))
-			return false;
 		return true;
 	}
+
+
+	
 	
 	
 

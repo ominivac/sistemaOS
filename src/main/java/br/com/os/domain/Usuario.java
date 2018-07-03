@@ -90,10 +90,6 @@ public class Usuario  {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((codigoUsuario == null) ? 0 : codigoUsuario.hashCode());
-		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
-		result = prime * result + ((role == null) ? 0 : role.hashCode());
-		result = prime * result + ((segSenha == null) ? 0 : segSenha.hashCode());
-		result = prime * result + ((senha == null) ? 0 : senha.hashCode());
 		return result;
 	}
 
@@ -111,37 +107,9 @@ public class Usuario  {
 				return false;
 		} else if (!codigoUsuario.equals(other.codigoUsuario))
 			return false;
-		if (nome == null) {
-			if (other.nome != null)
-				return false;
-		} else if (!nome.equals(other.nome))
-			return false;
-		if (role != other.role)
-			return false;
-		if (segSenha == null) {
-			if (other.segSenha != null)
-				return false;
-		} else if (!segSenha.equals(other.segSenha))
-			return false;
-		if (senha == null) {
-			if (other.senha != null)
-				return false;
-		} else if (!senha.equals(other.senha))
-			return false;
 		return true;
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
 	
 	
 	

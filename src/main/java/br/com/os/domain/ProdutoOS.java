@@ -79,10 +79,7 @@ public class ProdutoOS implements Serializable{
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((anoReferencia == null) ? 0 : anoReferencia.hashCode());
 		result = prime * result + ((codigoProduto == null) ? 0 : codigoProduto.hashCode());
-		result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
-		result = prime * result + ((valorPorHora == null) ? 0 : valorPorHora.hashCode());
 		return result;
 	}
 
@@ -95,28 +92,15 @@ public class ProdutoOS implements Serializable{
 		if (getClass() != obj.getClass())
 			return false;
 		ProdutoOS other = (ProdutoOS) obj;
-		if (anoReferencia == null) {
-			if (other.anoReferencia != null)
-				return false;
-		} else if (!anoReferencia.equals(other.anoReferencia))
-			return false;
 		if (codigoProduto == null) {
 			if (other.codigoProduto != null)
 				return false;
 		} else if (!codigoProduto.equals(other.codigoProduto))
 			return false;
-		if (descricao == null) {
-			if (other.descricao != null)
-				return false;
-		} else if (!descricao.equals(other.descricao))
-			return false;
-		if (valorPorHora == null) {
-			if (other.valorPorHora != null)
-				return false;
-		} else if (!valorPorHora.equals(other.valorPorHora))
-			return false;
 		return true;
 	}
+	
+	
 	
 	
 	

@@ -11,10 +11,13 @@
 		<converter-class>javax.faces.convert.EnumConverter</converter-class>
 	</converter>
 	
+	<!-- 
+	
 	<converter>
-    	<description>Converter generico</description>
-    	<converter-id>generic</converter-id>
-    	<converter-class>br.com.os.converter.GenericConverter</converter-class>
+    	<description>Responsavel Converter</description>
+    	<converter-id>responsavelConverter</converter-id>
+    	<converter-class>br.com.os.converter.ResponsavelConverter</converter-class>
 	</converter>
+	 -->
 
 </faces-config>

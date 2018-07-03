@@ -125,11 +125,6 @@ public class OS implements Serializable,SampleEntity{
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((codigoOs == null) ? 0 : codigoOs.hashCode());
-		result = prime * result + ((dataLancamento == null) ? 0 : dataLancamento.hashCode());
-		result = prime * result + ((dataPrevisaoEntrega == null) ? 0 : dataPrevisaoEntrega.hashCode());
-		result = prime * result + ((responsavelOS == null) ? 0 : responsavelOS.hashCode());
-		result = prime * result + ((usuario == null) ? 0 : usuario.hashCode());
-		result = prime * result + ((valorTotal == null) ? 0 : valorTotal.hashCode());
 		return result;
 	}
 
@@ -148,38 +143,8 @@ public class OS implements Serializable,SampleEntity{
 				return false;
 		} else if (!codigoOs.equals(other.codigoOs))
 			return false;
-		if (dataLancamento == null) {
-			if (other.dataLancamento != null)
-				return false;
-		} else if (!dataLancamento.equals(other.dataLancamento))
-			return false;
-		if (dataPrevisaoEntrega == null) {
-			if (other.dataPrevisaoEntrega != null)
-				return false;
-		} else if (!dataPrevisaoEntrega.equals(other.dataPrevisaoEntrega))
-			return false;
-		if (responsavelOS == null) {
-			if (other.responsavelOS != null)
-				return false;
-		} else if (!responsavelOS.equals(other.responsavelOS))
-			return false;
-		if (usuario == null) {
-			if (other.usuario != null)
-				return false;
-		} else if (!usuario.equals(other.usuario))
-			return false;
-		if (valorTotal == null) {
-			if (other.valorTotal != null)
-				return false;
-		} else if (!valorTotal.equals(other.valorTotal))
-			return false;
 		return true;
 	}
-
-	
-
-	
-
 	
 	
 	
