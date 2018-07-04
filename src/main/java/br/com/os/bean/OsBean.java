@@ -134,6 +134,10 @@ public class OsBean implements Serializable{
 	public void calcular() {
 		os.setValorTotal(new BigDecimal("0.00"));
 		
+		//limpa no finalizar
+		os.setResponsavelOS(null);
+		os.setUsuario(null);
+		
 		for(int posicao = 0 ; posicao < itensOs.size(); posicao++) {
 			Item item = itensOs.get(posicao);
 			os.setValorTotal(os.getValorTotal().add(item.getValorParcial())  );
@@ -163,10 +167,13 @@ public class OsBean implements Serializable{
 				return;
 			}
 			OsDAO osdao = new OsDAO();
-			osdao.salvar(os);
+			//osdao.salvar(os);
+			osdao.salvar(os, itensOs);
 			
+			Messages.addGlobalInfo("Ordem de serviço salva com sucesso !");
 			
-			
+			//limpar tudo
+			novo();
 			
 		} catch (RuntimeException e) {
 			Messages.addGlobalError("Ocorreu um erro ao salvar a OS.");

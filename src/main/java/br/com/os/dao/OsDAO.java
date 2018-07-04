@@ -6,6 +6,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
+import br.com.os.domain.Item;
 import br.com.os.domain.OS;
 
 import br.com.os.util.HibernateUtil;
@@ -20,6 +21,36 @@ public class OsDAO {
 		try {
 			transacao = sessao.beginTransaction();
 			sessao.save(os);
+			transacao.commit();
+			
+		}catch (RuntimeException ex) {
+			if(transacao != null) {
+				transacao.rollback();
+			}
+			throw ex;
+		}finally {
+			sessao.close();
+		}
+	}
+	
+	public void salvar(OS os, List<Item> itens) {
+		Session sessao = HibernateUtil.getSessionFactory().openSession();
+		Transaction transacao =  null ;
+		
+		
+		try {
+			transacao = sessao.beginTransaction();
+			sessao.save(os);
+			
+			for(int posicao = 0 ; posicao < itens.size() ; posicao++) {
+				Item itemCorrente = itens.get(posicao);
+				itemCorrente.setOs(os);
+				
+				sessao.save(itemCorrente);
+				
+			}
+			
+			
 			transacao.commit();
 			
 		}catch (RuntimeException ex) {
