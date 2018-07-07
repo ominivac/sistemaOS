@@ -1,69 +1,61 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	template="/templates/modelo.xhtml">
 
-<h:head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Usuários</title>
-<h:outputScript library="js" name="scripts.js"/>
-</h:head>
-<h:body>
-	<p:growl id="mensagem"/>
-	
+<ui:define name="conteudo">
 
-	<h:form id="formListagem">
-		<p:panel header="Usuários - Listagem">
-			<p:dataTable id="tabela" emptyMessage="Nenhum registro encontrado."
-				value="#{usuarioBean.usuarios}" var="usuario" paginator="true">
-				
-				<f:facet name="footer">
-						<p:commandButton value="Novo Usuário"
-							actionListener="#{usuarioBean.novo}"
+		<h:form id="formListagem">
+			<p:panel header="Usuários - Listagem">
+				<p:dataTable id="tabela" emptyMessage="Nenhum registro encontrado."
+					value="#{usuarioBean.usuarios}" var="usuario" paginator="true">
+					
+					<f:facet name="footer">
+							<p:commandButton value="Novo Usuário"
+								actionListener="#{usuarioBean.novo}"
+								update=":formCadastroUsuario:pnlFormCadUsuario"
+								oncomplete="PF('dlgUsuario').show();">
+								<f:actionListener type="org.omnifaces.eventlistener.ResetInputAjaxActionListener"/>
+							</p:commandButton>	
+						</f:facet>
+					
+					<p:column headerText="Codigo">
+						<h:outputText value="#{usuario.codigo}" />
+					</p:column>
+					
+					<p:column headerText="Nome" sortBy="#{usuario.nome}" filterBy="#{usuario.nome}">
+						<h:outputText value="#{usuario.nome}" />
+					</p:column>
+					
+					<p:column headerText="Tipo" >
+						<h:outputText value="#{usuario.role}" />
+					</p:column>
+					
+					<p:column headerText="Opções">
+						<p:commandButton icon="ui-icon-pencil" 
+							actionListener="#{usuarioBean.editar}" 
 							update=":formCadastroUsuario:pnlFormCadUsuario"
 							oncomplete="PF('dlgUsuario').show();">
+							<f:attribute name="usuarioSelecionado" value="#{usuario}"/>
 							<f:actionListener type="org.omnifaces.eventlistener.ResetInputAjaxActionListener"/>
-						</p:commandButton>	
-					</f:facet>
-				
-				<p:column headerText="Codigo">
-					<h:outputText value="#{usuario.codigo}" />
-				</p:column>
-				
-				<p:column headerText="Nome" sortBy="#{usuario.nome}" filterBy="#{usuario.nome}">
-					<h:outputText value="#{usuario.nome}" />
-				</p:column>
-				
-				<p:column headerText="Tipo" >
-					<h:outputText value="#{usuario.role}" />
-				</p:column>
-				
-				
-				<p:column headerText="Opções">
-					<p:commandButton icon="ui-icon-pencil" 
-						actionListener="#{usuarioBean.editar}" 
-						update=":formCadastroUsuario:pnlFormCadUsuario"
-						oncomplete="PF('dlgUsuario').show();">
-						<f:attribute name="usuarioSelecionado" value="#{usuario}"/>
-						<f:actionListener type="org.omnifaces.eventlistener.ResetInputAjaxActionListener"/>
-					</p:commandButton>
-					
-					<p:commandButton icon="ui-icon-trash"
-						actionListener="#{usuarioBean.excluir}"
-						update=":mensagem">
-						<p:confirm header="Confirmação" message="Deseja excluir o usuário?"
-							icon="ui-icon-alert"/>
-						<f:attribute name="usuarioSelecionado" value="#{usuario}"/>		
-							
-					</p:commandButton>
-				</p:column>
-			
-			</p:dataTable>
-		</p:panel>
-	
-	</h:form>
+						</p:commandButton>
+						
+						<p:commandButton icon="ui-icon-trash"
+							actionListener="#{usuarioBean.excluir}"
+							update=":mensagem">
+							<p:confirm header="Confirmação" message="Deseja excluir o usuário?"
+								icon="ui-icon-alert"/>
+							<f:attribute name="usuarioSelecionado" value="#{usuario}"/>		
+								
+						</p:commandButton>
+					</p:column>
+				</p:dataTable>
+			</p:panel>
+		</h:form>
 	
 	<p:dialog widgetVar="dlgUsuario" draggable="false" 
 		resizable="false" modal="true" header="Usuários - Cadastro">
@@ -99,11 +91,9 @@
 					
 				<p:commandButton value="Fechar" oncomplete="PF('dlgUsuario').hide();"/>
 			</h:panelGrid>
-			
 		</h:form>
-	
 	</p:dialog>
 	
-	
-</h:body>
-</html>
+	</ui:define>
+</ui:composition>	
+

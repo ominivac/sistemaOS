@@ -2,4 +2,63 @@
 
 .ui-widget, .ui-widget .ui-widget {
 	font-size: 95% ;
+	font-style: bold;
 }
+
+.imagemCentralizada{
+	display: block;
+	margim-left: auto;
+	margim-right: auto;
+}
+
+.divTopo{
+	padding-bottom: 5px;
+	pause-after: 5px;
+}
+
+.divCabecalho{
+	padding-bottom: 25px;
+	pause-after: 10px;
+}
+
+.tabela{
+	font-size: 95% ;
+	font-weight: bold;
+	padding-bottom: 10px;
+	pause-after: 10px;
+	height: 80%;
+	width: 100%
+}
+
+.colunas{
+	font-size: 95% ;
+	font-weight: bold;
+	padding-bottom: 10px;
+	pause-after: 10px;
+	height: 80%;
+	width: 100%
+}
+
+
+
+
+/* Menu sistema inicio */
+.menu-sistema {
+    border: 0px !important;
+    padding: 0px !important;
+    background: none !important;
+}
+
+.menu-sistema .ui-menu-parent > a .ui-menuitem-text, .menu-sistema > .ui-menu-list > .ui-menuitem > a > .ui-menuitem-text {
+     overflow: visible !important; <----------
+    color: #ffffff !important;
+}
+
+.menu-sistema .ui-icon-triangle-1-s {    
+    background: url(#{resource['images:seta-para-baixo.png']}) no-repeat !important;
+}
+
+.menu-sistema .ui-menu-list {
+    top: 25px !important;    
+}
+/* Menu sistema fim */

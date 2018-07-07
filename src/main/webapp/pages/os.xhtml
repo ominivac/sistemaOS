@@ -1,163 +1,160 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	template="/templates/modelo.xhtml">
 
-<h:head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Ordem de Serviço</title>
-<h:outputScript library="js" name="scripts.js"/>
-</h:head>
-<h:body>
-	<p:growl id="mensagem"/>
+	<ui:define name="conteudo">
 	
-	<h:form id="formOs">
-		<p:panel header="Itens de OS">
-			<p:dataTable id="tabelaProdutos" emptyMessage="Nenhum registro encontrado."
-				value="#{osBean.produtosOS}" var="produto" paginator="true">
-				
-				<p:column headerText="Id" width="10%">
-					<h:outputText value="#{produto.codigo}" />
-				</p:column>
-				
-				<p:column headerText="Retranca" sortBy="#{produto.descricao}" filterBy="#{produto.descricao}">
-					<h:outputText value="#{produto.descricao}" />
-				</p:column>
-				
-				<p:column headerText="Valor p/ hora" >
-					<h:outputText value="#{produto.valorPorHora}" />
-				</p:column>
-				
-				<p:column headerText="Opções" width="25%">
-					<p:commandButton icon="ui-icon-plus" actionListener="#{osBean.adicionar}"
-						update=":formOs:tabelaItens :formOs:finalizacao">
-						<f:attribute name="produtoSelecionado" value="#{produto}"/>
-					</p:commandButton>
+	
+		<h:form id="formOs">
+			<p:panel header="Itens de OS">
+				<p:dataTable id="tabelaProdutos" emptyMessage="Nenhum registro encontrado."
+					value="#{osBean.produtosOS}" var="produto" paginator="true">
 					
-				</p:column>
+					<p:column headerText="Id" width="10%">
+						<h:outputText value="#{produto.codigo}" />
+					</p:column>
+					
+					<p:column headerText="Retranca" sortBy="#{produto.descricao}" filterBy="#{produto.descricao}">
+						<h:outputText value="#{produto.descricao}" />
+					</p:column>
+					
+					<p:column headerText="Valor p/ hora" >
+						<h:outputText value="#{produto.valorPorHora}" />
+					</p:column>
+					
+					<p:column headerText="Opções" width="25%">
+						<p:commandButton icon="ui-icon-plus" actionListener="#{osBean.adicionar}"
+							update=":formOs:tabelaItens :formOs:finalizacao">
+							<f:attribute name="produtoSelecionado" value="#{produto}"/>
+						</p:commandButton>
+						
+					</p:column>
+				
+				</p:dataTable>
+			</p:panel>
 			
-			</p:dataTable>
-		</p:panel>
-		
-		<p:panel header="Itens para compor OS">
-			<p:dataTable id="tabelaItens" emptyMessage="Nenhum registro encontrado."
-				value="#{osBean.itensOs}" var="item" paginator="true">
+			<p:panel header="Itens para compor OS">
+				<p:dataTable id="tabelaItens" emptyMessage="Nenhum registro encontrado."
+					value="#{osBean.itensOs}" var="item" paginator="true">
+					
+					<p:column headerText="Id" width="10%">
+						<h:outputText value="#{item.produtoOS.codigo}" />
+					</p:column>
+					
+					<p:column headerText="Retranca" sortBy="#{item.produtoOS.descricao}" filterBy="#{item.produtoOS.descricao}">
+						<h:outputText value="#{item.produtoOS.descricao}" />
+					</p:column>
+					
+					<p:column headerText="valor p/ hora" sortBy="#{item.produtoOS.valorPorHora}" filterBy="#{item.produtoOS.valorPorHora}">
+						<h:outputText value="#{item.produtoOS.valorPorHora}" />
+					</p:column>
+					
+					<p:column headerText="quantidade" sortBy="#{item.quantidade}" >
+						<h:outputText value="#{item.quantidade}" />
+					</p:column>
+					
+					<p:column headerText="valor parcial">
+						<h:outputText  style="font-weight:bold" value="#{item.valorParcial}" />
+					</p:column>
+					
+					<p:column headerText="Ano Ref." sortBy="#{item.produtoOS.anoReferencia}" filterBy="#{item.produtoOS.anoReferencia}">
+						<h:outputText value="#{item.produtoOS.anoReferencia}" />
+					</p:column>
+					
+					<p:column headerText="Opções" width="25%">
+						<p:commandButton icon="ui-icon-minus"
+							actionListener="#{osBean.remover}"
+							update=":formOs:tabelaItens :formOs:finalizacao">
+							<f:attribute name="itemSelecionado" value="#{item}"/>
+							
+						</p:commandButton>
+						
+						
+					</p:column>
 				
-				<p:column headerText="Id" width="10%">
-					<h:outputText value="#{item.produtoOS.codigo}" />
-				</p:column>
-				
-				<p:column headerText="Retranca" sortBy="#{item.produtoOS.descricao}" filterBy="#{item.produtoOS.descricao}">
-					<h:outputText value="#{item.produtoOS.descricao}" />
-				</p:column>
-				
-				<p:column headerText="valor p/ hora" sortBy="#{item.produtoOS.valorPorHora}" filterBy="#{item.produtoOS.valorPorHora}">
-					<h:outputText value="#{item.produtoOS.valorPorHora}" />
-				</p:column>
-				
-				<p:column headerText="quantidade" sortBy="#{item.quantidade}" >
-					<h:outputText value="#{item.quantidade}" />
-				</p:column>
-				
-				<p:column headerText="valor parcial">
-					<h:outputText  style="font-weight:bold" value="#{item.valorParcial}" />
-				</p:column>
-				
-				<p:column headerText="Ano Ref." sortBy="#{item.produtoOS.anoReferencia}" filterBy="#{item.produtoOS.anoReferencia}">
-					<h:outputText value="#{item.produtoOS.anoReferencia}" />
-				</p:column>
-				
-				<p:column headerText="Opções" width="25%">
-					<p:commandButton icon="ui-icon-minus"
-						actionListener="#{osBean.remover}"
-						update=":formOs:tabelaItens :formOs:finalizacao">
-						<f:attribute name="itemSelecionado" value="#{item}"/>
+				</p:dataTable>
+			</p:panel>
+			
+			<p:panel header="Total">
+				<h:panelGrid id="finalizacao" columns="3">
+					<p:outputLabel value="Total"/>
+					<h:outputText value="#{osBean.os.valorTotal}" >
+						<f:convertNumber locale="pt_BR" minFractionDigits="2"/>
+					</h:outputText>
+					<p:commandButton value="Finalizar" 
+						actionListener="#{osBean.finalizar}"
+						update=":mensagem: formFinalizar:pnlFinalizar" 
+						oncomplete="PF('dialogo').show();" >
+						<f:actionListener 
+							type="org.omnifaces.eventlistener.ResetInputAjaxActionListener"/>
 						
 					</p:commandButton>
-					
-					
-				</p:column>
-			
-			</p:dataTable>
-		</p:panel>
+				</h:panelGrid>
+			</p:panel>
 		
-		<p:panel header="Total">
-			<h:panelGrid id="finalizacao" columns="3">
-				<p:outputLabel value="Total"/>
-				<h:outputText value="#{osBean.os.valorTotal}" >
-					<f:convertNumber locale="pt_BR" minFractionDigits="2"/>
-				</h:outputText>
-				<p:commandButton value="Finalizar" 
-					actionListener="#{osBean.finalizar}"
-					update=":mensagem: formFinalizar:pnlFinalizar" 
-					oncomplete="PF('dialogo').show();" >
-					<f:actionListener 
-						type="org.omnifaces.eventlistener.ResetInputAjaxActionListener"/>
-					
-				</p:commandButton>
-			</h:panelGrid>
-		</p:panel>
-	
-	
-	</h:form>
-	
-	
-	<p:dialog header="Finalizar OS" widgetVar="dialogo"
-		draggable="false"  resizable="false" modal="true" closable="false">
-		<h:form id="formFinalizar">
-			<h:panelGrid id="pnlFinalizar" columns="2">
-				<p:outputLabel value="Data lançamento "/>
-				<h:outputText value="#{osBean.os.dataLancamento}">
-					<f:convertDateTime pattern="dd/MM/yyyy HH:mm" 
-						locale="pt_BR" timeZone="America/Sao_Paulo"/>
-				</h:outputText>
-			
-				<p:outputLabel value="Valor Total R$: "/>
-				<h:outputText value="#{osBean.os.valorTotal}">
-					<f:convertNumber locale="pt_BR" minFractionDigits="2"/>
-				</h:outputText>
-				
-				<p:outputLabel value="Responsável:"/>
-				<h:selectOneMenu id="sltResponsavel" value="#{osBean.os.responsavelOS}"
-					conveter="responsavelConverter">
-					
-					<f:selectItem noSelectionOption="true"
-						itemLabel="Selecione um responsável pela OS" />
-					
-					<f:selectItems value="#{osBean.responsaveis}" 
-						var="respOS" itemValue="#{respOS}" 
-						itemLabel="#{respOS.nome}"/>
-					
-				</h:selectOneMenu>
-				
-				
-				
-				<p:outputLabel value="Data lançamento:"/>
-				<p:calendar value="#{osBean.os.dataLancamento}" locale="pt_BR" timeZone="America/Sao_Paulo">
-					<!-- <f:convertDateTime pattern="dd/MM/yyyy HH:mm "/> -->
-				</p:calendar>
-				
-				<p:outputLabel value="Data Previsão de Entrega:"/>
-				<p:calendar value="#{osBean.os.dataPrevisaoEntrega}" locale="pt_BR" timeZone="America/Sao_Paulo">
-					<!-- <f:convertDateTime pattern="dd/MM/yyyy HH:mm "/> -->
-				</p:calendar>
-				
-				<p:outputLabel value="res selec." />
-				<h:outputText value="#{osBean.os.responsavelOS}" />
-				
-			</h:panelGrid>
-			
-			<h:panelGrid columns="2">
-				<p:commandButton value="Salvar" actionListener="#{osBean.salvar}"
-					update=":mensagem :formOs:tabelaProdutos :formOs:tabelaItens :formOs:finalizacao" oncomplete="PF('dialogo').hide();"/>
-				<p:commandButton value="Fechar" oncomplete="PF('dialogo').hide();"/>
-			</h:panelGrid>
+		
 		</h:form>
+	
+	
+		<p:dialog header="Finalizar OS" widgetVar="dialogo"
+			draggable="false"  resizable="false" modal="true" closable="false">
+			<h:form id="formFinalizar">
+				<h:panelGrid id="pnlFinalizar" columns="2">
+					<p:outputLabel value="Data lançamento "/>
+					<h:outputText value="#{osBean.os.dataLancamento}">
+						<f:convertDateTime pattern="dd/MM/yyyy HH:mm" 
+							locale="pt_BR" timeZone="America/Sao_Paulo"/>
+					</h:outputText>
+				
+					<p:outputLabel value="Valor Total R$: "/>
+					<h:outputText value="#{osBean.os.valorTotal}">
+						<f:convertNumber locale="pt_BR" minFractionDigits="2"/>
+					</h:outputText>
+					
+					<p:outputLabel value="Responsável:"/>
+					<h:selectOneMenu id="sltResponsavel" value="#{osBean.os.responsavelOS}"
+						conveter="responsavelConverter">
+						
+						<f:selectItem noSelectionOption="true"
+							itemLabel="Selecione um responsável pela OS" />
+						
+						<f:selectItems value="#{osBean.responsaveis}" 
+							var="respOS" itemValue="#{respOS}" 
+							itemLabel="#{respOS.nome}"/>
+						
+					</h:selectOneMenu>
+					
+					
+					
+					<p:outputLabel value="Data lançamento:"/>
+					<p:calendar value="#{osBean.os.dataLancamento}" locale="pt_BR" timeZone="America/Sao_Paulo">
+						<!-- <f:convertDateTime pattern="dd/MM/yyyy HH:mm "/> -->
+					</p:calendar>
+					
+					<p:outputLabel value="Data Previsão de Entrega:"/>
+					<p:calendar value="#{osBean.os.dataPrevisaoEntrega}" locale="pt_BR" timeZone="America/Sao_Paulo">
+						<!-- <f:convertDateTime pattern="dd/MM/yyyy HH:mm "/> -->
+					</p:calendar>
+					
+					<p:outputLabel value="res selec." />
+					<h:outputText value="#{osBean.os.responsavelOS}" />
+					
+				</h:panelGrid>
+				
+				<h:panelGrid columns="2">
+					<p:commandButton value="Salvar" actionListener="#{osBean.salvar}"
+						update=":mensagem :formOs:tabelaProdutos :formOs:tabelaItens :formOs:finalizacao" oncomplete="PF('dialogo').hide();"/>
+					<p:commandButton value="Fechar" oncomplete="PF('dialogo').hide();"/>
+				</h:panelGrid>
+			</h:form>
+	
+		</p:dialog>
+	
+	</ui:define>
 
-	</p:dialog>
-	
-	
-</h:body>
-</html>
+</ui:composition>

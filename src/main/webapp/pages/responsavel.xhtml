@@ -1,96 +1,91 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml"
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
-	xmlns:p="http://primefaces.org/ui">
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	template="/templates/modelo.xhtml">
 
-<h:head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-<title>Responsáveis pela OS</title>
-<h:outputScript library="js" name="scripts.js"/>
-</h:head>
-<h:body>
-	<p:growl id="mensagem"/>
-	
-
-	<h:form id="formListagem">
-		<p:panel header="Responsáveis pela OS - Listagem">
-			<p:dataTable id="tabela" emptyMessage="Nenhum registro encontrado."
-				value="#{responsavelOSBean.responsaveis}" var="resp" paginator="true">
-				
-				<f:facet name="footer">
-						<p:commandButton value="Novo Responsavel"
-							actionListener="#{responsavelOSBean.novo()}"
-							update=":formCadastroResponsavel:pnlFormCadResponsavel"
-							oncomplete="PF('dlgResponsavel').show();"/>
-				</f:facet>
-				
-				<p:column headerText="Id" width="10%">
-					<h:outputText value="#{resp.codigo}" />
-				</p:column>
-				
-				<p:column headerText="Nome" sortBy="#{resp.nome}" filterBy="#{resp.nome}">
-					<h:outputText value="#{resp.nome}" />
-				</p:column>
-				
-				<p:column headerText="Opções" width="25%">
-				
-					<p:commandButton icon="ui-icon-pencil" 
-						actionListener="#{responsavelOSBean.editar}" 
-						update=":formCadastroResponsavel:pnlFormCadResponsavel"
-						oncomplete="PF('dlgResponsavel').show();">
-						<f:attribute name="respSelecionado" value="#{resp}"/>
-						
-					</p:commandButton>
-					
-					<p:commandButton icon="ui-icon-trash"
-						actionListener="#{responsavelOSBean.excluir}"
-						update=":mensagem">
-						<p:confirm header="Confirmação" message="Deseja excluir o responsável?"
-							icon="ui-icon-alert"/>
-						<f:attribute name="respSelecionado" value="#{resp}"/>		
-							
-					</p:commandButton>
-					
-				</p:column>
-			
-			</p:dataTable>
-			
-			<p:confirmDialog global="true">
-				<p:commandButton value="Sim" type="button"
-					styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
-				
-				<p:commandButton value="Não" type="button"
-					styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>
-			</p:confirmDialog>
-			
-		</p:panel>
-	
-	</h:form>
-	
-	<p:dialog widgetVar="dlgResponsavel" draggable="false" 
-		resizable="false" modal="true" header="Responsáveis pela OS - Cadastro">
-		<h:form id="formCadastroResponsavel">
-			<h:panelGrid id="pnlFormCadResponsavel" columns="2">
+	<ui:define name="conteudo">
 		
-				<p:outputLabel value="Nome: "/>
-				<p:inputText value="#{responsavelOSBean.responsavelOS.nome}" size="30" maxlength="100"
-					required="true" requiredMessage="o campo nome é obrigatório!"/>
+		<h:form id="formListagem">
+			<p:panel header="Responsáveis pela OS - Listagem">
+				<p:dataTable styleClass="tabela" id="tabela" emptyMessage="Nenhum registro encontrado."
+					value="#{responsavelOSBean.responsaveis}" var="resp" paginator="true">
+					
+					<f:facet name="footer">
+							<p:commandButton value="Novo Responsável"
+								actionListener="#{responsavelOSBean.novo()}"
+								update=":formCadastroResponsavel:pnlFormCadResponsavel"
+								oncomplete="PF('dlgResponsavel').show();"/>
+					</f:facet>
+					
+					<p:column styleClass="coluna" headerText="Id" width="10%">
+						<h:outputText value="#{resp.codigo}" />
+					</p:column>
+					
+					<p:column styleClass="colunas" headerText="Nome" sortBy="#{resp.nome}" filterBy="#{resp.nome}">
+						<h:outputText value="#{resp.nome}" />
+					</p:column>
+					
+					<p:column styleClass="colunas" headerText="Opções" width="25%">
+					
+						<p:commandButton icon="ui-icon-pencil" 
+							actionListener="#{responsavelOSBean.editar}" 
+							update=":formCadastroResponsavel:pnlFormCadResponsavel"
+							oncomplete="PF('dlgResponsavel').show();">
+							<f:attribute name="respSelecionado" value="#{resp}"/>
+							
+						</p:commandButton>
+						
+						<p:commandButton icon="ui-icon-trash"
+							actionListener="#{responsavelOSBean.excluir}"
+							update=":mensagem">
+							<p:confirm header="Confirmação" message="Deseja excluir o responsável?"
+								icon="ui-icon-alert"/>
+							<f:attribute name="respSelecionado" value="#{resp}"/>		
+								
+						</p:commandButton>
+						
+					</p:column>
 				
-			
-			</h:panelGrid>
-			<h:panelGrid columns="2">
-				<p:commandButton value="Salvar" 
-					actionListener="#{responsavelOSBean.salvar()}" oncomplete="PF('dlgResponsavel').hide();"
-					update=":mensagem: formCadastroResponsavel:pnlFormCadResponsavel :formListagem:tabela "/>
-				<p:commandButton value="Fechar" oncomplete="PF('dlgResponsavel').hide();"/>
-			</h:panelGrid>
-			
+				</p:dataTable>
+				
+				<p:confirmDialog global="true">
+					<p:commandButton value="Sim" type="button"
+						styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
+					
+					<p:commandButton value="Não" type="button"
+						styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>
+				</p:confirmDialog>
+				
+			</p:panel>
+		
 		</h:form>
+		
+		<p:dialog widgetVar="dlgResponsavel" draggable="false" 
+			resizable="false" modal="true" header="Responsáveis pela OS - Cadastro">
+			<h:form id="formCadastroResponsavel">
+				<h:panelGrid id="pnlFormCadResponsavel" columns="2">
+			
+					<p:outputLabel value="Nome: "/>
+					<p:inputText value="#{responsavelOSBean.responsavelOS.nome}" size="30" maxlength="100"
+						required="true" requiredMessage="o campo nome é obrigatório!"/>
+					
+				
+				</h:panelGrid>
+				<h:panelGrid columns="2">
+					<p:commandButton value="Salvar" 
+						actionListener="#{responsavelOSBean.salvar()}" oncomplete="PF('dlgResponsavel').hide();"
+						update=":mensagem: formCadastroResponsavel:pnlFormCadResponsavel :formListagem:tabela "/>
+					<p:commandButton value="Fechar" oncomplete="PF('dlgResponsavel').hide();"/>
+				</h:panelGrid>
+				
+			</h:form>
+		
+		</p:dialog>
+	</ui:define>	
 	
-	</p:dialog>
-	
-	
-</h:body>
-</html>
+</ui:composition>

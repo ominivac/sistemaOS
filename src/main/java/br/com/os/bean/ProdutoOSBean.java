@@ -1,18 +1,25 @@
 package br.com.os.bean;
 
 import java.io.Serializable;
+import java.sql.Connection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.event.ActionEvent;
 
+import org.omnifaces.util.Faces;
 import org.omnifaces.util.Messages;
 
 import br.com.os.dao.ProdutoOsDAO;
 
 import br.com.os.domain.ProdutoOS;
+import br.com.os.util.HibernateUtil;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperFillManager;
 
 
 
@@ -63,6 +70,26 @@ public class ProdutoOSBean  implements Serializable {
 			e.printStackTrace();
 		}
 	}
+	
+	public void imprimir() {
+		try {
+			String caminho = Faces.getRealPath("/reports/itens_os.jasper");
+			Map<String, Object> parametros = new HashMap<String, Object>();
+			
+			Connection conexao = HibernateUtil.getConexao();
+			
+			JasperFillManager.fillReportToFile(caminho,  parametros, conexao);
+		}catch (JRException ex) {
+			Messages.addGlobalError("Erro tentar gerar impressão dos itens de OS");
+			ex.printStackTrace();
+		}
+		
+		catch (RuntimeException e) {
+			Messages.addGlobalError("Erro de conexao na geração do relatorio");
+			e.printStackTrace();
+		}
+	}
+	
 	
 	public void salvar() {
 		try {
