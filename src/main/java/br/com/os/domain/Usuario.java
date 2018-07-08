@@ -11,13 +11,15 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 
 @SuppressWarnings("serial")
 @Entity()
 @Table(name="usuario")
 @NamedQueries({
 	@NamedQuery(name="Usuario.listar", query= "SELECT usuario FROM Usuario usuario"),
-	@NamedQuery(name="Usuario.buscarPorCodigo", query= "SELECT usuario FROM Usuario usuario WHERE usuario.codigoUsuario = :codigo" )
+	@NamedQuery(name="Usuario.buscarPorCodigo", query= "SELECT usuario FROM Usuario usuario WHERE usuario.codigoUsuario = :codigo" ),
+	@NamedQuery(name="Usuario.login", query= "SELECT usuario FROM Usuario usuario WHERE usuario.nome =:nome AND usuario.senha =:senha" )
 })
 public class Usuario  {
 	
@@ -40,8 +42,8 @@ public class Usuario  {
 	@Column(length=32, nullable = false)
 	private String senha;
 	
-	
-	private String segSenha;
+	@Transient
+	private String senhaSemCripto;
 
 	@Enumerated(EnumType.STRING)
 	private Role role;
@@ -63,12 +65,12 @@ public class Usuario  {
 	}
 
 	
-	public String getSegSenha() {
-		return segSenha;
+	public String getSenhaSemCripto() {
+		return senhaSemCripto;
 	}
 	
-	public void setSegSenha(String segSenha) {
-		this.segSenha = segSenha;
+	public void setSenhaSemCripto(String senhaSemCripto) {
+		this.senhaSemCripto = senhaSemCripto;
 	}
 
 	public Role getRole() {

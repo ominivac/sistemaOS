@@ -2,6 +2,7 @@ package br.com.os.dao;
 
 import java.util.List;
 
+import org.apache.shiro.crypto.hash.SimpleHash;
 import org.junit.Ignore;
 import org.junit.Test;
 
@@ -16,14 +17,44 @@ public class UsuarioDAOTest {
 	public void salvar() {
 		// TESTADO  - OK
 		Usuario usuario = new Usuario();
-		usuario.setNome("USUARIO 1");
-		usuario.setRole(Role.USUARIO);
-		usuario.setSenha("user1");
+		usuario.setNome("USUARIO CRIPTO");
+		usuario.setRole(Role.ADMINISTRADOR);
+		usuario.setSenhaSemCripto("1q2w3e4r");
+		
+		SimpleHash hash = new SimpleHash("md5", usuario.getSenhaSemCripto());
+		usuario.setSenha(hash.toHex() );
 		
 		
 		UsuarioDAO usuarioDAO = new UsuarioDAO();
 		usuarioDAO.salvar(usuario);
 	}
+	
+	@Test
+	@Ignore
+	public void autenticar() {
+		String  nome = "USUARIO CRIPTO";
+		String  senha = "1q2w3e4r";
+		
+		UsuarioDAO udao = new UsuarioDAO();
+		Usuario u = udao.autenticar(nome, senha);
+		
+		System.out.println(u);
+		
+	}
+	
+	@Test
+	public void login() {
+		String  nome = "USUARIO CRIPTO";
+		String  senha = "1q2w3e4r";
+		
+		UsuarioDAO udao = new UsuarioDAO();
+		Usuario u = udao.login(nome, senha);
+		
+		System.out.println(u);
+		
+	}
+	
+	
 	@Test
 	@Ignore
 	public void mergeIncluir() {

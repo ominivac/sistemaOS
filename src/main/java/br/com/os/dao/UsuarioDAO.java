@@ -2,10 +2,12 @@ package br.com.os.dao;
 
 import java.util.List;
 
+import org.apache.shiro.crypto.hash.SimpleHash;
+import org.hibernate.Criteria;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-
+import org.hibernate.criterion.Restrictions;
 
 import br.com.os.domain.Usuario;
 import br.com.os.util.HibernateUtil;
@@ -30,6 +32,55 @@ public class UsuarioDAO {
 		}finally {
 			sessao.close();
 		}	
+	}
+	
+	
+	public Usuario autenticar(String nome, String senha) {
+		Session sessao = HibernateUtil.getSessionFactory().openSession();
+		
+		try {
+			Criteria consulta = sessao.createCriteria(Usuario.class);
+			consulta.createAlias("usuario","u");
+			
+			consulta.add(Restrictions.eq("u.nome", nome));
+			
+			SimpleHash hash = new SimpleHash("md5", senha);
+			consulta.add(Restrictions.eq("senha", hash.toHex() ));
+			
+			Usuario usuario =  (Usuario) consulta.uniqueResult();
+			
+			return usuario;
+		}catch (RuntimeException ex) {
+
+			throw ex;
+		}finally {
+			sessao.close();
+		}
+	}
+	
+	public Usuario login(String nome, String senha){
+		Session sessao = HibernateUtil.getSessionFactory().openSession();
+		Usuario usuario  = null;
+		Query consulta = null;
+		
+		
+		try {
+			consulta = sessao.getNamedQuery("Usuario.login");
+			consulta.setString("nome", nome);
+			
+			SimpleHash hash = new SimpleHash("md5", senha);
+			
+			consulta.setString("senha", hash.toHex() );
+			
+			usuario =  (Usuario) consulta.uniqueResult();
+			
+		}catch (RuntimeException ex) {
+
+			throw ex;
+		}finally {
+			sessao.close();
+		}
+		return usuario;
 	}
 	
 	

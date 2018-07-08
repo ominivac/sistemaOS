@@ -67,7 +67,7 @@ public class UsuarioBean implements Serializable{
 	
 	
 	private boolean senhasIguais() {
-		if(usuario.getSenha().equals(usuario.getSegSenha() ) ) {
+		if(usuario.getSenha().equals(usuario.getSenhaSemCripto() ) ) {
 			return true;
 		}
 		return false;
