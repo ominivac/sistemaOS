@@ -19,5 +19,10 @@
     	<converter-class>br.com.os.converter.ResponsavelConverter</converter-class>
 	</converter>
 	 -->
+	 
+	 <!-- Definição  do PahseListener para autenticação -->
+	 <lifecycle>
+	 	<phase-listener>br.com.os.util.AutenticacaoListener</phase-listener>
+	 </lifecycle>
 
 </faces-config>

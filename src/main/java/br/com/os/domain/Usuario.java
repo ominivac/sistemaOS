@@ -13,6 +13,8 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
+import org.apache.shiro.crypto.hash.SimpleHash;
+
 @SuppressWarnings("serial")
 @Entity()
 @Table(name="usuario")
@@ -83,6 +85,7 @@ public class Usuario  {
 
 	@Override
 	public String toString() {
+		
 		return "Usuario [codigoUsuario=" + codigoUsuario + ", nome=" + nome + ", senha=" + senha + ", role=" + role
 				+ "]";
 	}

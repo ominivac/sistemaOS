@@ -12,25 +12,34 @@
 	<h:outputStylesheet library="css" name="estilos.css"/>
 </h:head>
 <h:body>
+	<p:layout fullPage="true">
 	<p:growl id="mensagem"/>
 	
 	
-		<div id="geral">
-			<div id="topo" >
-				<h:form id="formLogout">
-					<p:panel header="Sistema de Ordem de Serviço" styleClass="panel">
-						<h:outputLabel value="Bem vindo, #{autenticacaoBean.usuarioLogado.nome}"/>
-						<p:commandButton value="Sair" />
-					</p:panel>
-				</h:form>
-				
-				
-			</div>
+	<div id="geral">
+		<div id="topo" >
+				 <p:layoutUnit header="Sistema de Auditorias" position="north"
+            		resizable="false" closable="false" collapsible="false">
+            		<p:toolbar style="height:40px;">
+		                <f:facet name="left">
+		                	<h:form id="formLogout">
+					            <p:outputLabel value="Bem vindo, #{autenticacaoBean.usuarioLogado.nome}"
+		                        style="position: relative;left: 1360px;" />
+		                    <p:commandButton value="Sair"
+		                        style="height:28px;width:90px; text-align:center;position: relative;left: 1370px;" />
+		                	</h:form>
+		                </f:facet>
+            		</p:toolbar>
+        		</p:layoutUnit>
+		</div>
 		
-			<div id="cabecalho" class="divCabecalho">
+		<div id="cabecalho" class="divCabecalho">
+			 <p:layoutUnit header="Menu Inicial" size="200" position="north"
+            	resizable="false" closable="false" collapsible="false">	
 				<h:form id="formMenu">
 				<p:menubar styleClass="menuS">
 					<p:submenu label="Configurações">
+						<p:menuitem value="Inicial" url="/pages/principal.xhtml"/>
 						<p:menuitem value="Sair"/>
 					</p:submenu>
 					
@@ -50,14 +59,18 @@
 					
 				</p:menubar>
 				</h:form>
+			</p:layoutUnit>
 			</div>
 			
 			<div id="conteudo">
+				<p:layoutUnit position="center" resizable="false" closable="true"
+            		collapsible="false">
 				<ui:insert name="conteudo"/>
+				</p:layoutUnit>
 			</div>
 		
 		</div>
-		<p:dialog widgetVar="dlgSobre" draggable="false" closable="true"
+		<p:dialog widgetVar="dlgSobre" draggable="false" closable="true" appendTo="body"
 			resizable="false" modal="true" header="Sobre">
 			<h:form>
 				<h:panelGrid columns="2">		
@@ -69,6 +82,10 @@
 			</h:form>
 		
 		</p:dialog>
-	
+		<p:layoutUnit header="Desenvolvido por: Roberto Sousa" position="south" 
+			resizable="false" closable="false" collapsible="false">
+        </p:layoutUnit>
+		
+	</p:layout>
 </h:body>
 </html>

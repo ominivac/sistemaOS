@@ -35,7 +35,7 @@ public class UsuarioDAO {
 	}
 	
 	
-	public Usuario autenticar(String nome, String senha) {
+	public Usuario autenticarOld(String nome, String senha) {
 		Session sessao = HibernateUtil.getSessionFactory().openSession();
 		
 		try {

@@ -9,21 +9,24 @@
 <title>Autenticação</title>
 </h:head>
 <h:body>
+
+	<p:growl id="mensagem"/>
+
 	<p:dialog widgetVar="dlgAutenticar" header="Autenticação" visible="true" closable="false"
 		draggable="false" resizable="false"  modal="true">
 		<h:form id="formAutenticar">
 	
 			<h:panelGrid columns="2">
 				<p:outputLabel for="nome" value="Nome" size="20"/>
-				<p:inputText id="nome"  maxlength="20" size="20"
+				<p:inputText id="nome"  maxlength="20" size="20" value="#{autenticacaoBean.usuario.nome}"
 					required="true" requiredMessage="O campo nome é obrigatório"/>
 				
 				<p:outputLabel for="senha" value="Senha"/>
-				<p:password id="senha" maxlength="8" size="20"
+				<p:password id="senha" maxlength="20" size="20" value="#{autenticacaoBean.usuario.senhaSemCripto}"
 					required="true" requiredMessage="O campo senha é obrigatório"/>
 				
 				<h:panelGrid columns="2">
-					<p:commandButton value="Entrar" 
+					<p:commandButton value="Entrar" update=":mensagem"
 						actionListener="#{autenticacaoBean.autenticar}"/>
 					<p:commandButton value="Cancelar"  oncomplete="PF('dlgAutenticar').hide();"/>
 				</h:panelGrid>

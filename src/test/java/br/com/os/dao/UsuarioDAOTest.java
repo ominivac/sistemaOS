@@ -31,21 +31,39 @@ public class UsuarioDAOTest {
 	
 	@Test
 	@Ignore
+	public void salvar2() {
+		// TESTADO  - OK
+		Usuario usuario = new Usuario();
+		usuario.setNome("Maria Rita");
+		usuario.setRole(Role.USUARIO);
+		usuario.setSenhaSemCripto("maria123");
+		
+		SimpleHash hash = new SimpleHash("md5", usuario.getSenhaSemCripto());
+		usuario.setSenha(hash.toHex() );
+		
+		
+		UsuarioDAO usuarioDAO = new UsuarioDAO();
+		usuarioDAO.salvar(usuario);
+	}
+	
+	@Test
+	//@Ignore
 	public void autenticar() {
-		String  nome = "USUARIO CRIPTO";
-		String  senha = "1q2w3e4r";
+		String  nome = "Maria Rita";
+		String  senha = "maria123";
 		
 		UsuarioDAO udao = new UsuarioDAO();
-		Usuario u = udao.autenticar(nome, senha);
+		Usuario u = udao.login(nome, senha);
 		
 		System.out.println(u);
 		
 	}
 	
 	@Test
+	@Ignore
 	public void login() {
-		String  nome = "USUARIO CRIPTO";
-		String  senha = "1q2w3e4r";
+		String  nome = "admin";
+		String  senha = "admin";
 		
 		UsuarioDAO udao = new UsuarioDAO();
 		Usuario u = udao.login(nome, senha);

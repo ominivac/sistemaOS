@@ -16,6 +16,13 @@
 	pause-after: 5px;
 }
 
+.panel{
+	font-size: 95% ;
+	font-weight: bold;
+	height: 100%;
+	width: 100%
+}
+
 .divCabecalho{
 	padding-bottom: 25px;
 	pause-after: 10px;

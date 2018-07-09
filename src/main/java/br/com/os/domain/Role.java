@@ -25,7 +25,10 @@ public enum Role {
 		}
 		
 		
-		
+		@Override
+		public String toString() {
+			return this.descricao;
+		}
 	
 		
 		
