@@ -5,7 +5,7 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-	template="/templates/modelo.xhtml">
+	template="/templates/modelo2.xhtml">
 
 <ui:define name="conteudo">
 
@@ -57,7 +57,7 @@
 			</p:panel>
 		</h:form>
 	
-	<p:dialog widgetVar="dlgUsuario" draggable="false"  appendTo="body"
+	<p:dialog widgetVar="dlgUsuario" draggable="false"  appendTo="@(body)"
 		resizable="false" modal="true" header="Usuários - Cadastro">
 		<h:form id="formCadastroUsuario">
 			<h:panelGrid id="pnlFormCadUsuario" columns="2">

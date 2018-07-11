@@ -6,7 +6,7 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-	template="/templates/modelo.xhtml">
+	template="/templates/modelo2.xhtml">
 
 	<ui:define name="conteudo">
 		
@@ -65,7 +65,7 @@
 		
 		</h:form>
 		
-		<p:dialog widgetVar="dlgResponsavel" draggable="false" appendTo="body"
+		<p:dialog widgetVar="dlgResponsavel" draggable="false" appendTo="@(body)"
 			resizable="false" modal="true" header="Responsáveis pela OS - Cadastro">
 			<h:form id="formCadastroResponsavel">
 				<h:panelGrid id="pnlFormCadResponsavel" columns="2">

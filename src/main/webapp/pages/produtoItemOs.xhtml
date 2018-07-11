@@ -6,7 +6,7 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-	template="/templates/modelo.xhtml">
+	template="/templates/modelo2.xhtml">
 
 	<ui:define name="conteudo">
 
@@ -22,8 +22,8 @@
 								update=":formCadastroProduto:pnlFormCadProduto"
 								oncomplete="PF('dlgProduto').show();"/>
 								
-							<p:commandButton icon="ui-icon-print" 
-								actionListener="#{produtoOSBean.imprimir}"/>	
+							<p:commandButton icon="ui-icon-print" ajax="false"
+								actionListener="#{produtoOSBean.gerarRelatorio}"/>	
 								
 					</f:facet>
 					
@@ -79,7 +79,7 @@
 		
 		</h:form>
 	
-		<p:dialog widgetVar="dlgProduto" draggable="false" appendTo="body"
+		<p:dialog widgetVar="dlgProduto" draggable="false" appendTo="@(body)"
 			resizable="false" modal="true" header="Itens de OS - Cadastro">
 			<h:form id="formCadastroProduto">
 				<h:panelGrid id="pnlFormCadProduto" columns="2">

@@ -90,7 +90,7 @@
 		<dependency>
 			<groupId>net.sf.jasperreports</groupId>
 			<artifactId>jasperreports</artifactId>
-			<version>6.2.0</version>
+			<version>5.0.1</version>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.apache.shiro/shiro-core -->

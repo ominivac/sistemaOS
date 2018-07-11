@@ -17,6 +17,8 @@
 	
 		<div id="geral">
 			<div id="topo" >
+				<!-- <p:graphicImage styleClass="" />  -->
+			
 				<h:form id="formLogout">
 					<p:panel header="Sistema de Ordem de Serviço" styleClass="panel">
 						<h:outputLabel value="Bem vindo, #{autenticacaoBean.usuarioLogado.nome}"/>
@@ -31,6 +33,7 @@
 				<h:form id="formMenu">
 				<p:menubar styleClass="menuS">
 					<p:submenu label="Configurações">
+						<p:menuitem value="Página Inicial" url="/pages/principal.xhtml"/>
 						<p:menuitem value="Sair"/>
 					</p:submenu>
 					

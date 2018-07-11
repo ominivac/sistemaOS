@@ -34,7 +34,7 @@
 		</div>
 		
 		<div id="cabecalho" class="divCabecalho">
-			 <p:layoutUnit header="Menu Inicial" size="200" position="north"
+			 <p:layoutUnit header="Menu Inicial" size="200" styleClass="menu-sistema" position="north"
             	resizable="false" closable="false" collapsible="false">	
 				<h:form id="formMenu">
 				<p:menubar styleClass="menuS">
@@ -62,15 +62,15 @@
 			</p:layoutUnit>
 			</div>
 			
-			<div id="conteudo">
-				<p:layoutUnit position="center" resizable="false" closable="true"
+			<!-- <div id="conteudo">  -->
+				<p:layoutUnit position="center" resizable="true" closable="true" styleClass="layout-unit"
             		collapsible="false">
 				<ui:insert name="conteudo"/>
 				</p:layoutUnit>
-			</div>
+			<!-- </div>  -->
 		
 		</div>
-		<p:dialog widgetVar="dlgSobre" draggable="false" closable="true" appendTo="body"
+		<p:dialog widgetVar="dlgSobre" draggable="false" closable="true" appendTo="@(body)"
 			resizable="false" modal="true" header="Sobre">
 			<h:form>
 				<h:panelGrid columns="2">		
