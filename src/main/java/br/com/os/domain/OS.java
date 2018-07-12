@@ -26,6 +26,7 @@ import br.com.os.converter.SampleEntity;
 @Table(name="os")
 @NamedQueries({
 	@NamedQuery(name="OS.listar", query= "SELECT os FROM OS os"),
+	@NamedQuery(name="OS.listarByDateDesc", query= "SELECT os FROM OS os ORDER BY os.dataLancamento DESC"),
 	@NamedQuery(name="OS.buscarPorCodigo", query= "SELECT os FROM OS os WHERE os.codigoOs = :codigo" )
 })
 public class OS implements Serializable,SampleEntity{

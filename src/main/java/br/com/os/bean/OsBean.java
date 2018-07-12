@@ -32,6 +32,17 @@ public class OsBean implements Serializable{
 	
 	private OS os;
 	
+	private List<OS> listaOs; //para listagem da tabela
+	
+	public List<OS> getListaOs() {
+		return listaOs;
+	}
+	
+	public void setListaOs(List<OS> listaOs) {
+		this.listaOs = listaOs;
+	}
+	
+	
 	public List<ProdutoOS> getProdutosOS() {
 		return produtosOS;
 	}
@@ -75,6 +86,12 @@ public class OsBean implements Serializable{
 			produtosOS = pdao.listar();
 			
 			itensOs = new ArrayList<Item>();
+			//popular lista de os ja salvas para a tabela
+			
+			OsDAO osDAO = new OsDAO();
+			listaOs = osDAO.listar();
+			
+			
 			
 		}catch (Exception e) {
 			Messages.addGlobalError("erro ao listas os itens");
@@ -111,6 +128,12 @@ public class OsBean implements Serializable{
 		
 		
 	}
+	
+	
+	public void editar(ActionEvent event) {
+		OS osSelecionado = (OS)event.getComponent().getAttributes().get("itemSelecionado");
+	}
+	
 	
 	public void remover(ActionEvent event) {
 		Item itemSelecionado = (Item)event.getComponent().getAttributes().get("itemSelecionado");

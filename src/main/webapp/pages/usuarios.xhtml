@@ -5,12 +5,12 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-	template="/templates/modelo2.xhtml">
+	template="/templates/modelo.xhtml">
 
 <ui:define name="conteudo">
 
 		<h:form id="formListagem">
-			<p:panel header="Usuários - Listagem">
+			<p:panel header="Usuários - Listagem" styleClass="ui-widget">
 				<p:dataTable id="tabela" emptyMessage="Nenhum registro encontrado."
 					value="#{usuarioBean.usuarios}" var="usuario" paginator="true">
 					
@@ -36,7 +36,7 @@
 					</p:column>
 					
 					<p:column headerText="Opções">
-						<p:commandButton icon="ui-icon-pencil" 
+						<p:commandButton value="Editar"
 							actionListener="#{usuarioBean.editar}" 
 							update=":formCadastroUsuario:pnlFormCadUsuario"
 							oncomplete="PF('dlgUsuario').show();">
@@ -44,21 +44,32 @@
 							<f:actionListener type="org.omnifaces.eventlistener.ResetInputAjaxActionListener"/>
 						</p:commandButton>
 						
-						<p:commandButton icon="ui-icon-trash"
+						<p:commandButton value="Excluir"
 							actionListener="#{usuarioBean.excluir}"
-							update=":mensagem">
-							<p:confirm header="Confirmação" message="Deseja excluir o usuário?"
+							update=":mensagem :formListagem:tabela">
+							
+							<p:confirm header="Confirmação" message="Deseja excluir o usuário ?"
 								icon="ui-icon-alert"/>
 							<f:attribute name="usuarioSelecionado" value="#{usuario}"/>		
-								
 						</p:commandButton>
+						
 					</p:column>
 				</p:dataTable>
+				
+				<p:confirmDialog global="true">
+					<p:commandButton value="Sim" type="button"
+						styleClass="ui-confirmdialog-yes" icon="ui-icon-check"/>
+					
+					<p:commandButton value="Não" type="button"
+						styleClass="ui-confirmdialog-no" icon="ui-icon-close"/>
+				</p:confirmDialog>
+				
 			</p:panel>
 		</h:form>
 	
-	<p:dialog widgetVar="dlgUsuario" draggable="false"  appendTo="@(body)"
+	<p:dialog widgetVar="dlgUsuario" draggable="false"  appendTo="@(body)" showEffect="clip" hideEffect="clip"
 		resizable="false" modal="true" header="Usuários - Cadastro">
+		<p:growl id="mensagemAlteraSenha" autoUpdate="false"/>
 		<h:form id="formCadastroUsuario">
 			<h:panelGrid id="pnlFormCadUsuario" columns="2">
 		
@@ -66,12 +77,14 @@
 				<p:inputText id="txtNome" value="#{usuarioBean.usuario.nome}" size="30" maxlength="100"
 					required="true" requiredMessage="o campo nome é obrigatório!"/>
 				
-				<p:outputLabel for="txtSenha1" value="Senha: "/>
-				<p:password id="txtSenha1" value="#{usuarioBean.usuario.senha}" size="10" maxlength="8"
-					required="true" requiredMessage="o campo senha é obrigatório!"/>
+				<p:outputLabel for="txtSenha" value="Senha: "/>
+				<p:password id="txtSenha" value="#{usuarioBean.usuario.senha}" size="10" maxlength="8"
+					required="true" match="txtSenha2" 
+					validatorMessage="Os campos senha tem de ser iguais"
+					requiredMessage="o campo senha é obrigatório!" />
 				
 				<p:outputLabel for="txtSenha2" value="Repita a Senha: "/>
-				<p:password id="txtSenha2" size="10" maxlength="8"/>
+				<p:password id="txtSenha2" required="true" size="10" maxlength="8"/>
 				
 				<p:outputLabel for="sltRole" value="Tipo Usuário: "/>
 				<h:selectOneMenu id="sltRole" value="#{usuarioBean.usuario.role}" 
@@ -85,11 +98,14 @@
 			
 			</h:panelGrid>
 			<h:panelGrid columns="2">
-				<p:commandButton value="Salvar" 
-					actionListener="#{usuarioBean.salvar}" oncomplete="PF('dlgUsuario').hide();"
-					update=":mensagem: formCadastroUsuario:pnlFormCadUsuario :formListagem:tabela "/>
+				<h:form id="formSalvar">
+					<p:commandButton id="btnSalvar" value="Salvar" 
+						actionListener="#{usuarioBean.salvar}" oncomplete="PF('dlgUsuario').hide();"
+						update=":mensagem: formCadastroUsuario:pnlFormCadUsuario :formListagem:tabela "/>
 					
-				<p:commandButton value="Fechar" oncomplete="PF('dlgUsuario').hide();"/>
+					<p:commandButton value="Fechar" type="button"
+						onclick="PF('dlgUsuario').hide();" oncomplete=""/>
+				</h:form>
 			</h:panelGrid>
 		</h:form>
 	</p:dialog>

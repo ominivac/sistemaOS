@@ -21,7 +21,8 @@ import org.apache.shiro.crypto.hash.SimpleHash;
 @NamedQueries({
 	@NamedQuery(name="Usuario.listar", query= "SELECT usuario FROM Usuario usuario"),
 	@NamedQuery(name="Usuario.buscarPorCodigo", query= "SELECT usuario FROM Usuario usuario WHERE usuario.codigoUsuario = :codigo" ),
-	@NamedQuery(name="Usuario.login", query= "SELECT usuario FROM Usuario usuario WHERE usuario.nome =:nome AND usuario.senha =:senha" )
+	@NamedQuery(name="Usuario.buscarPorEmail", query= "SELECT usuario FROM Usuario usuario WHERE usuario.email = :email" ),
+	@NamedQuery(name="Usuario.login", query= "SELECT usuario FROM Usuario usuario WHERE usuario.email =:email AND usuario.senha =:senha" )
 })
 public class Usuario  {
 	
@@ -43,6 +44,10 @@ public class Usuario  {
 	private String nome;
 	@Column(length=32, nullable = false)
 	private String senha;
+	
+	@Column(length=32, nullable = true)
+	private String email;
+	
 	
 	@Transient
 	private String senhaSemCripto;
@@ -67,6 +72,15 @@ public class Usuario  {
 	}
 
 	
+	public String getEmail() {
+		return email;
+	}
+	
+	public void setEmail(String email) {
+		this.email = email;
+	}
+	
+	
 	public String getSenhaSemCripto() {
 		return senhaSemCripto;
 	}
@@ -83,11 +97,12 @@ public class Usuario  {
 		this.role = role;
 	}
 
+	
+
 	@Override
 	public String toString() {
-		
-		return "Usuario [codigoUsuario=" + codigoUsuario + ", nome=" + nome + ", senha=" + senha + ", role=" + role
-				+ "]";
+		return "Usuario [codigoUsuario=" + codigoUsuario + ", nome=" + nome + ", senha=" + senha + ", email=" + email
+				+ ", senhaSemCripto=" + senhaSemCripto + ", role=" + role + "]";
 	}
 
 	@Override

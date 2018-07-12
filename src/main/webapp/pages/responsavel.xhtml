@@ -6,7 +6,7 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-	template="/templates/modelo2.xhtml">
+	template="/templates/modelo.xhtml">
 
 	<ui:define name="conteudo">
 		
@@ -17,9 +17,11 @@
 					
 					<f:facet name="footer">
 							<p:commandButton value="Novo Responsável"
-								actionListener="#{responsavelOSBean.novo()}"
+								actionListener="#{responsavelOSBean.novo}"
 								update=":formCadastroResponsavel:pnlFormCadResponsavel"
-								oncomplete="PF('dlgResponsavel').show();"/>
+								oncomplete="PF('dlgResponsavel').show();">
+								
+							</p:commandButton>
 					</f:facet>
 					
 					<p:column styleClass="coluna" headerText="Id" width="10%">
@@ -37,20 +39,19 @@
 							update=":formCadastroResponsavel:pnlFormCadResponsavel"
 							oncomplete="PF('dlgResponsavel').show();">
 							<f:attribute name="respSelecionado" value="#{resp}"/>
-							
+							<f:actionListener type="org.omnifaces.eventlistener.ResetInputAjaxActionListener"/>
 						</p:commandButton>
 						
 						<p:commandButton icon="ui-icon-trash"
 							actionListener="#{responsavelOSBean.excluir}"
-							update=":mensagem">
+							update=":mensagem :formListagem:tabela">
+							
 							<p:confirm header="Confirmação" message="Deseja excluir o responsável?"
 								icon="ui-icon-alert"/>
 							<f:attribute name="respSelecionado" value="#{resp}"/>		
-								
 						</p:commandButton>
 						
 					</p:column>
-				
 				</p:dataTable>
 				
 				<p:confirmDialog global="true">
@@ -65,7 +66,8 @@
 		
 		</h:form>
 		
-		<p:dialog widgetVar="dlgResponsavel" draggable="false" appendTo="@(body)"
+		<p:dialog widgetVar="dlgResponsavel" draggable="false" appendTo="@(body)" showEffect="clip" hideEffect="clip" 
+		 	styleClass="ui-dialog-title-dialog"
 			resizable="false" modal="true" header="Responsáveis pela OS - Cadastro">
 			<h:form id="formCadastroResponsavel">
 				<h:panelGrid id="pnlFormCadResponsavel" columns="2">
@@ -77,10 +79,12 @@
 				
 				</h:panelGrid>
 				<h:panelGrid columns="2">
-					<p:commandButton value="Salvar" 
-						actionListener="#{responsavelOSBean.salvar()}" oncomplete="PF('dlgResponsavel').hide();"
+					<p:commandButton value="Salvar"
+						actionListener="#{responsavelOSBean.salvar}" oncomplete="PF('dlgResponsavel').hide();"
 						update=":mensagem: formCadastroResponsavel:pnlFormCadResponsavel :formListagem:tabela "/>
-					<p:commandButton value="Fechar" oncomplete="PF('dlgResponsavel').hide();"/>
+					
+					<p:commandButton value="Fechar" type="button"
+						onclick="PF('dlgResponsavel').hide();" oncomplete=""/>
 				</h:panelGrid>
 				
 			</h:form>

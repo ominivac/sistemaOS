@@ -83,6 +83,25 @@ public class OsDAO {
 		return listaOs;
 	}
 	
+	public List<OS> listarbYDate(){
+		Session sessao = HibernateUtil.getSessionFactory().openSession();
+		List<OS> listaOs = null;
+		Query consulta = null;
+		
+		
+		try {
+			consulta = sessao.getNamedQuery("OS.listarByDateDesc");
+			listaOs =  consulta.list();
+			
+		}catch (RuntimeException ex) {
+
+			throw ex;
+		}finally {
+			sessao.close();
+		}
+		return listaOs;
+	}
+	
 	public OS buscarPorCodigo(Integer codigo){
 		Session sessao = HibernateUtil.getSessionFactory().openSession();
 		OS os  = null;

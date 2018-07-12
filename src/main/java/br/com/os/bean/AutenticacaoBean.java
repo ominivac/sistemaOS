@@ -7,11 +7,14 @@ import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 
+
 import org.omnifaces.util.Faces;
 import org.omnifaces.util.Messages;
 
 import br.com.os.dao.UsuarioDAO;
+
 import br.com.os.domain.Usuario;
+
 
 @ManagedBean
 @SessionScoped

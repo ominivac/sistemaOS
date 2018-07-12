@@ -34,7 +34,7 @@ public class UsuarioDAO {
 		}	
 	}
 	
-	
+	/**
 	public Usuario autenticarOld(String nome, String senha) {
 		Session sessao = HibernateUtil.getSessionFactory().openSession();
 		
@@ -56,9 +56,9 @@ public class UsuarioDAO {
 		}finally {
 			sessao.close();
 		}
-	}
+	}*/
 	
-	public Usuario login(String nome, String senha){
+	public Usuario login(String email, String senha){
 		Session sessao = HibernateUtil.getSessionFactory().openSession();
 		Usuario usuario  = null;
 		Query consulta = null;
@@ -66,10 +66,9 @@ public class UsuarioDAO {
 		
 		try {
 			consulta = sessao.getNamedQuery("Usuario.login");
-			consulta.setString("nome", nome);
+			consulta.setString("email", email);
 			
 			SimpleHash hash = new SimpleHash("md5", senha);
-			
 			consulta.setString("senha", hash.toHex() );
 			
 			usuario =  (Usuario) consulta.uniqueResult();
@@ -83,6 +82,29 @@ public class UsuarioDAO {
 		return usuario;
 	}
 	
+	
+	
+	
+	
+	public Usuario buscarPorEmail(String email){
+		Session sessao = HibernateUtil.getSessionFactory().openSession();
+		Usuario usuario  = null;
+		Query consulta = null;
+		
+		
+		try {
+			consulta = sessao.getNamedQuery("Usuario.buscarPorEmail");
+			consulta.setString("email",email);
+			usuario =  (Usuario) consulta.uniqueResult();
+			
+		}catch (RuntimeException ex) {
+
+			throw ex;
+		}finally {
+			sessao.close();
+		}
+		return usuario;
+	}
 	
 	
 	public void merge(Usuario usuario) {

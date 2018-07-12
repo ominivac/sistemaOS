@@ -1,5 +1,7 @@
 package br.com.os.dao;
 
+import static org.junit.Assert.assertNotNull;
+
 import java.util.List;
 
 import org.apache.shiro.crypto.hash.SimpleHash;
@@ -17,9 +19,10 @@ public class UsuarioDAOTest {
 	public void salvar() {
 		// TESTADO  - OK
 		Usuario usuario = new Usuario();
-		usuario.setNome("USUARIO CRIPTO");
+		usuario.setNome("Roberto Sousa");
 		usuario.setRole(Role.ADMINISTRADOR);
-		usuario.setSenhaSemCripto("1q2w3e4r");
+		usuario.setEmail("robertokbs@gmail.com");
+		usuario.setSenhaSemCripto("1q2w3e");
 		
 		SimpleHash hash = new SimpleHash("md5", usuario.getSenhaSemCripto());
 		usuario.setSenha(hash.toHex() );
@@ -47,7 +50,7 @@ public class UsuarioDAOTest {
 	}
 	
 	@Test
-	//@Ignore
+	@Ignore
 	public void autenticar() {
 		String  nome = "Maria Rita";
 		String  senha = "maria123";
@@ -60,14 +63,17 @@ public class UsuarioDAOTest {
 	}
 	
 	@Test
-	@Ignore
+	//@Ignore
 	public void login() {
-		String  nome = "admin";
-		String  senha = "admin";
+		//String  email = "cris.torres@gmail.com";
+		String  email = "robertokbs@gmail.com";
+		//String  senha = "cris123";
+		String  senha = "1q2w3e";
 		
 		UsuarioDAO udao = new UsuarioDAO();
-		Usuario u = udao.login(nome, senha);
+		Usuario u = udao.login(email, senha);
 		
+		assertNotNull(u);
 		System.out.println(u);
 		
 	}

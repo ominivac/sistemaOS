@@ -1,0 +1,21 @@
+@charset "UTF-8";
+
+
+body{
+	font-size: 10px;
+	margin: 15px;
+}
+
+h1{
+	font-size: 20px;
+	font-weight: 450;
+	
+}
+
+panel{
+	font-size: 8px !important;
+	width: 80%;
+	height: 80% !important;
+}
+
+

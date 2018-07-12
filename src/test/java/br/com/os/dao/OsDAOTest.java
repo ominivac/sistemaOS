@@ -37,7 +37,7 @@ public class OsDAOTest {
 	
 	
 	@Test
-	//@Ignore
+	@Ignore
 	public void editar() {
 		//TESTADO OK
 		OsDAO osDAO = new OsDAO();
@@ -61,11 +61,12 @@ public class OsDAOTest {
 	
 	
 	@Test
-	@Ignore
+	//@Ignore
 	public void listar() {
 		//TESTADO - OK 
 		OsDAO osDAO = new OsDAO();
-		List<OS> listaOs = osDAO.listar();
+		//List<OS> listaOs = osDAO.listar();
+		List<OS> listaOs = osDAO.listarbYDate();
 		
 		System.out.println(listaOs);
 		

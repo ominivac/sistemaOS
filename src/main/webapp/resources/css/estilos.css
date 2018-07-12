@@ -5,6 +5,30 @@
 	font-style: bold;
 }
 
+.overlayDialog div.ui-dialog-titlebar{
+	
+}
+
+.ui-dialog-titlebar{
+	height: 85%;
+	width: 100%
+	font-size: 85% ;
+	font-weight: bold;
+}
+
+.ui-dialog-title-dialog{
+	height: 85%;
+	width: 100%
+	font-size: 80% ;
+	font-weight: bold;
+}
+
+
+.ui-panel-titlebar.ui-widget-header{
+	height: 100%;
+	width: 100%
+}
+
 .imagemCentralizada{
 	display: block;
 	margim-left: auto;
@@ -17,10 +41,10 @@
 }
 
 .panel{
-	font-size: 95% ;
+	font-size: 75% ;
 	font-weight: bold;
 	height: 100%;
-	width: 100%
+	width: 80%
 }
 
 .divCabecalho{
@@ -49,31 +73,3 @@
 
 
 
-/* Menu sistema inicio */
-.menu-sistema {
-    border: 0px !important;
-    padding: 0px !important;
-    background: none !important;
-    width: 10px;
-    font-size: 12px;
-    font-style: bold;
-}
-
-.menu-sistema .ui-menu-parent > a .ui-menuitem-text, .menu-sistema > .ui-menu-list > .ui-menuitem > a > .ui-menuitem-text {
-    overflow: visible !important; <----------
-    color: #ffffff !important;
-}
-
-.layout-unit{
-	width: 100px;
-	height: 50px;
-}
-
-.menu-sistema .ui-icon-triangle-1-s {    
-    background: url(#{resource['images:seta-para-baixo.png']}) no-repeat !important;
-}
-
-.menu-sistema .ui-menu-list {
-    top: 20px !important;    
-}
-/* Menu sistema fim */

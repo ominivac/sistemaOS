@@ -5,7 +5,7 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:p="http://primefaces.org/ui"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-	template="/templates/modelo2.xhtml">
+	template="/templates/modelo.xhtml">
 
 	<ui:define name="conteudo">
 	
@@ -28,7 +28,7 @@
 					</p:column>
 					
 					<p:column headerText="Opções" width="25%">
-						<p:commandButton icon="ui-icon-plus" actionListener="#{osBean.adicionar}"
+						<p:commandButton value="adicionar" actionListener="#{osBean.adicionar}"
 							update=":formOs:tabelaItens :formOs:finalizacao">
 							<f:attribute name="produtoSelecionado" value="#{produto}"/>
 						</p:commandButton>
@@ -67,7 +67,7 @@
 					</p:column>
 					
 					<p:column headerText="Opções" width="25%">
-						<p:commandButton icon="ui-icon-minus"
+						<p:commandButton value="remover"
 							actionListener="#{osBean.remover}"
 							update=":formOs:tabelaItens :formOs:finalizacao">
 							<f:attribute name="itemSelecionado" value="#{item}"/>
@@ -101,7 +101,7 @@
 		</h:form>
 	
 	
-		<p:dialog header="Finalizar OS" widgetVar="dialogo" appendTo="body"
+		<p:dialog header="Finalizar OS" widgetVar="dialogo" appendTo="@(body)"
 			draggable="false"  resizable="false" modal="true" closable="false">
 			<h:form id="formFinalizar">
 				<h:panelGrid id="pnlFinalizar" columns="2">
