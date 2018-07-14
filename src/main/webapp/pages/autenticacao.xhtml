@@ -3,10 +3,14 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
 	xmlns:h="http://xmlns.jcp.org/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
-     xmlns:f="http://java.sun.com/jsf/core">
+     xmlns:f="http://java.sun.com/jsf/core"
+     xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
 
 <h:head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<title>Sistema de Ordem de Serviço</title>
+<h:outputStylesheet library="css" name="jquery-ui.theme.css"/>
 <title>Autenticação</title>
 </h:head>
 <h:body>
@@ -19,15 +23,16 @@
 	
 			<h:panelGrid columns="2">
 				<p:outputLabel for="nome" value="Nome" size="20"/>
-				<p:inputText id="nome"  maxlength="20" size="20" value="#{autenticacaoBean.usuario.nome}"
+				<p:inputText id="nome"  maxlength="20" size="20" onfocus="@this" value="#{autenticacaoBean.usuario.nome}"
 					required="true" requiredMessage="O campo nome é obrigatório"/>
 				
 				<p:outputLabel for="senha" value="Senha"/>
 				<p:password id="senha" maxlength="20" size="20" value="#{autenticacaoBean.usuario.senhaSemCripto}"
 					required="true" requiredMessage="O campo senha é obrigatório"/>
 					
-				<p:commandButton value="Entrar" update=":mensagem"
-						actionListener="#{autenticacaoBean.autenticar}"/>
+				<p:commandButton widgetVar="btnEntrar" value="Entrar" update=":mensagem" 
+					onclick="PF('btnEntrar').disable();" actionListener="#{autenticacaoBean.autenticar}"
+					oncomplete="PF('btnEntrar').enable();"/>
 				<p:commandButton value="Cancelar"  oncomplete="PF('dlgAutenticar').hide();"/>
 				<p:commandButton value="Resetar Senha"  oncomplete="PF('dlgResetEmail').show();"/>		
 				

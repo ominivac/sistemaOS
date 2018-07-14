@@ -31,6 +31,10 @@
 						<h:outputText value="#{usuario.nome}" />
 					</p:column>
 					
+					<p:column headerText="Email" sortBy="#{usuario.email}" filterBy="#{usuario.email}">
+						<h:outputText value="#{usuario.email}" />
+					</p:column>
+					
 					<p:column headerText="Tipo" >
 						<h:outputText value="#{usuario.role}" />
 					</p:column>
@@ -76,6 +80,14 @@
 				<p:outputLabel for="txtNome" value="Nome: "/>
 				<p:inputText id="txtNome" value="#{usuarioBean.usuario.nome}" size="30" maxlength="100"
 					required="true" requiredMessage="o campo nome é obrigatório!"/>
+					
+				<p:outputLabel for="txtEmail" value="Email: "/>
+				<p:inputText id="txtEmail" value="#{usuarioBean.usuario.email}" size="30" maxlength="100"
+					required="true" validatorMessage="email invalido" 
+					requiredMessage="o campo nome é obrigatório!">
+					
+					 <f:validateRegex pattern="([^.@]+)(\.[^.@]+)*@([^.@]+\.)+([^.@]+)" />
+				</p:inputText>
 				
 				<p:outputLabel for="txtSenha" value="Senha: "/>
 				<p:password id="txtSenha" value="#{usuarioBean.usuario.senha}" size="10" maxlength="8"

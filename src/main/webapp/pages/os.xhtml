@@ -28,7 +28,7 @@
 					</p:column>
 					
 					<p:column headerText="Opções" width="25%">
-						<p:commandButton value="adicionar" actionListener="#{osBean.adicionar}"
+						<p:commandButton icon="ui-icon-plus" actionListener="#{osBean.adicionar}"
 							update=":formOs:tabelaItens :formOs:finalizacao">
 							<f:attribute name="produtoSelecionado" value="#{produto}"/>
 						</p:commandButton>
@@ -67,7 +67,7 @@
 					</p:column>
 					
 					<p:column headerText="Opções" width="25%">
-						<p:commandButton value="remover"
+						<p:commandButton icon="ui-icon-minus"
 							actionListener="#{osBean.remover}"
 							update=":formOs:tabelaItens :formOs:finalizacao">
 							<f:attribute name="itemSelecionado" value="#{item}"/>
@@ -89,7 +89,7 @@
 					<p:commandButton value="Finalizar" 
 						actionListener="#{osBean.finalizar}"
 						update=":mensagem: formFinalizar:pnlFinalizar" 
-						oncomplete="PF('dialogo').show();" >
+						oncomplete="PF('dlgFinalizar').show();" >
 						<f:actionListener 
 							type="org.omnifaces.eventlistener.ResetInputAjaxActionListener"/>
 						
@@ -101,7 +101,7 @@
 		</h:form>
 	
 	
-		<p:dialog header="Finalizar OS" widgetVar="dialogo" appendTo="@(body)"
+		<p:dialog header="Finalizar OS" widgetVar="dlgFinalizar" appendTo="@(body)"
 			draggable="false"  resizable="false" modal="true" closable="false">
 			<h:form id="formFinalizar">
 				<h:panelGrid id="pnlFinalizar" columns="2">
@@ -119,7 +119,6 @@
 					<p:outputLabel value="Responsável:"/>
 					<h:selectOneMenu id="sltResponsavel" value="#{osBean.os.responsavelOS}"
 						conveter="responsavelConverter">
-						
 						<f:selectItem noSelectionOption="true"
 							itemLabel="Selecione um responsável pela OS" />
 						
@@ -128,8 +127,6 @@
 							itemLabel="#{respOS.nome}"/>
 						
 					</h:selectOneMenu>
-					
-					
 					
 					<p:outputLabel value="Data lançamento:"/>
 					<p:calendar value="#{osBean.os.dataLancamento}" locale="pt_BR" timeZone="America/Sao_Paulo">
@@ -140,9 +137,6 @@
 					<p:calendar value="#{osBean.os.dataPrevisaoEntrega}" locale="pt_BR" timeZone="America/Sao_Paulo">
 						<!-- <f:convertDateTime pattern="dd/MM/yyyy HH:mm "/> -->
 					</p:calendar>
-					
-					<p:outputLabel value="res selec." />
-					<h:outputText value="#{osBean.os.responsavelOS}" />
 					
 				</h:panelGrid>
 				

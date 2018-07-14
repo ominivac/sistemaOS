@@ -79,6 +79,8 @@ public class OsBean implements Serializable{
 	public void novo() {
 		try {
 			os = new OS();
+			os.setDataLancamento(new Date() );
+			
 			os.setValorTotal(new BigDecimal("0.00"));
 			
 			
@@ -101,8 +103,13 @@ public class OsBean implements Serializable{
 	
 	
 	public void adicionar(ActionEvent event) {
+		System.out.println("entrou adicionar OsBean");
+		
+		
 		ProdutoOS produtoOSselecionado =  (ProdutoOS)event.getComponent()
 				.getAttributes().get("produtoSelecionado");
+		
+		System.out.println(produtoOSselecionado);
 		
 		int achou = -1;
 		for(int posicao = 0; posicao < itensOs.size() ; posicao++) {
@@ -118,10 +125,14 @@ public class OsBean implements Serializable{
 			item.setQuantidade(1);
 			
 			itensOs.add(item);
+			System.out.println("item adicionado" + item);
+			
 		}else {
 			Item item = itensOs.get(achou);
 			item.setQuantidade(item.getQuantidade() + 1);
 			item.setValorParcial(produtoOSselecionado.getValorPorHora().multiply(new BigDecimal(item.getQuantidade() ))  );
+			
+			System.out.println("item removido" + item);
 		}
 		//atualizar o valor total
 		calcular();
