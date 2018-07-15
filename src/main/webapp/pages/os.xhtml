@@ -142,8 +142,10 @@
 				
 				<h:panelGrid columns="2">
 					<p:commandButton value="Salvar" actionListener="#{osBean.salvar}"
-						update=":mensagem :formOs:tabelaProdutos :formOs:tabelaItens :formOs:finalizacao" oncomplete="PF('dialogo').hide();"/>
-					<p:commandButton value="Fechar" oncomplete="PF('dialogo').hide();"/>
+						update=":mensagem :formOs:tabelaProdutos :formOs:tabelaItens :formOs:finalizacao"
+						oncomplete="PF('dlgFinalizar').hide();"/>
+						
+					<p:commandButton value="Fechar" oncomplete="PF('dlgFinalizar').hide();"/>
 				</h:panelGrid>
 			</h:form>
 	

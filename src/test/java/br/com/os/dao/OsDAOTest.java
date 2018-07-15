@@ -6,6 +6,7 @@ import java.util.List;
 import org.junit.Ignore;
 import org.junit.Test;
 
+import br.com.os.domain.Item;
 import br.com.os.domain.OS;
 import br.com.os.domain.ResponsavelOS;
 import br.com.os.domain.Usuario;
@@ -68,7 +69,22 @@ public class OsDAOTest {
 		//List<OS> listaOs = osDAO.listar();
 		List<OS> listaOs = osDAO.listarbYDate();
 		
-		System.out.println(listaOs);
+		//System.out.println(listaOs);
+		
+		for(int i=0 ; i < listaOs.size() ; i++) {
+			OS os = listaOs.get(i);
+			System.out.println(os);
+			
+			List<Item> itens= listaOs.get(i).getItensOs();
+			for(int j=0 ; j < itens.size() ; j++) {
+				Item item = itens.get(j);
+				System.out.println(item);
+			}
+			System.out.println( "\n");
+			
+		}
+			
+		
 		
 	}
 	

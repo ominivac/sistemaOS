@@ -101,6 +101,18 @@ public class OsBean implements Serializable{
 		}
 	}
 	
+	public void listarOs() {
+		try {
+			OsDAO osDAO = new OsDAO();
+			listaOs =  osDAO.listarbYDate();
+		}catch (Exception e) {
+				Messages.addGlobalError("erro ao listas as ordens de serviço !");
+				e.printStackTrace();
+			}
+	}
+	
+	
+	
 	
 	public void adicionar(ActionEvent event) {
 		System.out.println("entrou adicionar OsBean");
@@ -142,7 +154,22 @@ public class OsBean implements Serializable{
 	
 	
 	public void editar(ActionEvent event) {
-		OS osSelecionado = (OS)event.getComponent().getAttributes().get("itemSelecionado");
+		
+		try {
+			OS osSelecionado = (OS)event.getComponent().getAttributes().get("itemSelecionado");
+			System.out.println("OS Para edição selecionada" + osSelecionado);
+			
+			//OsDAO osDAO = new OsDAO();
+			//osDAO.editar(osSelecionado);
+			
+			
+		}catch (RuntimeException e) {
+			Messages.addGlobalError("Erro ao editar responsável");
+			e.printStackTrace();
+		}
+	
+		
+		
 	}
 	
 	

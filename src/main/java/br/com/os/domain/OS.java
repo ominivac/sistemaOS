@@ -3,6 +3,7 @@ package br.com.os.domain;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -15,6 +16,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -38,16 +40,11 @@ public class OS implements Serializable,SampleEntity{
 	@Column(name = "cod_os", columnDefinition= "serial", unique=true, nullable=false)
 	@GeneratedValue(strategy= GenerationType.SEQUENCE ,generator="pk_sequence")
 	private Integer codigoOs;
-
-	public Integer getCodigo() {
-		return codigoOs;
-	}
+	
+	@OneToMany(fetch=FetchType.EAGER , mappedBy="os")
+	private List<Item> itensOs;
 
 	
-	public void setCodigo(Integer codigo) {
-		this.codigoOs = codigo;
-	}
-
 	@Temporal(TemporalType.TIMESTAMP)
 	@Column(name="data_lancamento", nullable = true)
 	private Date dataLancamento;
@@ -72,6 +69,24 @@ public class OS implements Serializable,SampleEntity{
 	@JoinColumn(name="responsavel_cod", referencedColumnName="cod_responsavel",columnDefinition="integer", nullable = true)
 	private ResponsavelOS responsavelOS;
 
+	
+	public Integer getCodigo() {
+		return codigoOs;
+	}
+
+	public void setCodigo(Integer codigo) {
+		this.codigoOs = codigo;
+	}
+	
+	public List<Item> getItensOs() {
+		return itensOs;
+	}
+	
+	public void setItensOs(List<Item> itensOs) {
+		this.itensOs = itensOs;
+	}
+	
+	
 	public Date getDataLancamento() {
 		return dataLancamento;
 	}

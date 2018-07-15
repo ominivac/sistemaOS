@@ -21,6 +21,14 @@
 .ui-widget .ui-widget {
 	font-size: 0.9em;
 }
+
+.ui-widget .ui-panel-titlebar {
+	margin:2px;
+	padding:2px;
+	height:1.0em;
+	text-align: left
+}
+
 .ui-widget input,
 .ui-widget select,
 .ui-widget textarea,

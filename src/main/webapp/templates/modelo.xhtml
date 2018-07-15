@@ -27,7 +27,8 @@
 		<div id="cabecalho" class="divCabecalho">
 			<h:form>
 				<p:panel header="Sistema de Ordem de Serviço" styleClass="ui-widget">
-					<h:outputLabel value="Bem vindo, #{autenticacaoBean.usuarioLogado.nome}" styleClass="ui-widget .ui-widget"/>
+					<h:outputLabel value="Bem vindo, #{autenticacaoBean.usuarioLogado.nome}" 
+						styleClass="ui-widget .ui-widget"/>
 					<p:commandButton value="Sair" styleClass="ui-widget .ui-widget"/>
 				</p:panel>
 			</h:form>
@@ -42,7 +43,7 @@
 					</p:submenu>
 
 					<p:submenu label="Cadastros">
-						<p:menuitem value="Cadastro de Usuários"
+						<p:menuitem value="Cadastro de Usuários" 
 							url="/pages/usuarios.xhtml" />
 						<p:menuitem value="Cadastro de Responsáveis"
 							url="/pages/responsavel.xhtml" />
@@ -53,6 +54,10 @@
 						<p:menuitem value="Cadastro de Ordens de Serviço"
 							rendered="#{autenticacaoBean.temPermisssoes(['A','G'])}"
 							url="/pages/os.xhtml" />
+							
+						<p:menuitem value="Cadastro de O.S. - NOVA"
+							url="/pages/ordemservico2.xhtml" />	
+							
 					</p:submenu>
 
 					<p:submenu label="Ajuda">
@@ -60,11 +65,6 @@
 							oncomplete="PF('dlgSobre').show();" />
 					</p:submenu>
 					
-					
-					
-
-
-
 				</p:menubar>
 			</h:form>
 		</div>
