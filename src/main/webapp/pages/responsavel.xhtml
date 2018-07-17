@@ -69,6 +69,7 @@
 		<p:dialog widgetVar="dlgResponsavel" draggable="false" appendTo="@(body)" showEffect="clip" hideEffect="clip" 
 		 	styleClass="ui-dialog-title-dialog"
 			resizable="false" modal="true" header="Responsáveis pela OS - Cadastro">
+			
 			<h:form id="formCadastroResponsavel">
 				<h:panelGrid id="pnlFormCadResponsavel" columns="2">
 			
@@ -83,8 +84,8 @@
 						actionListener="#{responsavelOSBean.salvar}" oncomplete="PF('dlgResponsavel').hide();"
 						update=":mensagem: formCadastroResponsavel:pnlFormCadResponsavel :formListagem:tabela "/>
 					
-					<p:commandButton value="Fechar" type="button"
-						onclick="PF('dlgResponsavel').hide();" oncomplete=""/>
+					<p:commandButton value="Fechar" type="button" process="@this"
+						onclick="PF('dlgResponsavel').hide();" />
 				</h:panelGrid>
 				
 			</h:form>

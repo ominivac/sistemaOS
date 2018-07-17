@@ -11,7 +11,9 @@
 
 
 	<title>Sistema de Ordem de Serviço</title>
+	<h:outputStylesheet library="css" name="jquery-ui.min.css"/>
 	<h:outputStylesheet library="css" name="jquery-ui.theme.css"/>
+	<script  src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
 </h:head>
 <h:body>
 	<p:graphicImage library="images" name="LogoItaPro_2.png" width="200" />
@@ -77,11 +79,13 @@
 	<p:dialog widgetVar="dlgSobre" draggable="false" closable="true"
 		resizable="false" modal="true" header="Sobre">
 		<h:form>
-			<h:panelGrid columns="2">
+			<h:panelGrid columns="1">
 				<p:outputLabel value="Versão: 1.0.0 SNAPSHOT " />
-				<p></p>
-				<p:outputLabel
-					value="Responsável : Roberto Sousa at: robertokbs@gmail.com" />
+			
+				<p:outputLabel value="Responsável : Roberto Sousa at: robertokbs@gmail.com" />
+			
+				<p:commandButton value="ok" onclick="PF('dlgSobre').hide();"/>
+				
 			</h:panelGrid>
 
 

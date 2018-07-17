@@ -1,0 +1,130 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+	<p:dialog header="Editar Ordem de Serviço" id="dialog-modal-editar" maximizable="true"
+		widgetVar="dialog-modal-editar" modal="true">
+
+		<p:panel id="pnlMaster" header="master">
+			<h:form>
+				<p:panel>
+					<p:outputLabel value="Data Lançamento: " />
+					<p:outputLabel value="#{osBeanEditar.osEditar.dataLancamento}">
+						<f:convertDateTime pattern="dd/MM/yyyy HH:mm" locale="pt_BR"
+							timeZone="America/Sao_Paulo" />
+					</p:outputLabel>>
+					
+					<p:outputLabel value="Responsável" for="inputText-responsavel" />
+					<p:inputText id="inputText-responsavel" style="width:300px"
+						maxlength="70" value="#{osBeanEditar.osEditar.responsavelOS.nome}"
+						required="true"
+						requiredMessage="O nome é de preenchimento obrigatório" />
+
+					<p:messages showDetail="false" closable="true" severity="error" />
+				</p:panel>
+
+
+
+			</h:form>
+		</p:panel>
+		<p:panel id="pnlProdutos" header="itens">
+			<h:form id="form-listagem-produtos">
+				<p:panel id="pnlFormProdutos" header="Retrancas disponíveis">
+					<p:dataTable id="tabelaProdutos" rows="3"
+						emptyMessage="Nenhum registro encontrado."
+						value="#{osBeanEditar.produtosOS}" var="produto"
+						paginator="true">
+
+						<p:column headerText="Código">
+							<h:outputText value="#{produto.codigo}" />
+						</p:column>
+						
+						<p:column headerText="Ano ref.">
+							<h:outputText value="#{produto.anoReferencia}" />
+						</p:column>
+
+						<p:column headerText="Retranca">
+							<h:outputText value="#{produto.descricao}" />
+						</p:column>
+
+						<p:column headerText="Valor">
+							<h:outputText value="#{produto.valorPorHora}" />
+						</p:column>
+
+						<p:column headerText="" style="width:25px;">
+
+							<p:commandButton icon="ui-icon-plus" title="Adicionar Item"
+								actionListener="#{osBeanEditar.adicionarItem}"
+								
+								update="form-cadastro-itens:pnlFormItens">
+								<f:attribute name="produtoSelecionado" value="#{produto}" />
+
+							</p:commandButton>
+
+						</p:column>
+					</p:dataTable>
+				</p:panel>
+			</h:form>
+			
+		
+			<!-- painel dos itens que ja compoem a OS -->
+			<h:form id="form-cadastro-itens">
+				<p:panel id="pnlFormItens" header="Itens que compôem a OS">
+					<p:dataTable id="tabelaItens"
+						emptyMessage="Nenhum registro encontrado."
+						value="#{osBeanEditar.osEditar.itensOs}" var="item"
+						paginator="true">
+
+						<p:column headerText="Código">
+							<h:outputText value="#{item.codigo}" />
+						</p:column>
+
+						<p:column headerText="Retranca">
+							<h:outputText value="#{item.produtoOS.descricao}" />
+						</p:column>
+						
+						<p:column headerText="Retranca">
+							<h:outputText value="#{item.quantidade}" />
+						</p:column>
+
+						<p:column headerText="Valor">
+							<h:outputText value="#{item.produtoOS.valorPorHora}" />
+						</p:column>
+
+						<p:column headerText="" style="width:25px;">
+
+							<p:commandButton icon="ui-icon-pencil" title="Remover Item"
+								actionListener="#{osBeanEditar.removerItem}"
+								oncomplete="PF('dialog-modal-editar').show();"
+								update="dialog-modal-editar">
+								<f:attribute name="itemSelecionado" value="#{item}" />
+
+							</p:commandButton>
+
+						</p:column>
+
+
+					</p:dataTable>
+
+				</p:panel>
+			</h:form>
+		</p:panel>
+
+		<p:panel>
+		<h:form>
+			<p:commandButton value="Alterar" id="commandButton-alterar"
+				icon="ui-icon-gear" actionListener="#{osBeanEditar.editar}"
+				oncomplete="PF('dialog-modal-editar').hide();"
+				update="form-consulta" />
+
+			<p:commandButton value="Fechar" id="commandButton-fechar"
+				type="button" icon="ui-icon-gear"
+				onclick="PF('dialog-modal-editar').hide();" />
+		</h:form>
+		</p:panel>
+		
+	</p:dialog>
+
+</ui:composition>

@@ -3,7 +3,6 @@ package br.com.os.bean;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -15,22 +14,19 @@ import org.omnifaces.util.Messages;
 
 import br.com.os.dao.OsDAO;
 import br.com.os.dao.ProdutoOsDAO;
-import br.com.os.dao.ResponsavelOsDAO;
 import br.com.os.domain.Item;
 import br.com.os.domain.OS;
 import br.com.os.domain.ProdutoOS;
-import br.com.os.domain.ResponsavelOS;
 
 @ManagedBean
 @ViewScoped
-public class OsBean implements Serializable{
-	
+public class OsBeanEditar implements Serializable{
+
 	private static final long serialVersionUID = 1L;
+	private OS osEditar;
 	private List<ProdutoOS> produtosOS;
-	private List<Item> itensOs;
-	private List<ResponsavelOS> responsaveis;
 	
-	private OS os;
+	private List<Item> itensOs;
 	
 	private List<OS> listaOs; //para listagem da tabela
 	
@@ -42,29 +38,12 @@ public class OsBean implements Serializable{
 		this.listaOs = listaOs;
 	}
 	
-	
-	public List<ProdutoOS> getProdutosOS() {
-		return produtosOS;
+	public OS getOsEditar() {
+		return osEditar;
 	}
 	
-	public void setProdutosOS(List<ProdutoOS> produtosOS) {
-		this.produtosOS = produtosOS;
-	}
-	
-	public OS getOs() {
-		return os;
-	}
-	
-	public void setOs(OS os) {
-		this.os = os;
-	}
-	
-	public List<ResponsavelOS> getResponsaveis() {
-		return responsaveis;
-	}
-	
-	public void setResponsaveis(List<ResponsavelOS> responsaveis) {
-		this.responsaveis = responsaveis;
+	public void setOsEditar(OS osEditar) {
+		this.osEditar = osEditar;
 	}
 	
 	public List<Item> getItensOs() {
@@ -74,38 +53,29 @@ public class OsBean implements Serializable{
 	public void setItensOs(List<Item> itensOs) {
 		this.itensOs = itensOs;
 	}
-
 	
-	public void novo() {
-		try {
-			os = new OS();
-			os.setDataLancamento(new Date() );
-			
-			os.setValorTotal(new BigDecimal("0.00"));
-			
-			
-			ProdutoOsDAO pdao = new ProdutoOsDAO();
-			produtosOS = pdao.listar();
-			
-			itensOs = new ArrayList<Item>();
-			//popular lista de os ja salvas para a tabela
-			
-			OsDAO osDAO = new OsDAO();
-			listaOs = osDAO.listar();
-			
-			
-			
-		}catch (Exception e) {
-			Messages.addGlobalError("erro ao listas os itens");
-			e.printStackTrace();
-		}
+	public List<ProdutoOS> getProdutosOS() {
+		return produtosOS;
 	}
 	
+	public void setProdutosOS(List<ProdutoOS> produtosOS) {
+		this.produtosOS = produtosOS;
+	}
+	
+	
+	
+	//--------- metodos -------// 
+
 	@PostConstruct
 	public void listarOs() {
 		try {
 			OsDAO osDAO = new OsDAO();
 			listaOs =  osDAO.listarbYDate();
+			
+			ProdutoOsDAO pdao = new ProdutoOsDAO();
+			produtosOS = pdao.listar();
+			
+			
 		}catch (Exception e) {
 				Messages.addGlobalError("erro ao listas as ordens de serviço !");
 				e.printStackTrace();
@@ -113,12 +83,8 @@ public class OsBean implements Serializable{
 	}
 	
 	
+	public void adicionarItem(ActionEvent event) {
 	
-	
-	public void adicionar(ActionEvent event) {
-		System.out.println("entrou adicionar OsBean");
-		
-		
 		ProdutoOS produtoOSselecionado =  (ProdutoOS)event.getComponent()
 				.getAttributes().get("produtoSelecionado");
 		
@@ -154,29 +120,9 @@ public class OsBean implements Serializable{
 	}
 	
 	
-	
-	public void excluir(ActionEvent event) {
-		
-		try {
-			OS osSelecionadoExclusao = (OS)event.getComponent().getAttributes().get("osSelecionado");
-			System.out.println("OS Para exclusão selecionada" + osSelecionadoExclusao);
-			
-			//OsDAO osDAO = new OsDAO();
-			//osDAO.editar(osSelecionado);
-			
-			
-		}catch (RuntimeException e) {
-			Messages.addGlobalError("Erro ao apagar OS");
-			e.printStackTrace();
-		}
-	
-		
-		
-	}
-	
-	
-	public void remover(ActionEvent event) {
+	public void removerItem(ActionEvent event) {
 		Item itemSelecionado = (Item)event.getComponent().getAttributes().get("itemSelecionado");
+		System.out.println("item removido: " + itemSelecionado);
 		
 		int achou = -1;
 		
@@ -194,54 +140,65 @@ public class OsBean implements Serializable{
 		calcular();
 	}
 	
+	
 	public void calcular() {
-		os.setValorTotal(new BigDecimal("0.00"));
+		osEditar.setValorTotal(new BigDecimal("0.00"));
 		
 		//limpa no finalizar
-		os.setResponsavelOS(null);
-		os.setUsuario(null);
+		osEditar.setResponsavelOS(null);
+		osEditar.setUsuario(null);
 		
 		for(int posicao = 0 ; posicao < itensOs.size(); posicao++) {
 			Item item = itensOs.get(posicao);
-			os.setValorTotal(os.getValorTotal().add(item.getValorParcial())  );
+			osEditar.setValorTotal(osEditar.getValorTotal().add(item.getValorParcial())  );
 		}
 		
 	}
 	
-	public void finalizar() {
+	
+	
+	public void editarComParametro(OS os) {
 		try {
-			os.setDataLancamento(new Date());
-			
-			ResponsavelOsDAO rdao = new ResponsavelOsDAO();
-			responsaveis = rdao.listar();
-			
-		} catch (RuntimeException e) {
-			Messages.addGlobalError("Ocorreu um erro ao finalizar a OS");
+			//osEditar = new OS();
+			osEditar = os;
+			System.out.println("OS Para edição selecionada: " + osEditar);
+		}catch (RuntimeException e) {
+			Messages.addGlobalError("Erro ao editar OS");
 			e.printStackTrace();
 		}
 	}
 	
 	
-	public void salvar() {
+	public void editar(ActionEvent event) {
+		
 		try {
-			if(os.getValorTotal().signum() == 0 ) {
-				
-				Messages.addGlobalError("Informe pelo menos um item para a OS.");
-				return;
+			//osEditar = new OS();
+			osEditar = (OS)event.getComponent().getAttributes().get("osSelecionada");
+			
+			
+			System.out.println("OS Para edição selecionada: " + osEditar);
+			
+			//OsDAO osDAO = new OsDAO();
+			//osDAO.editar(osSelecionado);
+			
+			List<Item> itens = osEditar.getItensOs();
+			for(Item item : itens) {
+				System.out.println(item);
 			}
-			OsDAO osdao = new OsDAO();
-			//osdao.salvar(os);
-			osdao.salvar(os, itensOs);
 			
-			Messages.addGlobalInfo("Ordem de serviço salva com sucesso !");
+			//faz uma copia dos itens da os que vem do banco de dados para o bean, para posterior edicao
+			itensOs = new ArrayList<Item>();
+			itensOs = itens;
 			
-			//limpar tudo
-			novo();
 			
-		} catch (RuntimeException e) {
-			Messages.addGlobalError("Ocorreu um erro ao salvar a OS.");
+			
+		}catch (RuntimeException e) {
+			Messages.addGlobalError("Erro ao editar OS");
+			e.printStackTrace();
 		}
+	
+		
+		
 	}
 	
-
 }

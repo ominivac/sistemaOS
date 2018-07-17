@@ -9,21 +9,26 @@
 	template="/templates/modelo.xhtml">
 
 	<ui:define name="conteudo">
+	<f:metadata>
+		<f:viewAction action="#{produtoOSBean2.listar}"></f:viewAction>
+	</f:metadata>
+	
+	
 
 		<h:form id="formListagem">
 			<p:panel header="Itens de OS - Listagem">
 				<p:dataTable id="tabela" emptyMessage="Nenhum registro encontrado."
-					value="#{produtoOSBean.produtosOS}" var="produto" paginator="true">
+					value="#{produtoOSBean2.produtosOS}" var="produto" paginator="true">
 					
 					<f:facet name="footer">
 							
-							<p:commandButton icon="ui-icon-plus"
-								actionListener="#{produtoOSBean.novo()}"
+							<p:commandButton value="Novo"
+								actionListener="#{produtoOSBean2.novo()}"
 								update=":formCadastroProduto:pnlFormCadProduto"
 								oncomplete="PF('dlgProduto').show();"/>
 								
-							<p:commandButton icon="ui-icon-print" ajax="false"
-								actionListener="#{produtoOSBean.gerarRelatorio}"/>	
+							<p:commandButton value="Imprimir" ajax="false"
+								actionListener="#{produtoOSBean2.gerarRelatorio}"/>	
 								
 					</f:facet>
 					
@@ -47,8 +52,13 @@
 					
 					<p:column headerText="Opções" width="25%">
 					
+						<p:button value="Editar" 
+							outcome="/pages/produtoEdicao.xhtml">
+							<f:param name="codigo" value="#{produto.codigo}"/>
+						</p:button>
+					
 						<p:commandButton icon="ui-icon-pencil" 
-							actionListener="#{produtoOSBean.editar}" 
+							actionListener="#{produtoOSBean2.editar}" 
 							update=":formCadastroProduto:pnlFormCadProduto"
 							oncomplete="PF('dlgProduto').show();">
 							<f:attribute name="produtoSelecionado" value="#{produto}"/>
@@ -56,7 +66,7 @@
 						</p:commandButton>
 						
 						<p:commandButton icon="ui-icon-trash"
-							actionListener="#{produtoOSBean.excluir}"
+							actionListener="#{produtoOSBean2.excluir}"
 							update=":mensagem :formListagem:tabela">
 							
 							<p:confirm header="Confirmação" message="Deseja excluir o Item de OS ?"
@@ -86,12 +96,12 @@
 				<h:panelGrid id="pnlFormCadProduto" columns="2">
 			
 					<p:outputLabel value="Retranca: "/>
-					<p:inputText value="#{produtoOSBean.produtoOS.descricao}" required="true" requiredMessage="o campo descrição é obrigatório!" 
+					<p:inputText value="#{produtoOSBean2.produtoOS.descricao}" required="true" requiredMessage="o campo descrição é obrigatório!" 
 						 size="50" maxlength="100"/>
 					
 					
 					<p:outputLabel value="Valor por Hora: "/>
-					<p:inputText value="#{produtoOSBean.produtoOS.valorPorHora}" required="true" requiredMessage="o campo valor é obrigatório!"
+					<p:inputText value="#{produtoOSBean2.produtoOS.valorPorHora}" required="true" requiredMessage="o campo valor é obrigatório!"
 						converterMessage="o valor deve ser no formato XX,YY" size="30" maxlength="100"
 						validatorMessage="O valor mínimo para o campo valor deve ser 1,00">
 						
@@ -101,13 +111,13 @@
 					
 					
 					<p:outputLabel value="Ano de referência: "/>
-					<p:inputText value="#{produtoOSBean.produtoOS.anoReferencia}" required="true" requiredMessage="o campo ano é obrigatório!" 
+					<p:inputText value="#{produtoOSBean2.produtoOS.anoReferencia}" required="true" requiredMessage="o campo ano é obrigatório!" 
 						converterMessage="o valor deve ser inteiro - formato XXXX" size="30" maxlength="100"/>
 				
 				</h:panelGrid>
 				<h:panelGrid columns="2">
 					<p:commandButton value="Salvar" 
-						actionListener="#{produtoOSBean.salvar}" oncomplete="PF('dlgProduto').hide();"
+						actionListener="#{produtoOSBean2.salvar}" oncomplete="PF('dlgProduto').hide();"
 						update=":mensagem: formCadastroProduto:pnlFormCadProduto :formListagem:tabela "/>
 					<p:commandButton value="Fechar" type="button"
 						onclick="PF('dlgProduto').hide();"

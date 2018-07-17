@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	template="/templates/modelo.xhtml">
+
+	<ui:define name="conteudo">
+		<f:metadata>
+			<f:viewParam name="codigo" value="#{produtoOSBean2.codigoProduto}"
+				required="true" requiredMessage="codigo do produto é obrigatório"/>
+			<f:viewAction action="#{produtoOSBean2.carregarEdicao}"></f:viewAction>
+		</f:metadata>
+
+		<h:form id="formCadastroProduto">
+			<p:panel header="Produtos - Edição">
+				<h:panelGrid id="pnlFormCadProduto" columns="2">
+				
+				<p:outputLabel value="Id: " />
+				<p:inputText value="#{produtoOSBean2.produtoOS.codigo}" disabled="true"
+					size="50" maxlength="100" />
+
+				<p:outputLabel value="Retranca: " />
+				<p:inputText value="#{produtoOSBean2.produtoOS.descricao}"
+					required="true" requiredMessage="o campo descrição é obrigatório!"
+					size="50" maxlength="100" />
+  
+
+				<p:outputLabel value="Valor por Hora: " />
+				<p:inputText value="#{produtoOSBean2.produtoOS.valorPorHora}"
+					required="true" requiredMessage="o campo valor é obrigatório!"
+					converterMessage="o valor deve ser no formato XX,YY" size="30"
+					maxlength="100"
+					validatorMessage="O valor mínimo para o campo valor deve ser 1,00">
+
+					<f:validateDoubleRange minimum="1.00" />
+					<f:convertNumber locale="pt_BR" minFractionDigits="2" />
+				</p:inputText>
+
+
+				<p:outputLabel value="Ano de referência: " />
+				<p:inputText value="#{produtoOSBean2.produtoOS.anoReferencia}"
+					required="true" requiredMessage="o campo ano é obrigatório!"
+					converterMessage="o valor deve ser inteiro - formato XXXX"
+					size="30" maxlength="100" />
+
+				</h:panelGrid>
+				
+				<h:panelGrid columns="2">
+					<p:commandButton value="Editar" update=":mensagem"/>
+					<p:commandButton value="Voltar"/>
+				</h:panelGrid>
+			</p:panel>
+		</h:form>
+
+
+
+
+
+
+
+
+	</ui:define>
+</ui:composition>

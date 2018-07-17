@@ -83,7 +83,7 @@ public class ResponsavelOSBean implements Serializable{
 			
 			responsaveis = responsavelOsDAO.listar();
 			
-			Messages.addGlobalInfo("Resposável excluído com sucesso");
+			Messages.addGlobalInfo("Responsável excluído com sucesso");
 
 		}catch (RuntimeException e) {
 			Messages.addGlobalError("Erro ao salvar responsável");
@@ -99,7 +99,7 @@ public class ResponsavelOSBean implements Serializable{
 			responsavelOsDAO.editar(responsavelOS);
 			responsaveis = responsavelOsDAO.listar();
 			
-			Messages.addGlobalInfo("Resposável editado com sucesso");
+			Messages.addGlobalInfo("Responsável editado com sucesso");
 			
 			//Messages.addGlobalInfo("resp selecionado: " + responsavelOS.getNome());
 		}catch (RuntimeException e) {

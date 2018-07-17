@@ -9,8 +9,6 @@
 
 	<ui:define name="conteudo">
 
-
-
 		<h:form id="formOsListagem">
 			<p:panel header="Ordens de Serviço">
 				<p:dataTable id="tabelaOs"
@@ -47,7 +45,7 @@
 
 					<p:column styleClass="colunas" headerText="Opções" width="25%">
 
-						<p:commandButton value="Editar" actionListener="#{osBean.editar}"
+						<p:commandButton value="Editar" actionListener="#{osBean.excluir}"
 							oncomplete="PF('dlgOs').show();">
 							<f:attribute name="osSelecionado" value="#{os}" />
 							<f:actionListener
@@ -66,6 +64,7 @@
 			styleClass="ui-dialog-title-dialog" maximizable="true"
 			minHeight="600" resizable="false" modal="true"
 			header="Nova OS - Cadastro">
+			
 			<p:panel id="pnlMaster">
 				<!-- inicio form itensProdutos -->
 				<h:form id="formItensProdutos">

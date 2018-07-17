@@ -31,8 +31,10 @@
 					required="true" requiredMessage="O campo senha é obrigatório"/>
 					
 				<p:commandButton widgetVar="btnEntrar" value="Entrar" update=":mensagem" 
-					onclick="PF('btnEntrar').disable();" actionListener="#{autenticacaoBean.autenticar}"
-					oncomplete="PF('btnEntrar').enable();"/>
+					actionListener="#{autenticacaoBean.autenticar}"
+					onstart="PF('dlgProgress').show();"
+					oncomplete="PF('btnEntrar').enable();PF('dlgProgress').close();"
+					/>
 				<p:commandButton value="Cancelar"  oncomplete="PF('dlgAutenticar').hide();"/>
 				<p:commandButton value="Resetar Senha"  oncomplete="PF('dlgResetEmail').show();"/>		
 				
@@ -41,6 +43,9 @@
 			</h:panelGrid>
 		</h:form>
 	</p:dialog>
+	
+	
+	
 	
 	<p:dialog widgetVar="dlgResetEmail" draggable="false" appendTo="@(body)"
 			resizable="false" modal="true" header="Enviar nova senha.">
@@ -63,6 +68,31 @@
 			</h:form>
 		
 		</p:dialog>
+	
+	<!--janela do progress bar -->
+	<p:dialog widgetVar="dlgProgress"
+		modal="true" header="Processando.." resizable="false" minimizable="false"
+		draggable="false" closable="false" closeOnEscape="false">
+		
+		<h:form id="trade-order-form">
+		<p:panel widgetVar="progressPanel"
+                 visible="false"
+                 style="border:none;"
+                 closable="true"
+                 toggleable="true">
+            <p:progressBar style="height:20px;width:400px;"
+                           mode="indeterminate"/>
+        </p:panel>
+        <p:panel>
+        	<p:commandButton value="Cancelar" type="button" onclick="PF('dlgProgress').hide();" />
+        </p:panel>
+        	
+		</h:form>
+			
+			
+		
+	
+	</p:dialog>
 	
 </h:body>
 </html>
