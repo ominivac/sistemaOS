@@ -13,6 +13,7 @@ import javax.faces.event.ActionEvent;
 
 import org.omnifaces.util.Messages;
 
+import br.com.os.dao.ItemDAO;
 import br.com.os.dao.OsDAO;
 import br.com.os.dao.ProdutoOsDAO;
 import br.com.os.dao.ResponsavelOsDAO;
@@ -23,225 +24,269 @@ import br.com.os.domain.ResponsavelOS;
 
 @ManagedBean
 @ViewScoped
-public class OsBean implements Serializable{
-	
+public class OsBean implements Serializable {
+
 	private static final long serialVersionUID = 1L;
+	//private OS osEditar;
+	private OS ordemServico;
 	private List<ProdutoOS> produtosOS;
-	private List<Item> itensOs;
 	private List<ResponsavelOS> responsaveis;
+
+	private List<Item> itensOs;
+
+	private List<OS> listaOs; // para listagem da tabela
 	
-	private OS os;
 	
-	private List<OS> listaOs; //para listagem da tabela
 	
+	public OS getOrdemServico() {
+		return ordemServico;
+	}
+
+	public void setOrdemServico(OS ordemServico) {
+		this.ordemServico = ordemServico;
+	}
+
 	public List<OS> getListaOs() {
 		return listaOs;
 	}
-	
+
 	public void setListaOs(List<OS> listaOs) {
 		this.listaOs = listaOs;
 	}
+
 	
-	
-	public List<ProdutoOS> getProdutosOS() {
-		return produtosOS;
+
+	public List<Item> getItensOs() {
+		return itensOs;
 	}
-	
-	public void setProdutosOS(List<ProdutoOS> produtosOS) {
-		this.produtosOS = produtosOS;
-	}
-	
-	public OS getOs() {
-		return os;
-	}
-	
-	public void setOs(OS os) {
-		this.os = os;
-	}
-	
+
 	public List<ResponsavelOS> getResponsaveis() {
 		return responsaveis;
 	}
-	
+
 	public void setResponsaveis(List<ResponsavelOS> responsaveis) {
 		this.responsaveis = responsaveis;
-	}
-	
-	public List<Item> getItensOs() {
-		return itensOs;
 	}
 
 	public void setItensOs(List<Item> itensOs) {
 		this.itensOs = itensOs;
 	}
 
-	
-	public void novo() {
-		try {
-			os = new OS();
-			os.setDataLancamento(new Date() );
-			
-			os.setValorTotal(new BigDecimal("0.00"));
-			
-			
-			ProdutoOsDAO pdao = new ProdutoOsDAO();
-			produtosOS = pdao.listar();
-			
-			itensOs = new ArrayList<Item>();
-			//popular lista de os ja salvas para a tabela
-			
-			OsDAO osDAO = new OsDAO();
-			listaOs = osDAO.listar();
-			
-			
-			
-		}catch (Exception e) {
-			Messages.addGlobalError("erro ao listas os itens");
-			e.printStackTrace();
-		}
+	public List<ProdutoOS> getProdutosOS() {
+		return produtosOS;
 	}
+
+	public void setProdutosOS(List<ProdutoOS> produtosOS) {
+		this.produtosOS = produtosOS;
+	}
+
+	public OsBean() {
+		
+	}
+
+
+	// ------------------------------ metodos ---------------------------------
 	
 	@PostConstruct
+	public void listarTodos() {
+		listarProdutos();
+		//listarResponsaveis();
+		listarOs();
+		
+	}
+
+	public void listarProdutos() {
+		ProdutoOsDAO produtoDAO = new ProdutoOsDAO();
+		produtosOS = produtoDAO.listar();
+	}
+
+	public void listarResponsaveis() {
+		ResponsavelOsDAO rdao = new ResponsavelOsDAO();
+		responsaveis = rdao.listar();
+	}
+	
+	
 	public void listarOs() {
 		try {
 			OsDAO osDAO = new OsDAO();
-			listaOs =  osDAO.listarbYDate();
-		}catch (Exception e) {
-				Messages.addGlobalError("erro ao listas as ordens de serviço !");
-				e.printStackTrace();
-			}
+			listaOs = osDAO.listarbYDate();
+
+		} catch (Exception e) {
+			Messages.addGlobalError("erro ao listas as ordens de serviço !");
+			e.printStackTrace();
+		}
 	}
 	
-	
-	
-	
-	public void adicionar(ActionEvent event) {
-		System.out.println("entrou adicionar OsBean");
+	public void novo() {
+		ordemServico = new OS();
+		ordemServico.setValorTotal(new BigDecimal("0.00"));
+		ordemServico.setDataLancamento(new Date());
 		
+		//ResponsavelOS responsavel = new ResponsavelOS();
+		//ordemServico.setResponsavelOS(responsavel);
 		
-		ProdutoOS produtoOSselecionado =  (ProdutoOS)event.getComponent()
-				.getAttributes().get("produtoSelecionado");
+		itensOs = new ArrayList<Item>();
+		ordemServico.setItensOs(itensOs);
+		
+	}
+	
+	public void adicionarItem(ActionEvent event) {
+
+		ProdutoOS produtoOSselecionado = (ProdutoOS) event.getComponent().getAttributes().get("produtoSelecionado");
+		String action = (String)event.getComponent().getAttributes().get("action");
 		
 		System.out.println(produtoOSselecionado);
-		
+		System.out.println("ação" + action);
+
 		int achou = -1;
-		for(int posicao = 0; posicao < itensOs.size() ; posicao++) {
-			if(itensOs.get(posicao).getProdutoOS().equals(produtoOSselecionado) ) {
+		for (int posicao = 0; posicao < itensOs.size(); posicao++) {
+			if (itensOs.get(posicao).getProdutoOS().equals(produtoOSselecionado)) {
 				achou = posicao;
 			}
 		}
-		
-		if(achou == -1) {
+
+		if (achou == -1) {
 			Item item = new Item();
 			item.setProdutoOS(produtoOSselecionado);
-			item.setValorParcial(produtoOSselecionado.getValorPorHora());
+			// item.setValorParcial(produtoOSselecionado.getValorPorHora());
 			item.setQuantidade(1);
-			
+			item.getValorParcial();
+
+			item.setOs(ordemServico);// importante para o update !
+
 			itensOs.add(item);
 			System.out.println("item adicionado" + item);
-			
-		}else {
+
+		} else {
 			Item item = itensOs.get(achou);
 			item.setQuantidade(item.getQuantidade() + 1);
-			item.setValorParcial(produtoOSselecionado.getValorPorHora().multiply(new BigDecimal(item.getQuantidade() ))  );
-			
-			System.out.println("item removido" + item);
+			// item.setValorParcial(produtoOSselecionado.getValorPorHora().multiply(new
+			// BigDecimal(item.getQuantidade() )) );
+			item.getValorParcial();
+
+			item.setOs(ordemServico);// importante para o update !
+
+			System.out.println("item ja na lista atualizando valor" + item);
 		}
-		//atualizar o valor total
+		
+		System.out.println("tamanho da lista " + itensOs.size() );
+		// atualizar o valor total
 		calcular();
-		
-		
+
 	}
-	
-	
-	
-	public void excluir(ActionEvent event) {
-		
-		try {
-			OS osSelecionadoExclusao = (OS)event.getComponent().getAttributes().get("osSelecionado");
-			System.out.println("OS Para exclusão selecionada" + osSelecionadoExclusao);
-			
-			//OsDAO osDAO = new OsDAO();
-			//osDAO.editar(osSelecionado);
-			
-			
-		}catch (RuntimeException e) {
-			Messages.addGlobalError("Erro ao apagar OS");
-			e.printStackTrace();
-		}
-	
-		
-		
-	}
-	
-	
-	public void remover(ActionEvent event) {
-		Item itemSelecionado = (Item)event.getComponent().getAttributes().get("itemSelecionado");
-		
+
+	public void removerItem(ActionEvent event) {
+		Item itemSelecionado = (Item) event.getComponent().getAttributes().get("itemSelecionado");
+		System.out.println("item removido: " + itemSelecionado);
+
+		//ItemDAO idao = new ItemDAO();
+
 		int achou = -1;
-		
-		for(int posicao = 0 ; posicao < itensOs.size() ; posicao++) {
-			if(itensOs.get(posicao).getProdutoOS().equals(itemSelecionado.getProdutoOS())) {
+
+		for (int posicao = 0; posicao < itensOs.size(); posicao++) {
+			if (itensOs.get(posicao).getProdutoOS().getCodigo() == itemSelecionado.getProdutoOS().getCodigo()) {
 				achou = posicao;
 			}
 		}
-		
-		if(achou > -1) {
+
+		if (achou > -1) {
+			//Item itemToRemove = idao.buscarPorOsEproduto(ordemServico.getCodigo(), itemSelecionado.getProdutoOS().getCodigo());
+			//idao.excluir(itemToRemove);
+
 			itensOs.remove(achou);
-			
 		}
-		//atualizar o valor total
+		System.out.println("tamanho da lista " + itensOs.size() );
+		// atualizar o valor total
 		calcular();
 	}
-	
+
 	public void calcular() {
-		os.setValorTotal(new BigDecimal("0.00"));
-		
-		//limpa no finalizar
-		os.setResponsavelOS(null);
-		os.setUsuario(null);
-		
-		for(int posicao = 0 ; posicao < itensOs.size(); posicao++) {
-			Item item = itensOs.get(posicao);
-			os.setValorTotal(os.getValorTotal().add(item.getValorParcial())  );
-		}
-		
+		ordemServico.getValorTotal();
+	}
+
+	public void finalizar() {
+		listarResponsaveis();
 	}
 	
-	public void finalizar() {
+	
+	public void prepararEdicao(ActionEvent event) {
+
 		try {
-			os.setDataLancamento(new Date());
-			
+			// osEditar = new OS();
+			ordemServico = (OS) event.getComponent().getAttributes().get("osSelecionada");
+
+			System.out.println("OS Para edição selecionada: " + ordemServico);
+
+			List<Item> itens = ordemServico.getItensOs();
+			for (Item item : itens) {
+				System.out.println(item);
+			}
+
+			// faz uma copia dos itens da os que vem do banco de dados para o bean, para
+			// posterior edicao
+			itensOs = new ArrayList<Item>();
+			itensOs = itens;
+
+			ordemServico.setItensOs(itensOs);
+
 			ResponsavelOsDAO rdao = new ResponsavelOsDAO();
+			responsaveis = new ArrayList<ResponsavelOS>();
 			responsaveis = rdao.listar();
-			
+
 		} catch (RuntimeException e) {
-			Messages.addGlobalError("Ocorreu um erro ao finalizar a OS");
+			Messages.addGlobalError("Erro ao preparar edição");
 			e.printStackTrace();
 		}
+
 	}
-	
-	
+
 	public void salvar() {
 		try {
-			if(os.getValorTotal().signum() == 0 ) {
-				
+			if(ordemServico.getValorTotal().signum() == 0) {
+				Messages.addGlobalError("Informe pelo menos um Item para a OS ! ");
+				return;
+			}
+			
+			
+			OsDAO osdao = new OsDAO();
+			osdao.salvar(ordemServico, itensOs);
+			
+			Messages.addGlobalInfo("Ordem de serviço salva com sucesso !");
+
+			
+		}catch (RuntimeException e) {
+			Messages.addGlobalError("Ocorreu um erro salvar a OS! ");
+		}
+	}
+	
+	public void editar(ActionEvent event) {
+		System.out.println(ordemServico);
+
+		OsDAO osDAO = new OsDAO();
+		// pesquisa a os que deseja edicao pelo cod
+		// osDAO.buscarPorCodigo(osEditar.getCodigo() );
+
+		try {
+			if (ordemServico.getValorTotal().signum() == 0) {
+
 				Messages.addGlobalError("Informe pelo menos um item para a OS.");
 				return;
 			}
-			OsDAO osdao = new OsDAO();
-			//osdao.salvar(os);
-			osdao.salvar(os, itensOs);
-			
-			Messages.addGlobalInfo("Ordem de serviço salva com sucesso !");
-			
-			//limpar tudo
-			novo();
-			
+
+			osDAO.editar(ordemServico);
+
+			Messages.addGlobalInfo("Ordem de serviço editada com sucesso !");
+
+			// limpar tudo
+			// novo();
+			// osEditar = new OS();
+
 		} catch (RuntimeException e) {
-			Messages.addGlobalError("Ocorreu um erro ao salvar a OS.");
+			Messages.addGlobalError("Ocorreu um erro ao editar a OS.");
 		}
 	}
-	
 
+	
+	
+	
 }

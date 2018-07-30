@@ -181,7 +181,7 @@ public class ProdutoOSBean  implements Serializable {
 			
 			
 		}catch (JRException ex) {
-			Messages.addGlobalError("Erro tentar gerar impressão dos itens de OS");
+			Messages.addGlobalError("Erro tentar gerar impressão das Retrancas");
 			ex.printStackTrace();
 		}
 		
@@ -204,10 +204,10 @@ public class ProdutoOSBean  implements Serializable {
 			produtosOS = produtoDAO.listar();
 			
 			
-			Messages.addGlobalInfo("Item de OS salvo com sucesso");
+			Messages.addGlobalInfo("Retranca salva com sucesso !");
 			
 		}catch (RuntimeException e) {
-			Messages.addGlobalError("Erro ao salvar Item de OS");
+			Messages.addGlobalError("Erro ao salvar Retranca !");
 			e.printStackTrace();
 		}
 	}
@@ -222,10 +222,10 @@ public class ProdutoOSBean  implements Serializable {
 			
 			produtosOS = produtoDAO.listar();
 			
-			Messages.addGlobalInfo("Item de OS excluído com sucesso");
+			Messages.addGlobalInfo("Retranca editada com sucesso !");
 
 		}catch (RuntimeException e) {
-			Messages.addGlobalError("Erro ao salvar item de OS");
+			Messages.addGlobalError("Erro editar Retranca !");
 			e.printStackTrace();
 		}
 	}
@@ -239,11 +239,11 @@ public class ProdutoOSBean  implements Serializable {
 			produtoDAO.merge(produtoOS);
 			produtosOS = produtoDAO.listar();
 			
-			Messages.addGlobalInfo("Item de OS editado com sucesso");
+			Messages.addGlobalInfo("Retranca editada com sucesso !");
 			
 			//Messages.addGlobalInfo("resp selecionado: " + responsavelOS.getNome());
 		}catch (RuntimeException e) {
-			Messages.addGlobalError("Erro ao editar item de OS");
+			Messages.addGlobalError("Erro ao editar Retranca !");
 			e.printStackTrace();
 		}
 	}

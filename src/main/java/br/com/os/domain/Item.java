@@ -24,7 +24,8 @@ import org.hibernate.annotations.Cascade;
 @Table(name="item")
 @NamedQueries({
 	@NamedQuery(name="Item.listar", query= "SELECT item FROM Item item"),
-	@NamedQuery(name="Item.buscarPorCodigo", query= "SELECT item FROM Item item WHERE item.codigoItem = :codigo" )
+	@NamedQuery(name="Item.buscarPorCodigoItem", query= "SELECT item FROM Item item WHERE item.codigoItem = :codigo" ),
+	@NamedQuery(name="Item.buscarPorCodOsAndCodProduto", query= "SELECT i FROM Item i WHERE i.os.codigoOs = :codOS AND i.produtoOS.codigoProduto = :codProd" )
 })
 public class Item implements Serializable {
 	
@@ -54,7 +55,7 @@ public class Item implements Serializable {
 	@JoinColumn(name="produto_cod",  referencedColumnName="cod_produto", nullable = false)
 	private ProdutoOS produtoOS;
 	
-	@ManyToOne(fetch = FetchType.EAGER)
+	@ManyToOne(fetch = FetchType.EAGER, cascade= CascadeType.MERGE)
 	@JoinColumn(name="os_cod", referencedColumnName="cod_os",  nullable = false)
 	private OS os;
 
@@ -69,11 +70,14 @@ public class Item implements Serializable {
 	}
 
 	public BigDecimal getValorParcial() {
+		valorParcial =  produtoOS.getValorPorHora().multiply(new BigDecimal( quantidade));
 		return valorParcial;
 	}
 
-	public void setValorParcial(BigDecimal valorParcial) {
-		this.valorParcial = valorParcial;
+	
+
+	public void setValorParcial() {
+		
 	}
 
 	public ProdutoOS getProdutoOS() {

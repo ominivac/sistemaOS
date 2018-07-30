@@ -45,7 +45,7 @@
 
 					<p:column styleClass="colunas" headerText="Opções" width="25%">
 
-						<p:commandButton value="Editar" actionListener="#{osBean.excluir}"
+						<p:commandButton value="Editar" actionListener="#{osBean.prepararEdicao}"
 							oncomplete="PF('dlgOs').show();">
 							<f:attribute name="osSelecionado" value="#{os}" />
 							<f:actionListener

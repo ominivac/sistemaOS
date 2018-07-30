@@ -13,10 +13,10 @@ import br.com.os.util.HibernateUtil;
 
 public class OsDAO {
 
+	@Deprecated
 	public void salvar(OS os) {
 		Session sessao = HibernateUtil.getSessionFactory().openSession();
 		Transaction transacao =  null ;
-		
 		
 		try {
 			transacao = sessao.beginTransaction();
@@ -37,7 +37,6 @@ public class OsDAO {
 		Session sessao = HibernateUtil.getSessionFactory().openSession();
 		Transaction transacao =  null ;
 		
-		
 		try {
 			transacao = sessao.beginTransaction();
 			sessao.save(os);
@@ -45,8 +44,78 @@ public class OsDAO {
 			for(int posicao = 0 ; posicao < itens.size() ; posicao++) {
 				Item itemCorrente = itens.get(posicao);
 				itemCorrente.setOs(os);
-				
+
 				sessao.save(itemCorrente);
+			}
+			
+			
+			transacao.commit();
+			
+		}catch (RuntimeException ex) {
+			if(transacao != null) {
+				transacao.rollback();
+			}
+			throw ex;
+		}finally {
+			sessao.close();
+		}
+	}
+	
+	
+	public void editar(OS os) {
+		Session sessao = HibernateUtil.getSessionFactory().openSession();
+		Transaction transacao =  null ;
+		
+		try {
+			transacao = sessao.beginTransaction();
+			sessao.update(os);
+			
+			ItemDAO idao = new ItemDAO();
+			
+			for(int posicao = 0 ; posicao < os.getItensOs().size() ; posicao++) {
+				Item itemCorrente = os.getItensOs().get(posicao);
+				//se for item novo deve salvar
+				
+				
+				if(itemCorrente.getCodigo() == null) {
+					idao.salvar(itemCorrente);
+				}else {
+					idao.update(os.getItensOs().get(posicao) );
+				}
+				
+			}
+			
+			transacao.commit();
+			
+		}catch (RuntimeException ex) {
+			if(transacao != null) {
+				transacao.rollback();
+			}
+			throw ex;
+		}finally {
+			sessao.close();
+		}
+	}
+	
+	/**
+	 * @deprecated
+	 * @param os
+	 * @param itens
+	 */
+	public void merge(OS os, List<Item> itens) {
+		Session sessao = HibernateUtil.getSessionFactory().openSession();
+		Transaction transacao =  null ;
+		
+		
+		try {
+			transacao = sessao.beginTransaction();
+			sessao.update(os);
+			
+			for(int posicao = 0 ; posicao < itens.size() ; posicao++) {
+				Item itemCorrente = itens.get(posicao);
+				itemCorrente.setOs(os);
+				
+				sessao.update(itemCorrente);
 				
 			}
 			
@@ -141,7 +210,7 @@ public class OsDAO {
 		}	
 	}
 	
-	public void editar(OS os) {
+	public void merge(OS os) {
 		Session sessao = HibernateUtil.getSessionFactory().openSession();
 		Transaction transacao =  null ;
 		

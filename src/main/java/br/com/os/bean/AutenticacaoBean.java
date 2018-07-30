@@ -1,6 +1,7 @@
 package br.com.os.bean;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.List;
 
 import javax.annotation.PostConstruct;
@@ -18,8 +19,12 @@ import br.com.os.domain.Usuario;
 
 @ManagedBean
 @SessionScoped
-public class AutenticacaoBean {
+public class AutenticacaoBean implements Serializable{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private Usuario usuario;
 	private Usuario usuarioLogado;
 	

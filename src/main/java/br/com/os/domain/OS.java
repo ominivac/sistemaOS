@@ -2,6 +2,7 @@ package br.com.os.domain;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -82,8 +83,9 @@ public class OS implements Serializable,SampleEntity{
 		return itensOs;
 	}
 	
-	public void setItensOs(List<Item> itensOs) {
-		this.itensOs = itensOs;
+	public void setItensOs(List<Item> itens) {
+		itensOs = new ArrayList<Item>();
+		itensOs = itens;
 	}
 	
 	
@@ -104,10 +106,21 @@ public class OS implements Serializable,SampleEntity{
 	}
 
 	public BigDecimal getValorTotal() {
+		if(itensOs.isEmpty() ) {
+			valorTotal = new BigDecimal("0.00");
+		}else {
+			valorTotal = new BigDecimal("0.00");
+			
+			for(int posicao = 0 ; posicao < itensOs.size(); posicao++) {
+				Item item = itensOs.get(posicao);
+				valorTotal = valorTotal.add(item.getValorParcial() )  ;
+			}
+		}
+		
 		return valorTotal;
 	}
 
-	public void setValorTotal(BigDecimal valorTotal) {
+	public void setValorTotal( BigDecimal valorTotal) {
 		this.valorTotal = valorTotal;
 	}
 

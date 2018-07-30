@@ -55,15 +55,37 @@ public class ItemDAO {
 		return listaItem;
 	}
 	
-	public Item buscarPorCodigo(Integer codigo){
+	public Item buscarPorCodigoItem(Integer codigo){
 		Session sessao = HibernateUtil.getSessionFactory().openSession();
 		Item item  = null;
 		Query consulta = null;
 		
 		
 		try {
-			consulta = sessao.getNamedQuery("Item.buscarPorCodigo");
+			consulta = sessao.getNamedQuery("Item.buscarPorCodigoItem");
 			consulta.setInteger("codigo",codigo);
+			item =  (Item) consulta.uniqueResult();
+			
+		}catch (RuntimeException ex) {
+
+			throw ex;
+		}finally {
+			sessao.close();
+		}
+		return item;
+	}
+	
+	
+	public Item buscarPorOsEproduto(Integer codigoOs, Integer codigoProd){
+		Session sessao = HibernateUtil.getSessionFactory().openSession();
+		Item item  = null;
+		Query consulta = null;
+		
+		
+		try {
+			consulta = sessao.getNamedQuery("Item.buscarPorCodOsAndCodProduto");
+			consulta.setInteger("codOS",codigoOs);
+			consulta.setInteger("codProd", codigoProd);
 			item =  (Item) consulta.uniqueResult();
 			
 		}catch (RuntimeException ex) {
@@ -94,7 +116,7 @@ public class ItemDAO {
 		}	
 	}
 	
-	public void editar(Item item) {
+	public void update(Item item) {
 		Session sessao = HibernateUtil.getSessionFactory().openSession();
 		Transaction transacao =  null ;
 		

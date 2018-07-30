@@ -101,7 +101,6 @@ public class ResponsavelOSBean implements Serializable{
 			
 			Messages.addGlobalInfo("Responsável editado com sucesso");
 			
-			//Messages.addGlobalInfo("resp selecionado: " + responsavelOS.getNome());
 		}catch (RuntimeException e) {
 			Messages.addGlobalError("Erro ao editar responsável");
 			e.printStackTrace();
