@@ -48,6 +48,10 @@ public class Item implements Serializable {
 	@Column(name="quantidade", nullable = false)
 	private Integer quantidade;
 	
+	@Column(name="quantidade_horas", nullable = true)
+	private Integer quantidadeHoras;
+	
+	
 	@Column(name="valor_parcial", nullable = false, precision = 8, scale = 2)
 	private BigDecimal valorParcial;
 	
@@ -55,7 +59,7 @@ public class Item implements Serializable {
 	@JoinColumn(name="produto_cod",  referencedColumnName="cod_produto", nullable = false)
 	private ProdutoOS produtoOS;
 	
-	@ManyToOne(fetch = FetchType.EAGER, cascade= CascadeType.MERGE)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="os_cod", referencedColumnName="cod_os",  nullable = false)
 	private OS os;
 
@@ -68,9 +72,18 @@ public class Item implements Serializable {
 	public void setQuantidade(Integer quantidade) {
 		this.quantidade = quantidade;
 	}
+	
+	
+	public Integer getQuantidadeHoras() {
+		return quantidadeHoras;
+	}
+	
+	public void setQuantidadeHoras(Integer quantidadeHoras) {
+		this.quantidadeHoras = quantidadeHoras;
+	}
 
 	public BigDecimal getValorParcial() {
-		valorParcial =  produtoOS.getValorPorHora().multiply(new BigDecimal( quantidade));
+		valorParcial =  produtoOS.getValorPorHora().multiply(new BigDecimal( quantidade)).multiply( new BigDecimal(this.quantidadeHoras));
 		return valorParcial;
 	}
 
@@ -96,10 +109,13 @@ public class Item implements Serializable {
 		this.os = os;
 	}
 
+	
+	
+
 	@Override
 	public String toString() {
-		return "Item [codigoItem=" + codigoItem + ", quantidade=" + quantidade + ", valorParcial=" + valorParcial
-				+ ", produtoOS=" + produtoOS + ", os=" + os + "]";
+		return "Item [codigoItem=" + codigoItem + ", quantidade=" + quantidade + ", quantidadeHoras=" + quantidadeHoras
+				+ ", valorParcial=" + valorParcial + ", produtoOS=" + produtoOS + ", os=" + os + "]";
 	}
 
 	@Override

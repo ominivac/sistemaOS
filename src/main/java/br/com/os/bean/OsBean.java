@@ -13,7 +13,7 @@ import javax.faces.event.ActionEvent;
 
 import org.omnifaces.util.Messages;
 
-import br.com.os.dao.ItemDAO;
+
 import br.com.os.dao.OsDAO;
 import br.com.os.dao.ProdutoOsDAO;
 import br.com.os.dao.ResponsavelOsDAO;
@@ -33,9 +33,29 @@ public class OsBean implements Serializable {
 	private List<ResponsavelOS> responsaveis;
 
 	private List<Item> itensOs;
+	
+	private ProdutoOS produtoOSselecionado;
+	
+	
+
+	public Item getItemCrudEdit() {
+		return itemCrudEdit;
+	}
+
+	public void setItemCrudEdit(Item itemCrudEdit) {
+		this.itemCrudEdit = itemCrudEdit;
+	}
+
+	public ProdutoOS getProdutoOSselecionado() {
+		return produtoOSselecionado;
+	}
+
+	public void setProdutoOSselecionado(ProdutoOS produtoOSselecionado) {
+		this.produtoOSselecionado = produtoOSselecionado;
+	}
 
 	private List<OS> listaOs; // para listagem da tabela
-	
+	private Item itemCrudEdit; 
 	
 	
 	public OS getOrdemServico() {
@@ -118,16 +138,92 @@ public class OsBean implements Serializable {
 	}
 	
 	public void novo() {
+		
+		
 		ordemServico = new OS();
 		ordemServico.setValorTotal(new BigDecimal("0.00"));
 		ordemServico.setDataLancamento(new Date());
 		
 		//ResponsavelOS responsavel = new ResponsavelOS();
 		//ordemServico.setResponsavelOS(responsavel);
+		itemCrudEdit = new Item();
+		
+		produtoOSselecionado = new ProdutoOS();
+		
 		
 		itensOs = new ArrayList<Item>();
 		ordemServico.setItensOs(itensOs);
 		
+	}
+	
+	public void prepararItemNovo(ActionEvent event) {
+		produtoOSselecionado = (ProdutoOS) event.getComponent().getAttributes().get("produtoSelecionado");
+		System.out.println(produtoOSselecionado);
+		
+		itemCrudEdit = new Item();
+		
+		itemCrudEdit.setQuantidadeHoras(0);
+		itemCrudEdit.setQuantidade(0);
+		
+		itemCrudEdit.setProdutoOS(produtoOSselecionado);
+		
+
+	}
+	
+	public void adicionarItemNovo(ActionEvent event) {
+
+		//ProdutoOS produtoOSselecionado = (ProdutoOS) event.getComponent().getAttributes().get("produtoSelecionado");
+		
+		
+		System.out.println(produtoOSselecionado);
+		System.out.println(itemCrudEdit);
+		
+		itemCrudEdit.setProdutoOS(produtoOSselecionado);
+
+		int achou = -1;
+		for (int posicao = 0; posicao < itensOs.size(); posicao++) {
+			if (itensOs.get(posicao).getProdutoOS().equals(produtoOSselecionado)) {
+				achou = posicao;
+			}
+		}
+
+		if (achou == -1) {
+			
+			//itemCrudEdit.setProdutoOS(produtoOSselecionado);
+			
+			//item.setProdutoOS(produtoOSselecionado);
+			// item.setValorParcial(produtoOSselecionado.getValorPorHora());
+			
+			//item.setQuantidade(1);
+			itemCrudEdit.setQuantidade(1);
+			
+			//item.getValorParcial();
+			itemCrudEdit.getValorParcial();
+
+			//item.setOs(ordemServico);// importante para o update !
+			itemCrudEdit.setOs(ordemServico);
+
+			//itensOs.add(item);
+			itensOs.add(itemCrudEdit);
+			
+			System.out.println("item adicionado" + itemCrudEdit);
+
+		} else {
+			Item item = itensOs.get(achou);
+			item.setQuantidade(item.getQuantidade() + 1);
+			// item.setValorParcial(produtoOSselecionado.getValorPorHora().multiply(new
+			// BigDecimal(item.getQuantidade() )) );
+			item.getValorParcial();
+
+			item.setOs(ordemServico);// importante para o update !
+
+			System.out.println("item ja na lista atualizando valor" + item);
+		}
+		
+		System.out.println("tamanho da lista " + itensOs.size() );
+		// atualizar o valor total
+		calcular();
+
 	}
 	
 	public void adicionarItem(ActionEvent event) {
@@ -241,18 +337,28 @@ public class OsBean implements Serializable {
 	}
 
 	public void salvar() {
+		System.out.println("entrou salvar");
+		
 		try {
 			if(ordemServico.getValorTotal().signum() == 0) {
 				Messages.addGlobalError("Informe pelo menos um Item para a OS ! ");
 				return;
 			}
 			
-			
+			System.out.println("itens dentro de salvar"+ itensOs);
 			OsDAO osdao = new OsDAO();
-			osdao.salvar(ordemServico, itensOs);
 			
-			Messages.addGlobalInfo("Ordem de serviço salva com sucesso !");
-
+			
+			if(ordemServico.getCodigo() == null) {
+				//eh uma os nova entao salva
+				osdao.salvar(ordemServico, itensOs);
+				Messages.addGlobalInfo("Nova Ordem de serviço salva com sucesso !");
+			}else {
+				//eh uma os para edicao, entao edita
+				osdao.editar(ordemServico);
+				Messages.addGlobalInfo("Ordem de serviço editada com sucesso !");
+			}
+			
 			
 		}catch (RuntimeException e) {
 			Messages.addGlobalError("Ocorreu um erro salvar a OS! ");
