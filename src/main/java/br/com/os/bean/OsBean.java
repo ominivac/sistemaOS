@@ -378,7 +378,7 @@ public class OsBean implements Serializable {
 			
 			if(ordemServico.getCodigo() == null) {
 				//eh uma os nova entao salva
-				osdao.salvar(ordemServico, itensOs);
+				osdao.merge(ordemServico, itensOs);
 				Messages.addGlobalInfo("Nova Ordem de serviço salva com sucesso !");
 			}else {
 				//eh uma os para edicao, entao edita
