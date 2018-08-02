@@ -152,6 +152,7 @@ public class OsDAO {
 		return listaOs;
 	}
 	
+	@SuppressWarnings("unchecked")
 	public List<OS> listarbYDate(){
 		Session sessao = HibernateUtil.getSessionFactory().openSession();
 		List<OS> listaOs = null;

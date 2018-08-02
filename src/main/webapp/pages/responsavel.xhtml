@@ -20,7 +20,7 @@
 								actionListener="#{responsavelOSBean.novo}"
 								update=":formCadastroResponsavel:pnlFormCadResponsavel"
 								oncomplete="PF('dlgResponsavel').show();">
-								
+								<f:actionListener type="org.omnifaces.eventlistener.ResetInputAjaxActionListener"/>
 							</p:commandButton>
 					</f:facet>
 					
@@ -84,7 +84,7 @@
 						actionListener="#{responsavelOSBean.salvar}" oncomplete="PF('dlgResponsavel').hide();"
 						update=":mensagem: formCadastroResponsavel:pnlFormCadResponsavel :formListagem:tabela "/>
 					
-					<p:commandButton value="Fechar" type="button" process="@this"
+					<p:commandButton value="Fechar" type="button" 
 						onclick="PF('dlgResponsavel').hide();" />
 				</h:panelGrid>
 				

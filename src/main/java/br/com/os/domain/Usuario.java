@@ -13,7 +13,7 @@ import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 import javax.persistence.Transient;
 
-import org.apache.shiro.crypto.hash.SimpleHash;
+
 
 @SuppressWarnings("serial")
 @Entity()

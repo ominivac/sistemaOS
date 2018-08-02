@@ -29,6 +29,8 @@ public class OsBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	//private OS osEditar;
 	private OS ordemServico;
+	private OS ordemServicoEdicao;
+	
 	private List<ProdutoOS> produtosOS;
 	private List<ResponsavelOS> responsaveis;
 
@@ -64,6 +66,14 @@ public class OsBean implements Serializable {
 
 	public void setOrdemServico(OS ordemServico) {
 		this.ordemServico = ordemServico;
+	}
+	
+	public OS getOrdemServicoEdicao() {
+		return ordemServicoEdicao;
+	}
+
+	public void setOrdemServicoEdicao(OS ordemServicoEdicao) {
+		this.ordemServicoEdicao = ordemServicoEdicao;
 	}
 
 	public List<OS> getListaOs() {
@@ -304,6 +314,23 @@ public class OsBean implements Serializable {
 		listarResponsaveis();
 	}
 	
+	public void prepararEdicaoNovo(ActionEvent event) {
+		try {
+			
+			
+			ordemServicoEdicao = (OS) event.getComponent().getAttributes().get("osSelecionada");
+			System.out.println("OS Para edição selecionada: " + ordemServicoEdicao);
+			
+			System.out.println(ordemServicoEdicao.getItensOs() );
+			
+			itensOs = ordemServicoEdicao.getItensOs();
+			
+			
+		}catch (RuntimeException e) {
+			Messages.addGlobalError("Erro ao preparar edição");
+			e.printStackTrace();
+		}
+	}
 	
 	public void prepararEdicao(ActionEvent event) {
 

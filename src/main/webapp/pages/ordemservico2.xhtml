@@ -10,7 +10,7 @@
 	<ui:define name="conteudo">
 
 
-		<h:form style="margin:auto;margin-left:2%;" id="form-consulta">
+		<h:form id="form-consulta" style="margin:auto;margin-left:2%;" >
 			<p:dataTable id="dataTable-registros" var="os"
 				value="#{osBean.listaOs}" rows="5" paginator="true"
 				paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
@@ -40,10 +40,11 @@
 				<p:column headerText="" style="width:25px;">
 
 					<p:commandButton icon="ui-icon-pencil" title="Editar Registro"
-						actionListener="#{osBean.prepararEdicao}"
+						actionListener="#{osBean.prepararEdicaoNovo}"
 						oncomplete="PF('dialog-modal-novo').show();"
 						update="dialog-modal-novo">
 						<f:attribute name="osSelecionada" value="#{os}" />
+						<f:actionListener type="org.omnifaces.eventlistener.ResetInputAjaxActionListener"/>
 
 					</p:commandButton>
 
@@ -69,7 +70,7 @@
 
 							<p:panel>
 								<p:outputLabel value="Código:" />
-								<p:inputText size="4" />
+								<p:inputText size="4" value="#{osBean.ordemServico.codigo}" />
 							</p:panel>
 
 
@@ -159,7 +160,7 @@
 
 								<p:column headerText="" style="width:25px;">
 
-									<p:commandButton icon="ui-icon-pencil" title="Remover Item"
+									<p:commandButton icon="ui-icon-pencil" title="Remover Item" 
 										actionListener="#{osBean.removerItem}"
 										update=":form-cadastro-itens:pnlFormItens :form-finalizacao-nova:txt-valor-total">
 										<f:attribute name="itemSelecionado" value="#{item}" />
@@ -281,7 +282,7 @@
 					<p:commandButton value="Salvar" actionListener="#{osBean.salvar}"
 						update=":mensagem"
 						oncomplete="PF('dlgFinalizarOS').hide();PF('dialog-modal-novo').hide();" />
-					<p:commandButton value="Fechar"
+					<p:commandButton value="Fechar" process="@this"
 						oncomplete="PF('dlgFinalizarOS').hide();" />
 
 				</p:panelGrid>

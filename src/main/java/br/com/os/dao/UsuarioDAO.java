@@ -3,12 +3,12 @@ package br.com.os.dao;
 import java.util.List;
 
 import org.apache.shiro.crypto.hash.SimpleHash;
-import org.hibernate.Criteria;
+
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
-import org.hibernate.criterion.Restrictions;
 
+import br.com.os.domain.ProdutoOS;
 import br.com.os.domain.Usuario;
 import br.com.os.util.HibernateUtil;
 
@@ -31,79 +31,7 @@ public class UsuarioDAO {
 			throw ex;
 		}finally {
 			sessao.close();
-		}	
-	}
-	
-	/**
-	public Usuario autenticarOld(String nome, String senha) {
-		Session sessao = HibernateUtil.getSessionFactory().openSession();
-		
-		try {
-			Criteria consulta = sessao.createCriteria(Usuario.class);
-			consulta.createAlias("usuario","u");
-			
-			consulta.add(Restrictions.eq("u.nome", nome));
-			
-			SimpleHash hash = new SimpleHash("md5", senha);
-			consulta.add(Restrictions.eq("senha", hash.toHex() ));
-			
-			Usuario usuario =  (Usuario) consulta.uniqueResult();
-			
-			return usuario;
-		}catch (RuntimeException ex) {
-
-			throw ex;
-		}finally {
-			sessao.close();
 		}
-	}*/
-	
-	public Usuario login(String email, String senha){
-		Session sessao = HibernateUtil.getSessionFactory().openSession();
-		Usuario usuario  = null;
-		Query consulta = null;
-		
-		
-		try {
-			consulta = sessao.getNamedQuery("Usuario.login");
-			consulta.setString("email", email);
-			
-			SimpleHash hash = new SimpleHash("md5", senha);
-			consulta.setString("senha", hash.toHex() );
-			
-			usuario =  (Usuario) consulta.uniqueResult();
-			
-		}catch (RuntimeException ex) {
-
-			throw ex;
-		}finally {
-			sessao.close();
-		}
-		return usuario;
-	}
-	
-	
-	
-	
-	
-	public Usuario buscarPorEmail(String email){
-		Session sessao = HibernateUtil.getSessionFactory().openSession();
-		Usuario usuario  = null;
-		Query consulta = null;
-		
-		
-		try {
-			consulta = sessao.getNamedQuery("Usuario.buscarPorEmail");
-			consulta.setString("email",email);
-			usuario =  (Usuario) consulta.uniqueResult();
-			
-		}catch (RuntimeException ex) {
-
-			throw ex;
-		}finally {
-			sessao.close();
-		}
-		return usuario;
 	}
 	
 	
@@ -144,6 +72,50 @@ public class UsuarioDAO {
 		}finally {
 			sessao.close();
 		}	
+	}
+	
+	public Usuario login(String email, String senha){
+		Session sessao = HibernateUtil.getSessionFactory().openSession();
+		Usuario usuario  = null;
+		Query consulta = null;
+		
+		
+		try {
+			consulta = sessao.getNamedQuery("Usuario.login");
+			consulta.setString("email", email);
+			
+			SimpleHash hash = new SimpleHash("md5", senha);
+			consulta.setString("senha", hash.toHex() );
+			
+			usuario =  (Usuario) consulta.uniqueResult();
+			
+		}catch (RuntimeException ex) {
+
+			throw ex;
+		}finally {
+			sessao.close();
+		}
+		return usuario;
+	}
+	
+	public Usuario buscarPorEmail(String email){
+		Session sessao = HibernateUtil.getSessionFactory().openSession();
+		Usuario usuario  = null;
+		Query consulta = null;
+		
+		
+		try {
+			consulta = sessao.getNamedQuery("Usuario.buscarPorEmail");
+			consulta.setString("email",email);
+			usuario =  (Usuario) consulta.uniqueResult();
+			
+		}catch (RuntimeException ex) {
+
+			throw ex;
+		}finally {
+			sessao.close();
+		}
+		return usuario;
 	}
 	
 	@SuppressWarnings("unchecked")

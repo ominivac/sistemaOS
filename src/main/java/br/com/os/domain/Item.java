@@ -3,7 +3,7 @@ package br.com.os.domain;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
-import javax.persistence.CascadeType;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -17,7 +17,7 @@ import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
-import org.hibernate.annotations.Cascade;
+
 
 
 @Entity

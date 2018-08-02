@@ -75,6 +75,7 @@ public class AutenticacaoBean implements Serializable{
 		
 		for(String permissao : permissoes) {
 			if(usuarioLogado.getRole().toString().equals(permissao)) {
+				System.out.println(usuarioLogado.getRole().toString() );
 				return true;
 			}
 		}

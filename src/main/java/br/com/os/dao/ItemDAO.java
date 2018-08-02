@@ -7,7 +7,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import br.com.os.domain.Item;
-import br.com.os.domain.OS;
+
 import br.com.os.util.HibernateUtil;
 
 public class ItemDAO {

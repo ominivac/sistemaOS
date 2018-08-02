@@ -10,9 +10,9 @@ import javax.faces.event.ActionEvent;
 
 import org.omnifaces.util.Messages;
 
-import br.com.os.dao.ResponsavelOsDAO;
+
 import br.com.os.dao.UsuarioDAO;
-import br.com.os.domain.ResponsavelOS;
+
 import br.com.os.domain.Usuario;
 
 @ManagedBean
@@ -70,7 +70,7 @@ public class UsuarioBean implements Serializable{
 	public void salvar() {
 		try {
 			UsuarioDAO usuarioDAO = new UsuarioDAO();
-			usuarioDAO.merge(usuario);
+			usuarioDAO.salvar(usuario);
 			
 			usuario = new Usuario();
 			usuarios = usuarioDAO.listar();

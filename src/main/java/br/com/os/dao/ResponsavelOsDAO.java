@@ -7,6 +7,7 @@ import org.hibernate.Session;
 import org.hibernate.Transaction;
 
 import br.com.os.domain.ResponsavelOS;
+
 import br.com.os.util.HibernateUtil;
 
 public class ResponsavelOsDAO {
@@ -31,10 +32,9 @@ public class ResponsavelOsDAO {
 		}
 	}
 	
-	public void editar(ResponsavelOS responsavelOS) {
+	public void merge(ResponsavelOS responsavelOS) {
 		Session sessao = HibernateUtil.getSessionFactory().openSession();
 		Transaction transacao =  null ;
-		
 		
 		try {
 			transacao = sessao.beginTransaction();
@@ -48,7 +48,7 @@ public class ResponsavelOsDAO {
 			throw ex;
 		}finally {
 			sessao.close();
-		}
+		}	
 	}
 	
 	public void excluir(ResponsavelOS responsavelOS) {

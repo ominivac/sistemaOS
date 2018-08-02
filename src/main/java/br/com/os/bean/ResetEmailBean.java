@@ -1,12 +1,11 @@
 package br.com.os.bean;
 
 import java.io.Serializable;
-import java.util.Map;
+
 
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
-import javax.faces.context.FacesContext;
-import javax.faces.event.ActionEvent;
+
 
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.omnifaces.util.Messages;
