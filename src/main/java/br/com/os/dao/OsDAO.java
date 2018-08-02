@@ -98,7 +98,6 @@ public class OsDAO {
 	}
 	
 	/**
-	 * @deprecated
 	 * @param os
 	 * @param itens
 	 */
@@ -109,13 +108,13 @@ public class OsDAO {
 		
 		try {
 			transacao = sessao.beginTransaction();
-			sessao.update(os);
+			sessao.merge(os);
 			
 			for(int posicao = 0 ; posicao < itens.size() ; posicao++) {
 				Item itemCorrente = itens.get(posicao);
 				itemCorrente.setOs(os);
 				
-				sessao.update(itemCorrente);
+				sessao.merge(itemCorrente);
 				
 			}
 			
