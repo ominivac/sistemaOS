@@ -18,28 +18,37 @@
 
 				<f:facet name="footer">
 
-					<p:commandButton value="Novo" actionListener="#{osBean.novo}"
+					<p:commandButton value="Novo" icon="ui-icon-new" 
+						actionListener="#{osBean.novo}"
 						oncomplete="PF('dialog-modal-novo').show();" />
 				</f:facet>
 
-				<p:column headerText="Código">
+				<p:column headerText="Código" style="width: 50px">
 					<h:outputText value="#{os.codigo}" />
 				</p:column>
 
-				<p:column headerText="Responsável">
-					<h:outputText value="#{os.responsavelOS.nome}" />
+				<p:column headerText="Responsável" filterBy="#{os.usuario.nome}" style="width: 250px">
+					<h:outputText value="#{os.usuario.nome}" />
 				</p:column>
 
-				<p:column headerText="Data Lançamento">
+				<p:column headerText="Data Lançamento" style="width: 50px">
 					<h:outputText value="#{os.dataLancamento}">
 						<f:convertDateTime pattern="dd/MM/yyyy" locale="pt_BR"
 							timeZone="America/Sao_Paulo" />
 					</h:outputText>
 				</p:column>
-
+				
+				<p:column headerText="Data previsão entrega" style="width: 50px">
+					<h:outputText value="#{os.dataPrevisaoEntrega}">
+						<f:convertDateTime pattern="dd/MM/yyyy" locale="pt_BR"
+							timeZone="America/Sao_Paulo" />
+					</h:outputText>
+				</p:column>
+				
 				<p:column headerText="" style="width:25px;">
 
-					<p:commandButton icon="ui-icon-pencil" title="Editar Registro"
+					<p:commandButton icon="ui-icon-pencil" value="Editar" 
+						rendered="#{autenticacaoBean.ehadmin()}"
 						actionListener="#{osBean.prepararEdicaoNovo}"
 						oncomplete="PF('dialog-modal-novo').show();"
 						update="dialog-modal-novo">
@@ -57,11 +66,11 @@
 		</h:form>
 
 		<!-- tela para CRUD -->
-		<p:dialog header="Nova  Ordem de Serviço" id="dialog-modal-novo"
+		<p:dialog header="Editar Ordem de Serviço" id="dialog-modal-novo"
 			resizable="true" closable="true" widgetVar="dialog-modal-novo"
 			modal="true">
 
-			<p:panel id="pnlMasterNova" header="master">
+			<p:panel id="pnlMasterNova" header="Detalhes">
 				<h:form id="form-finalizacao-nova">
 					<p:panel>
 						<p:messages showDetail="false" closable="true" severity="error" />
@@ -70,7 +79,7 @@
 
 							<p:panel>
 								<p:outputLabel value="Código:" />
-								<p:inputText size="4" value="#{osBean.ordemServico.codigo}" />
+								<p:inputText size="4" value="#{osBean.ordemServico.codigo}" disabled="true"/>
 							</p:panel>
 
 
@@ -91,7 +100,7 @@
 
 				</h:form>
 			</p:panel>
-			<p:panel id="pnlProdutosNova" header="itens">
+			<p:panel id="pnlProdutosNova" header="Itens">
 				<h:form id="form-listagem-produtos-nova">
 					<p:panel id="pnlFormProdutos" header="Retrancas disponíveis">
 						<p:dataTable id="tabelaProdutos" rows="3"
@@ -265,13 +274,13 @@
 
 					<p:outputLabel value="Responsável" for="inputText-responsavel" />
 					<p:selectOneMenu id="inputText-responsavel"
-						value="#{osBean.ordemServico.responsavelOS}"
-						conveter="responsavelConverter">
+						value="#{osBean.ordemServico.usuario}"
+						conveter="usuarioConverter">
 						<f:selectItem noSelectionOption="true"
 							itemLabel="Selecione um responsável pela OS" />
 
-						<f:selectItems value="#{osBean.responsaveis}" var="respOS"
-							itemValue="#{respOS}" itemLabel="#{respOS.nome}" />
+						<f:selectItems value="#{osBean.usuarios}" var="usuarioOS"
+							itemValue="#{usuarioOS}" itemLabel="#{usuarioOS.nome}" />
 
 					</p:selectOneMenu>
 
@@ -280,7 +289,7 @@
 
 				<p:panelGrid columns="">
 					<p:commandButton value="Salvar" actionListener="#{osBean.salvar}"
-						update=":mensagem"
+						update=":mensagem :form-consulta:dataTable-registros"
 						oncomplete="PF('dlgFinalizarOS').hide();PF('dialog-modal-novo').hide();" />
 					<p:commandButton value="Fechar" process="@this"
 						oncomplete="PF('dlgFinalizarOS').hide();" />

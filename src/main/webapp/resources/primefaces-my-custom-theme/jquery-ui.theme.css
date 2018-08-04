@@ -1,5 +1,5 @@
 /*!
- * jQuery UI CSS Framework 1.12.1
+ * jQuery UI CSS Framework 1.11.4
  * http://jqueryui.com
  *
  * Copyright jQuery Foundation and other contributors
@@ -8,7 +8,7 @@
  *
  * http://api.jqueryui.com/category/theming/
  *
- * To view and modify this theme, visit http://jqueryui.com/themeroller/?scope=&folderName=dark-hive&cornerRadiusShadow=8px&offsetLeftShadow=-7px&offsetTopShadow=-7px&thicknessShadow=7px&opacityShadow=60&bgImgOpacityShadow=30&bgTextureShadow=flat&bgColorShadow=cccccc&opacityOverlay=80&bgImgOpacityOverlay=50&bgTextureOverlay=flat&bgColorOverlay=5c5c5c&iconColorError=a83300&fcError=111111&borderColorError=ffb73d&bgImgOpacityError=40&bgTextureError=glass&bgColorError=ffc73d&iconColorHighlight=4b8e0b&fcHighlight=2e7db2&borderColorHighlight=cccccc&bgImgOpacityHighlight=80&bgTextureHighlight=highlight_soft&bgColorHighlight=eeeeee&iconColorActive=222222&fcActive=ffffff&borderColorActive=26b3f7&bgImgOpacityActive=20&bgTextureActive=highlight_hard&bgColorActive=0972a5&iconColorHover=ffffff&fcHover=ffffff&borderColorHover=0b93d5&bgImgOpacityHover=33&bgTextureHover=highlight_soft&bgColorHover=003147&iconColorDefault=cccccc&fcDefault=eeeeee&borderColorDefault=444444&bgImgOpacityDefault=35&bgTextureDefault=highlight_soft&bgColorDefault=222222&iconColorContent=cccccc&fcContent=ffffff&borderColorContent=555555&bgImgOpacityContent=25&bgTextureContent=loop&bgColorContent=000000&iconColorHeader=ffffff&fcHeader=ffffff&borderColorHeader=333333&bgImgOpacityHeader=44&bgTextureHeader=highlight_soft&bgColorHeader=444444&cornerRadius=6px&fsDefault=1.1em&fwDefault=normal&ffDefault=Verdana%2CArial%2Csans-serif
+ * To view and modify this theme, visit http://jqueryui.com/themeroller/?ffDefault=Verdana%2CArial%2Csans-serif&fsDefault=0.9em&fwDefault=bold&cornerRadius=6px&bgColorHeader=%23444444&bgTextureHeader=highlight_soft&borderColorHeader=%23333333&fcHeader=%23f15709&iconColorHeader=%23ffffff&bgColorContent=%23000000&bgTextureContent=flat&borderColorContent=%23555555&fcContent=%23f15709&iconColorContent=%23f15709&bgColorDefault=%23222222&bgTextureDefault=highlight_soft&borderColorDefault=%23444444&fcDefault=%23f15709&iconColorDefault=%23cccccc&bgColorHover=%23003147&bgTextureHover=highlight_soft&borderColorHover=%230b93d5&fcHover=%23ffffff&iconColorHover=%23ffffff&bgColorActive=%23fcd5c1&bgTextureActive=highlight_hard&borderColorActive=%23f15709&fcActive=%23f15709&iconColorActive=%23f15709&bgColorHighlight=%23eeeeee&bgTextureHighlight=highlight_soft&borderColorHighlight=%23cccccc&fcHighlight=%23f15709&iconColorHighlight=%234b8e0b&bgColorError=%23ffc73d&bgTextureError=glass&borderColorError=%23ffb73d&fcError=%23111111&iconColorError=%23a83300&bgColorOverlay=%235c5c5c&bgTextureOverlay=flat&bgImgOpacityOverlay=50&opacityOverlay=80&bgColorShadow=%23cccccc&bgTextureShadow=flat&bgImgOpacityShadow=30&opacityShadow=60&thicknessShadow=7px&offsetTopShadow=-7px&offsetLeftShadow=-7px&cornerRadiusShadow=8px&bgImgOpacityHeader=44&bgImgOpacityContent=25&bgImgOpacityDefault=35&bgImgOpacityHover=33&bgImgOpacityActive=20&bgImgOpacityHighlight=80&bgImgOpacityError=40
  */
 
 
@@ -16,87 +16,50 @@
 ----------------------------------*/
 .ui-widget {
 	font-family: Verdana,Arial,sans-serif;
-	font-size: 0.8em;
+	font-size: 0.9em;
 }
 .ui-widget .ui-widget {
-	font-size: 0.8em;
+	font-size: 1em;
 }
-
-.ui-widget .ui-panel-titlebar {
-	margin:2px;
-	padding:2px;
-	height:0.9em;
-	text-align: left
-}
-
 .ui-widget input,
 .ui-widget select,
 .ui-widget textarea,
 .ui-widget button {
 	font-family: Verdana,Arial,sans-serif;
-	font-size: 0.8em;
-}
-.ui-widget.ui-widget-content {
-	/*border: 1px solid #444444;*/
-	border: 1px solid #5c5c5c;
-	padding-top: 2px;
+	font-size: 1em;
 }
 .ui-widget-content {
-	/*border: 1px solid #555555;*/
-	border: 1px solid #5c5c5c;
-	background: #000000 url("images/ui-bg_loop_25_000000_21x21.png") 50% 50% repeat;
-	/*color: #ffffff;*/
-	/*color: #59f713;*/
-	color: #Fe760a;
-	padding-top: 2px;
-	font-size: 0.5em;
+	border: 1px solid #555555;
+	background: #000000;
+	color: #f15709;
 }
 .ui-widget-content a {
-	/*color: #ffffff;*/
-	/*color: #59f713;*/
-	color: #Fe760a;
+	color: #f15709;
 }
 .ui-widget-header {
-	/*border: 1px solid #333333;*/
-	border: 1px solid #5c5c5c;
-	/*background: #444444 url("images/ui-bg_highlight-soft_44_444444_1x100.png") 50% 50% repeat-x;*/
-	/*background: #5c5c5c url("images/ui-bg_highlight-soft_44_444444_1x100.png") 50% 50% repeat-x;*/
-	background: #5c5c5c url("images/ui-bg_highlight-soft_44_444444_1x100.png") 50% 50% repeat-x;
-	color: #ffffff;
+	border: 1px solid #333333;
+	background: #444444 url("images/ui-bg_highlight-soft_44_444444_1x100.png") 50% 50% repeat-x;
+	color: #f15709;
 	font-weight: bold;
-	padding-top: 2px;
-	font-size: 0.8em;
 }
 .ui-widget-header a {
-	color: #ffffff;
-	font-size: 0.6em;
+	color: #f15709;
 }
 
 /* Interaction states
 ----------------------------------*/
 .ui-state-default,
 .ui-widget-content .ui-state-default,
-.ui-widget-header .ui-state-default,
-.ui-button,
-
-/* We use html here because we need a greater specificity to make sure disabled
-works properly when clicked or hovered */
-html .ui-button.ui-state-disabled:hover,
-html .ui-button.ui-state-disabled:active {
+.ui-widget-header .ui-state-default {
 	border: 1px solid #444444;
 	background: #222222 url("images/ui-bg_highlight-soft_35_222222_1x100.png") 50% 50% repeat-x;
-	font-weight: normal;
-	color: #eeeeee;
+	font-weight: bold;
+	color: #f15709;
 }
 .ui-state-default a,
 .ui-state-default a:link,
-.ui-state-default a:visited,
-a.ui-button,
-a:link.ui-button,
-a:visited.ui-button,
-.ui-button {
-	/*color: #eeeeee;*/
-	color: #Fe760a;
+.ui-state-default a:visited {
+	color: #f15709;
 	text-decoration: none;
 }
 .ui-state-hover,
@@ -104,15 +67,11 @@ a:visited.ui-button,
 .ui-widget-header .ui-state-hover,
 .ui-state-focus,
 .ui-widget-content .ui-state-focus,
-.ui-widget-header .ui-state-focus,
-.ui-button:hover,
-.ui-button:focus {
+.ui-widget-header .ui-state-focus {
 	border: 1px solid #0b93d5;
 	background: #003147 url("images/ui-bg_highlight-soft_33_003147_1x100.png") 50% 50% repeat-x;
-	font-weight: normal;
-	/*color: #ffffff;*/
-	color: #0b93d5;
-	
+	font-weight: bold;
+	color: #ffffff;
 }
 .ui-state-hover a,
 .ui-state-hover a:hover,
@@ -121,36 +80,22 @@ a:visited.ui-button,
 .ui-state-focus a,
 .ui-state-focus a:hover,
 .ui-state-focus a:link,
-.ui-state-focus a:visited,
-a.ui-button:hover,
-a.ui-button:focus {
+.ui-state-focus a:visited {
 	color: #ffffff;
 	text-decoration: none;
 }
-
-.ui-visual-focus {
-	box-shadow: 0 0 3px 1px rgb(94, 158, 214);
-}
 .ui-state-active,
 .ui-widget-content .ui-state-active,
-.ui-widget-header .ui-state-active,
-a.ui-button:active,
-.ui-button:active,
-.ui-button.ui-state-active:hover {
-	border: 1px solid #26b3f7;
-	background: #0972a5 url("images/ui-bg_highlight-hard_20_0972a5_1x100.png") 50% 50% repeat-x;
-	font-weight: normal;
-	color: #ffffff;
-}
-.ui-icon-background,
-.ui-state-active .ui-icon-background {
-	border: #26b3f7;
-	background-color: #ffffff;
+.ui-widget-header .ui-state-active {
+	border: 1px solid #f15709;
+	background: #fcd5c1 url("images/ui-bg_highlight-hard_20_fcd5c1_1x100.png") 50% 50% repeat-x;
+	font-weight: bold;
+	color: #f15709;
 }
 .ui-state-active a,
 .ui-state-active a:link,
 .ui-state-active a:visited {
-	color: #ffffff;
+	color: #f15709;
 	text-decoration: none;
 }
 
@@ -160,18 +105,13 @@ a.ui-button:active,
 .ui-widget-content .ui-state-highlight,
 .ui-widget-header .ui-state-highlight {
 	border: 1px solid #cccccc;
-	background: #Fe760a; url("images/ui-bg_highlight-soft_80_eeeeee_1x100.png") 50% top repeat-x;
-	color: #2e7db2;
-}
-.ui-state-checked {
-	border: 1px solid #cccccc;
-	/*background: #eeeeee;*/
-	background: #2e7db2;
+	background: #eeeeee url("images/ui-bg_highlight-soft_80_eeeeee_1x100.png") 50% top repeat-x;
+	color: #f15709;
 }
 .ui-state-highlight a,
 .ui-widget-content .ui-state-highlight a,
 .ui-widget-header .ui-state-highlight a {
-	color: #2e7db2;
+	color: #f15709;
 }
 .ui-state-error,
 .ui-widget-content .ui-state-error,
@@ -223,50 +163,46 @@ a.ui-button:active,
 }
 .ui-icon,
 .ui-widget-content .ui-icon {
-	background-image: url("images/ui-icons_cccccc_256x240.png");
+	background-image: url("images/ui-icons_f15709_256x240.png");
 }
 .ui-widget-header .ui-icon {
 	background-image: url("images/ui-icons_ffffff_256x240.png");
 }
+.ui-state-default .ui-icon {
+	background-image: url("images/ui-icons_cccccc_256x240.png");
+}
 .ui-state-hover .ui-icon,
-.ui-state-focus .ui-icon,
-.ui-button:hover .ui-icon,
-.ui-button:focus .ui-icon {
+.ui-state-focus .ui-icon {
 	background-image: url("images/ui-icons_ffffff_256x240.png");
 }
-.ui-state-active .ui-icon,
-.ui-button:active .ui-icon {
-	background-image: url("images/ui-icons_222222_256x240.png");
+.ui-state-active .ui-icon {
+	background-image: url("images/ui-icons_f15709_256x240.png");
 }
-.ui-state-highlight .ui-icon,
-.ui-button .ui-state-highlight.ui-icon {
+.ui-state-highlight .ui-icon {
 	background-image: url("images/ui-icons_4b8e0b_256x240.png");
 }
 .ui-state-error .ui-icon,
 .ui-state-error-text .ui-icon {
 	background-image: url("images/ui-icons_a83300_256x240.png");
 }
-.ui-button .ui-icon {
-	background-image: url("images/ui-icons_cccccc_256x240.png");
-}
 
 /* positioning */
 .ui-icon-blank { background-position: 16px 16px; }
-.ui-icon-caret-1-n { background-position: 0 0; }
-.ui-icon-caret-1-ne { background-position: -16px 0; }
-.ui-icon-caret-1-e { background-position: -32px 0; }
-.ui-icon-caret-1-se { background-position: -48px 0; }
-.ui-icon-caret-1-s { background-position: -65px 0; }
-.ui-icon-caret-1-sw { background-position: -80px 0; }
-.ui-icon-caret-1-w { background-position: -96px 0; }
-.ui-icon-caret-1-nw { background-position: -112px 0; }
-.ui-icon-caret-2-n-s { background-position: -128px 0; }
-.ui-icon-caret-2-e-w { background-position: -144px 0; }
+.ui-icon-carat-1-n { background-position: 0 0; }
+.ui-icon-carat-1-ne { background-position: -16px 0; }
+.ui-icon-carat-1-e { background-position: -32px 0; }
+.ui-icon-carat-1-se { background-position: -48px 0; }
+.ui-icon-carat-1-s { background-position: -64px 0; }
+.ui-icon-carat-1-sw { background-position: -80px 0; }
+.ui-icon-carat-1-w { background-position: -96px 0; }
+.ui-icon-carat-1-nw { background-position: -112px 0; }
+.ui-icon-carat-2-n-s { background-position: -128px 0; }
+.ui-icon-carat-2-e-w { background-position: -144px 0; }
 .ui-icon-triangle-1-n { background-position: 0 -16px; }
 .ui-icon-triangle-1-ne { background-position: -16px -16px; }
 .ui-icon-triangle-1-e { background-position: -32px -16px; }
 .ui-icon-triangle-1-se { background-position: -48px -16px; }
-.ui-icon-triangle-1-s { background-position: -65px -16px; }
+.ui-icon-triangle-1-s { background-position: -64px -16px; }
 .ui-icon-triangle-1-sw { background-position: -80px -16px; }
 .ui-icon-triangle-1-w { background-position: -96px -16px; }
 .ui-icon-triangle-1-nw { background-position: -112px -16px; }
@@ -276,7 +212,7 @@ a.ui-button:active,
 .ui-icon-arrow-1-ne { background-position: -16px -32px; }
 .ui-icon-arrow-1-e { background-position: -32px -32px; }
 .ui-icon-arrow-1-se { background-position: -48px -32px; }
-.ui-icon-arrow-1-s { background-position: -65px -32px; }
+.ui-icon-arrow-1-s { background-position: -64px -32px; }
 .ui-icon-arrow-1-sw { background-position: -80px -32px; }
 .ui-icon-arrow-1-w { background-position: -96px -32px; }
 .ui-icon-arrow-1-nw { background-position: -112px -32px; }
@@ -288,7 +224,7 @@ a.ui-button:active,
 .ui-icon-arrowstop-1-e { background-position: -208px -32px; }
 .ui-icon-arrowstop-1-s { background-position: -224px -32px; }
 .ui-icon-arrowstop-1-w { background-position: -240px -32px; }
-.ui-icon-arrowthick-1-n { background-position: 1px -48px; }
+.ui-icon-arrowthick-1-n { background-position: 0 -48px; }
 .ui-icon-arrowthick-1-ne { background-position: -16px -48px; }
 .ui-icon-arrowthick-1-e { background-position: -32px -48px; }
 .ui-icon-arrowthick-1-se { background-position: -48px -48px; }
@@ -460,12 +396,15 @@ a.ui-button:active,
 
 /* Overlays */
 .ui-widget-overlay {
-	/*background: #5c5c5c;*/
-	background: #9c9c9c;
+	background: #5c5c5c;
 	opacity: .8;
 	filter: Alpha(Opacity=80); /* support: IE8 */
 }
 .ui-widget-shadow {
-	-webkit-box-shadow: -7px -7px 7px #cccccc;
-	box-shadow: -7px -7px 7px #cccccc;
+	margin: -7px 0 0 -7px;
+	padding: 7px;
+	background: #cccccc;
+	opacity: .6;
+	filter: Alpha(Opacity=60); /* support: IE8 */
+	border-radius: 8px;
 }

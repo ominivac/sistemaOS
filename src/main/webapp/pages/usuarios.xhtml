@@ -15,7 +15,7 @@
 					value="#{usuarioBean.usuarios}" var="usuario" paginator="true">
 					
 					<f:facet name="footer">
-							<p:commandButton value="Novo Usuário"
+							<p:commandButton value="Novo Usuário" icon="ui-icon-plus"
 								actionListener="#{usuarioBean.novo}"
 								update=":formCadastroUsuario:pnlFormCadUsuario"
 								oncomplete="PF('dlgUsuario').show();">
@@ -23,24 +23,28 @@
 							</p:commandButton>	
 						</f:facet>
 					
-					<p:column headerText="Codigo">
+					<p:column headerText="CÓDIGO">
 						<h:outputText value="#{usuario.codigo}" />
 					</p:column>
 					
-					<p:column headerText="Nome" sortBy="#{usuario.nome}" filterBy="#{usuario.nome}">
+					<p:column headerText="NOME" sortBy="#{usuario.nome}" filterBy="#{usuario.nome}">
 						<h:outputText value="#{usuario.nome}" />
 					</p:column>
 					
-					<p:column headerText="Email" sortBy="#{usuario.email}" filterBy="#{usuario.email}">
+					<p:column headerText="EMAIL" sortBy="#{usuario.email}" filterBy="#{usuario.email}">
 						<h:outputText value="#{usuario.email}" />
 					</p:column>
 					
-					<p:column headerText="Tipo" >
+					<p:column headerText="SENHA" >
+						<h:outputText value="#{usuario.senha}" />
+					</p:column>
+					
+					<p:column headerText="TIPO" >
 						<h:outputText value="#{usuario.role}" />
 					</p:column>
 					
-					<p:column headerText="Opções">
-						<p:commandButton value="Editar"
+					<p:column headerText="OPÇÕES">
+						<p:commandButton value="Editar" icon="ui-icon-pencil"
 							actionListener="#{usuarioBean.editar}" 
 							update=":formCadastroUsuario:pnlFormCadUsuario"
 							oncomplete="PF('dlgUsuario').show();">
@@ -48,7 +52,7 @@
 							<f:actionListener type="org.omnifaces.eventlistener.ResetInputAjaxActionListener"/>
 						</p:commandButton>
 						
-						<p:commandButton value="Excluir"
+						<p:commandButton value="Excluir" icon="ui-icon-trash"
 							actionListener="#{usuarioBean.excluir}"
 							update=":mensagem :formListagem:tabela">
 							
@@ -92,7 +96,7 @@
 				</p:inputText>
 				
 				<p:outputLabel for="txtSenha" value="Senha: "/>
-				<p:password id="txtSenha" value="#{usuarioBean.usuario.senha}" size="10" maxlength="8"
+				<p:password id="txtSenha" value="#{usuarioBean.usuario.senhaSemCripto}" size="10" maxlength="8"
 					required="true" match="txtSenha2" 
 					validatorMessage="Os campos senha tem de ser iguais"
 					requiredMessage="o campo senha é obrigatório!" />
@@ -115,7 +119,10 @@
 				<h:form id="formSalvar">
 					<p:commandButton id="btnSalvar" value="Salvar" 
 						actionListener="#{usuarioBean.salvar}" oncomplete="PF('dlgUsuario').hide();"
-						update=":mensagem: formCadastroUsuario:pnlFormCadUsuario :formListagem:tabela "/>
+						update=":mensagem: formCadastroUsuario:pnlFormCadUsuario :formListagem:tabela ">
+						
+						
+					</p:commandButton>
 					
 					<p:commandButton value="Fechar" type="button"
 						onclick="PF('dlgUsuario').hide();"/>

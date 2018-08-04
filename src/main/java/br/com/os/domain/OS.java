@@ -66,7 +66,7 @@ public class OS implements Serializable,SampleEntity{
 	private Usuario usuario;
 	
 	
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.PERSIST)
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="responsavel_cod", referencedColumnName="cod_responsavel",columnDefinition="integer", nullable = true)
 	private ResponsavelOS responsavelOS;
 

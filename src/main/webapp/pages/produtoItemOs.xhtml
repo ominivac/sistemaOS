@@ -20,12 +20,12 @@
 					
 					<f:facet name="footer">
 							
-							<p:commandButton value="Novo"
+							<p:commandButton value="Novo" icon="ui-icon-new"
 								actionListener="#{produtoOSBean2.novo()}"
 								update=":formCadastroProduto:pnlFormCadProduto"
 								oncomplete="PF('dlgProduto').show();"/>
 								
-							<p:commandButton value="Imprimir" ajax="false"
+							<p:commandButton value="Imprimir" icon="ui-icon-print" ajax="false"
 								actionListener="#{produtoOSBean2.gerarRelatorio}"/>	
 								
 					</f:facet>
@@ -50,7 +50,7 @@
 					
 					<p:column headerText="Opções" width="25%">
 					
-						<p:commandButton icon="ui-icon-pencil" 
+						<p:commandButton value="Editar" icon="ui-icon-pencil" 
 							actionListener="#{produtoOSBean2.editar}" 
 							update=":formCadastroProduto:pnlFormCadProduto"
 							oncomplete="PF('dlgProduto').show();">
@@ -58,7 +58,7 @@
 							<f:actionListener type="org.omnifaces.eventlistener.ResetInputAjaxActionListener"/>
 						</p:commandButton>
 						
-						<p:commandButton icon="ui-icon-trash"
+						<p:commandButton value="Excluir" icon="ui-icon-trash"
 							actionListener="#{produtoOSBean2.excluir}"
 							update=":mensagem :formListagem:tabela">
 							
@@ -109,10 +109,11 @@
 				
 				</h:panelGrid>
 				<h:panelGrid columns="2">
-					<p:commandButton value="Salvar" 
+					<p:commandButton value="Salvar" icon="ui-icon-save"
 						actionListener="#{produtoOSBean2.salvar}" oncomplete="PF('dlgProduto').hide();"
 						update=":mensagem: formCadastroProduto:pnlFormCadProduto :formListagem:tabela "/>
-					<p:commandButton value="Fechar" type="button"
+					
+					<p:commandButton value="Fechar" icon="ui-icon-close" type="button"
 						onclick="PF('dlgProduto').hide();"
 						oncomplete=""/>
 				</h:panelGrid>

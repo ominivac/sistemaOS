@@ -8,7 +8,7 @@ import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
 
-import br.com.os.domain.ProdutoOS;
+
 import br.com.os.domain.Usuario;
 import br.com.os.util.HibernateUtil;
 
@@ -21,6 +21,8 @@ public class UsuarioDAO {
 		
 		try {
 			transacao = sessao.beginTransaction();
+			SimpleHash hash = new SimpleHash("md5", usuario.getSenhaSemCripto() );
+			usuario.setSenha(hash.toHex() );
 			sessao.save(usuario);
 			transacao.commit();
 			

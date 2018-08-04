@@ -105,7 +105,6 @@ public class OsDAO {
 		Session sessao = HibernateUtil.getSessionFactory().openSession();
 		Transaction transacao =  null ;
 		
-		
 		try {
 			transacao = sessao.beginTransaction();
 			sessao.merge(os);
@@ -115,10 +114,7 @@ public class OsDAO {
 				itemCorrente.setOs(os);
 				
 				sessao.merge(itemCorrente);
-				
 			}
-			
-			
 			transacao.commit();
 			
 		}catch (RuntimeException ex) {

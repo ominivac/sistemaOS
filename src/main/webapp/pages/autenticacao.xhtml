@@ -10,7 +10,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
 <title>Sistema de Ordem de Serviço</title>
-<h:outputStylesheet library="css" name="jquery-ui.theme.css"/>
+<!-- <h:outputStylesheet library="css" name="jquery-ui.theme.css"/>  -->
+<h:outputStylesheet library="primefaces-my-custom-theme" name="theme.css"/> 
 <title>Autenticação</title>
 </h:head>
 <h:body>
@@ -22,7 +23,7 @@
 		<h:form id="formAutenticar">
 	
 			<h:panelGrid columns="2">
-				<p:outputLabel for="nome" value="Nome" size="20"/>
+				<p:outputLabel for="nome" value="Login" size="20"/>
 				<p:inputText id="nome"  maxlength="20" size="20" onfocus="@this" value="#{autenticacaoBean.usuario.nome}"
 					required="true" requiredMessage="O campo nome é obrigatório"/>
 				
@@ -30,12 +31,13 @@
 				<p:password id="senha" maxlength="20" size="20" value="#{autenticacaoBean.usuario.senhaSemCripto}"
 					required="true" requiredMessage="O campo senha é obrigatório"/>
 					
-				<p:commandButton widgetVar="btnEntrar" value="Entrar" update=":mensagem" 
+				<p:commandButton widgetVar="btnEntrar" value="Entrar"
+					update=":mensagem" 
 					actionListener="#{autenticacaoBean.autenticar}"
-					onstart="PF('dlgProgress').show();"
-					oncomplete="PF('btnEntrar').enable();PF('dlgProgress').close();"
+					
+					oncomplete="PF('btnEntrar').enable();"
 					/>
-				<p:commandButton value="Cancelar"  oncomplete="PF('dlgAutenticar').hide();"/>
+				
 				<p:commandButton value="Resetar Senha"  oncomplete="PF('dlgResetEmail').show();"/>		
 				
 				

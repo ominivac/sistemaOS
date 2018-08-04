@@ -59,7 +59,7 @@ public class AutenticacaoBean implements Serializable{
 			usuarioLogado =  udao.login(usuario.getNome() , usuario.getSenhaSemCripto() );
 			if(usuarioLogado == null) {
 				Messages.addGlobalError("Nome de usuário ou senha inválidas" );
-				return;
+				//Faces.redirect("./pages/autenticacao.xhtml");
 			}
 			
 			Faces.redirect("./pages/principal.xhtml");
@@ -70,12 +70,26 @@ public class AutenticacaoBean implements Serializable{
 		
 	}
 	
+	public boolean ehadmin() {
+		return usuarioLogado.getRole().toString().equals("A");
+	}
+	
+	public void sair() {
+		System.out.println("entrou em sair");
+		usuarioLogado = null;
+		try {
+			Faces.redirect("./pages/autenticacao.xhtml");
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
 	
 	public boolean temPermisssoes(List<String> permissoes) {
 		
 		for(String permissao : permissoes) {
 			if(usuarioLogado.getRole().toString().equals(permissao)) {
-				System.out.println(usuarioLogado.getRole().toString() );
 				return true;
 			}
 		}

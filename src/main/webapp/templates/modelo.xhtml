@@ -12,11 +12,15 @@
 
 	<title>Sistema de Ordem de Serviço</title>
 	<h:outputStylesheet library="css" name="jquery-ui.min.css"/>
-	<h:outputStylesheet library="css" name="jquery-ui.theme.css"/>
+	<!-- <h:outputStylesheet library="css" name="jquery-ui.theme.css"/> -->
+	<h:outputStylesheet library="primefaces-my-custom-theme" name="theme.css"/> 
+	
 	<script  src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
 </h:head>
 <h:body>
-	<p:graphicImage library="images" name="LogoItaPro_2.png" width="200" />
+	<p:panel header="Sistema de Ordem de Serviço - Versão 1.0" styleClass="ui-widget">
+		<p:graphicImage library="images" name="LogoItaPro_2.png" width="200" />
+	</p:panel>
 
 	<p:growl id="mensagem">
 		<p:autoUpdate disabled="false" />
@@ -28,10 +32,16 @@
 
 		<div id="cabecalho" class="divCabecalho">
 			<h:form>
-				<p:panel header="Sistema de Ordem de Serviço" styleClass="ui-widget">
-					<h:outputLabel value="Bem vindo, #{autenticacaoBean.usuarioLogado.nome}" 
+				<p:panel header="" styleClass="ui-widget">
+					<h:outputLabel value="Bem vindo," 
 						styleClass="ui-widget .ui-widget"/>
-					<p:commandButton value="Sair" styleClass="ui-widget .ui-widget"/>
+					
+					<p:spacer/>
+					
+					<h:outputLabel value=" #{autenticacaoBean.usuarioLogado.nome}" />
+						
+					<p:commandButton value="Sair"  actionListener="#{autenticacaoBean.sair}"
+					 styleClass="ui-widget .ui-widget"/>
 				</p:panel>
 			</h:form>
 			<h:form id="formMenu">
@@ -41,21 +51,20 @@
 
 					<p:submenu label="Configurações">
 						<p:menuitem value="Página Inicial" url="/pages/principal.xhtml" />
-						<p:menuitem value="Sair" />
+						<p:menuitem value="Sair" actionListener="#{autenticacaoBean.sair}"/>
 					</p:submenu>
 
-					<p:submenu label="Cadastros">
-						<p:menuitem value="Cadastro de Usuários" 
+					<p:submenu label="CADASTROS">
+						<p:menuitem value="CADASTRO DE USUÁRIOS" rendered="#{autenticacaoBean.ehadmin()}"
 							url="/pages/usuarios.xhtml" />
-						<p:menuitem value="Cadastro de Responsáveis"
-							url="/pages/responsavel.xhtml" />
-						<p:menuitem value="Cadastro de Itens de O.S."
+						
+						<p:menuitem value="CADASTRO DE RETRANCAS" rendered="#{autenticacaoBean.ehadmin()}"
 							url="/pages/produtoItemOs.xhtml" />
 						
-						<p:menuitem value="Listagem de  O.S. - Editar"
-							url="/pages/ordemservico2.xhtml" />										
+						<p:menuitem value="LISTAGEM DE  O.S."
+							url="/pages/ordemservico.xhtml" />										
 												
-						<p:menuitem value="Cadastro de O.S. - NOVA"
+						<p:menuitem value="CADASTRO DE NOVA O.S." rendered="#{autenticacaoBean.ehadmin()}"
 							url="/pages/novaOs.xhtml" />	
 							
 					</p:submenu>

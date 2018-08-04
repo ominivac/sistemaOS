@@ -17,10 +17,12 @@ import org.omnifaces.util.Messages;
 import br.com.os.dao.OsDAO;
 import br.com.os.dao.ProdutoOsDAO;
 import br.com.os.dao.ResponsavelOsDAO;
+import br.com.os.dao.UsuarioDAO;
 import br.com.os.domain.Item;
 import br.com.os.domain.OS;
 import br.com.os.domain.ProdutoOS;
 import br.com.os.domain.ResponsavelOS;
+import br.com.os.domain.Usuario;
 
 @ManagedBean
 @ViewScoped
@@ -33,6 +35,7 @@ public class OsBean implements Serializable {
 	
 	private List<ProdutoOS> produtosOS;
 	private List<ResponsavelOS> responsaveis;
+	private List<Usuario> usuarios;
 
 	private List<Item> itensOs;
 	
@@ -97,6 +100,15 @@ public class OsBean implements Serializable {
 	public void setResponsaveis(List<ResponsavelOS> responsaveis) {
 		this.responsaveis = responsaveis;
 	}
+	
+	
+	public List<Usuario> getUsuarios() {
+		return usuarios;
+	}
+
+	public void setUsuarios(List<Usuario> usuarios) {
+		this.usuarios = usuarios;
+	}
 
 	public void setItensOs(List<Item> itensOs) {
 		this.itensOs = itensOs;
@@ -133,6 +145,11 @@ public class OsBean implements Serializable {
 	public void listarResponsaveis() {
 		ResponsavelOsDAO rdao = new ResponsavelOsDAO();
 		responsaveis = rdao.listar();
+	}
+	
+	public void listarUsuarios() {
+		UsuarioDAO udao = new UsuarioDAO();
+		usuarios =  udao.listar();
 	}
 	
 	
@@ -307,23 +324,25 @@ public class OsBean implements Serializable {
 	}
 
 	public void calcular() {
+		
 		ordemServico.getValorTotal();
 	}
 
 	public void finalizar() {
-		listarResponsaveis();
+		//listarResponsaveis();
+		listarUsuarios();
 	}
 	
 	public void prepararEdicaoNovo(ActionEvent event) {
 		try {
 			
 			
-			ordemServicoEdicao = (OS) event.getComponent().getAttributes().get("osSelecionada");
+			ordemServico= (OS) event.getComponent().getAttributes().get("osSelecionada");
 			System.out.println("OS Para edição selecionada: " + ordemServicoEdicao);
 			
-			System.out.println(ordemServicoEdicao.getItensOs() );
+			System.out.println(ordemServico.getItensOs() );
 			
-			itensOs = ordemServicoEdicao.getItensOs();
+			itensOs = ordemServico.getItensOs();
 			
 			
 		}catch (RuntimeException e) {
@@ -378,11 +397,14 @@ public class OsBean implements Serializable {
 			
 			if(ordemServico.getCodigo() == null) {
 				//eh uma os nova entao salva
-				osdao.merge(ordemServico, itensOs);
+				osdao.salvar(ordemServico, itensOs);
+				listaOs = osdao.listar();
+				
 				Messages.addGlobalInfo("Nova Ordem de serviço salva com sucesso !");
 			}else {
 				//eh uma os para edicao, entao edita
 				osdao.editar(ordemServico);
+				listaOs = osdao.listar();
 				Messages.addGlobalInfo("Ordem de serviço editada com sucesso !");
 			}
 			
@@ -407,6 +429,7 @@ public class OsBean implements Serializable {
 			}
 
 			osDAO.editar(ordemServico);
+			listaOs = osDAO.listar();
 
 			Messages.addGlobalInfo("Ordem de serviço editada com sucesso !");
 

@@ -16,7 +16,7 @@
 	<!--Ttema do primefaces -->
 	<context-param>
 		<param-name>primefaces.THEME</param-name>
-		<param-value>dark-hive</param-value>
+		<param-value>my-custom-theme</param-value>
 	</context-param>
 
 	<servlet>
@@ -40,7 +40,7 @@
 	</welcome-file-list>
 
 	<session-config>
-		<session-timeout>30</session-timeout>
+		<session-timeout>60</session-timeout>
 	</session-config>
 
 </web-app>
