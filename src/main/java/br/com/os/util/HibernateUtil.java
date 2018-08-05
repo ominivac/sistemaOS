@@ -2,8 +2,6 @@ package br.com.os.util;
 
 import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.HashMap;
-import java.util.Map;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -15,28 +13,12 @@ import org.hibernate.service.ServiceRegistry;
 public class HibernateUtil {
 
 	
-	private static final SessionFactory sessionFactory = buildSessionFactory();
+	private static SessionFactory sessionFactory = null ;// buildSessionFactory();
 
-	
-	private static SessionFactory buildSessionFactory() {
-		Configuration configuration = new Configuration().configure();
-		
-		Map<String,String> jdbcUrlSettings = new HashMap<String, String>();
-		String jdbcDbUrl = System.getenv("JDBC_DATABASE_URL");
-		if (null != jdbcDbUrl) {
-		  jdbcUrlSettings.put("hibernate.connection.url", System.getenv("JDBC_DATABASE_URL"));
-		}
-
-		ServiceRegistry registry = new StandardServiceRegistryBuilder().
-		    configure("hibernate.cfg.xml").
-		    applySettings(jdbcUrlSettings).build();
-		
-		SessionFactory fabrica = configuration.buildSessionFactory(registry);
-    	return fabrica;
-	}
-	
-    private static SessionFactory buildSessionFactory_OLD() {
+    private static SessionFactory buildSessionFactory() {
         try {
+        	
+        	
             Configuration configuration = new Configuration().configure();
         	ServiceRegistry registry = new StandardServiceRegistryBuilder()
         			.applySettings( configuration.getProperties() ).build();
@@ -54,6 +36,7 @@ public class HibernateUtil {
     }
 
     public static SessionFactory getSessionFactory() {
+    	sessionFactory = buildSessionFactory();
         return sessionFactory;
     }
     
