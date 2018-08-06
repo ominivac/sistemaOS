@@ -68,7 +68,7 @@ public class OsDAOTest {
 	
 	
 	@Test
-	//@Ignore
+	@Ignore
 	public void editar() {
 		OS os = new OS();
 		OsDAO osDAO = new OsDAO();
