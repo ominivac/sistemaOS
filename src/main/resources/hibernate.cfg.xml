@@ -6,20 +6,21 @@
     <session-factory>
     
     	<!-- Settings for heroku development -->
-		<!-- 
+		
 		<property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
 		<property name="hibernate.connection.url">jdbc:postgres://hhlwuigvpcgpcm:acdce1d6f83655c976c8e16a434abd6a7ed5176a78547e6aad2d26866f11438d@ec2-54-221-210-97.compute-1.amazonaws.com:5432/dc7kvndr9gdh?sslfactory=org.postgresql.ssl.NonValidatingFactory</property>
 		<property name="hibernate.connection.username">hhlwuigvpcgpcm</property>
 		<property name="hibernate.connection.password">acdce1d6f83655c976c8e16a434abd6a7ed5176a78547e6aad2d26866f11438d</property>
-		 -->
+		 
 		
+    	<!-- 
     	
-    	<!--   Settings for local development --> 
+    	  Settings for local development  
         <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
         <property name="hibernate.connection.url">jdbc:postgresql://localhost/osdb</property>
         <property name="hibernate.connection.username">postgres</property>
         <property name="hibernate.connection.password">postgres</property> 
-        
+        -->
         
         
         <property name="hibernate.connection.pool_size">3</property>
