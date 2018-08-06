@@ -33,6 +33,7 @@ public class ResponsavelOsDAOTest {
 	}
 	
 	@Test
+	@Ignore
 	public void buscarPorCodigo() {
 		ResponsavelOsDAO rdao = new ResponsavelOsDAO();
 		ResponsavelOS responsavelOS =  rdao.buscarPorCodigo(5);

@@ -64,7 +64,7 @@ public class ItemDAOTest {
 	}
 	
 	@Test
-	//@Ignore
+	@Ignore
 	public void buscarPorOsEproduto() {
 		//TESTADO OK
 		int codigoOs = 116;

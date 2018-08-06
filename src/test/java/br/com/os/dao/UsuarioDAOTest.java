@@ -63,7 +63,7 @@ public class UsuarioDAOTest {
 	}
 	
 	@Test
-	//@Ignore
+	@Ignore
 	public void login() {
 		//String  email = "cris.torres@gmail.com";
 		String  email = "robertokbs@gmail.com";
