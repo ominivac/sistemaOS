@@ -1,1 +1,1 @@
-web: java -jar target/depedency/*.jar --port $PORT target/*.war
+//web: java -jar target/depedency/*.jar --port $PORT target/*.war
