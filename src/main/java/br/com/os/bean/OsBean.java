@@ -1,15 +1,25 @@
 package br.com.os.bean;
 
+import java.io.File;
+import java.io.FileInputStream;
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.ExternalContext;
+import javax.faces.context.FacesContext;
 import javax.faces.event.ActionEvent;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletOutputStream;
+import javax.servlet.http.HttpServletResponse;
 
 import org.omnifaces.util.Messages;
 
@@ -23,6 +33,8 @@ import br.com.os.domain.OS;
 import br.com.os.domain.ProdutoOS;
 import br.com.os.domain.ResponsavelOS;
 import br.com.os.domain.Usuario;
+import br.com.os.util.HibernateUtil;
+import net.sf.jasperreports.engine.JasperRunManager;
 
 @ManagedBean
 @ViewScoped
@@ -128,6 +140,50 @@ public class OsBean implements Serializable {
 
 
 	// ------------------------------ metodos ---------------------------------
+	
+	public void gerarRelatorio(ActionEvent evento) {
+		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+		ServletContext context = (ServletContext) externalContext.getContext();
+		String arquivo = context.getRealPath("/reports/relatorio_os_a4.jasper");
+		System.out.println(arquivo);
+
+		OS osImprimir = (OS) evento.getComponent().getAttributes().get("osSelecionada");
+		System.out.println("os para impressao:" + osImprimir);
+		
+		
+		
+		gerarRelatorioWeb(arquivo, osImprimir);
+	}
+	
+	private void gerarRelatorioWeb(String arquivo, OS osImpressao) {
+		ServletOutputStream servletOutputStream = null;
+		FacesContext context = FacesContext.getCurrentInstance();
+		HttpServletResponse response = (HttpServletResponse) context.getExternalContext().getResponse();
+
+		try {
+			servletOutputStream = response.getOutputStream();
+			Connection conexao = HibernateUtil.getConexao();
+			Map<String, Object> parametros = new HashMap<String, Object>();
+			
+			
+			parametros.put("COD_OS", osImpressao.getCodigo() ); 
+			
+			// JasperRunManager.runReportToPdfStream(new FileInputStream(new File(arquivo)),
+			// response.getOutputStream(), parametros, conexao);
+			JasperRunManager.runReportToPdfStream(new FileInputStream(new File(arquivo)), response.getOutputStream(),
+					parametros, conexao);
+
+			response.setContentType("application/pdf");
+			servletOutputStream.flush();
+			servletOutputStream.close();
+			context.renderResponse();
+			context.responseComplete();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	
 	
 	@PostConstruct
 	public void listarTodos() {

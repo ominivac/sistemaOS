@@ -80,7 +80,7 @@ ORDER BY os.data_lancamento DESC]]>
 			<band height="12"/>
 		</groupHeader>
 		<groupFooter>
-			<band height="31"/>
+			<band height="29"/>
 		</groupFooter>
 	</group>
 	<background>
@@ -128,7 +128,7 @@ ORDER BY os.data_lancamento DESC]]>
 					<text><![CDATA[Previsão Entrega]]></text>
 				</staticText>
 				<staticText>
-					<reportElement style="Column header" x="476" y="0" width="78" height="15" uuid="9a738d78-89b3-480c-a1dc-921f32fa2c3b">
+					<reportElement style="Column header" x="560" y="93" width="78" height="15" uuid="9a738d78-89b3-480c-a1dc-921f32fa2c3b">
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="468114a0-d860-4b96-a745-a8348d858408"/>
 					</reportElement>
 					<text><![CDATA[valor_total]]></text>
@@ -254,7 +254,7 @@ ORDER BY os.data_lancamento DESC]]>
 					<textFieldExpression><![CDATA[$F{data_previsao}]]></textFieldExpression>
 				</textField>
 				<textField>
-					<reportElement style="Detail" x="470" y="0" width="78" height="15" uuid="89a76d33-aa02-465a-96af-7421751a73e6">
+					<reportElement style="Detail" x="660" y="60" width="78" height="15" uuid="89a76d33-aa02-465a-96af-7421751a73e6">
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="468114a0-d860-4b96-a745-a8348d858408"/>
 					</reportElement>
 					<textFieldExpression><![CDATA[$F{valor_total}]]></textFieldExpression>

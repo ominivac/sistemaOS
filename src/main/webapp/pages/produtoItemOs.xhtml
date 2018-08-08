@@ -20,13 +20,18 @@
 					
 					<f:facet name="footer">
 							
-							<p:commandButton value="Novo" icon="ui-icon-new"
+							<p:commandButton value="Novo" icon="ui-icon-plus"
 								actionListener="#{produtoOSBean2.novo()}"
 								update=":formCadastroProduto:pnlFormCadProduto"
-								oncomplete="PF('dlgProduto').show();"/>
+								oncomplete="PF('dlgProduto').show();">
+								
+								<f:actionListener type="org.omnifaces.eventlistener.ResetInputAjaxActionListener"/>
+						
+							</p:commandButton>
 								
 							<p:commandButton value="Imprimir" icon="ui-icon-print" ajax="false"
-								actionListener="#{produtoOSBean2.gerarRelatorio}"/>	
+								actionListener="#{produtoOSBean2.gerarRelatorio}"
+								target = "_blank"/>	
 								
 					</f:facet>
 					

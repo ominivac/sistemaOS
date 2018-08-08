@@ -56,6 +56,14 @@
 						<f:actionListener type="org.omnifaces.eventlistener.ResetInputAjaxActionListener"/>
 
 					</p:commandButton>
+					
+					<p:commandButton icon="ui-icon-print" Value="Imprimor" ajax="false"
+						actionListener="#{osBean.gerarRelatorio()}" 
+						target = "_blank">
+						
+						<f:attribute name="osSelecionada" value="#{os}"/>
+					
+					</p:commandButton>
 
 				</p:column>
 
