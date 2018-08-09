@@ -143,6 +143,7 @@ public class ProdutoOSBean2 implements Serializable {
 			servletOutputStream.close();
 			context.renderResponse();
 			context.responseComplete();
+			System.out.println("entrou gerar rel na web");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

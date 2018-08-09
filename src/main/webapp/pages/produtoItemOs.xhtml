@@ -13,7 +13,7 @@
 		<f:viewAction action="#{produtoOSBean2.listar}"></f:viewAction>
 	</f:metadata>
 	
-		<h:form id="formListagem">
+		<h:form id="formListagem" target="_blank">
 			<p:panel header="Itens de OS - Listagem">
 				<p:dataTable id="tabela" emptyMessage="Nenhum registro encontrado."
 					value="#{produtoOSBean2.produtosOS}" var="produto" paginator="true">
@@ -29,7 +29,8 @@
 						
 							</p:commandButton>
 								
-							<p:commandButton value="Imprimir" icon="ui-icon-print" ajax="false"
+							<p:commandButton value="Imprimir" icon="ui-icon-print" 
+								ajax="false"
 								actionListener="#{produtoOSBean2.gerarRelatorio}"
 								target = "_blank"/>	
 								

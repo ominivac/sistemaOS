@@ -10,7 +10,7 @@
 	<ui:define name="conteudo">
 
 
-		<h:form id="form-consulta" style="margin:auto;margin-left:2%;" >
+		<h:form id="form-consulta" target = "_blank" style="margin:auto;margin-left:2%;" >
 			<p:dataTable id="dataTable-registros" var="os"
 				value="#{osBean.listaOs}" rows="5" paginator="true"
 				paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
@@ -27,25 +27,25 @@
 					<h:outputText value="#{os.codigo}" />
 				</p:column>
 
-				<p:column headerText="Responsável" filterBy="#{os.usuario.nome}" style="width: 250px">
+				<p:column headerText="Responsável" filterBy="#{os.usuario.nome}" style="width: 300px">
 					<h:outputText value="#{os.usuario.nome}" />
 				</p:column>
 
-				<p:column headerText="Data Lançamento" style="width: 50px">
+				<p:column headerText="Data Lançamento" >
 					<h:outputText value="#{os.dataLancamento}">
 						<f:convertDateTime pattern="dd/MM/yyyy" locale="pt_BR"
 							timeZone="America/Sao_Paulo" />
 					</h:outputText>
 				</p:column>
 				
-				<p:column headerText="Data previsão entrega" style="width: 50px">
+				<p:column headerText="Data previsão entrega" >
 					<h:outputText value="#{os.dataPrevisaoEntrega}">
 						<f:convertDateTime pattern="dd/MM/yyyy" locale="pt_BR"
 							timeZone="America/Sao_Paulo" />
 					</h:outputText>
 				</p:column>
 				
-				<p:column headerText="" style="width:25px;">
+				<p:column styleClass="colunas" headerText="Opções" width="25%">
 
 					<p:commandButton icon="ui-icon-pencil" value="Editar" 
 						rendered="#{autenticacaoBean.ehadmin()}"
@@ -57,8 +57,10 @@
 
 					</p:commandButton>
 					
-					<p:commandButton icon="ui-icon-print" Value="Imprimor" ajax="false"
-						actionListener="#{osBean.gerarRelatorio()}" 
+					<p:commandButton  value="Imprimir" icon="ui-icon-print" 
+						rendered="true"
+						ajax="false"
+						actionListener="#{osBean.gerarRelatorio}" 
 						target = "_blank">
 						
 						<f:attribute name="osSelecionada" value="#{os}"/>
@@ -67,8 +69,7 @@
 
 				</p:column>
 
-				<p:column headerText="" style="width:25px;">
-				</p:column>
+				
 
 			</p:dataTable>
 		</h:form>

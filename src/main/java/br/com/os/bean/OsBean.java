@@ -155,7 +155,7 @@ public class OsBean implements Serializable {
 		gerarRelatorioWeb(arquivo, osImprimir);
 	}
 	
-	private void gerarRelatorioWeb(String arquivo, OS osImpressao) {
+	private void gerarRelatorioWeb(String arquivo, OS osToPrint) {
 		ServletOutputStream servletOutputStream = null;
 		FacesContext context = FacesContext.getCurrentInstance();
 		HttpServletResponse response = (HttpServletResponse) context.getExternalContext().getResponse();
@@ -164,10 +164,11 @@ public class OsBean implements Serializable {
 			servletOutputStream = response.getOutputStream();
 			Connection conexao = HibernateUtil.getConexao();
 			Map<String, Object> parametros = new HashMap<String, Object>();
+			System.out.println(osToPrint.getCodigo() );
 			
+			parametros.put("cod_os", osToPrint.getCodigo() );
 			
-			parametros.put("COD_OS", osImpressao.getCodigo() ); 
-			
+
 			// JasperRunManager.runReportToPdfStream(new FileInputStream(new File(arquivo)),
 			// response.getOutputStream(), parametros, conexao);
 			JasperRunManager.runReportToPdfStream(new FileInputStream(new File(arquivo)), response.getOutputStream(),
@@ -178,6 +179,7 @@ public class OsBean implements Serializable {
 			servletOutputStream.close();
 			context.renderResponse();
 			context.responseComplete();
+			System.out.println("entrou gerar rel na web");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
