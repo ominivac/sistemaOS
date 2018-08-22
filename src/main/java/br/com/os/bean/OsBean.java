@@ -33,6 +33,7 @@ import br.com.os.domain.OS;
 import br.com.os.domain.ProdutoOS;
 import br.com.os.domain.ResponsavelOS;
 import br.com.os.domain.Usuario;
+import br.com.os.filter.OSFilter;
 import br.com.os.util.HibernateUtil;
 import net.sf.jasperreports.engine.JasperRunManager;
 
@@ -51,10 +52,20 @@ public class OsBean implements Serializable {
 
 	private List<Item> itensOs;
 	
+	private List<OS> listaOsFiltradas;
+	private OSFilter osfilter; 
+	
 	private ProdutoOS produtoOSselecionado;
 	
 	
-
+	public OSFilter getOsfilter() {
+		return osfilter;
+	}
+	
+	public void setOsfilter(OSFilter osfilter) {
+		this.osfilter = osfilter;
+	}
+	
 	public Item getItemCrudEdit() {
 		return itemCrudEdit;
 	}
@@ -70,6 +81,15 @@ public class OsBean implements Serializable {
 	public void setProdutoOSselecionado(ProdutoOS produtoOSselecionado) {
 		this.produtoOSselecionado = produtoOSselecionado;
 	}
+	
+	public List<OS> getListaOsFiltradas() {
+		return listaOsFiltradas;
+	}
+	
+	public void setListaOsFiltradas(List<OS> listaOsFiltradas) {
+		this.listaOsFiltradas = listaOsFiltradas;
+	}
+	
 
 	private List<OS> listaOs; // para listagem da tabela
 	private Item itemCrudEdit; 
@@ -192,6 +212,25 @@ public class OsBean implements Serializable {
 		listarProdutos();
 		//listarResponsaveis();
 		listarOs();
+		
+	}
+	
+	
+	public void listarPorIntervaloData() {
+		System.out.println("entrou no metodo");
+		try {
+			OsDAO osdao = new OsDAO();
+			String dinicial = "";
+			String dfinal = "";
+			
+			String data_inicial = "1/1/2018";
+			String data_final = "31/12/2018";
+			
+			listaOsFiltradas = osdao.buscarEntreDatas(data_inicial, data_final);
+		}catch (Exception e) {
+			Messages.addGlobalError("erro pesquisar por data !");
+			e.printStackTrace();
+		}
 		
 	}
 

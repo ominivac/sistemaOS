@@ -1,8 +1,12 @@
 package br.com.os.dao;
 
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.List;
 
 import org.junit.Ignore;
@@ -13,6 +17,7 @@ import br.com.os.domain.OS;
 import br.com.os.domain.ProdutoOS;
 import br.com.os.domain.ResponsavelOS;
 import br.com.os.domain.Usuario;
+import br.com.os.filter.OSFilter;
 
 public class OsDAOTest {
 
@@ -186,6 +191,49 @@ public class OsDAOTest {
 		System.out.println(os);
 	}
 	
+	@Test
+	public void buscarPorIntervaloData() throws ParseException {
+		SimpleDateFormat formato = new  SimpleDateFormat("dd/MM/YYYY");
+		
+		
+		
+		String data_inicial = "1/1/2018";
+		String data_final = "31/12/2018";
+		
+		
+		Date  startDate = (Date)formato.parse(data_inicial);
+		//System.out.println(startDate);
+		Date  endDate = (Date)formato.parse(data_final);
+	//	System.out.println(endDate);
+		
+		GregorianCalendar cinicial = new GregorianCalendar();
+		cinicial.set(2018, GregorianCalendar.JANUARY, 1);
+		
+		GregorianCalendar cfinal = new GregorianCalendar();
+		cfinal.set(2018, GregorianCalendar.AUGUST, 20);
+		
+		
+		
+		Date d1 = cinicial.getTime();
+		Date d2 = cfinal.getTime();
+		
+		
+		System.out.println(d1+" " + d2);
+		
+		
+		OsDAO osdao = new OsDAO();
+		String data1 = formato.format(d1);
+		String data2 = formato.format(d2);
+		
+		List<OS> listaos = osdao.buscarEntreDatas(data1, data2);
+		
+		for(OS os : listaos) {
+			System.out.println(os);
+		}
+		
+		//System.out.println(data1 + " "+ data2);
+		
+	}
 	
 	
 	
