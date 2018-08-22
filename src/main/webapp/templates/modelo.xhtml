@@ -18,7 +18,7 @@
 	<script  src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8/jquery-ui.min.js"></script>
 </h:head>
 <h:body>
-	<p:panel header="Sistema de Ordem de Serviço - Versão 1.0" styleClass="ui-widget">
+	<p:panel header="Sistema de Ordem de Serviço - Versão 1.1.3" styleClass="ui-widget">
 		<p:graphicImage library="images" name="LogoItaPro_2.png" width="200" />
 	</p:panel>
 
@@ -65,11 +65,10 @@
 							url="/pages/ordemservico.xhtml" />										
 												
 						<p:menuitem value="CADASTRO DE NOVA O.S." rendered="#{autenticacaoBean.ehadmin()}"
-							url="/pages/novaOs.xhtml" />	
-							
+							url="/pages/novaOs.xhtml" />
+						
 						<p:menuitem value="FECHAMENTO DO MÊS." rendered="#{autenticacaoBean.ehadmin()}"
-							url="/pages/fechamentoperiodo.xhtml" />	
-							
+							url="/pages/fechamentoperiodo.xhtml" />		
 							
 					</p:submenu>
 

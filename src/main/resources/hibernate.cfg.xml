@@ -3,7 +3,7 @@
       "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
       "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
 	<hibernate-configuration>
-	<session-factory>
+	<session-factory> 
 
 		<!-- Settings for heroku development -->
 		<!-- 
@@ -11,26 +11,25 @@
 		<property name="hibernate.connection.url">jdbc:postgres://xtsndvncmgtvnn:2143afb0e68ce73d6bf49a20bafee2baf16a15e249fb33a40ed624799a7e205a@ec2-54-83-13-119.compute-1.amazonaws.com:5432/dcg7sb99qmgg60</property> 
 		<property name="hibernate.connection.username">xtsndvncmgtvnn</property> 
 		<property name="hibernate.connection.password">2143afb0e68ce73d6bf49a20bafee2baf16a15e249fb33a40ed624799a7e205a</property> 
-		-->
+		 -->
 
 		<!-- Settings for Jelastic  -->
 		
-		<!--  
+		
 		<property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
 		<property name="hibernate.connection.url">jdbc:postgresql://node169966-itaproos.jelasticlw.com.br/osdb</property>
 		<property name="hibernate.connection.username">webadmin</property>
 		<property name="hibernate.connection.password">NZVsrt91146</property>
-		  -->
-
+		 
+		
+		
 		<!-- Settings for local development -->
-		
-		
+		<!-- 
 		<property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
 		<property name="hibernate.connection.url">jdbc:postgresql://localhost/osdb</property>
 		<property name="hibernate.connection.username">postgres</property>
 		<property name="hibernate.connection.password">postgres</property>
-		 
-		
+		-->
 		
 
 

@@ -4,7 +4,6 @@ package br.com.os.dao;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
@@ -231,7 +230,7 @@ public class OsDAOTest {
 			System.out.println(os);
 		}
 		
-		//System.out.println(data1 + " "+ data2);
+		System.out.println(data1 + " "+ data2);
 		
 	}
 	

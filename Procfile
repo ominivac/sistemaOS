@@ -1,1 +1,1 @@
-web:    java $JAVA_OPTS -jar target/dependency/webapp-runner.jar --port $PORT target/*.war
+web: java JAVA_OPTS -jar target/dependency/webapp-runner.jar --port $PORT target/SistemaOs-1.0.1.war

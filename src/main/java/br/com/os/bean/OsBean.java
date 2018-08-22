@@ -65,7 +65,7 @@ public class OsBean implements Serializable {
 	public void setOsfilter(OSFilter osfilter) {
 		this.osfilter = osfilter;
 	}
-	
+
 	public Item getItemCrudEdit() {
 		return itemCrudEdit;
 	}
@@ -227,6 +227,7 @@ public class OsBean implements Serializable {
 			String data_final = "31/12/2018";
 			
 			listaOsFiltradas = osdao.buscarEntreDatas(data_inicial, data_final);
+			
 		}catch (Exception e) {
 			Messages.addGlobalError("erro pesquisar por data !");
 			e.printStackTrace();

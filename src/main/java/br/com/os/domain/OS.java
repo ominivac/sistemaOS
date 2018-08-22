@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -30,7 +31,7 @@ import br.com.os.converter.SampleEntity;
 	@NamedQuery(name="OS.listar", query= "SELECT os FROM OS os"),
 	@NamedQuery(name="OS.listarByDateDesc", query= "SELECT os FROM OS os ORDER BY os.dataLancamento DESC"),
 	@NamedQuery(name="OS.buscarPorCodigo", query= "SELECT os FROM OS os WHERE os.codigoOs = :codigo" ),
-	@NamedQuery(name="OS.buscarEntreDatas", query= "SELECT os FROM OS os WHERE os.dataLancamento between :data_inicial AND :data_final" )
+	@NamedQuery(name="OS.buscarEntreDatas", query= "SELECT os FROM OS os WHERE os.dataLancamento BETWEEN :data_inicial AND :data_final" )
 })
 public class OS implements Serializable,SampleEntity{
 
@@ -52,8 +53,7 @@ public class OS implements Serializable,SampleEntity{
 	
 	
 	@Temporal(TemporalType.DATE)
-	//@DateTimeFormat(pattern = "dd-MMM-yyyy")
-	@Column(name="data_previsao", nullable = true )
+	@Column(name="data_previsao", nullable = true)
 	private Date dataPrevisaoEntrega;
 	
 	@Column(name = "valor_total", precision = 8, scale = 2)
