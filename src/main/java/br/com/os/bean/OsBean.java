@@ -5,6 +5,7 @@ import java.io.FileInputStream;
 import java.io.Serializable;
 import java.math.BigDecimal;
 import java.sql.Connection;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -22,7 +23,7 @@ import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletResponse;
 
 import org.omnifaces.util.Messages;
-
+import org.primefaces.event.SelectEvent;
 
 import br.com.os.dao.OsDAO;
 import br.com.os.dao.ProdutoOsDAO;
@@ -55,6 +56,29 @@ public class OsBean implements Serializable {
 	private List<OS> listaOsFiltradas;
 	private OSFilter osfilter; 
 	
+	private Date dataInicialPesquisa;
+	private Date dataFinalPesquisa;
+	
+	
+	
+	
+	public Date getDataInicialPesquisa() {
+		return dataInicialPesquisa;
+	}
+
+	public void setDataInicialPesquisa(Date dataInicialPesquisa) {
+		this.dataInicialPesquisa = dataInicialPesquisa;
+	}
+
+	public Date getDataFinalPesquisa() {
+		return dataFinalPesquisa;
+	}
+
+	public void setDataFinalPesquisa(Date dataFinalPesquisa) {
+		this.dataFinalPesquisa = dataFinalPesquisa;
+	}
+
+
 	private ProdutoOS produtoOSselecionado;
 	
 	
@@ -212,21 +236,38 @@ public class OsBean implements Serializable {
 		listarProdutos();
 		//listarResponsaveis();
 		listarOs();
+		osfilter = new OSFilter();
+		dataInicialPesquisa = new Date();
+		dataFinalPesquisa = new Date();
 		
+	}
+	
+	public void handleDateSelect(SelectEvent event) {
+		 System.out.println((Date)event.getObject() );
 	}
 	
 	
 	public void listarPorIntervaloData() {
-		System.out.println("entrou no metodo");
+		//System.out.println("entrou no metodo");
 		try {
 			OsDAO osdao = new OsDAO();
-			String dinicial = "";
-			String dfinal = "";
 			
-			String data_inicial = "1/1/2018";
-			String data_final = "31/12/2018";
 			
-			listaOsFiltradas = osdao.buscarEntreDatas(data_inicial, data_final);
+			//String data_inicial = "1/1/2018";
+			//String data_final = "31/12/2018";
+			if(osfilter != null) {
+				String data_inicial = dataInicialPesquisa.toString();
+				String data_final = dataFinalPesquisa.toString();
+				
+				SimpleDateFormat formatado = new SimpleDateFormat("dd/MM/yyyy");
+				
+				String dataFormatIni = formatado.format(dataInicialPesquisa);
+				String dataFormatFim = formatado.format(dataFinalPesquisa);
+				
+				System.out.println(dataFormatIni + " " + dataFormatFim);
+				
+				listaOsFiltradas = osdao.buscarEntreDatas(dataFormatIni, dataFormatFim);
+			}
 			
 		}catch (Exception e) {
 			Messages.addGlobalError("erro pesquisar por data !");

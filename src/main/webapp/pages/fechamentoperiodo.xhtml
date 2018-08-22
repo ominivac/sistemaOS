@@ -13,10 +13,16 @@
 				<p:panelGrid columns="2">
 
 					<p:outputLabel value="Data Inicial:" />
-					<p:calendar value="#{osBean.osfilter.dataInicial}" />
+					
+					<p:calendar value="#{osBean.dataInicialPesquisa}" >
+						<p:ajax event="dateSelect" listener="#{osBean.handleDateSelect}"/>
+					</p:calendar>
 
 					<p:outputLabel value="Data Final:" />
-					<p:calendar value="#{osBean.osfilter.dataInicial}" />
+					
+					<p:calendar value="#{osBean.dataFinalPesquisa}" >
+						<p:ajax event="dateSelect" listener="#{osBean.handleDateSelect}"/>
+					</p:calendar>
 
 					<p:commandButton value="Pesquisar"
 						actionListener="#{osBean.listarPorIntervaloData}"
