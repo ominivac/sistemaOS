@@ -47,7 +47,7 @@ public class OS implements Serializable,SampleEntity{
 	private List<Item> itensOs;
 
 	
-	@Temporal(TemporalType.TIMESTAMP)
+	@Temporal(TemporalType.DATE)
 	@Column(name="data_lancamento", nullable = true)
 	private Date dataLancamento;
 	
@@ -70,6 +70,9 @@ public class OS implements Serializable,SampleEntity{
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="responsavel_cod", referencedColumnName="cod_responsavel",columnDefinition="integer", nullable = true)
 	private ResponsavelOS responsavelOS;
+	
+	@Column(name="aberta", nullable = true)
+	private Boolean aberta;
 
 	
 	public Integer getCodigo() {
@@ -84,6 +87,15 @@ public class OS implements Serializable,SampleEntity{
 		return itensOs;
 	}
 	
+	
+	public Boolean getAberta() {
+		return aberta;
+	}
+
+	public void setAberta(Boolean aberta) {
+		this.aberta = aberta;
+	}
+
 	public void setItensOs(List<Item> itens) {
 		itensOs = new ArrayList<Item>();
 		itensOs = itens;

@@ -51,6 +51,9 @@ public class Item implements Serializable {
 	@Column(name="quantidade_horas", nullable = true)
 	private Integer quantidadeHoras;
 	
+	@Column(name="aberto", nullable = true)
+	private Boolean aberto;
+	
 	
 	@Column(name="valor_parcial", nullable = false, precision = 8, scale = 2)
 	private BigDecimal valorParcial;
@@ -80,6 +83,15 @@ public class Item implements Serializable {
 	
 	public void setQuantidadeHoras(Integer quantidadeHoras) {
 		this.quantidadeHoras = quantidadeHoras;
+	}
+	
+	
+	public Boolean getAberto() {
+		return aberto;
+	}
+
+	public void setAberto(Boolean aberto) {
+		this.aberto = aberto;
 	}
 
 	public BigDecimal getValorParcial() {
@@ -142,6 +154,8 @@ public class Item implements Serializable {
 			return false;
 		return true;
 	}
+
+	
 
 	
 

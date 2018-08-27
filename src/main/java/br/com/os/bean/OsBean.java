@@ -309,6 +309,7 @@ public class OsBean implements Serializable {
 		ordemServico = new OS();
 		ordemServico.setValorTotal(new BigDecimal("0.00"));
 		ordemServico.setDataLancamento(new Date());
+		ordemServico.setAberta(true);
 		
 		//ResponsavelOS responsavel = new ResponsavelOS();
 		//ordemServico.setResponsavelOS(responsavel);
@@ -330,6 +331,7 @@ public class OsBean implements Serializable {
 		
 		itemCrudEdit.setQuantidadeHoras(0);
 		itemCrudEdit.setQuantidade(0);
+		itemCrudEdit.setAberto(true);
 		
 		itemCrudEdit.setProdutoOS(produtoOSselecionado);
 		

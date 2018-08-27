@@ -18,9 +18,12 @@
 						<p:outputLabel value="Código:" />
 						<h:outputText value="#{osBeanEditar.osEditar.codigo}" />
 						
+						<p:outputLabel value="Aberta? " />
+						<p:selectBooleanCheckbox value="#{osBeanEditar.ordemServico.aberta}"/>
+						
 						<p:outputLabel value="Data Lançamento:" />
 						<p:outputLabel value="#{osBeanEditar.osEditar.dataLancamento}">
-							<f:convertDateTime pattern="dd/MM/yyyy HH:mm" locale="pt_BR"
+							<f:convertDateTime pattern="dd/MM/yyyy" locale="pt_BR"
 								timeZone="America/Sao_Paulo" />
 						</p:outputLabel>
 

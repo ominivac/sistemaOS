@@ -265,11 +265,14 @@
 						value="#{osBean.ordemServico.valorTotal}">
 						<f:convertNumber locale="pt_BR" minFractionDigits="2" />
 					</p:outputLabel>
+					
+					<p:outputLabel value="Aberta? " />
+					<p:selectBooleanCheckbox value="#{osBean.ordemServico.aberta}"/>
 
 					<p:outputLabel value="Data Lançamento:" />
 					<p:calendar value="#{osBean.ordemServico.dataLancamento}"
-						pattern="dd/MM/yyyy HH:mm">
-						<f:convertDateTime pattern="dd/MM/yyyy HH:mm" locale="pt_BR"
+						pattern="dd/MM/yyyy">
+						<f:convertDateTime pattern="dd/MM/yyyy" locale="pt_BR"
 							timeZone="America/Sao_Paulo" />
 					</p:calendar>
 
