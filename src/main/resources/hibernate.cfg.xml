@@ -15,21 +15,21 @@
 
 		<!-- Settings for Jelastic  -->
 		
-		<!-- 
+		
 		<property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
 		<property name="hibernate.connection.url">jdbc:postgresql://node169966-itaproos.jelasticlw.com.br/osdb</property>
 		<property name="hibernate.connection.username">webadmin</property>
 		<property name="hibernate.connection.password">NZVsrt91146</property>
-		 -->
+		 
 		
 		
 		<!-- Settings for local development -->
-		
+		<!-- 
 		<property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
 		<property name="hibernate.connection.url">jdbc:postgresql://localhost/osdb</property>
 		<property name="hibernate.connection.username">postgres</property>
 		<property name="hibernate.connection.password">postgres</property>
-		
+		-->
 		
 
 
