@@ -6,15 +6,23 @@
 	<session-factory> 
 
 		<!-- Settings for heroku development -->
-		
+		<!-- 
 		<property name="hibernate.connection.driver_class">org.postgresql.Driver</property> 
 		<property name="hibernate.connection.url">jdbc:postgres://xtsndvncmgtvnn:2143afb0e68ce73d6bf49a20bafee2baf16a15e249fb33a40ed624799a7e205a@ec2-54-83-13-119.compute-1.amazonaws.com:5432/dcg7sb99qmgg60</property> 
 		<property name="hibernate.connection.username">xtsndvncmgtvnn</property> 
 		<property name="hibernate.connection.password">2143afb0e68ce73d6bf49a20bafee2baf16a15e249fb33a40ed624799a7e205a</property> 
+		 -->
+		
+		
+		<!-- Settings for heroku development 2-->
+		
+		<property name="hibernate.connection.driver_class">org.postgresql.Driver</property> 
+		<property name="hibernate.connection.url">jdbc:postgres://wpaoumoipqfntq:a0e3b0b523f949f1fee8a9062d7e6ef8bc1a20406a31eadc269449ef423bfff1@ec2-50-16-196-57.compute-1.amazonaws.com:5432/dba230siusstoo</property> 
+		<property name="hibernate.connection.username">wpaoumoipqfntq</property> 
+		<property name="hibernate.connection.password">a0e3b0b523f949f1fee8a9062d7e6ef8bc1a20406a31eadc269449ef423bfff1</property>
 		
 
 		<!-- Settings for Jelastic  -->
-		
 		<!-- 
 		<property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
 		<property name="hibernate.connection.url">jdbc:postgresql://node169966-itaproos.jelasticlw.com.br/osdb</property>
