@@ -1,0 +1,357 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorio_os_entre_datas_a4_Landscape" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="0478c934-505c-4253-a4da-a84fc4ae20ed">
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="295"/>
+	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="695"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="os_adapter"/>
+	<parameter name="DATA_INICIAL" class="java.sql.Timestamp"/>
+	<parameter name="DATA_FINAL" class="java.sql.Timestamp"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT os.cod_os AS num_os,
+	os.data_previsao,
+	SUM ( item.quantidade_horas) AS qdte_horas,
+	item.valor_parcial,
+	os.valor_total,
+	produto_os.descricao
+FROM os
+	JOIN item ON 
+	 item.os_cod = os.cod_os 
+	INNER JOIN produto_os ON 
+	 produto_os.cod_produto = item.produto_cod 
+WHERE 
+	 os.data_previsao >= $P{DATA_INICIAL} 
+	 AND os.data_previsao <= $P{DATA_FINAL} 
+GROUP BY os.cod_os,
+	produto_os.descricao,
+	item.valor_parcial]]>
+	</queryString>
+	<field name="num_os" class="java.lang.Integer">
+		<property name="com.jaspersoft.studio.field.label" value="num_os"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="os"/>
+	</field>
+	<field name="data_previsao" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.label" value="data_previsao"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="os"/>
+	</field>
+	<field name="qdte_horas" class="java.lang.Long">
+		<property name="com.jaspersoft.studio.field.label" value="qdte_horas"/>
+	</field>
+	<field name="valor_parcial" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="valor_parcial"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="item"/>
+	</field>
+	<field name="valor_total" class="java.math.BigDecimal">
+		<property name="com.jaspersoft.studio.field.label" value="valor_total"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="os"/>
+	</field>
+	<field name="descricao" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="descricao"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="produto_os"/>
+	</field>
+	<sortField name="num_os" order="Descending"/>
+	<variable name="Total_Geral" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{valor_total}]]></variableExpression>
+	</variable>
+	<variable name="Total_horas" class="java.lang.Integer" calculation="Sum">
+		<variableExpression><![CDATA[$F{qdte_horas}]]></variableExpression>
+	</variable>
+	<group name="num_os">
+		<groupExpression><![CDATA[$F{num_os}]]></groupExpression>
+		<groupFooter>
+			<band height="18">
+				<staticText>
+					<reportElement mode="Opaque" x="270" y="1" width="88" height="16" backcolor="#C5E0E0" uuid="30960dda-bcb1-4877-ac12-b390b360d304">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="e8703c4f-ec5b-456d-92e8-112491ff33c4"/>
+					</reportElement>
+					<box>
+						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center"/>
+					<text><![CDATA[Total :]]></text>
+				</staticText>
+				<textField pattern="¤ #,##0.##;¤-#,##0.##">
+					<reportElement x="358" y="1" width="77" height="16" uuid="6780ecd6-8fab-4e76-a4af-c21cfcb7d253">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="93c7725a-b95b-47f4-a656-51907ca7cf48"/>
+						<property name="com.jaspersoft.studio.unit.width" value="px"/>
+					</reportElement>
+					<box padding="0">
+						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Left">
+						<font isBold="true"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{valor_total}]]></textFieldExpression>
+				</textField>
+			</band>
+		</groupFooter>
+	</group>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="110" splitType="Stretch">
+			<staticText>
+				<reportElement x="200" y="19" width="240" height="20" uuid="413d7564-d808-4177-87e5-4d32257f13c9"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[ ORDEM DE SERVIÇO - CONTRATO 2018 / 094 ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="160" y="44" width="310" height="20" uuid="3c7fe2ed-bf4b-4ece-b40d-5ddb5d6b1a86"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[CLIENTE: BANCO DO NORDESTE DO BRASIL S/A]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="171" y="67" width="310" height="20" uuid="09551a47-5e71-4670-b485-d474f708631e"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<text><![CDATA[Av. Paranjana, 5.700 - Fortaleza - Ceará]]></text>
+			</staticText>
+			<frame>
+				<reportElement x="20" y="5" width="759" height="100" uuid="4e39ed68-2cf6-49b8-9a0a-24b1a99daeb5"/>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<image>
+					<reportElement x="1" y="1" width="145" height="86" uuid="7fd1f76f-6420-4f14-b225-4d7613ca4028"/>
+					<imageExpression><![CDATA["src/main/webapp/resources/images/LogoItaPro_2.png"]]></imageExpression>
+				</image>
+				<rectangle>
+					<reportElement x="650" y="1" width="109" height="50" uuid="6856c127-d8da-4492-93e4-6cd24c75a265"/>
+				</rectangle>
+				<staticText>
+					<reportElement mode="Opaque" x="650" y="0" width="109" height="20" backcolor="#C5E0E0" uuid="03acb76c-00b3-45c5-bb3f-5263882f0e1c"/>
+					<box>
+						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Solicitante]]></text>
+				</staticText>
+				<textField>
+					<reportElement x="649" y="25" width="109" height="26" uuid="9a303538-61ce-4813-9a2e-a165980e5a96"/>
+					<textElement textAlignment="Center"/>
+					<textFieldExpression><![CDATA["Audiovisual do Banco do Nordeste"]]></textFieldExpression>
+				</textField>
+			</frame>
+		</band>
+	</title>
+	<pageHeader>
+		<band height="49">
+			<staticText>
+				<reportElement x="20" y="0" width="240" height="20" uuid="a9a0380e-b2b4-4554-a9e0-b41b4e8ccc54"/>
+				<text><![CDATA[PRESTAÇÃO DE CONTAS - CONTRATO 2018 / 094  ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="20" y="23" width="434" height="20" uuid="04fbfbf2-6dc3-4cb4-a9d7-854491287b62"/>
+				<text><![CDATA[CLIENTE: BANCO DO NORDESTE DO BRASIL S/A   -   Av. Paranjana, 5.700 - Fortaleza - Ceará]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="265" y="1" width="240" height="20" uuid="0f7208db-d709-459f-812d-dfdbf998d11d"/>
+				<text><![CDATA[PERÍODO 19/07/2018 A 18/08/2018]]></text>
+			</staticText>
+		</band>
+	</pageHeader>
+	<columnHeader>
+		<band height="20" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Opaque" x="20" y="1" width="90" height="16" backcolor="#C5E0E0" uuid="d5d186b8-fe4b-40b1-adb6-3f2933a8c95c">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="db34d4cf-f9b4-48af-88e1-3c13237b19a3"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement>
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Nº da O.S.]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="110" y="1" width="161" height="16" backcolor="#C5E0E0" uuid="fa6745be-7fde-4475-bd19-e69d5687c5c4">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="4dbd8155-3455-4846-a364-311b4fdf3072"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Dt. da Entrega]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="270" y="1" width="88" height="16" backcolor="#C5E0E0" uuid="e7c3fb24-920f-46b2-8a2f-8a3a282a8ce8">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a905388d-0808-435c-a2d0-3821665ca1ad"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[HORAS]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="358" y="1" width="77" height="16" backcolor="#C5E0E0" uuid="91f24983-588a-48b4-aaa2-cdd892ed740f">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="93c7725a-b95b-47f4-a656-51907ca7cf48"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Valor Parcial]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Opaque" x="435" y="1" width="343" height="16" backcolor="#C5E0E0" uuid="2687a8e0-dd29-4de8-a211-238992cd5e1b">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="e8703c4f-ec5b-456d-92e8-112491ff33c4"/>
+				</reportElement>
+				<box>
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="9"/>
+				</textElement>
+				<text><![CDATA[Retranca]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="19" splitType="Stretch">
+			<property name="com.jaspersoft.studio.unit.height" value="px"/>
+			<textField>
+				<reportElement x="20" y="-1" width="90" height="16" uuid="3f528a70-4195-4cef-920e-5d8c42d8b83f">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="db34d4cf-f9b4-48af-88e1-3c13237b19a3"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box padding="0">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{num_os}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="110" y="-1" width="160" height="16" uuid="ed06b31a-a80e-46fd-82fb-0ddf6c5d8c85">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="4dbd8155-3455-4846-a364-311b4fdf3072"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box padding="0">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{data_previsao}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="270" y="-1" width="88" height="16" uuid="6e5dc33b-023b-400c-8891-dd5990beefcc">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="a905388d-0808-435c-a2d0-3821665ca1ad"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box padding="0">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{qdte_horas}]]></textFieldExpression>
+			</textField>
+			<textField pattern="¤ #,##0.##;¤-#,##0.##">
+				<reportElement x="358" y="-1" width="77" height="16" uuid="c4bcdd73-c926-4e51-80bd-2efba53191a3">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="93c7725a-b95b-47f4-a656-51907ca7cf48"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box padding="0">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Left">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{valor_parcial}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="435" y="-1" width="344" height="16" uuid="69b47ba5-f67b-413c-9b5a-dc38e55d5bae">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="e8703c4f-ec5b-456d-92e8-112491ff33c4"/>
+					<property name="com.jaspersoft.studio.unit.height" value="px"/>
+				</reportElement>
+				<box padding="0">
+					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textElement textAlignment="Center">
+					<font size="9"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{descricao}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<summary>
+		<band height="35">
+			<staticText>
+				<reportElement x="166" y="0" width="100" height="18" uuid="5daa2290-844f-4abd-85a7-45af7ceae067"/>
+				<text><![CDATA[Total do mês]]></text>
+			</staticText>
+			<textField pattern="¤ #,##0.##;¤-#,##0.##">
+				<reportElement x="353" y="0" width="67" height="19" uuid="f66dfd51-10f0-4e5c-9eb8-51226fcda5a0"/>
+				<textElement textAlignment="Center">
+					<font isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{Total_Geral}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="280" y="1" width="70" height="18" uuid="8d2f44e1-1a51-4635-9529-25f31cd53c62"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$V{Total_horas}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

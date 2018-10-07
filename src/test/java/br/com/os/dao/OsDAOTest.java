@@ -24,7 +24,7 @@ public class OsDAOTest {
 	@Ignore
 	public void salvar() {
 		OS os = new OS();
-		os.setDataLancamento(new Date());
+		os.setDataSolicitacao(new Date() );
 		os.setDataPrevisaoEntrega(new Date());
 		
 		ResponsavelOsDAO rdao = new ResponsavelOsDAO();

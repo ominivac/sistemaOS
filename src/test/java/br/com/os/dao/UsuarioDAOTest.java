@@ -15,7 +15,7 @@ import br.com.os.domain.Usuario;
 public class UsuarioDAOTest {
 	
 	@Test
-	@Ignore
+	//@Ignore
 	public void salvar() {
 		// TESTADO  - OK
 		Usuario usuario = new Usuario();

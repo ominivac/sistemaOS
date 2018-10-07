@@ -2,7 +2,7 @@ package br.com.os.domain;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-
+import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,6 +16,8 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 
 
 
@@ -47,6 +49,14 @@ public class Item implements Serializable {
 	
 	@Column(name="quantidade", nullable = false)
 	private Integer quantidade;
+	
+	
+	@Column(name="atividadeItem", length=255,  nullable = true)
+	private String  atividadeItem;
+	
+	@Temporal(TemporalType.DATE)
+	@Column(name="data_entrega", nullable = true)
+	private Date dataEntrega;
 	
 	@Column(name="quantidade_horas", nullable = true)
 	private Integer quantidadeHoras;
@@ -86,6 +96,23 @@ public class Item implements Serializable {
 	}
 	
 	
+	
+	public String getAtividadeItem() {
+		return atividadeItem;
+	}
+
+	public void setAtividadeItem(String atividadeItem) {
+		this.atividadeItem = atividadeItem;
+	}
+
+	public Date getDataEntrega() {
+		return dataEntrega;
+	}
+
+	public void setDataEntrega(Date dataEntrega) {
+		this.dataEntrega = dataEntrega;
+	}
+
 	public Boolean getAberto() {
 		return aberto;
 	}

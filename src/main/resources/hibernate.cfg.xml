@@ -15,12 +15,12 @@
 		
 		
 		<!-- Settings for heroku development 2-->
-		
+		<!-- 
 		<property name="hibernate.connection.driver_class">org.postgresql.Driver</property> 
 		<property name="hibernate.connection.url">jdbc:postgres://wpaoumoipqfntq:a0e3b0b523f949f1fee8a9062d7e6ef8bc1a20406a31eadc269449ef423bfff1@ec2-50-16-196-57.compute-1.amazonaws.com:5432/dba230siusstoo</property> 
 		<property name="hibernate.connection.username">wpaoumoipqfntq</property> 
 		<property name="hibernate.connection.password">a0e3b0b523f949f1fee8a9062d7e6ef8bc1a20406a31eadc269449ef423bfff1</property>
-		
+		 -->
 
 		<!-- Settings for Jelastic  -->
 		<!-- 
@@ -32,21 +32,29 @@
 		
 		
 		<!-- Settings for local development -->
-		<!-- 
+		 
 		<property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
 		<property name="hibernate.connection.url">jdbc:postgresql://localhost/osdb</property>
 		<property name="hibernate.connection.username">postgres</property>
 		<property name="hibernate.connection.password">postgres</property>
+		 
+		
+		
+		<!-- Settings for Jelastic  DEMO -->
+		<!-- 
+		 
+		<property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+		<property name="hibernate.connection.url">jdbc:postgresql://node170989-osdemo.jelasticlw.com.br/osdbdemo</property>
+		<property name="hibernate.connection.username">webadmin</property>
+		<property name="hibernate.connection.password">ASFleb18835</property>
 		 -->
-		
-		
 
 
 		<property name="hibernate.connection.pool_size">3</property>
 		<property name="hibernate.current_session_context_class">thread</property>
 		<property name="hibernate.show_sql">true</property>
 
-		<property name="hibernate.hbm2ddl.auto">create</property>
+		<property name="hibernate.hbm2ddl.auto">update</property>
 
 		<property name="hibernate.dialect"></property>
 

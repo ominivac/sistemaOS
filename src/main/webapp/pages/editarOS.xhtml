@@ -5,7 +5,7 @@
 	xmlns:p="http://primefaces.org/ui">
 
 	
-	<p:dialog header="Editar Ordem de Serviço" id="dialog-modal-editar"
+	<p:dialog header="Editar Ordem de Serviço - OU ESSA" id="dialog-modal-editar"
 		resizable="true" closable="true" widgetVar="dialog-modal-editar"
 		modal="true">
 
@@ -20,6 +20,12 @@
 						
 						<p:outputLabel value="Aberta? " />
 						<p:selectBooleanCheckbox value="#{osBeanEditar.ordemServico.aberta}"/>
+						
+						<p:outputLabel value="Atividade:" />
+						<p:inputText value="#{osBean.itemCrudEdit.atividadeItem}" />
+						
+						<p:outputLabel value="Atividade:" />
+						<p:inputText value="${osBeanEditar.ordemServico.atividade}" size="30"/>
 						
 						<p:outputLabel value="Data Lançamento:" />
 						<p:outputLabel value="#{osBeanEditar.osEditar.dataLancamento}">

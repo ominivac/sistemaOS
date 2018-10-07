@@ -57,6 +57,26 @@ public class UsuarioDAO {
 		}	
 	}
 	
+	public void editar(Usuario usuario) {
+		Session sessao = HibernateUtil.getSessionFactory().openSession();
+		Transaction transacao =  null ;
+		
+		
+		try {
+			transacao = sessao.beginTransaction();
+			sessao.update(usuario);
+			transacao.commit();
+			
+		}catch (RuntimeException ex) {
+			if(transacao != null) {
+				transacao.rollback();
+			}
+			throw ex;
+		}finally {
+			sessao.close();
+		}	
+	}
+	
 	public void excluir(Usuario usuario) {
 		Session sessao = HibernateUtil.getSessionFactory().openSession();
 		Transaction transacao =  null ;

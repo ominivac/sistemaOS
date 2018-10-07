@@ -244,7 +244,7 @@ public class ProdutoOSBean2 implements Serializable {
 			Messages.addGlobalInfo("Item de OS excluído com sucesso");
 
 		} catch (RuntimeException e) {
-			Messages.addGlobalError("Erro ao salvar item de OS");
+			Messages.addGlobalError("Erro ao excluir item de OS");
 			e.printStackTrace();
 		}
 	}

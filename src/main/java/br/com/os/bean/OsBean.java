@@ -308,7 +308,7 @@ public class OsBean implements Serializable {
 		
 		ordemServico = new OS();
 		ordemServico.setValorTotal(new BigDecimal("0.00"));
-		ordemServico.setDataLancamento(new Date());
+		ordemServico.setDataSolicitacao(new Date() );
 		ordemServico.setAberta(true);
 		
 		//ResponsavelOS responsavel = new ResponsavelOS();

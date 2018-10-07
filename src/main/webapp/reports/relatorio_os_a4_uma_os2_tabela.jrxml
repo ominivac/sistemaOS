@@ -1,7 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorio_os_a4" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" whenResourceMissingType="Empty" uuid="7a5c9b49-9dc5-422a-ac69-e92cf61ef530">
-	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.sql.tables">
+		<![CDATA[aXRlbSAsMTUsMTM4LDVkMmUyODkyLTY5Y2EtNDk0Yy1hMjJkLTM2YWMwN2FhNmY5NDtvcyAsMTc1
+LDE1LGVhNmNmZWVkLTg1ZGUtNDg3Yi05ODg1LThmNzlmMDg3MDk2Nztwcm9kdXRvX29zICwxNzUs
+Mjg5LGFhNGVkMjI1LWI2YTctNDI0Yi1iODJhLWQyMWRiNzE3YTBkNDt1c3VhcmlvICwzNDcsMTY1
+LDNkNWZmZDRmLWMzMTQtNGRhMC1hMDQ0LTU1Zjk2YzkxYjc4Yzs=]]>
+	</property>
 	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="256"/>
 	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="735"/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="os_adapter"/>
@@ -23,7 +28,8 @@
 	item.quantidade_horas,
 	produto_os.descricao,
 	produto_os.valorporhora,
-	usuario.nome
+	usuario.nome,
+	os.atividade
 FROM item
 	INNER JOIN os ON 
 	 item.os_cod = os.cod_os 
@@ -38,7 +44,7 @@ WHERE
 		<property name="com.jaspersoft.studio.field.label" value="cod_os"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="os"/>
 	</field>
-	<field name="data_lancamento" class="java.sql.Timestamp">
+	<field name="data_lancamento" class="java.sql.Date">
 		<property name="com.jaspersoft.studio.field.label" value="data_lancamento"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="os"/>
 	</field>
@@ -74,26 +80,27 @@ WHERE
 		<property name="com.jaspersoft.studio.field.label" value="nome"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="usuario"/>
 	</field>
+	<field name="atividade" class="java.lang.String">
+		<property name="com.jaspersoft.studio.field.label" value="atividade"/>
+		<property name="com.jaspersoft.studio.field.tree.path" value="os"/>
+	</field>
 	<sortField name="cod_os" order="Descending"/>
 	<group name="Group1">
 		<groupExpression><![CDATA[$F{cod_os}]]></groupExpression>
 		<groupHeader>
-			<band height="27"/>
+			<band height="14"/>
 		</groupHeader>
 		<groupFooter>
-			<band height="21">
-				<rectangle>
-					<reportElement mode="Opaque" x="0" y="3" width="769" height="17" forecolor="#F0DFDF" backcolor="#EDDFDF" uuid="eea48856-4a7f-4ecd-851e-9bce28353119"/>
-				</rectangle>
+			<band height="94">
 				<staticText>
-					<reportElement x="346" y="0" width="64" height="19" uuid="e55e15ea-1327-408b-beb2-430cfa52a88a"/>
+					<reportElement x="463" y="2" width="64" height="13" uuid="e55e15ea-1327-408b-beb2-430cfa52a88a"/>
 					<textElement textAlignment="Center">
 						<font fontName="Arial" size="8"/>
 					</textElement>
 					<text><![CDATA[TOTAL]]></text>
 				</staticText>
 				<textField>
-					<reportElement x="695" y="3" width="62" height="16" uuid="cab9617b-aae6-4e22-b5f7-244c62645538"/>
+					<reportElement x="616" y="0" width="62" height="16" uuid="cab9617b-aae6-4e22-b5f7-244c62645538"/>
 					<textElement>
 						<font fontName="Arial" size="8" isBold="true"/>
 					</textElement>
@@ -106,14 +113,14 @@ WHERE
 		<band splitType="Stretch"/>
 	</background>
 	<title>
-		<band height="160" splitType="Stretch">
+		<band height="154" splitType="Stretch">
 			<frame>
 				<reportElement mode="Opaque" x="0" y="30" width="769" height="90" forecolor="#000000" backcolor="#FFFFFF" uuid="b0c895f6-6dbd-477d-9858-9ad66af087e1"/>
 				<box>
 					<pen lineWidth="2.0"/>
 				</box>
 				<rectangle>
-					<reportElement x="557" y="0" width="103" height="50" uuid="64e16564-eb7f-4f64-b8c5-b746a004554a"/>
+					<reportElement x="557" y="0" width="103" height="90" uuid="64e16564-eb7f-4f64-b8c5-b746a004554a"/>
 				</rectangle>
 				<staticText>
 					<reportElement x="200" y="19" width="240" height="20" uuid="a5bd9302-2203-462f-af26-98378973fcec"/>
@@ -123,25 +130,36 @@ WHERE
 					<text><![CDATA[ ORDEM DE SERVIÇO - CONTRATO 2018 / 094 ]]></text>
 				</staticText>
 				<staticText>
-					<reportElement x="560" y="2" width="100" height="20" uuid="09327195-31d6-4d7a-91a6-1af04f645320"/>
-					<textElement>
+					<reportElement mode="Opaque" x="557" y="0" width="103" height="20" backcolor="#C5E0E0" uuid="09327195-31d6-4d7a-91a6-1af04f645320"/>
+					<box>
+						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center">
 						<font size="8" isBold="true"/>
 					</textElement>
 					<text><![CDATA[Número O.S.]]></text>
 				</staticText>
 				<textField>
 					<reportElement x="576" y="24" width="56" height="18" uuid="929739e5-d505-4ee4-b13a-48ec807b6fbf"/>
+					<textElement textAlignment="Center"/>
 					<textFieldExpression><![CDATA[$F{cod_os}]]></textFieldExpression>
 				</textField>
 				<staticText>
-					<reportElement style="Title" x="5" y="5" width="135" height="75" forecolor="#000000" backcolor="#FFFFFF" uuid="a0056387-bd7c-48c9-afe5-6de0217ec993"/>
+					<reportElement style="Title" x="1" y="0" width="145" height="90" forecolor="#000000" backcolor="#FFFFFF" uuid="a0056387-bd7c-48c9-afe5-6de0217ec993"/>
 					<box topPadding="4" leftPadding="4" bottomPadding="4" rightPadding="4">
 						<pen lineColor="#030000"/>
+						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#030000"/>
+						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#030000"/>
+						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#030000"/>
+						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#030000"/>
 					</box>
 					<textElement verticalAlignment="Bottom">
 						<font size="20" isBold="false"/>
 					</textElement>
-					<text><![CDATA[Logo BNB]]></text>
+					<text><![CDATA[]]></text>
 				</staticText>
 				<staticText>
 					<reportElement x="160" y="44" width="310" height="20" uuid="afc1f0ed-b9ac-436d-aa28-fe0b31d68ec7"/>
@@ -165,91 +183,112 @@ WHERE
 					<text><![CDATA[Número O.S.]]></text>
 				</staticText>
 				<rectangle>
-					<reportElement x="662" y="1" width="103" height="50" uuid="1155ea25-1184-49e2-916f-03903a4e8648"/>
+					<reportElement x="660" y="1" width="109" height="50" uuid="1155ea25-1184-49e2-916f-03903a4e8648"/>
 				</rectangle>
 				<staticText>
-					<reportElement x="665" y="1" width="100" height="20" uuid="9ad4c429-cf9e-41c6-8432-320d1c92ff6d"/>
-					<textElement>
+					<reportElement mode="Opaque" x="660" y="0" width="109" height="20" backcolor="#C5E0E0" uuid="9ad4c429-cf9e-41c6-8432-320d1c92ff6d"/>
+					<box>
+						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center">
 						<font size="8" isBold="true"/>
 					</textElement>
 					<text><![CDATA[Solicitante]]></text>
 				</staticText>
+				<textField>
+					<reportElement x="664" y="25" width="100" height="26" uuid="9bcb3554-a5bc-4baa-9bba-a96d3c61df85"/>
+					<textElement textAlignment="Center"/>
+					<textFieldExpression><![CDATA["Audiovisual do Banco do Nordeste"]]></textFieldExpression>
+				</textField>
 				<staticText>
-					<reportElement x="663" y="26" width="100" height="25" uuid="0a3a68ef-3a95-47bb-8653-fa2522e6fb9a"/>
-					<textElement>
+					<reportElement mode="Opaque" x="660" y="69" width="109" height="20" backcolor="#C5E0E0" uuid="e16b243e-e510-44b6-be3e-5df27616790d"/>
+					<box>
+						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center">
 						<font size="8" isBold="true"/>
 					</textElement>
-					<text><![CDATA[Audiovisual do Banco do Nordeste]]></text>
+					<text><![CDATA[Data da Entrega]]></text>
 				</staticText>
+				<staticText>
+					<reportElement mode="Opaque" x="557" y="69" width="104" height="20" backcolor="#C5E0E0" uuid="214fafaa-bdd4-4609-9673-b6f45d6144d5"/>
+					<box>
+						<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<leftPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+						<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
+					</box>
+					<textElement textAlignment="Center">
+						<font size="8" isBold="true"/>
+					</textElement>
+					<text><![CDATA[Data da Solicitação]]></text>
+				</staticText>
+				<image>
+					<reportElement x="1" y="1" width="145" height="86" uuid="792dc922-6ee0-4d05-8f2b-3ed4bdad0b3f"/>
+					<imageExpression><![CDATA["src/main/webapp/resources/images/LogoItaPro_2.png"]]></imageExpression>
+				</image>
 			</frame>
 			<rectangle>
-				<reportElement x="0" y="130" width="769" height="20" uuid="7dc3b5d4-29b3-4313-9aa4-c58ed0be69a6"/>
+				<reportElement x="1" y="119" width="768" height="30" uuid="7dc3b5d4-29b3-4313-9aa4-c58ed0be69a6"/>
 				<graphicElement>
 					<pen lineWidth="2.0" lineStyle="Solid"/>
 				</graphicElement>
 			</rectangle>
 			<staticText>
-				<reportElement x="3" y="132" width="348" height="14" uuid="6eb6e960-2cd6-44b5-bd24-d2c79494cf42"/>
-				<text><![CDATA[Contratado : ITA PRODUÇÕES AÚDIO E VÍDEO LTDA                    2018/029]]></text>
+				<reportElement x="3" y="120" width="47" height="29" uuid="6eb6e960-2cd6-44b5-bd24-d2c79494cf42"/>
+				<text><![CDATA[Serviço]]></text>
 			</staticText>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="557" y="123" width="103" height="18" uuid="2ab4a904-13dc-45e2-ac61-4520b79fe076"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{data_lancamento}]]></textFieldExpression>
+			</textField>
+			<textField pattern="dd/MM/yyyy">
+				<reportElement x="675" y="123" width="89" height="18" uuid="4b23f844-a798-44f7-8768-711b6c269df2"/>
+				<textElement textAlignment="Center"/>
+				<textFieldExpression><![CDATA[$F{data_previsao}]]></textFieldExpression>
+			</textField>
+			<rectangle>
+				<reportElement x="50" y="119" width="507" height="29" uuid="10cfa3c2-e3b2-40fd-81e1-e518951fc86b"/>
+				<graphicElement>
+					<pen lineStyle="Solid"/>
+				</graphicElement>
+			</rectangle>
+			<textField>
+				<reportElement x="56" y="119" width="244" height="29" uuid="db339b43-4153-4cb9-b9ab-49f31d079c67"/>
+				<box>
+					<topPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<leftPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<bottomPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+					<rightPen lineWidth="0.0" lineStyle="Solid" lineColor="#000000"/>
+				</box>
+				<textFieldExpression><![CDATA[$F{atividade}]]></textFieldExpression>
+			</textField>
 		</band>
 	</title>
 	<pageHeader>
 		<band splitType="Stretch"/>
 	</pageHeader>
 	<columnHeader>
-		<band height="21" splitType="Stretch">
-			<rectangle>
-				<reportElement mode="Opaque" x="0" y="0" width="769" height="21" forecolor="#F0DFDF" backcolor="#EDDFDF" uuid="476ed46c-7258-4aa2-b683-e035b7fec40c"/>
-			</rectangle>
+		<band height="33" splitType="Stretch">
 			<staticText>
-				<reportElement style="Column header" x="3" y="0" width="80" height="18" forecolor="#000000" uuid="1c55babe-6763-49d7-bb6e-492d2eaa0560">
+				<reportElement style="Column header" x="3" y="0" width="257" height="10" forecolor="#000000" uuid="1c55babe-6763-49d7-bb6e-492d2eaa0560">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="581c6a03-a9ff-42a1-b3c0-30d89d904ce1"/>
 				</reportElement>
 				<textElement>
 					<font fontName="Arial" size="8" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Data Lançamento]]></text>
+				<text><![CDATA[Itens de serviços contratuais ( valores R$ e quantidade de horas)]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" x="286" y="0" width="94" height="18" forecolor="#000000" uuid="0979b7ee-44da-4a9e-af10-912fee599282">
-					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="3a324a8c-09a6-49ed-9330-51a82dc58289"/>
-				</reportElement>
-				<textElement>
-					<font fontName="Arial" size="8" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Data Previsão Entrega]]></text>
-			</staticText>
-			<staticText>
-				<reportElement style="Column header" x="134" y="0" width="56" height="18" forecolor="#000000" uuid="62109bba-db9c-4d9c-a0e0-235ccbffbc78">
-					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="eaf5041a-33cc-4615-9a7b-16d36bc38516"/>
-				</reportElement>
-				<textElement>
-					<font fontName="Arial" size="8" isBold="true"/>
-				</textElement>
-				<text><![CDATA[qtde]]></text>
-			</staticText>
-			<staticText>
-				<reportElement style="Column header" x="702" y="0" width="58" height="18" forecolor="#000000" uuid="b3ec5ba7-057b-49c6-a486-c3a0efda42b0">
-					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c6fbfbf1-fa11-4419-a005-dc1937180360"/>
-				</reportElement>
-				<textElement>
-					<font fontName="Arial" size="8" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Valor Total]]></text>
-			</staticText>
-			<staticText>
-				<reportElement style="Column header" x="390" y="0" width="88" height="18" forecolor="#000000" uuid="b4cd2780-3df1-46e1-b823-9a61126a5e8a">
-					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b725e91b-8926-49a1-8450-12a2763546ea"/>
-				</reportElement>
-				<textElement>
-					<font fontName="Arial" size="8" isBold="true"/>
-				</textElement>
-				<text><![CDATA[Quant. Horas]]></text>
-			</staticText>
-			<staticText>
-				<reportElement style="Column header" x="483" y="0" width="92" height="18" forecolor="#000000" uuid="aba6917e-782c-464a-8f3a-b977c5abd200">
-					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="95ff24f8-8068-448a-9ddd-0bbae78592fe"/>
+				<reportElement style="Column header" x="0" y="18" width="62" height="10" forecolor="#000000" uuid="2eae7150-060d-4861-bcdb-5b0fb020dd6a">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="581c6a03-a9ff-42a1-b3c0-30d89d904ce1"/>
 				</reportElement>
 				<textElement>
 					<font fontName="Arial" size="8" isBold="true"/>
@@ -257,30 +296,48 @@ WHERE
 				<text><![CDATA[Retranca]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" x="586" y="0" width="88" height="18" forecolor="#000000" uuid="9d3cefd6-aa80-40f2-a3d6-e579891881dd">
-					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="532b57e6-0acf-4781-82f1-1c79d1b5467f"/>
+				<reportElement style="Column header" x="168" y="18" width="62" height="10" forecolor="#000000" uuid="a4d9805c-9901-4f28-8d36-0a2f5c5c7825">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="581c6a03-a9ff-42a1-b3c0-30d89d904ce1"/>
 				</reportElement>
 				<textElement>
 					<font fontName="Arial" size="8" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Valor unitário]]></text>
+				<text><![CDATA[Quantidade]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" x="194" y="0" width="88" height="18" forecolor="#000000" uuid="d787ae9d-d9f3-4542-bafa-a3f2a78b5850">
-					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="85e98f72-2282-4e83-a468-8184fd1071a9"/>
+				<reportElement style="Column header" x="313" y="18" width="86" height="10" forecolor="#000000" uuid="cc078265-47df-493e-a746-ce25fcca4d7a">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="581c6a03-a9ff-42a1-b3c0-30d89d904ce1"/>
 				</reportElement>
 				<textElement>
 					<font fontName="Arial" size="8" isBold="true"/>
 				</textElement>
-				<text><![CDATA[Responsável]]></text>
+				<text><![CDATA[Quantidade em horas]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="481" y="18" width="62" height="10" forecolor="#000000" uuid="a3f7ad00-5a79-43fe-a754-db2f501f9b86">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="581c6a03-a9ff-42a1-b3c0-30d89d904ce1"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Valor por hora]]></text>
+			</staticText>
+			<staticText>
+				<reportElement style="Column header" x="615" y="18" width="114" height="10" forecolor="#000000" uuid="4dee1b53-e57b-4d4a-be44-f61190a455d8">
+					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="581c6a03-a9ff-42a1-b3c0-30d89d904ce1"/>
+				</reportElement>
+				<textElement>
+					<font fontName="Arial" size="8" isBold="true"/>
+				</textElement>
+				<text><![CDATA[Valor Serviço x Qtde de horas]]></text>
 			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="18">
+		<band height="38">
 			<frame>
-				<reportElement style="Detail" mode="Opaque" x="0" y="0" width="765" height="18" uuid="34a2ae4b-4055-476b-8676-d499f6af510b">
-					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.VerticalRowLayout"/>
+				<reportElement style="Detail" stretchType="ContainerHeight" mode="Opaque" x="0" y="0" width="769" height="30" uuid="cb4232fa-8bf6-4740-8d3c-dd8744c4b1d0">
+					<property name="com.jaspersoft.studio.layout" value="com.jaspersoft.studio.editor.layout.HorizontalRowLayout"/>
 				</reportElement>
 				<box>
 					<topPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
@@ -288,53 +345,8 @@ WHERE
 					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy">
-					<reportElement style="Detail" positionType="Float" x="0" y="0" width="765" height="4" uuid="47eb78fe-b601-4f9b-a85b-a2d1312b9611">
-						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="581c6a03-a9ff-42a1-b3c0-30d89d904ce1"/>
-					</reportElement>
-					<textElement>
-						<font fontName="Arial" size="8"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$F{data_lancamento}]]></textFieldExpression>
-				</textField>
 				<textField isStretchWithOverflow="true">
-					<reportElement style="Detail" positionType="Float" x="0" y="4" width="765" height="2" uuid="1a2a6a5f-3430-4b7d-86b7-e140005be94f">
-						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="eaf5041a-33cc-4615-9a7b-16d36bc38516"/>
-					</reportElement>
-					<textElement>
-						<font fontName="Arial" size="8"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$F{quantidade}]]></textFieldExpression>
-				</textField>
-				<textField isStretchWithOverflow="true">
-					<reportElement style="Detail" positionType="Float" x="0" y="6" width="765" height="2" uuid="d9ea34ad-ac77-4af7-9520-05032f18ff9b">
-						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="85e98f72-2282-4e83-a468-8184fd1071a9"/>
-					</reportElement>
-					<textElement>
-						<font fontName="Arial" size="8"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$F{nome}]]></textFieldExpression>
-				</textField>
-				<textField isStretchWithOverflow="true">
-					<reportElement style="Detail" positionType="Float" x="0" y="8" width="765" height="2" uuid="c022cf1e-f275-4a82-99a0-4cdb8d47a938">
-						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="3a324a8c-09a6-49ed-9330-51a82dc58289"/>
-					</reportElement>
-					<textElement>
-						<font fontName="Arial" size="8"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$F{data_previsao}]]></textFieldExpression>
-				</textField>
-				<textField isStretchWithOverflow="true">
-					<reportElement style="Detail" positionType="Float" x="0" y="10" width="765" height="2" uuid="99a07b56-5835-4499-b4aa-c35b732b94ec">
-						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b725e91b-8926-49a1-8450-12a2763546ea"/>
-					</reportElement>
-					<textElement>
-						<font fontName="Arial" size="8"/>
-					</textElement>
-					<textFieldExpression><![CDATA[$F{quantidade_horas}]]></textFieldExpression>
-				</textField>
-				<textField isStretchWithOverflow="true">
-					<reportElement style="Detail" positionType="Float" x="0" y="12" width="765" height="2" uuid="1285c71c-41d1-4e51-a519-5bb0bdb42dc4">
+					<reportElement style="Detail" positionType="Float" x="0" y="0" width="157" height="30" uuid="27ec5cba-7ef4-4077-801a-8630ed8ca0c3">
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="95ff24f8-8068-448a-9ddd-0bbae78592fe"/>
 					</reportElement>
 					<textElement>
@@ -343,7 +355,25 @@ WHERE
 					<textFieldExpression><![CDATA[$F{descricao}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true">
-					<reportElement style="Detail" positionType="Float" x="0" y="14" width="765" height="2" uuid="ac459424-fa31-4ecb-8f9f-9bd8befcf73f">
+					<reportElement style="Detail" positionType="Float" x="157" y="0" width="153" height="30" uuid="d009b8c3-e951-43b9-922a-74a98c07a7fd">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="eaf5041a-33cc-4615-9a7b-16d36bc38516"/>
+					</reportElement>
+					<textElement>
+						<font fontName="Arial" size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{quantidade}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="310" y="0" width="153" height="30" uuid="f1404537-a23a-4344-a4fb-cae347c5805d">
+						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="b725e91b-8926-49a1-8450-12a2763546ea"/>
+					</reportElement>
+					<textElement>
+						<font fontName="Arial" size="8"/>
+					</textElement>
+					<textFieldExpression><![CDATA[$F{quantidade_horas}]]></textFieldExpression>
+				</textField>
+				<textField isStretchWithOverflow="true">
+					<reportElement style="Detail" positionType="Float" x="463" y="0" width="153" height="30" uuid="854a6f46-f975-45a0-9ce0-aac9bedfd49c">
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="532b57e6-0acf-4781-82f1-1c79d1b5467f"/>
 					</reportElement>
 					<textElement>
@@ -352,7 +382,7 @@ WHERE
 					<textFieldExpression><![CDATA[$F{valorporhora}]]></textFieldExpression>
 				</textField>
 				<textField isStretchWithOverflow="true">
-					<reportElement style="Detail" positionType="Float" x="0" y="16" width="765" height="2" uuid="eb8ef795-e991-4b4c-b989-98eae5a1dba0">
+					<reportElement style="Detail" positionType="Float" x="616" y="0" width="153" height="30" uuid="89f2cac0-b35f-4b6b-a392-815d6557a0df">
 						<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c6fbfbf1-fa11-4419-a005-dc1937180360"/>
 					</reportElement>
 					<textElement>
@@ -371,68 +401,6 @@ WHERE
 					<pen lineWidth="0.5" lineColor="#999999"/>
 				</graphicElement>
 			</line>
-			<rectangle>
-				<reportElement mode="Opaque" x="0" y="15" width="769" height="50" uuid="5fb50e5a-0470-4e2f-a798-4d7d1c638ae9"/>
-				<graphicElement>
-					<pen lineWidth="2.2" lineStyle="Solid"/>
-				</graphicElement>
-			</rectangle>
-			<staticText>
-				<reportElement x="224" y="26" width="100" height="14" uuid="bc196b10-e809-46af-8e0d-b99c4ea28892"/>
-				<textElement>
-					<font fontName="Arial" size="8"/>
-				</textElement>
-				<text><![CDATA[De acordo (Contratado)]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="226" y="43" width="164" height="14" uuid="f0313a52-78b1-4f6a-a0de-9de76e034de0"/>
-				<text><![CDATA[____/____/____  ___________]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="624" y="24" width="100" height="14" uuid="dcedfc59-5c0a-4ada-b6f0-72c7ce5b0228"/>
-				<textElement>
-					<font fontName="Arial" size="8"/>
-				</textElement>
-				<text><![CDATA[Aceite (BNB)]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="625" y="41" width="164" height="14" uuid="afbce076-0c21-497e-a423-6a9022053cb2"/>
-				<text><![CDATA[____/____/____  ___________]]></text>
-			</staticText>
-			<rectangle>
-				<reportElement x="0" y="15" width="200" height="50" uuid="45b8fb41-8232-4d98-92b7-e4e7210f8e53"/>
-				<graphicElement>
-					<pen lineWidth="2.2"/>
-				</graphicElement>
-			</rectangle>
-			<staticText>
-				<reportElement x="9" y="26" width="100" height="14" uuid="2cf2f6a6-f898-4a5c-b29e-b0004f12755b"/>
-				<textElement>
-					<font fontName="Arial" size="8"/>
-				</textElement>
-				<text><![CDATA[Autorização (BNB)]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="11" y="43" width="169" height="14" uuid="49bc38f6-819e-4127-ab55-19410d4f061a"/>
-				<text><![CDATA[____/____/____  ___________]]></text>
-			</staticText>
-			<rectangle>
-				<reportElement x="405" y="15" width="200" height="50" uuid="b5078b9a-5dc3-43cc-992e-1ab19fd3ad35"/>
-				<graphicElement>
-					<pen lineWidth="2.2"/>
-				</graphicElement>
-			</rectangle>
-			<staticText>
-				<reportElement x="430" y="43" width="164" height="14" uuid="6e32c7c8-4e78-40a4-a9ae-288f864c5435"/>
-				<text><![CDATA[____/____/____  ___________]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="429" y="26" width="100" height="14" uuid="c3dc5200-f760-4f89-b8a6-11706bd1ca7d"/>
-				<textElement>
-					<font fontName="Arial" size="8"/>
-				</textElement>
-				<text><![CDATA[Conclusão ( Contratado )]]></text>
-			</staticText>
 		</band>
 	</columnFooter>
 	<pageFooter>

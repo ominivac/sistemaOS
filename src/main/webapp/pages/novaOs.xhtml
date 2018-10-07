@@ -34,7 +34,7 @@
 						<h:panelGrid id="finalizacao" columns="2">
 
 							<p:outputLabel value="Código:" />
-							<p:inputText size="4" />
+							<p:inputText size="4" disabled="true"/>
 
 
 							<p:outputLabel value="Total : R$ " />
@@ -171,9 +171,11 @@
 					<p:inputText value="#{osBean.produtoOSselecionado.codigo}"
 						disabled="true" />
 					
-					<p:outputLabel value="Aberto?" />
+					<p:outputLabel value="Aberta?" />
 					<p:selectBooleanCheckbox value="#{osBean.itemCrudEdit.aberto}"/>
 					
+					<p:outputLabel value="Atividade:" />
+					<p:inputText value="#{osBean.itemCrudEdit.atividadeItem}" />
 
 					<p:outputLabel value="Retranca" />
 					<p:inputText value="#{osBean.produtoOSselecionado.descricao}"
@@ -226,11 +228,14 @@
 					<p:outputLabel value="Aberta? " />
 					<p:selectBooleanCheckbox value="#{osBean.ordemServico.aberta}"/>
 
-					<p:outputLabel value="Data Lançamento:" />
-					<p:calendar value="#{osBean.ordemServico.dataLancamento}">
+					<p:outputLabel value="Data Solicitação:" />
+					<p:calendar value="#{osBean.ordemServico.dataSolicitacao}">
 						<f:convertDateTime pattern="dd/MM/yyyy" locale="pt_BR"
 							timeZone="America/Sao_Paulo" />
 					</p:calendar>
+					
+					<p:outputLabel value="Atividade:" />
+					<p:inputText value="${osBean.ordemServico.atividade}" size="30"/>
 
 
 					<p:outputLabel value="Data Previsão:" />

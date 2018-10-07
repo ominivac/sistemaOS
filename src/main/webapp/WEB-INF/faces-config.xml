@@ -20,9 +20,11 @@
 	</converter>
 	 -->
 	 
-	 <!-- Definição  do PahseListener para autenticação -->
+	 <!-- Definição  do PhaseListener para autenticação -->
 	 <lifecycle>
-	 	<phase-listener>br.com.os.util.AutenticacaoListener</phase-listener>
+	 	<phase-listener>br.com.os.listener.AutenticacaoListener</phase-listener>
 	 </lifecycle>
+	 
+	 
 
 </faces-config>

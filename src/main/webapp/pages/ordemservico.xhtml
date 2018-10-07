@@ -24,7 +24,7 @@
 				</f:facet>
 
 				<p:column headerText="Código" style="width: 50px">
-					<h:outputText value="#{os.codigo}" />
+					<h:outputText value="#{os.codigo}"  />
 				</p:column>
 
 				<p:column headerText="Responsável" filterBy="#{os.usuario.nome}" style="width: 300px">
@@ -32,11 +32,15 @@
 				</p:column>
 
 				<p:column headerText="Data Lançamento" >
-					<h:outputText value="#{os.dataLancamento}">
+					<h:outputText value="#{os.dataSolicitacao}">
 						<f:convertDateTime pattern="dd/MM/yyyy" locale="pt_BR"
 							timeZone="America/Sao_Paulo" />
 					</h:outputText>
 				</p:column>
+				
+				<p:column headerText="Atividade" >
+					<h:outputText value="#{os.atividade}" />
+				</p:column>	
 				
 				<p:column headerText="Data previsão entrega" >
 					<h:outputText value="#{os.dataPrevisaoEntrega}">
@@ -75,7 +79,7 @@
 		</h:form>
 
 		<!-- tela para CRUD -->
-		<p:dialog header="Editar Ordem de Serviço" id="dialog-modal-novo"
+		<p:dialog header="Editar Ordem de Serviço -ESSA" id="dialog-modal-novo"
 			resizable="true" closable="true" widgetVar="dialog-modal-novo"
 			modal="true">
 
@@ -268,14 +272,19 @@
 					
 					<p:outputLabel value="Aberta? " />
 					<p:selectBooleanCheckbox value="#{osBean.ordemServico.aberta}"/>
+					
+					<p:outputLabel value="Atividade:" />
+					<p:inputText value="#{osBean.itemCrudEdit.atividadeItem}" />
 
 					<p:outputLabel value="Data Lançamento:" />
-					<p:calendar value="#{osBean.ordemServico.dataLancamento}"
+					<p:calendar value="#{osBean.ordemServico.dataSolicitacao}"
 						pattern="dd/MM/yyyy">
 						<f:convertDateTime pattern="dd/MM/yyyy" locale="pt_BR"
 							timeZone="America/Sao_Paulo" />
 					</p:calendar>
 
+					<p:outputLabel value="Atividade:" />
+					<p:inputTextarea value="${osBean.ordemServico.atividade}" scrollHeight="2" />
 
 					<p:outputLabel value="Data Previsão:" />
 					<p:calendar value="#{osBean.ordemServico.dataPrevisaoEntrega}">

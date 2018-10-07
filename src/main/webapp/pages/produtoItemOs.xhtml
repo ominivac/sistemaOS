@@ -70,7 +70,8 @@
 							
 							<p:confirm header="Confirmação" message="Deseja excluir o Item de OS ?"
 								icon="ui-icon-alert"/>
-							<f:attribute name="produtoSelecionado" value="#{produto}"/>										
+							<f:attribute name="produtoSelecionado" value="#{produto}"/>	
+																
 						</p:commandButton>
 						
 					</p:column>
@@ -116,7 +117,8 @@
 				</h:panelGrid>
 				<h:panelGrid columns="2">
 					<p:commandButton value="Salvar" icon="ui-icon-save"
-						actionListener="#{produtoOSBean2.salvar}" oncomplete="PF('dlgProduto').hide();"
+						actionListener="#{produtoOSBean2.salvar}"
+						oncomplete="PF('dlgProduto').hide();"
 						update=":mensagem: formCadastroProduto:pnlFormCadProduto :formListagem:tabela "/>
 					
 					<p:commandButton value="Fechar" icon="ui-icon-close" type="button"

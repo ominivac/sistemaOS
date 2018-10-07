@@ -33,10 +33,7 @@
 					
 				<p:commandButton widgetVar="btnEntrar" value="Entrar"
 					update=":mensagem" 
-					actionListener="#{autenticacaoBean.autenticar}"
-					
-					oncomplete="PF('btnEntrar').enable();"
-					/>
+					actionListener="#{autenticacaoBean.autenticar}"/>
 				
 				<p:commandButton value="Resetar Senha"  oncomplete="PF('dlgResetEmail').show();"/>		
 				

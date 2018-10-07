@@ -29,9 +29,9 @@ import br.com.os.converter.SampleEntity;
 @Table(name="os")
 @NamedQueries({
 	@NamedQuery(name="OS.listar", query= "SELECT os FROM OS os"),
-	@NamedQuery(name="OS.listarByDateDesc", query= "SELECT os FROM OS os ORDER BY os.dataLancamento DESC"),
+	@NamedQuery(name="OS.listarByDateDesc", query= "SELECT os FROM OS os ORDER BY os.dataSolicitacao DESC"),
 	@NamedQuery(name="OS.buscarPorCodigo", query= "SELECT os FROM OS os WHERE os.codigoOs = :codigo" ),
-	@NamedQuery(name="OS.buscarEntreDatas", query= "SELECT os FROM OS os WHERE os.dataLancamento BETWEEN :data_inicial AND :data_final" )
+	@NamedQuery(name="OS.buscarEntreDatas", query= "SELECT os FROM OS os WHERE os.dataSolicitacao BETWEEN :data_inicial AND :data_final" )
 })
 public class OS implements Serializable,SampleEntity{
 
@@ -48,8 +48,8 @@ public class OS implements Serializable,SampleEntity{
 
 	
 	@Temporal(TemporalType.DATE)
-	@Column(name="data_lancamento", nullable = true)
-	private Date dataLancamento;
+	@Column(name="data_solicitacao", nullable = true)
+	private Date dataSolicitacao;
 	
 	
 	@Temporal(TemporalType.DATE)
@@ -73,16 +73,47 @@ public class OS implements Serializable,SampleEntity{
 	
 	@Column(name="aberta", nullable = true)
 	private Boolean aberta;
+	
+	
+	@Column(name="atividade", length=255,  nullable = true)
+	private String  atividade;
 
 	
 	public Integer getCodigo() {
 		return codigoOs;
 	}
+	
+	public String getCodigoFormatado() {
+		
+		if(codigoOs <10) {
+			return "00" + codigoOs;
+		}
+		
+		if(codigoOs >=10 && codigoOs < 100) {
+			return "0" + codigoOs;
+		}
+		
+		if(codigoOs >=100) {
+			return codigoOs.toString();
+		}
+		
+		return "";
+	}
+	
 
 	public void setCodigo(Integer codigo) {
 		this.codigoOs = codigo;
 	}
 	
+		
+	public String getAtividade() {
+		return atividade;
+	}
+
+	public void setAtividade(String atividade) {
+		this.atividade = atividade;
+	}
+
 	public List<Item> getItensOs() {
 		return itensOs;
 	}
@@ -102,12 +133,14 @@ public class OS implements Serializable,SampleEntity{
 	}
 	
 	
-	public Date getDataLancamento() {
-		return dataLancamento;
+	
+
+	public Date getDataSolicitacao() {
+		return dataSolicitacao;
 	}
 
-	public void setDataLancamento(Date dataLancamento) {
-		this.dataLancamento = dataLancamento;
+	public void setDataSolicitacao(Date dataSolicitacao) {
+		this.dataSolicitacao = dataSolicitacao;
 	}
 
 	public Date getDataPrevisaoEntrega() {
@@ -156,7 +189,7 @@ public class OS implements Serializable,SampleEntity{
 
 	@Override
 	public String toString() {
-		return "OS [codigoOs=" + codigoOs + ", dataLancamento=" + dataLancamento + ", dataPrevisaoEntrega="
+		return "OS [codigoOs=" + codigoOs + ", dataSolicitacao=" + dataSolicitacao + ", dataPrevisaoEntrega="
 				+ dataPrevisaoEntrega + ", valorTotal=" + valorTotal + ", usuario=" + usuario + ", responsavelOS="
 				+ responsavelOS + "]";
 	}
