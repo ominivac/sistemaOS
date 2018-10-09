@@ -76,7 +76,7 @@ public class ItemDAO {
 	}
 	
 	
-	public Item buscarPorOsEproduto(Integer codigoOs, Integer codigoProd){
+	public Item buscarPorOsEproduto(Integer codigoOs, Integer codigoItem){
 		Session sessao = HibernateUtil.getSessionFactory().openSession();
 		Item item  = null;
 		Query consulta = null;
@@ -85,7 +85,7 @@ public class ItemDAO {
 		try {
 			consulta = sessao.getNamedQuery("Item.buscarPorCodOsAndCodProduto");
 			consulta.setInteger("codOS",codigoOs);
-			consulta.setInteger("codProd", codigoProd);
+			consulta.setInteger("codItem", codigoItem);
 			item =  (Item) consulta.uniqueResult();
 			
 		}catch (RuntimeException ex) {

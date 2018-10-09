@@ -64,14 +64,15 @@ public class ItemDAOTest {
 	}
 	
 	@Test
-	@Ignore
+	//@Ignore
 	public void buscarPorOsEproduto() {
 		//TESTADO OK
-		int codigoOs = 116;
-		int codigoProd = 86;
+		int codigoOs = 7;
+		int codigoItem = 8;
 		
 		ItemDAO itemDAO = new ItemDAO();
-		Item item1 = itemDAO.buscarPorOsEproduto(codigoOs, codigoProd);
+		Item item1 = itemDAO.buscarPorOsEproduto(codigoOs, codigoItem);
+		
 		
 		System.out.println(item1);
 		

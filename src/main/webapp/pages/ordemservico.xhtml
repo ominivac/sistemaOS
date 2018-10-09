@@ -9,8 +9,8 @@
 
 	<ui:define name="conteudo">
 
-
-		<h:form id="form-consulta" target = "_blank" style="margin:auto;margin-left:2%;" >
+		<h:form id="form-consulta" target="_blank"
+			style="margin:auto;margin-left:2%;">
 			<p:dataTable id="dataTable-registros" var="os"
 				value="#{osBean.listaOs}" rows="5" paginator="true"
 				paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
@@ -18,101 +18,115 @@
 
 				<f:facet name="footer">
 
-					<p:commandButton value="Novo" icon="ui-icon-new" 
-						actionListener="#{osBean.novo}"
-						oncomplete="PF('dialog-modal-novo').show();" />
 				</f:facet>
 
-				<p:column headerText="Código" style="width: 50px">
-					<h:outputText value="#{os.codigo}"  />
+				<p:column headerText="Nº O.S.">
+					<h:outputText value="#{os.codigoFormatado}" style="width: 30px" />
 				</p:column>
 
-				<p:column headerText="Responsável" filterBy="#{os.usuario.nome}" style="width: 300px">
-					<h:outputText value="#{os.usuario.nome}" />
+				<p:column headerText="Responsável" filterBy="#{os.usuario.nome}">
+					<h:outputText value="#{os.usuario.nome}" style="width: 30px" />
 				</p:column>
 
-				<p:column headerText="Data Lançamento" >
+				<p:column headerText="Data Lançamento">
 					<h:outputText value="#{os.dataSolicitacao}">
 						<f:convertDateTime pattern="dd/MM/yyyy" locale="pt_BR"
 							timeZone="America/Sao_Paulo" />
 					</h:outputText>
 				</p:column>
-				
-				<p:column headerText="Atividade" >
+
+				<p:column headerText="Atividade">
 					<h:outputText value="#{os.atividade}" />
-				</p:column>	
-				
-				<p:column headerText="Data previsão entrega" >
+				</p:column>
+
+				<p:column headerText="Data previsão entrega">
 					<h:outputText value="#{os.dataPrevisaoEntrega}">
 						<f:convertDateTime pattern="dd/MM/yyyy" locale="pt_BR"
 							timeZone="America/Sao_Paulo" />
 					</h:outputText>
 				</p:column>
-				
+
 				<p:column styleClass="colunas" headerText="Opções" width="25%">
 
-					<p:commandButton icon="ui-icon-pencil" value="Editar" 
+					<p:commandButton icon="ui-icon-pencil" value="Editar"
 						rendered="#{autenticacaoBean.ehadmin()}"
-						actionListener="#{osBean.prepararEdicaoNovo}"
+						actionListener="#{osBean.prepararEdicao}"
 						oncomplete="PF('dialog-modal-novo').show();"
 						update="dialog-modal-novo">
 						<f:attribute name="osSelecionada" value="#{os}" />
-						<f:actionListener type="org.omnifaces.eventlistener.ResetInputAjaxActionListener"/>
+						<f:actionListener
+							type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
 
 					</p:commandButton>
-					
-					<p:commandButton  value="Imprimir" icon="ui-icon-print" 
-						rendered="true"
-						ajax="false"
-						actionListener="#{osBean.gerarRelatorio}" 
-						target = "_blank">
-						
-						<f:attribute name="osSelecionada" value="#{os}"/>
-					
-					</p:commandButton>
 
+					<p:commandButton value="Imprimir" icon="ui-icon-print"
+						rendered="true" ajax="false"
+						actionListener="#{osBean.gerarRelatorio}" target="_blank">
+
+						<f:attribute name="osSelecionada" value="#{os}" />
+
+					</p:commandButton>
 				</p:column>
-
-				
 
 			</p:dataTable>
 		</h:form>
 
-		<!-- tela para CRUD -->
-		<p:dialog header="Editar Ordem de Serviço -ESSA" id="dialog-modal-novo"
-			resizable="true" closable="true" widgetVar="dialog-modal-novo"
+		<!-- Modal para Editar OS -->
+		<p:dialog header="Editar Ordem de Serviço -ESSA"
+			id="dialog-modal-novo" resizable="true" closable="true"
+			dynamic="true" responsive="true" widgetVar="dialog-modal-novo"
 			modal="true">
 
-			<p:panel id="pnlMasterNova" header="Detalhes">
+			<p:panel id="pnlMasterNova" header="Informações da O.S.">
 				<h:form id="form-finalizacao-nova">
-					<p:panel>
-						<p:messages showDetail="false" closable="true" severity="error" />
 
-						<h:panelGrid id="finalizacao" columns="4">
+					<p:messages showDetail="false" closable="true" severity="error" />
+					<h:panelGrid id="finalizacao" columns="2">
+						<p:panel>
+							<p:outputLabel value="Nº O.S. :" />
+							<p:inputText size="14"
+								value="#{osBean.ordemServico.codigoFormatado}" disabled="true"
+								style="font-size: 14px; bold; background-color: white" />
+						</p:panel>
+						<p:panel>
+							<p:outputLabel value="Atividade: " />
+							<p:inputText id="txt-atividade" size="130"
+								value="#{osBean.ordemServico.atividade}" />
+						</p:panel>
 
-							<p:panel>
-								<p:outputLabel value="Código:" />
-								<p:inputText size="4" value="#{osBean.ordemServico.codigo}" disabled="true"/>
-							</p:panel>
+						<p:panel>
+							<p:outputLabel value="Total : R$ " />
+							<p:inputText id="txt-valor-total"
+								value="#{osBean.ordemServico.valorTotal}">
+								<f:convertNumber locale="pt_BR" minFractionDigits="2" />
+							</p:inputText>
+						</p:panel>
+						<p:panel>
+							
+								<p:panel>
+									<p:commandButton value="Finalizar" id="commandButton-salvar"
+										actionListener="#{osBean.finalizar}" icon="ui-icon-gear"
+										update=":mensagem :formFinalizarOS:painelFinalizarOS: form-finalizacao-nova:txt-valor-total"
+										oncomplete="PF('dlgFinalizarOS').show();">
+										<f:actionListener
+											type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
+									</p:commandButton>
 
+									<p:commandButton value="Fechar" id="commandButton-fechar"
+										icon="ui-icon-close" process="@this"
+										onclick="PF('dialog-modal-nova').hide();" />
 
-							<p:panel>
-								<p:outputLabel value="Total : R$ " />
-								<p:inputText id="txt-valor-total" value="#{osBean.ordemServico.valorTotal}">
-									<f:convertNumber locale="pt_BR" minFractionDigits="2" />
-								</p:inputText>
-							</p:panel>
+								</p:panel>
+							
+						</p:panel>
 
-						</h:panelGrid>
-
-
-
-					</p:panel>
+					</h:panelGrid>
 
 
 
 				</h:form>
 			</p:panel>
+
 			<p:panel id="pnlProdutosNova" header="Itens">
 				<h:form id="form-listagem-produtos-nova">
 					<p:panel id="pnlFormProdutos" header="Retrancas disponíveis">
@@ -120,7 +134,7 @@
 							emptyMessage="Nenhum registro encontrado."
 							value="#{osBean.produtosOS}" var="produto" paginator="true">
 
-							<p:column headerText="Código" style="width: 50px" >
+							<p:column headerText="Código">
 								<h:outputText value="#{produto.codigo}" />
 							</p:column>
 
@@ -160,37 +174,48 @@
 								emptyMessage="Nenhum registro encontrado."
 								value="#{osBean.itensOs}" var="item" paginator="true">
 
-								<p:column headerText="Código" style="width: 50px" >
+								<p:column headerText="Código" style="width: 5px">
 									<h:outputText value="#{item.codigo}" />
 								</p:column>
 
-								<p:column headerText="Retranca">
+								<p:column headerText="Retranca" style="width: 60px">
 									<h:outputText value="#{item.produtoOS.descricao}" />
 								</p:column>
 
-								<p:column headerText="Quantidade" style="width: 50px" >
+								<p:column headerText="Atividade" style="width: 100px">
+									<h:outputText value="#{item.atividadeItem}" />
+								</p:column>
+
+								<p:column headerText="Quantidade" style="width: 10px">
 									<h:outputText value="#{item.quantidade}" />
 								</p:column>
 
-								<p:column headerText="Valor Parcial" style="width: 50px" >
+								<p:column headerText="Valor Parcial" style="width: 20px">
 									<h:outputText value="#{item.valorParcial}" />
 								</p:column>
-								
-								<p:column headerText="Quantidade de horas" style="width: 50px">
+
+								<p:column headerText="Quantidade de horas" style="width: 10px">
 									<h:outputText value="#{item.quantidadeHoras}" />
 								</p:column>
 
 								<p:column headerText="" style="width:25px;">
+									<p:commandButton icon="ui-icon-pencil" title="Editar Item"
+										actionListener="#{osBean.prepararEdicaoItem}"
+										oncomplete="PF('dlgEditItem').show();"
+										update=":form-editar-item:pnlItemEditar">
 
-									<p:commandButton icon="ui-icon-pencil" title="Remover Item" 
+										<f:attribute name="itemSelecionado" value="#{item}" />
+
+									</p:commandButton>
+								</p:column>
+								<p:column headerText="" style="width:25px;">
+									<p:commandButton icon="ui-icon-minus" title="Remover Item"
 										actionListener="#{osBean.removerItem}"
 										update=":form-cadastro-itens:pnlFormItens :form-finalizacao-nova:txt-valor-total">
 										<f:attribute name="itemSelecionado" value="#{item}" />
 
 									</p:commandButton>
-
 								</p:column>
-
 							</p:dataTable>
 						</p:panel>
 					</p:panelGrid>
@@ -198,65 +223,97 @@
 				</h:form>
 			</p:panel>
 
-			<p:panel>
-				<h:form>
-					<p:commandButton value="Finalizar" id="commandButton-salvar"
-						actionListener="#{osBean.finalizar}" icon="ui-icon-gear"
-						update=":mensagem :formFinalizarOS:painelFinalizarOS: form-finalizacao-nova:txt-valor-total"
-						oncomplete="PF('dlgFinalizarOS').show();">
-						<f:actionListener
-							type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
-					</p:commandButton>
-
-					<p:commandButton value="Fechar" id="commandButton-fechar"
-						icon="ui-icon-gear" process="@this"
-						onclick="PF('dialog-modal-nova').hide();" />
-				</h:form>
-			</p:panel>
-
 		</p:dialog>
 
 
-		<p:dialog header="Adicionar Item" widgetVar="dlgAddItem"
+
+		<p:dialog header="Adicionar Novo Item" widgetVar="dlgAddItem"
 			draggable="false" resizable="false" modal="true" closable="true">
 			<h:form id="form-add-item">
 				<p:messages showDetail="false" closable="true" severity="error" />
-				
-				<p:panelGrid id="pnlItem" columns="2" >
+
+				<p:panelGrid id="pnlItem" columns="2">
+
 					<p:outputLabel value="Código Produto" />
-					<p:inputText value="#{osBean.produtoOSselecionado.codigo}" disabled="true"/>
-					
-					<p:outputLabel value="Retranca"/>
-					<p:inputText value="#{osBean.produtoOSselecionado.descricao}" disabled="true"/>
-					
-					<p:outputLabel value="Ano"/>
-					<p:inputText value="#{osBean.produtoOSselecionado.anoReferencia}" disabled="true"/>
-					
-					<p:outputLabel value="Valor hora"/>
-					<p:inputText value="#{osBean.produtoOSselecionado.valorPorHora}" disabled="true"/>
-					
-					<p:outputLabel value="Quantidade de horas"/>
+					<p:inputText value="#{osBean.produtoOSselecionado.codigo}"
+						disabled="true" />
+
+					<p:outputLabel value="Retranca" />
+					<p:inputText value="#{osBean.produtoOSselecionado.descricao}"
+						disabled="true" />
+
+					<p:outputLabel value="Em atendimento ?" />
+					<p:selectBooleanCheckbox value="#{osBean.itemCrudEdit.aberto}" />
+
+					<p:outputLabel value="Atividade:" />
+					<p:inputTextarea value="#{osBean.itemCrudEdit.atividadeItem}" />
+
+
+					<p:outputLabel value="Ano" />
+					<p:inputText value="#{osBean.produtoOSselecionado.anoReferencia}"
+						disabled="true" />
+
+					<p:outputLabel value="Valor hora" />
+					<p:inputText value="#{osBean.produtoOSselecionado.valorPorHora}"
+						disabled="true" />
+
+					<p:outputLabel value="Quantidade de horas" />
 					<p:inputText value="#{osBean.itemCrudEdit.quantidadeHoras}" />
 				</p:panelGrid>
-				
+
 				<p:panelGrid columns="">
-					<p:commandButton value="Adicionar Item" actionListener="#{osBean.adicionarItemNovo}"
+					<p:commandButton value="Adicionar Item"
+						actionListener="#{osBean.adicionarItemNovoVersao2}"
 						update=":mensagem :form-cadastro-itens:pnlGridFormItens :form-cadastro-itens:pnlFormItens :form-finalizacao-nova:txt-valor-total"
-						oncomplete="PF('dlgAddItem').hide()" >
-						
-						
+						oncomplete="PF('dlgAddItem').hide();">
+
+
 					</p:commandButton>
 					<p:commandButton value="Cancelar" process="@this"
 						oncomplete="PF('dlgAddItem').hide();" />
 
 				</p:panelGrid>
-
 			</h:form>
-
-
-
-
 		</p:dialog>
+
+		<!-- modal para editar Item de uma os -->
+		<p:dialog header="Editar Item" widgetVar="dlgEditItem"
+			draggable="false" resizable="false" modal="true" closable="true">
+			<h:form id="form-editar-item">
+				<p:messages showDetail="false" closable="true" severity="error" />
+
+				<p:panelGrid id="pnlItemEditar" columns="2">
+					<p:outputLabel value="Código Produto" />
+					<p:inputText value="#{osBean.itemCrudEdit.codigo}" disabled="true" />
+
+					<p:outputLabel value="Em atendimento ?" />
+					<p:selectBooleanCheckbox value="#{osBean.itemCrudEdit.aberto}" />
+
+					<p:outputLabel value="Atividade :" />
+					<p:inputTextarea value="#{osBean.itemCrudEdit.atividadeItem}" />
+
+					<p:outputLabel value="Qtde em horas :" />
+					<p:inputText value="#{osBean.itemCrudEdit.quantidadeHoras}" />
+
+
+
+				</p:panelGrid>
+
+				<p:panelGrid columns="">
+					<p:commandButton value="Editar Item"
+						actionListener="#{osBean.editarItem}"
+						update=":mensagem :form-cadastro-itens:pnlGridFormItens :form-cadastro-itens:pnlFormItens :form-finalizacao-nova:txt-valor-total"
+						oncomplete="PF('dlgEditItem').hide();">
+
+					</p:commandButton>
+					<p:commandButton value="Cancelar" process="@this"
+						oncomplete="PF('dlgEditItem').hide();" />
+
+				</p:panelGrid>
+			</h:form>
+		</p:dialog>
+
+
 
 		<p:dialog header="Finalizar Ordem de Serviço"
 			widgetVar="dlgFinalizarOS" draggable="false" resizable="false"
@@ -269,12 +326,9 @@
 						value="#{osBean.ordemServico.valorTotal}">
 						<f:convertNumber locale="pt_BR" minFractionDigits="2" />
 					</p:outputLabel>
-					
+
 					<p:outputLabel value="Aberta? " />
-					<p:selectBooleanCheckbox value="#{osBean.ordemServico.aberta}"/>
-					
-					<p:outputLabel value="Atividade:" />
-					<p:inputText value="#{osBean.itemCrudEdit.atividadeItem}" />
+					<p:selectBooleanCheckbox value="#{osBean.ordemServico.aberta}" />
 
 					<p:outputLabel value="Data Lançamento:" />
 					<p:calendar value="#{osBean.ordemServico.dataSolicitacao}"
@@ -284,7 +338,8 @@
 					</p:calendar>
 
 					<p:outputLabel value="Atividade:" />
-					<p:inputTextarea value="${osBean.ordemServico.atividade}" scrollHeight="2" />
+					<p:inputTextarea value="${osBean.ordemServico.atividade}"
+						scrollHeight="2" />
 
 					<p:outputLabel value="Data Previsão:" />
 					<p:calendar value="#{osBean.ordemServico.dataPrevisaoEntrega}">
@@ -295,8 +350,7 @@
 
 					<p:outputLabel value="Responsável" for="inputText-responsavel" />
 					<p:selectOneMenu id="inputText-responsavel"
-						value="#{osBean.ordemServico.usuario}"
-						conveter="usuarioConverter">
+						value="#{osBean.ordemServico.usuario}" conveter="usuarioConverter">
 						<f:selectItem noSelectionOption="true"
 							itemLabel="Selecione um responsável pela OS" />
 

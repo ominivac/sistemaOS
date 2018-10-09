@@ -27,7 +27,7 @@ import javax.persistence.TemporalType;
 @NamedQueries({
 	@NamedQuery(name="Item.listar", query= "SELECT item FROM Item item"),
 	@NamedQuery(name="Item.buscarPorCodigoItem", query= "SELECT item FROM Item item WHERE item.codigoItem = :codigo" ),
-	@NamedQuery(name="Item.buscarPorCodOsAndCodProduto", query= "SELECT i FROM Item i WHERE i.os.codigoOs = :codOS AND i.produtoOS.codigoProduto = :codProd" )
+	@NamedQuery(name="Item.buscarPorCodOsAndCodProduto", query= "SELECT i FROM Item i WHERE i.os.codigoOs = :codOS AND i.codigoItem = :codItem" )
 })
 public class Item implements Serializable {
 	
@@ -153,7 +153,7 @@ public class Item implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Item [codigoItem=" + codigoItem + ", quantidade=" + quantidade + ", quantidadeHoras=" + quantidadeHoras
+		return "Item [codigoItem=" + codigoItem + ",Atividade="+ atividadeItem + " ,quantidade=" + quantidade + ", quantidadeHoras=" + quantidadeHoras
 				+ ", valorParcial=" + valorParcial + ", produtoOS=" + produtoOS + ", os=" + os + "]";
 	}
 

@@ -1,12 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorio_os_a4" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="802" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" whenResourceMissingType="Empty" uuid="7a5c9b49-9dc5-422a-ac69-e92cf61ef530">
-	<property name="com.jaspersoft.studio.data.sql.tables">
-		<![CDATA[aXRlbSAsMTUsMTM4LDVkMmUyODkyLTY5Y2EtNDk0Yy1hMjJkLTM2YWMwN2FhNmY5NDtvcyAsMTc1
-LDE1LGVhNmNmZWVkLTg1ZGUtNDg3Yi05ODg1LThmNzlmMDg3MDk2Nztwcm9kdXRvX29zICwxNzUs
-Mjg5LGFhNGVkMjI1LWI2YTctNDI0Yi1iODJhLWQyMWRiNzE3YTBkNDt1c3VhcmlvICwzNDcsMTY1
-LDNkNWZmZDRmLWMzMTQtNGRhMC1hMDQ0LTU1Zjk2YzkxYjc4Yzs=]]>
-	</property>
+	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="256"/>
 	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="735"/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="os_adapter"/>
@@ -20,7 +15,7 @@ LDNkNWZmZDRmLWMzMTQtNGRhMC1hMDQ0LTU1Zjk2YzkxYjc4Yzs=]]>
 	</parameter>
 	<queryString language="SQL">
 		<![CDATA[SELECT os.cod_os,
-	os.data_lancamento,
+	os.data_solicitacao,
 	os.data_previsao,
 	os.valor_total,
 	item.quantidade,
@@ -29,7 +24,8 @@ LDNkNWZmZDRmLWMzMTQtNGRhMC1hMDQ0LTU1Zjk2YzkxYjc4Yzs=]]>
 	produto_os.descricao,
 	produto_os.valorporhora,
 	usuario.nome,
-	os.atividade
+	os.atividade,
+	os.data_solicitacao
 FROM item
 	INNER JOIN os ON 
 	 item.os_cod = os.cod_os 
@@ -44,8 +40,8 @@ WHERE
 		<property name="com.jaspersoft.studio.field.label" value="cod_os"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="os"/>
 	</field>
-	<field name="data_lancamento" class="java.sql.Date">
-		<property name="com.jaspersoft.studio.field.label" value="data_lancamento"/>
+	<field name="data_solicitacao" class="java.sql.Date">
+		<property name="com.jaspersoft.studio.field.label" value="data_solicitacao"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="os"/>
 	</field>
 	<field name="data_previsao" class="java.sql.Date">
@@ -247,7 +243,7 @@ WHERE
 			<textField pattern="dd/MM/yyyy">
 				<reportElement x="557" y="123" width="103" height="18" uuid="2ab4a904-13dc-45e2-ac61-4520b79fe076"/>
 				<textElement textAlignment="Center"/>
-				<textFieldExpression><![CDATA[$F{data_lancamento}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{data_solicitacao}]]></textFieldExpression>
 			</textField>
 			<textField pattern="dd/MM/yyyy">
 				<reportElement x="675" y="123" width="89" height="18" uuid="4b23f844-a798-44f7-8768-711b6c269df2"/>

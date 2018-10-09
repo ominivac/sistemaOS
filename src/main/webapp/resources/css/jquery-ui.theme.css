@@ -41,6 +41,13 @@
 	border: 1px solid #5c5c5c;
 	padding-top: 2px;
 }
+
+.ui-panel .ui-panel-content {
+    padding: 0;
+    padding-bottom: 0;
+    padding-top: 0;
+}
+
 .ui-widget-content {
 	/*border: 1px solid #555555;*/
 	border: 1px solid #5c5c5c;

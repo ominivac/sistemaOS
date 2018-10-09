@@ -14,6 +14,13 @@
 .ui-widget .ui-widget {
 	font-size: 0.9em;
 }
+
+.ui-panel .ui-panel-content {
+    padding: 1px;
+    padding-bottom: 1px;
+    padding-top: 1px;
+}
+
 .ui-widget input,
 .ui-widget select,
 .ui-widget textarea,
@@ -25,14 +32,44 @@
 	border: 1px solid #555555;
 	background: #000000;
 	color: #Fe760a;
-	padding-top: 2px;
-	padding-bottom: 2px;
+	padding-top: 1px;
+	padding-bottom: 1px;
 	
 }
+/* --para os dialogs --*/
+
+/*--- Container element of dialog --*/
+.ui-dialog {
+	
+}
+
+/*-- Title bar--*/
+.ui-dialog-titlebar{
+	padding-top: 1px;
+	padding-bottom: 1px;
+	
+}
+/* -- Header text--*/
+.ui-dialog-title-dialog{
+	padding-top: 1px;
+	padding-bottom: 1px;
+	
+}
+
+/*-- - Close icon --*/
+.ui-dialog-titlebar-close{
+	
+} 
+
+/* -- Dialog - body --*/
+.ui-dialog-content{
+	
+} 
+
 .ui-widget-content a {
 	color: #Fe760a;
-	padding-top: 2px;
-	padding-bottom: 2px;
+	padding-top: 1px;
+	padding-bottom: 1px;
 	
 }
 .ui-widget-header {
@@ -40,6 +77,8 @@
 	background: #444444 url("#{resource['primefaces-my-custom-theme:images/ui-bg_highlight-soft_44_444444_1x100.png']}") 50% 50% repeat-x;
 	color: #Fe760a;
 	font-weight: bold;
+	padding-top: 1px;
+	padding-bottom: 1px;
 	
 }
 .ui-widget-header a {

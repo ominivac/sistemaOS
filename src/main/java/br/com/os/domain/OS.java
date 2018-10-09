@@ -86,15 +86,15 @@ public class OS implements Serializable,SampleEntity{
 	public String getCodigoFormatado() {
 		
 		if(codigoOs <10) {
-			return "00" + codigoOs;
+			return "2018.094-00" + codigoOs;
 		}
 		
 		if(codigoOs >=10 && codigoOs < 100) {
-			return "0" + codigoOs;
+			return "2018.094-0" + codigoOs;
 		}
 		
 		if(codigoOs >=100) {
-			return codigoOs.toString();
+			return "2018.094-"+codigoOs.toString();
 		}
 		
 		return "";

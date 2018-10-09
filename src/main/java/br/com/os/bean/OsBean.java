@@ -25,6 +25,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.omnifaces.util.Messages;
 import org.primefaces.event.SelectEvent;
 
+import br.com.os.dao.ItemDAO;
 import br.com.os.dao.OsDAO;
 import br.com.os.dao.ProdutoOsDAO;
 import br.com.os.dao.ResponsavelOsDAO;
@@ -80,6 +81,7 @@ public class OsBean implements Serializable {
 
 
 	private ProdutoOS produtoOSselecionado;
+	private ProdutoOS produtoOSselecionadoEditar;
 	
 	
 	public OSFilter getOsfilter() {
@@ -106,6 +108,15 @@ public class OsBean implements Serializable {
 		this.produtoOSselecionado = produtoOSselecionado;
 	}
 	
+	
+	public ProdutoOS getProdutoOSselecionadoEditar() {
+		return produtoOSselecionadoEditar;
+	}
+
+	public void setProdutoOSselecionadoEditar(ProdutoOS produtoOSselecionadoEditar) {
+		this.produtoOSselecionadoEditar = produtoOSselecionadoEditar;
+	}
+
 	public List<OS> getListaOsFiltradas() {
 		return listaOsFiltradas;
 	}
@@ -338,10 +349,48 @@ public class OsBean implements Serializable {
 
 	}
 	
+	public void prepararEdicaoItem(ActionEvent event) {
+		//Item itemSelecionadoEditar = (Item) event.getComponent().getAttributes().get("itemSelecionado");
+		itemCrudEdit = (Item) event.getComponent().getAttributes().get("itemSelecionado");
+		System.out.println("item que vem da tela: " + itemCrudEdit);
+		OS osParaEdicao = new OS();
+		osParaEdicao = itemCrudEdit.getOs();
+		
+		//ItemDAO idao = new ItemDAO();
+		//System.out.println("item para editar antes: " + itemSelecionadoEditar);
+		System.out.println("Da os para editar: " + ordemServico);
+		
+		//Item itemToEdit = idao.buscarPorOsEproduto(osParaEdicao.getCodigo(), itemSelecionadoEditar.getCodigo() );
+		//System.out.println("Da os para editar depois : " + itemToEdit);
+		
+	}
+	
+	
+	
+	
+	public void adicionarItemNovoVersao2() {
+		System.out.println(produtoOSselecionado);
+		System.out.println(itemCrudEdit);
+		
+		itemCrudEdit.setProdutoOS(produtoOSselecionado);
+		
+		itemCrudEdit.setQuantidade(1);
+		
+		//item.getValorParcial();
+		itemCrudEdit.getValorParcial();
+
+		//item.setOs(ordemServico);// importante para o update !
+		itemCrudEdit.setOs(ordemServico);
+
+		//itensOs.add(item);
+		itensOs.add(itemCrudEdit);
+		
+		System.out.println("item adicionado" + itemCrudEdit);
+	}
+	
 	public void adicionarItemNovo(ActionEvent event) {
 
 		//ProdutoOS produtoOSselecionado = (ProdutoOS) event.getComponent().getAttributes().get("produtoSelecionado");
-		
 		
 		System.out.println(produtoOSselecionado);
 		System.out.println(itemCrudEdit);
@@ -438,12 +487,52 @@ public class OsBean implements Serializable {
 		calcular();
 
 	}
+	
+	
+	
+	
+	
+	public void editarItem(ActionEvent event) {
+		//Item itemSelecionado = (Item) event.getComponent().getAttributes().get("itemSelecionado");
+		System.out.println("item para editar: " + itemCrudEdit);
+		ItemDAO idao = new ItemDAO();
+		
+		try {
+			int achou = -1;
+
+			for (int posicao = 0; posicao < itensOs.size(); posicao++) {
+				if (itensOs.get(posicao).getProdutoOS().getCodigo() == itemCrudEdit.getProdutoOS().getCodigo()) {
+					achou = posicao;
+				}
+			}
+			
+			if (achou > -1) {
+				
+				Item itemToEdit = idao.buscarPorOsEproduto(ordemServico.getCodigo(), itemCrudEdit.getProdutoOS().getCodigo());
+				idao.update(itemToEdit);
+			}
+			
+			//calcular();
+			calcularEditar();
+			Messages.addGlobalInfo("Item da OS editado com sucesso !");
+			
+		}catch (RuntimeException e) {
+			Messages.addGlobalError("Erro editar o item da OS!");
+			e.printStackTrace();
+		}
+		
+		
+
+	}
 
 	public void removerItem(ActionEvent event) {
 		Item itemSelecionado = (Item) event.getComponent().getAttributes().get("itemSelecionado");
 		System.out.println("item removido: " + itemSelecionado);
 
-		//ItemDAO idao = new ItemDAO();
+		ItemDAO idao = new ItemDAO();
+		
+		//atualiza a lista dos itens da OS atual
+		itensOs = itemSelecionado.getOs().getItensOs();
 
 		int achou = -1;
 
@@ -454,10 +543,12 @@ public class OsBean implements Serializable {
 		}
 
 		if (achou > -1) {
-			//Item itemToRemove = idao.buscarPorOsEproduto(ordemServico.getCodigo(), itemSelecionado.getProdutoOS().getCodigo());
+			Item itemToRemove = idao.buscarPorOsEproduto(ordemServico.getCodigo(), itemSelecionado.getProdutoOS().getCodigo());
 			//idao.excluir(itemToRemove);
 
 			itensOs.remove(achou);
+			ordemServicoEdicao.setItensOs(itensOs);
+			
 		}
 		System.out.println("tamanho da lista " + itensOs.size() );
 		// atualizar o valor total
@@ -468,9 +559,12 @@ public class OsBean implements Serializable {
 		
 		ordemServico.getValorTotal();
 	}
+	
+	public void calcularEditar() {
+		ordemServicoEdicao.getValorTotal();
+	}
 
 	public void finalizar() {
-		//listarResponsaveis();
 		listarUsuarios();
 	}
 	
@@ -544,6 +638,10 @@ public class OsBean implements Serializable {
 				Messages.addGlobalInfo("Nova Ordem de serviço salva com sucesso !");
 			}else {
 				//eh uma os para edicao, entao edita
+				
+				//casos os itens da OS tenham sido alterados
+				ordemServico.setItensOs(itensOs);
+				
 				osdao.editar(ordemServico);
 				listaOs = osdao.listar();
 				Messages.addGlobalInfo("Ordem de serviço editada com sucesso !");
