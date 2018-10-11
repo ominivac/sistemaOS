@@ -46,13 +46,15 @@ public class OsBean implements Serializable {
 	private static final long serialVersionUID = 1L;
 	//private OS osEditar;
 	private OS ordemServico;
-	private OS ordemServicoEdicao;
+	
 	
 	private List<ProdutoOS> produtosOS;
 	private List<ResponsavelOS> responsaveis;
 	private List<Usuario> usuarios;
 
 	private List<Item> itensOs;
+	private List<OS> listaOs; // para listagem da tabela
+	private Item itemCrudEdit; 
 	
 	private List<OS> listaOsFiltradas;
 	private OSFilter osfilter; 
@@ -126,8 +128,7 @@ public class OsBean implements Serializable {
 	}
 	
 
-	private List<OS> listaOs; // para listagem da tabela
-	private Item itemCrudEdit; 
+
 	
 	
 	public OS getOrdemServico() {
@@ -138,13 +139,7 @@ public class OsBean implements Serializable {
 		this.ordemServico = ordemServico;
 	}
 	
-	public OS getOrdemServicoEdicao() {
-		return ordemServicoEdicao;
-	}
-
-	public void setOrdemServicoEdicao(OS ordemServicoEdicao) {
-		this.ordemServicoEdicao = ordemServicoEdicao;
-	}
+	
 
 	public List<OS> getListaOs() {
 		return listaOs;
@@ -353,8 +348,8 @@ public class OsBean implements Serializable {
 		//Item itemSelecionadoEditar = (Item) event.getComponent().getAttributes().get("itemSelecionado");
 		itemCrudEdit = (Item) event.getComponent().getAttributes().get("itemSelecionado");
 		System.out.println("item que vem da tela: " + itemCrudEdit);
-		OS osParaEdicao = new OS();
-		osParaEdicao = itemCrudEdit.getOs();
+		
+		ordemServico = itemCrudEdit.getOs();
 		
 		//ItemDAO idao = new ItemDAO();
 		//System.out.println("item para editar antes: " + itemSelecionadoEditar);
@@ -508,12 +503,14 @@ public class OsBean implements Serializable {
 			
 			if (achou > -1) {
 				
-				Item itemToEdit = idao.buscarPorOsEproduto(ordemServico.getCodigo(), itemCrudEdit.getProdutoOS().getCodigo());
-				idao.update(itemToEdit);
+				//Item itemToEdit = idao.buscarPorOsEproduto(ordemServico.getCodigo(), itemCrudEdit.getProdutoOS().getCodigo());
+				System.out.println("achou item na lista de itens");
+				idao.update(itemCrudEdit);
+				calcular();
 			}
 			
-			//calcular();
-			calcularEditar();
+			
+			
 			Messages.addGlobalInfo("Item da OS editado com sucesso !");
 			
 		}catch (RuntimeException e) {
@@ -547,7 +544,7 @@ public class OsBean implements Serializable {
 			//idao.excluir(itemToRemove);
 
 			itensOs.remove(achou);
-			ordemServicoEdicao.setItensOs(itensOs);
+			ordemServico.setItensOs(itensOs);
 			
 		}
 		System.out.println("tamanho da lista " + itensOs.size() );
@@ -560,9 +557,7 @@ public class OsBean implements Serializable {
 		ordemServico.getValorTotal();
 	}
 	
-	public void calcularEditar() {
-		ordemServicoEdicao.getValorTotal();
-	}
+	
 
 	public void finalizar() {
 		listarUsuarios();
@@ -572,8 +567,8 @@ public class OsBean implements Serializable {
 		try {
 			
 			
-			ordemServico= (OS) event.getComponent().getAttributes().get("osSelecionada");
-			System.out.println("OS Para edição selecionada: " + ordemServicoEdicao);
+			ordemServico = (OS) event.getComponent().getAttributes().get("osSelecionada");
+			System.out.println("OS Para edição selecionada: " + ordemServico);
 			
 			System.out.println(ordemServico.getItensOs() );
 			

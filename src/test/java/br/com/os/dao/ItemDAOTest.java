@@ -64,7 +64,7 @@ public class ItemDAOTest {
 	}
 	
 	@Test
-	//@Ignore
+	@Ignore
 	public void buscarPorOsEproduto() {
 		//TESTADO OK
 		int codigoOs = 7;
@@ -95,44 +95,20 @@ public class ItemDAOTest {
 	
 	
 	@Test
-	@Ignore
+	//@Ignore
 	public void editar() {
-		// TESTADO - OK
-		
-		ProdutoOsDAO pdao = new ProdutoOsDAO();
-		ProdutoOS produtoOS1 = pdao.buscarPorCodigo(85);
-		ProdutoOS produtoOS2 = pdao.buscarPorCodigo(86);
-		
-		OsDAO osDAO = new OsDAO();
-		OS os = osDAO.buscarPorCodigo(62);
 		
 		ItemDAO itemDAO = new ItemDAO();
-		Item itemARemover = itemDAO.buscarPorCodigoItem(63); //sera deletada
+		Item itemAEditar = itemDAO.buscarPorCodigoItem(18);
+		System.out.println("Item a Editar:" + itemAEditar);
+		
+		itemAEditar.setAtividadeItem("atividade teste EDITADA");
+		itemAEditar.setQuantidadeHoras(3);
+		
+		itemDAO.update(itemAEditar);
 		
 		
-		Item itemAlterar = itemDAO.buscarPorCodigoItem(64); //alterar para 2
-		itemAlterar.setQuantidade(2);
 		
-		//novos itens a adicionar
-		Item item1 = new Item();
-		
-		item1.setProdutoOS(produtoOS1);
-		item1.setQuantidade(3);
-		item1.setValorParcial();
-		
-		item1.setOs(os);
-		
-		Item item2 = new Item();
-		item2.setProdutoOS(produtoOS2);
-		item2.setQuantidade(2);
-		item2.setValorParcial();
-		
-		item2.setOs(os);
-		
-		itemDAO.excluir(itemARemover);
-		itemDAO.update(itemAlterar);
-		itemDAO.salvar(item1);
-		itemDAO.salvar(item2);
 		
 	}
 	
