@@ -259,6 +259,50 @@ public class OsDAO {
 		return os;
 	}
 	
+	@SuppressWarnings("unchecked")
+	public List<OS> buscarPorAtividade(String atividade){
+		Session sessao = HibernateUtil.getSessionFactory().openSession();
+		List<OS> listaOS  = null;
+		Query consulta = null;
+		
+		
+		try {
+			consulta = sessao.getNamedQuery("OS.buscarPorServico");
+			consulta.setString("atividade", "%" +atividade + "%");
+			listaOS =  consulta.list();
+			
+		}catch (RuntimeException ex) {
+
+			throw ex;
+		}finally {
+			sessao.close();
+		}
+		return listaOS;
+	}
+	
+	public List<OS> buscarPorAtividadeItem(String atividade){
+		Session sessao = HibernateUtil.getSessionFactory().openSession();
+		List<OS> listaOS  = null;
+		Query consulta = null;
+		
+		
+		try {
+			consulta = sessao.getNamedQuery("OS.buscarPorServicoItem");
+			consulta.setString("atividade", "%" +atividade + "%");
+			listaOS =  consulta.list();
+			
+		}catch (RuntimeException ex) {
+
+			throw ex;
+		}finally {
+			sessao.close();
+		}
+		return listaOS;
+	}
+	
+	
+	
+	
 	public List<OS> buscarEntreDatas(String data_inicial, String data_final){
 		Session sessao = HibernateUtil.getSessionFactory().openSession();
 		List<OS> listaOS  = null;

@@ -78,78 +78,30 @@ public class OsDAOTest {
 		OsDAO osDAO = new OsDAO();
 		
 		//pesquisa a os que deseja edicao pelo cod
-		os = osDAO.buscarPorCodigo(120);
+		os = osDAO.buscarPorCodigo(7);
 		
-		ResponsavelOsDAO rdao = new ResponsavelOsDAO();
-		ResponsavelOS resp = rdao.buscarPorCodigo(83);
+		System.out.println(os);
 		
-		//seta outro resp.
-		os.setResponsavelOS(resp);
-		
-		UsuarioDAO udao = new UsuarioDAO();
-		Usuario u = udao.buscarPorCodigo(52);
-		
-		//outro usuario alterou
-		os.setUsuario(u);
-		
-		ProdutoOsDAO pdao = new ProdutoOsDAO();
-		ProdutoOS p1 = pdao.buscarPorCodigo(2);
-		ProdutoOS p2 = pdao.buscarPorCodigo(3);
+		List<Item> itens =  os.getItensOs();
+		System.out.println(itens);
 		
 		ItemDAO idao = new ItemDAO();
-		
-		Item i1 = new Item();
-		i1.setProdutoOS(p1);
-		i1.setQuantidade(1);
-		i1.getValorParcial();
-		
-		i1.setOs(os);//importante para o update !
-		
-		
-		Item i2 = new Item();
-		i2.setProdutoOS(p2);
-		i2.setQuantidade(4);
-		i2.getValorParcial();
-		
-		i2.setOs(os); //importante para o update !
-
-		//faz traz os itens da os para edicao
-		List<Item> listaNovosItens =  new ArrayList<Item>();
-		listaNovosItens = os.getItensOs();
-		
+		Item itemRemover = idao.buscarPorCodigoItem(18);
 		
 		int achou = -1;
-		Item itemSelecionado = new Item();
-		ProdutoOS premover = new ProdutoOS();
-		premover.setCodigo(85);
-		itemSelecionado.setProdutoOS(premover);
 		
-		for(int posicao = 0 ; posicao < listaNovosItens.size() ; posicao++) {
-			if(listaNovosItens.get(posicao).getProdutoOS().getCodigo() == itemSelecionado.getProdutoOS().getCodigo() ) {
-				achou = posicao;
+		for(int i=0 ; i <  itens.size() ; i++) {
+			
+			if( itemRemover.getCodigo() == itens.get(i).getCodigo() ) {
+				achou = i;
+				System.out.println("achou na posicao " + achou );
+				itens.remove(achou);
+				
 			}
 		}
 		
-		if(achou > -1) {
-			//remove o item procurado
-			Item itemToRemove = idao.buscarPorOsEproduto(os.getCodigo(), 85);
-			idao.excluir(itemToRemove);
-			listaNovosItens.remove(achou);
-		}
-		
-		//remove o item com produto de codigo 85
-		
-		
-		listaNovosItens.add(i1);
-		listaNovosItens.add(i2);
-		
-		os.setItensOs(listaNovosItens);
-		
-		osDAO.editar(os); //ja 
-		
-		
-		
-		
+		os.setItensOs(itens);
+		idao.excluir(itemRemover);
 		
 	}
 	
@@ -183,14 +135,37 @@ public class OsDAOTest {
 	
 	@Test
 	@Ignore
+	public void listarPorAtividade() {
+		//TESTADO - OK 
+		OsDAO osDAO = new OsDAO();
+		List<OS> listaOs = osDAO.buscarPorAtividade("NORDESTE");
+		
+		System.out.println(listaOs);
+		
+	}
+	
+	@Test
+	@Ignore
+	public void listarPorAtividadeItem() {
+		//TESTADO - OK 
+		OsDAO osDAO = new OsDAO();
+		List<OS> listaOs = osDAO.buscarPorAtividadeItem("GRAVAÇÃO");
+		
+		System.out.println(listaOs);
+		
+	}
+	
+	@Test
+	//@Ignore
 	public void buscarPorCodigo() {
 		//TESTADO OK
 		OsDAO osDAO = new OsDAO();
-		OS os = osDAO.buscarPorCodigo(13);
+		OS os = osDAO.buscarPorCodigo(27);
 		System.out.println(os);
 	}
 	
 	@Test
+	@Ignore
 	public void buscarPorIntervaloData() throws ParseException {
 		SimpleDateFormat formato = new  SimpleDateFormat("dd/MM/YYYY");
 		

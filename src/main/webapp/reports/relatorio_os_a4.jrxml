@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- Created with Jaspersoft Studio version 6.6.0.final using JasperReports Library version 6.6.0  -->
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="relatorio_os_a4" printOrder="Horizontal" pageWidth="842" pageHeight="595" orientation="Landscape" columnWidth="718" leftMargin="76" rightMargin="48" topMargin="20" bottomMargin="20" whenResourceMissingType="Empty" uuid="7a5c9b49-9dc5-422a-ac69-e92cf61ef530">
-	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
+	<property name="com.jaspersoft.studio.data.sql.tables">
+		<![CDATA[cHJvZHV0b19vcyAsMTc1LDI4OSw1ZjcwOTNhOC05OTQxLTQxM2UtYjQ2My1mMDI4ZTgxMzUzZWI7
+aXRlbSAsMTUsMTEzLDBmZmJlN2I2LTVmZjgtNGI3ZS1hYTkxLWI3NjMxMWUzYmQ3ZDtvcyAsMTc1
+LDE1LGI0NzU4YTM2LWVjNjYtNDVjYS05NDUyLWNmNGY4YTFiMWYzZTt1c3VhcmlvICwzNDcsMTY1
+LGJkZjIwMTQ1LWE1ZDItNGZlYi1iZGFhLTQ4ZTNmMmQzOGMyNDs=
+]]>
+	</property>
 	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="256"/>
 	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="735"/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="os_adapter"/>
@@ -15,7 +21,6 @@
 	</parameter>
 	<queryString language="SQL">
 		<![CDATA[SELECT os.cod_os,
-	os.data_lancamento,
 	os.data_previsao,
 	os.valor_total,
 	item.quantidade,
@@ -23,7 +28,8 @@
 	item.quantidade_horas,
 	produto_os.descricao,
 	produto_os.valorporhora,
-	usuario.nome
+	usuario.nome,
+	os.data_solicitacao
 FROM item
 	INNER JOIN os ON 
 	 item.os_cod = os.cod_os 
@@ -36,10 +42,6 @@ WHERE
 	</queryString>
 	<field name="cod_os" class="java.lang.Integer">
 		<property name="com.jaspersoft.studio.field.label" value="cod_os"/>
-		<property name="com.jaspersoft.studio.field.tree.path" value="os"/>
-	</field>
-	<field name="data_lancamento" class="java.sql.Timestamp">
-		<property name="com.jaspersoft.studio.field.label" value="data_lancamento"/>
 		<property name="com.jaspersoft.studio.field.tree.path" value="os"/>
 	</field>
 	<field name="data_previsao" class="java.sql.Date">

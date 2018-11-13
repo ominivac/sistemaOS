@@ -37,7 +37,7 @@
 
 
 							<p:outputLabel value="Total : R$ " />
-							<p:inputText id="txt-valor-total"
+							<p:inputText id="txt-valor-total" disabled="true"
 								value="#{osBean.ordemServico.valorTotal}">
 								<f:convertNumber locale="pt_BR" minFractionDigits="2" />
 							</p:inputText>
@@ -119,9 +119,19 @@
 									<h:outputText value="#{item.produtoOS.descricao}" />
 								</p:column>
 
-								<p:column headerText="Atividade">
+								<p:column headerText="Serviço">
 									<h:outputText value="#{item.atividadeItem}" />
 								</p:column>
+								
+								<p:column headerText="Data realização" style="width: 50px">
+									<h:outputText value="#{item.dataEntrega}" >
+										<f:convertDateTime pattern="dd/MM/yyyy" locale="pt_BR"
+											timeZone="America/Sao_Paulo" />
+									</h:outputText>		
+									
+								</p:column>
+								
+								
 
 								<p:column headerText="Quantidade" style="width: 50px">
 									<h:outputText value="#{item.quantidade}" />
@@ -174,10 +184,13 @@
 					<p:outputLabel value="Aberta?" />
 					<p:selectBooleanCheckbox value="#{osBean.itemCrudEdit.aberto}" />
 
-					<p:outputLabel value="Atividade:" />
+					<p:outputLabel value="Serviço:" />
 					<p:inputTextarea value="#{osBean.itemCrudEdit.atividadeItem}" />
-
-					<p:outputLabel value="Ano" />
+					
+					<p:outputLabel value="Data realização:" />
+					<p:calendar value="#{osBean.itemCrudEdit.dataEntrega}" />
+					
+					<p:outputLabel value="Ano ref." />
 					<p:inputText value="#{osBean.produtoOSselecionado.anoReferencia}"
 						disabled="true" />
 
@@ -216,7 +229,7 @@
 				<p:panelGrid id="painelFinalizarOS" columns="2">
 
 					<p:outputLabel value="Total : R$ " />
-					<p:outputLabel id="txt-valor-total-2"
+					<p:outputLabel id="txt-valor-total-2" dir=""
 						value="#{osBean.ordemServico.valorTotal}">
 						<f:convertNumber locale="pt_BR" minFractionDigits="2" />
 					</p:outputLabel>
@@ -230,7 +243,7 @@
 							timeZone="America/Sao_Paulo" />
 					</p:calendar>
 
-					<p:outputLabel value="Atividade:" />
+					<p:outputLabel value="Serviço:" />
 					<p:inputText value="${osBean.ordemServico.atividade}" size="30" />
 
 

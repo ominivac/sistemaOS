@@ -1,6 +1,7 @@
 package br.com.os.dao;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Ignore;
@@ -52,6 +53,19 @@ public class ItemDAOTest {
 		List<Item> listaItens = itemDAO.listar();
 		System.out.println(listaItens);
 	}
+	
+	@Test
+	public void listarItensDeUmaOS() {
+		OsDAO odao = new OsDAO();
+		OS os = odao.buscarPorCodigo(7);
+		List<Item> itens  = new ArrayList<Item>();
+		itens = os.getItensOs();
+		for(int i=0 ; i< itens.size() ; i++) {
+			System.out.println(itens.get(i) );
+		}
+		
+	}
+	
 	
 	@Test
 	@Ignore

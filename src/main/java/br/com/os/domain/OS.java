@@ -31,6 +31,7 @@ import br.com.os.converter.SampleEntity;
 	@NamedQuery(name="OS.listar", query= "SELECT os FROM OS os"),
 	@NamedQuery(name="OS.listarByDateDesc", query= "SELECT os FROM OS os ORDER BY os.dataSolicitacao DESC"),
 	@NamedQuery(name="OS.buscarPorCodigo", query= "SELECT os FROM OS os WHERE os.codigoOs = :codigo" ),
+	@NamedQuery(name="OS.buscarPorServico", query= "SELECT os FROM OS os WHERE os.atividade LIKE :atividade" ),	
 	@NamedQuery(name="OS.buscarEntreDatas", query= "SELECT os FROM OS os WHERE os.dataSolicitacao BETWEEN :data_inicial AND :data_final" )
 })
 public class OS implements Serializable,SampleEntity{
@@ -99,6 +100,22 @@ public class OS implements Serializable,SampleEntity{
 		
 		return "";
 	}
+	
+	
+	public Integer getTotalHoras() {
+		Integer totalHoras = 0;
+		
+		if(this.itensOs.isEmpty() ) {
+			return totalHoras;
+		}else {
+			for(Item item : itensOs) {
+				totalHoras += item.getQuantidadeHoras();
+				return totalHoras;
+			}
+		}
+		return totalHoras;
+	}
+	
 	
 
 	public void setCodigo(Integer codigo) {
@@ -187,13 +204,15 @@ public class OS implements Serializable,SampleEntity{
 	}
 
 
+	
+
+
 	@Override
 	public String toString() {
-		return "OS [codigoOs=" + codigoOs + ", dataSolicitacao=" + dataSolicitacao + ", dataPrevisaoEntrega="
-				+ dataPrevisaoEntrega + ", valorTotal=" + valorTotal + ", usuario=" + usuario + ", responsavelOS="
-				+ responsavelOS + "]";
+		return "OS [codigoOs=" + codigoOs + ", itensOs=" + itensOs + ", dataSolicitacao=" + dataSolicitacao
+				+ ", dataPrevisaoEntrega=" + dataPrevisaoEntrega + ", valorTotal=" + valorTotal + ", usuario=" + usuario
+				+ ", responsavelOS=" + responsavelOS + ", aberta=" + aberta + ", atividade=" + atividade + "]";
 	}
-
 
 	@Override
 	public int hashCode() {

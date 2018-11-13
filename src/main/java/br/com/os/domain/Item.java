@@ -150,12 +150,16 @@ public class Item implements Serializable {
 
 	
 	
-
+	/*
 	@Override
 	public String toString() {
 		return "Item [codigoItem=" + codigoItem + ",Atividade="+ atividadeItem + " ,quantidade=" + quantidade + ", quantidadeHoras=" + quantidadeHoras
 				+ ", valorParcial=" + valorParcial + ", produtoOS=" + produtoOS + ", os=" + os + "]";
-	}
+	}*/
+	
+	
+	
+	
 
 	@Override
 	public int hashCode() {
@@ -163,6 +167,13 @@ public class Item implements Serializable {
 		int result = 1;
 		result = prime * result + ((codigoItem == null) ? 0 : codigoItem.hashCode());
 		return result;
+	}
+
+	@Override
+	public String toString() {
+		return "Item [codigoItem=" + codigoItem + ", quantidade=" + quantidade + ", atividadeItem=" + atividadeItem
+				+ ", dataEntrega=" + dataEntrega + ", quantidadeHoras=" + quantidadeHoras + ", aberto=" + aberto
+				+ ", valorParcial=" + valorParcial + ", produtoOS=" + produtoOS + "]";
 	}
 
 	@Override

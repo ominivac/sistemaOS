@@ -44,8 +44,9 @@ import net.sf.jasperreports.engine.JasperRunManager;
 public class OsBean implements Serializable {
 
 	private static final long serialVersionUID = 1L;
-	//private OS osEditar;
+	
 	private OS ordemServico;
+	private OS ordemServicoPesquisa;
 	
 	
 	private List<ProdutoOS> produtosOS;
@@ -63,8 +64,37 @@ public class OsBean implements Serializable {
 	private Date dataFinalPesquisa;
 	
 	
+	private Integer tipoPesquisa;
+	private Boolean todasOsSelecionadas;
 	
 	
+	
+	
+	public Integer getTipoPesquisa() {
+		return tipoPesquisa;
+	}
+
+	public void setTipoPesquisa(Integer tipoPesquisa) {
+		this.tipoPesquisa = tipoPesquisa;
+	}
+
+	
+	public Boolean getTodasOsSelecionadas() {
+		return todasOsSelecionadas;
+	}
+
+	public void setTodasOsSelecionadas(Boolean todasOsSelecionadas) {
+		this.todasOsSelecionadas = todasOsSelecionadas;
+	}
+
+	public OS getOrdemServicoPesquisa() {
+		return ordemServicoPesquisa;
+	}
+
+	public void setOrdemServicoPesquisa(OS ordemServicoPesquisa) {
+		this.ordemServicoPesquisa = ordemServicoPesquisa;
+	}
+
 	public Date getDataInicialPesquisa() {
 		return dataInicialPesquisa;
 	}
@@ -194,7 +224,11 @@ public class OsBean implements Serializable {
 	public void gerarRelatorio(ActionEvent evento) {
 		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
 		ServletContext context = (ServletContext) externalContext.getContext();
-		String arquivo = context.getRealPath("/reports/relatorio_os_a4.jasper");
+		
+		String contextpath = context.getContextPath();
+		System.out.println(contextpath);
+		
+		String arquivo = context.getRealPath("/reports/relatorio_os_a4_uma_os2_tabela2_v3.jasper");
 		System.out.println(arquivo);
 
 		OS osImprimir = (OS) evento.getComponent().getAttributes().get("osSelecionada");
@@ -214,7 +248,7 @@ public class OsBean implements Serializable {
 			servletOutputStream = response.getOutputStream();
 			Connection conexao = HibernateUtil.getConexao();
 			Map<String, Object> parametros = new HashMap<String, Object>();
-			System.out.println(osToPrint.getCodigo() );
+			System.out.println("codigo os to print" + osToPrint.getCodigo() );
 			
 			parametros.put("cod_os", osToPrint.getCodigo() );
 			
@@ -245,12 +279,59 @@ public class OsBean implements Serializable {
 		osfilter = new OSFilter();
 		dataInicialPesquisa = new Date();
 		dataFinalPesquisa = new Date();
-		
+		ordemServicoPesquisa = new OS();
 	}
 	
 	public void handleDateSelect(SelectEvent event) {
 		 System.out.println((Date)event.getObject() );
 	}
+	
+	
+	public void listarPorCodigo() {
+		try{
+			OsDAO osdao = new OsDAO();
+			//ordemServicoPesquisa = new OS();
+			listaOsFiltradas = new ArrayList<OS>();
+			
+			
+			
+			if(tipoPesquisa == 1) {
+				System.out.println("tipo pesquisa por codigo");
+				ordemServicoPesquisa  = osdao.buscarPorCodigo(ordemServicoPesquisa.getCodigo() );
+				System.out.println(ordemServicoPesquisa);
+				listaOsFiltradas.add(ordemServicoPesquisa);
+				
+			}
+			
+			
+		}catch (Exception e) {
+			Messages.addGlobalError("erro pesquisar por código da OS !");
+			e.printStackTrace();
+		}
+	}
+	
+	public void listarPorAtividade() {
+		try{
+			OsDAO osdao = new OsDAO();
+			//ordemServicoPesquisa = new OS();
+			listaOsFiltradas = new ArrayList<OS>();
+			
+			if(tipoPesquisa == 2) {
+				System.out.println("tipo pesquisa por atividade");
+				
+				listaOsFiltradas  = osdao.buscarPorAtividade(ordemServicoPesquisa.getAtividade() );
+				System.out.println(listaOsFiltradas);
+				
+				
+			}
+			
+			
+		}catch (Exception e) {
+			Messages.addGlobalError("erro pesquisar por código da OS !");
+			e.printStackTrace();
+		}
+	}
+	
 	
 	
 	public void listarPorIntervaloData() {
@@ -484,9 +565,6 @@ public class OsBean implements Serializable {
 	}
 	
 	
-	
-	
-	
 	public void editarItem(ActionEvent event) {
 		//Item itemSelecionado = (Item) event.getComponent().getAttributes().get("itemSelecionado");
 		System.out.println("item para editar: " + itemCrudEdit);
@@ -523,29 +601,29 @@ public class OsBean implements Serializable {
 	}
 
 	public void removerItem(ActionEvent event) {
-		Item itemSelecionado = (Item) event.getComponent().getAttributes().get("itemSelecionado");
-		System.out.println("item removido: " + itemSelecionado);
-
-		ItemDAO idao = new ItemDAO();
+		itemCrudEdit = (Item) event.getComponent().getAttributes().get("itemSelecionado");
+		System.out.println("item a ser removido: " + itemCrudEdit);
 		
-		//atualiza a lista dos itens da OS atual
-		itensOs = itemSelecionado.getOs().getItensOs();
 
 		int achou = -1;
 
 		for (int posicao = 0; posicao < itensOs.size(); posicao++) {
-			if (itensOs.get(posicao).getProdutoOS().getCodigo() == itemSelecionado.getProdutoOS().getCodigo()) {
+			if (itensOs.get(posicao).getProdutoOS().getCodigo() == itemCrudEdit.getProdutoOS().getCodigo()) {
 				achou = posicao;
+				System.out.println("achou item a ser removido");
 			}
 		}
 
 		if (achou > -1) {
-			Item itemToRemove = idao.buscarPorOsEproduto(ordemServico.getCodigo(), itemSelecionado.getProdutoOS().getCodigo());
-			//idao.excluir(itemToRemove);
-
 			itensOs.remove(achou);
-			ordemServico.setItensOs(itensOs);
+			ItemDAO idao = new ItemDAO();
+			idao.excluir(itemCrudEdit);
 			
+			
+			System.out.println(itensOs);
+			
+			ordemServico.setItensOs(itensOs);
+			Messages.addGlobalInfo("Item removido com sucesso !");
 		}
 		System.out.println("tamanho da lista " + itensOs.size() );
 		// atualizar o valor total
@@ -622,6 +700,7 @@ public class OsBean implements Serializable {
 			}
 			
 			System.out.println("itens dentro de salvar"+ itensOs);
+			
 			OsDAO osdao = new OsDAO();
 			
 			
@@ -638,6 +717,8 @@ public class OsBean implements Serializable {
 				ordemServico.setItensOs(itensOs);
 				
 				osdao.editar(ordemServico);
+				
+				
 				listaOs = osdao.listar();
 				Messages.addGlobalInfo("Ordem de serviço editada com sucesso !");
 			}
@@ -667,9 +748,7 @@ public class OsBean implements Serializable {
 
 			Messages.addGlobalInfo("Ordem de serviço editada com sucesso !");
 
-			// limpar tudo
-			// novo();
-			// osEditar = new OS();
+			
 
 		} catch (RuntimeException e) {
 			Messages.addGlobalError("Ocorreu um erro ao editar a OS.");
