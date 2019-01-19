@@ -156,7 +156,7 @@ public class OsDAOTest {
 	}
 	
 	@Test
-	//@Ignore
+	@Ignore
 	public void buscarPorCodigo() {
 		//TESTADO OK
 		OsDAO osDAO = new OsDAO();
@@ -165,7 +165,7 @@ public class OsDAOTest {
 	}
 	
 	@Test
-	@Ignore
+	//@Ignore
 	public void buscarPorIntervaloData() throws ParseException {
 		SimpleDateFormat formato = new  SimpleDateFormat("dd/MM/YYYY");
 		
@@ -184,7 +184,7 @@ public class OsDAOTest {
 		cinicial.set(2018, GregorianCalendar.JANUARY, 1);
 		
 		GregorianCalendar cfinal = new GregorianCalendar();
-		cfinal.set(2018, GregorianCalendar.AUGUST, 20);
+		cfinal.set(2019, GregorianCalendar.JANUARY, 1);
 		
 		
 		

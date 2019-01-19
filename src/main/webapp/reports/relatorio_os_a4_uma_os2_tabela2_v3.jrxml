@@ -150,7 +150,7 @@ WHERE
 					<text><![CDATA[Número O.S.]]></text>
 				</staticText>
 				<textField>
-					<reportElement x="576" y="24" width="56" height="18" uuid="929739e5-d505-4ee4-b13a-48ec807b6fbf"/>
+					<reportElement x="560" y="24" width="90" height="18" uuid="929739e5-d505-4ee4-b13a-48ec807b6fbf"/>
 					<textElement textAlignment="Center"/>
 					<textFieldExpression><![CDATA["2018.094-" + $F{cod_os}]]></textFieldExpression>
 				</textField>
@@ -293,7 +293,7 @@ WHERE
 				<textElement textAlignment="Center">
 					<font fontName="Arial" size="8" isBold="true"/>
 				</textElement>
-				<text><![CDATA[1 Capt. de Imagens]]></text>
+				<text><![CDATA[1 Captação. de Imagens]]></text>
 			</staticText>
 			<staticText>
 				<reportElement style="Column header" mode="Opaque" x="80" y="169" width="80" height="22" forecolor="#000000" backcolor="#C5E0E0" uuid="38e3cc11-6ac4-4cf8-88e9-de6eac9049e5">
@@ -542,12 +542,12 @@ WHERE
 					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<textElement>
+				<textElement textAlignment="Center">
 					<font fontName="Arial" size="8"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{atividadeitem}]]></textFieldExpression>
 			</textField>
-			<textField isStretchWithOverflow="true" pattern="¤ #,##0.00#;¤(#,##0.00#-)">
+			<textField isStretchWithOverflow="true" pattern="  ¤ #,##0.00#;¤(#,##0.00#-)">
 				<reportElement style="Detail" positionType="Float" x="581" y="0" width="61" height="28" uuid="89f2cac0-b35f-4b6b-a392-815d6557a0df">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c6fbfbf1-fa11-4419-a005-dc1937180360"/>
 				</reportElement>

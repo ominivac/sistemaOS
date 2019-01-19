@@ -9,10 +9,13 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Queue;
 
 import javax.annotation.PostConstruct;
+import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
 import javax.faces.context.ExternalContext;
@@ -24,6 +27,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.omnifaces.util.Messages;
 import org.primefaces.event.SelectEvent;
+import org.primefaces.event.UnselectEvent;
 
 import br.com.os.dao.ItemDAO;
 import br.com.os.dao.OsDAO;
@@ -48,6 +52,9 @@ public class OsBean implements Serializable {
 	private OS ordemServico;
 	private OS ordemServicoPesquisa;
 	
+	private OS ordemServicoSelecionada;
+	private List<OS> listaOrdemServicoSelecionadas;
+	
 	
 	private List<ProdutoOS> produtosOS;
 	private List<ResponsavelOS> responsaveis;
@@ -70,6 +77,34 @@ public class OsBean implements Serializable {
 	
 	
 	
+	public OS getOrdemServicoSelecionada() {
+		return ordemServicoSelecionada;
+	}
+
+	public void setOrdemServicoSelecionada(OS ordemServicoSelecionada) {
+		this.ordemServicoSelecionada = ordemServicoSelecionada;
+	}
+
+	public List<OS> getListaOrdemServicoSelecionadas() {
+		return listaOrdemServicoSelecionadas;
+	}
+
+	public void setListaOrdemServicoSelecionadas(List<OS> listaOrdemServicoSelecionadas) {
+		this.listaOrdemServicoSelecionadas = listaOrdemServicoSelecionadas;
+	}
+	
+	
+	public void onRowSelect(SelectEvent event) {
+        FacesMessage msg = new FacesMessage("OS Selecionada", ((OS) event.getObject()).getCodigo().toString() );
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+ 
+    public void onRowUnselect(UnselectEvent event) {
+        FacesMessage msg = new FacesMessage("OS De-selecionada", ((OS) event.getObject()).getCodigo().toString()  );
+        FacesContext.getCurrentInstance().addMessage(null, msg);
+    }
+	
+
 	public Integer getTipoPesquisa() {
 		return tipoPesquisa;
 	}
@@ -221,6 +256,41 @@ public class OsBean implements Serializable {
 
 	// ------------------------------ metodos ---------------------------------
 	
+	public void gerarRelatorioSelecionadas(ActionEvent evento) {
+		System.out.println("entrou gerarRelatorioSelecionadas");
+		
+		for(int i=0; i< listaOrdemServicoSelecionadas.size() ; i++) {
+			OS osImprimir = listaOrdemServicoSelecionadas.get(i);
+			System.out.println("os para impressao:" + osImprimir);
+		}
+		
+		Queue<OS> filaImpressao = new LinkedList<OS>();
+		for(int i=0; i< listaOrdemServicoSelecionadas.size() ; i++) {
+			filaImpressao.add(listaOrdemServicoSelecionadas.get(i));
+		}
+
+		
+		
+		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+		ServletContext context = (ServletContext) externalContext.getContext();
+		
+		String contextpath = context.getContextPath();
+		System.out.println(contextpath);
+		
+		String arquivo = context.getRealPath("/reports/relatorio_os_a4_uma_os2_tabela2_v3.jasper");
+		System.out.println(arquivo);
+
+		for(int i=0; i< filaImpressao.size() ; i++) {
+			OS osImprimir = filaImpressao.poll();
+			System.out.println("os da fila impressao:" + osImprimir);
+			gerarRelatorioWeb(arquivo, osImprimir);
+		}
+		
+		//
+		
+		
+	}
+	
 	public void gerarRelatorio(ActionEvent evento) {
 		ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
 		ServletContext context = (ServletContext) externalContext.getContext();
@@ -251,6 +321,7 @@ public class OsBean implements Serializable {
 			System.out.println("codigo os to print" + osToPrint.getCodigo() );
 			
 			parametros.put("cod_os", osToPrint.getCodigo() );
+			
 			
 
 			// JasperRunManager.runReportToPdfStream(new FileInputStream(new File(arquivo)),
@@ -322,10 +393,7 @@ public class OsBean implements Serializable {
 				listaOsFiltradas  = osdao.buscarPorAtividade(ordemServicoPesquisa.getAtividade() );
 				System.out.println(listaOsFiltradas);
 				
-				
 			}
-			
-			
 		}catch (Exception e) {
 			Messages.addGlobalError("erro pesquisar por código da OS !");
 			e.printStackTrace();

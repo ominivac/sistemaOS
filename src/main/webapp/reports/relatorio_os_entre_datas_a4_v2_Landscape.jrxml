@@ -5,6 +5,15 @@
 	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="287"/>
 	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="704"/>
 	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="os_adapter"/>
+	<property name="com.jaspersoft.studio.unit." value="cm"/>
+	<property name="com.jaspersoft.studio.unit.pageHeight" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.pageWidth" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.topMargin" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.bottomMargin" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.leftMargin" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.rightMargin" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.columnWidth" value="cm"/>
+	<property name="com.jaspersoft.studio.unit.columnSpacing" value="cm"/>
 	<style name="Title" forecolor="#FFFFFF" fontName="Times New Roman" fontSize="50" isBold="false"/>
 	<style name="SubTitle" forecolor="#CCCCCC" fontName="Times New Roman" fontSize="18" isBold="false"/>
 	<style name="Column header" forecolor="#666666" fontName="Times New Roman" fontSize="14" isBold="true"/>
@@ -15,6 +24,8 @@
 			<style mode="Opaque" backcolor="#F0EFEF"/>
 		</conditionalStyle>
 	</style>
+	<parameter name="start_date" class="java.util.Date"/>
+	<parameter name="final_date" class="java.util.Date"/>
 	<queryString language="SQL">
 		<![CDATA[SELECT os.cod_os,
 	os.data_previsao,
@@ -27,6 +38,8 @@ FROM item
 	 item.os_cod = os.cod_os 
 	INNER JOIN produto_os ON 
 	 item.produto_cod = produto_os.cod_produto 
+WHERE 
+	 $X{BETWEEN,os.data_solicitacao,start_date,final_date} 
 ORDER BY produto_os.descricao ASC]]>
 	</queryString>
 	<field name="cod_os" class="java.lang.Integer">
@@ -209,8 +222,8 @@ ORDER BY produto_os.descricao ASC]]>
 					<text><![CDATA[Av. Paranjana, 5.700 - Fortaleza - Ceará]]></text>
 				</staticText>
 				<image>
-					<reportElement x="32" y="9" width="79" height="75" uuid="62cf36cb-633e-48f2-b538-3190e916b77f"/>
-					<imageExpression><![CDATA["src/main/webapp/reports/LOGO TEXTO ITA.png"]]></imageExpression>
+					<reportElement x="0" y="1" width="145" height="89" uuid="336847a5-1f05-483e-94a5-4566b6aec327"/>
+					<imageExpression><![CDATA["src/main/webapp/resources/images/LOGO ita2.png"]]></imageExpression>
 				</image>
 			</frame>
 		</band>

@@ -227,10 +227,6 @@ WHERE
 					</textElement>
 					<text><![CDATA[Data da Solicitação]]></text>
 				</staticText>
-				<image>
-					<reportElement x="1" y="1" width="145" height="86" uuid="792dc922-6ee0-4d05-8f2b-3ed4bdad0b3f"/>
-					<imageExpression><![CDATA["src/main/webapp/resources/images/LogoItaPro_2.png"]]></imageExpression>
-				</image>
 			</frame>
 			<rectangle>
 				<reportElement x="1" y="119" width="768" height="30" uuid="7dc3b5d4-29b3-4313-9aa4-c58ed0be69a6"/>
