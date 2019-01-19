@@ -1,0 +1,161 @@
+
+	<p:dialog header="Editar Ordem de Serviço - OU ESSA" id="dialog-modal-editar"
+		resizable="true" closable="true" widgetVar="dialog-modal-editar"
+		modal="true">
+
+		<p:panel id="pnlMaster" header="master">
+			<h:form id="form-finalizacao">
+				<p:panel>
+					<p:messages showDetail="false" closable="true" severity="error" />
+
+					<h:panelGrid id="finalizacao" columns="4">
+						<p:outputLabel value="Código:" />
+						<h:outputText value="#{osBeanEditar.osEditar.codigo}" />
+						
+						<p:outputLabel value="Aberta? " />
+						<p:selectBooleanCheckbox value="#{osBeanEditar.ordemServico.aberta}"/>
+						
+						<p:outputLabel value="Atividade:" />
+						<p:inputText value="#{osBean.itemCrudEdit.atividadeItem}" />
+						
+						<p:outputLabel value="Atividade:" />
+						<p:inputText value="${osBeanEditar.ordemServico.atividade}" size="30"/>
+						
+						<p:outputLabel value="Data Lançamento:" />
+						<p:outputLabel value="#{osBeanEditar.osEditar.dataLancamento}">
+							<f:convertDateTime pattern="dd/MM/yyyy" locale="pt_BR"
+								timeZone="America/Sao_Paulo" />
+						</p:outputLabel>
+
+						<p:outputLabel value="Data Previsão:" />
+						<p:calendar value="#{osBeanEditar.osEditar.dataPrevisaoEntrega}"
+							locale="pt_BR" timeZone="America/Sao_Paulo">
+							<!-- <f:convertDateTime pattern="dd/MM/yyyy HH:mm "/> -->
+						</p:calendar>
+
+
+						<p:outputLabel value="Responsável" for="inputText-responsavel" />
+						<p:selectOneMenu id="inputText-responsavel"
+							value="#{osBeanEditar.osEditar.responsavelOS}"
+							conveter="responsavelConverter">
+							<f:selectItem noSelectionOption="true"
+								itemLabel="Selecione um responsável pela OS" />
+
+							<f:selectItems value="#{osBeanEditar.responsaveis}" var="respOS"
+								itemValue="#{respOS}" itemLabel="#{respOS.nome}" />
+
+						</p:selectOneMenu>
+
+						<p:outputLabel value="R$ " />
+						<h:outputText id="txt-valor-total" value="#{osBeanEditar.osEditar.valorTotal}">
+							<f:convertNumber locale="pt_BR" minFractionDigits="2" />
+						</h:outputText>
+
+					</h:panelGrid>
+
+					<h:panelGrid id="finalizacao2" columns="1">
+
+					</h:panelGrid>
+
+				</p:panel>
+
+
+
+			</h:form>
+		</p:panel>
+		<p:panel id="pnlProdutos" header="itens">
+			<h:form id="form-listagem-produtos">
+				<p:panel id="pnlFormProdutos" header="Retrancas disponíveis">
+					<p:dataTable id="tabelaProdutos" rows="3"
+						emptyMessage="Nenhum registro encontrado."
+						value="#{osBeanEditar.produtosOS}" var="produto" paginator="true">
+
+						<p:column headerText="Código">
+							<h:outputText value="#{produto.codigo}" />
+						</p:column>
+
+						<p:column headerText="Ano ref.">
+							<h:outputText value="#{produto.anoReferencia}" />
+						</p:column>
+
+						<p:column headerText="Retranca">
+							<h:outputText value="#{produto.descricao}" />
+						</p:column>
+
+						<p:column headerText="Valor">
+							<h:outputText value="#{produto.valorPorHora}" />
+						</p:column>
+
+						<p:column headerText="" style="width:25px;">
+
+							<p:commandButton icon="ui-icon-plus" title="Adicionar Item"
+								actionListener="#{osBean.adicionarItem}"
+								update=":form-cadastro-itens:pnlFormItens :form-finalizacao:txt-valor-total">
+								<f:attribute name="produtoSelecionado" value="#{produto}" />
+
+							</p:commandButton>
+
+						</p:column>
+					</p:dataTable>
+				</p:panel>
+			</h:form>
+
+
+			<!-- painel dos itens que ja compoem a OS -->
+			<h:form id="form-cadastro-itens">
+				<p:panelGrid id="pnlGridFormItens" columns="2">
+					<p:panel id="pnlFormItens" header="Itens que compôem a OS">
+						<p:dataTable id="tabelaItens" rows="2"
+							emptyMessage="Nenhum registro encontrado."
+							value="#{osBeanEditar.osEditar.itensOs}" var="item"
+							paginator="true">
+	
+							<p:column headerText="Código">
+								<h:outputText value="#{item.codigo}" />
+							</p:column>
+	
+							<p:column headerText="Retranca">
+								<h:outputText value="#{item.produtoOS.descricao}" />
+							</p:column>
+	
+							<p:column headerText="Retranca">
+								<h:outputText value="#{item.quantidade}" />
+							</p:column>
+	
+							<p:column headerText="Valor">
+								<h:outputText value="#{item.valorParcial}" />
+							</p:column>
+	
+							<p:column headerText="" style="width:25px;">
+	
+								<p:commandButton icon="ui-icon-pencil" title="Remover Item"
+									actionListener="#{osBean.removerItem}"
+									oncomplete="PF('dialog-modal-editar').show();"
+									update=":form-cadastro-itens:pnlFormItens :form-finalizacao:txt-valor-total">
+									<f:attribute name="itemSelecionado" value="#{item}" />
+	
+								</p:commandButton>
+	
+							</p:column>
+	
+						</p:dataTable>
+					</p:panel>
+					</p:panelGrid>
+
+			</h:form>
+		</p:panel>
+
+		<p:panel>
+			<h:form>
+				<p:commandButton value="Alterar" id="commandButton-alterar"
+					icon="ui-icon-gear" actionListener="#{osBeanEditar.editar}"
+					oncomplete="PF('dialog-modal-editar').hide();"
+					update=":mensagem: form-consulta" />
+
+				<p:commandButton value="Fechar" id="commandButton-fechar"
+					type="button" icon="ui-icon-gear"
+					onclick="PF('dialog-modal-editar').hide();" />
+			</h:form>
+		</p:panel>
+
+	</p:dialog>
