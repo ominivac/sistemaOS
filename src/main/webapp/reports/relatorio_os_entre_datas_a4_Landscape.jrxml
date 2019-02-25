@@ -4,7 +4,7 @@
 	<property name="com.jaspersoft.studio.data.sql.tables" value=""/>
 	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w1" value="297"/>
 	<property name="com.jaspersoft.studio.data.sql.SQLQueryDesigner.sash.w2" value="702"/>
-	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="os_adapter"/>
+	<property name="com.jaspersoft.studio.data.defaultdataadapter" value="One Empty Record"/>
 	<property name="com.jaspersoft.studio.unit." value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.pageHeight" value="pixel"/>
 	<property name="com.jaspersoft.studio.unit.pageWidth" value="pixel"/>
@@ -158,10 +158,6 @@ GROUP BY os.cod_os,
 					<bottomPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 					<rightPen lineWidth="1.0" lineStyle="Solid" lineColor="#000000"/>
 				</box>
-				<image>
-					<reportElement x="1" y="1" width="145" height="86" uuid="7fd1f76f-6420-4f14-b225-4d7613ca4028"/>
-					<imageExpression><![CDATA["src/main/webapp/resources/images/LogoItaPro_2.png"]]></imageExpression>
-				</image>
 				<rectangle>
 					<reportElement x="650" y="1" width="109" height="50" uuid="6856c127-d8da-4492-93e4-6cd24c75a265"/>
 				</rectangle>
