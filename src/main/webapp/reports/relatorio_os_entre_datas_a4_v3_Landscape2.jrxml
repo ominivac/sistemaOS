@@ -443,7 +443,7 @@
 						<pen lineWidth="0.75" lineStyle="Solid"/>
 					</box>
 					<textElement textAlignment="Center">
-						<font fontName="Arial" size="10"/>
+						<font fontName="Arial" size="10" isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{v_captacao}]]></textFieldExpression>
 				</textField>
@@ -502,7 +502,7 @@
 						<pen lineWidth="0.75" lineStyle="Solid"/>
 					</box>
 					<textElement textAlignment="Center">
-						<font fontName="Arial" size="10"/>
+						<font fontName="Arial" size="10" isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{v_edicao}]]></textFieldExpression>
 				</textField>
@@ -608,7 +608,7 @@
 						<pen lineWidth="0.75" lineStyle="Solid"/>
 					</box>
 					<textElement textAlignment="Center">
-						<font fontName="Arial" size="10"/>
+						<font fontName="Arial" size="10" isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{v_trans_grav}]]></textFieldExpression>
 				</textField>
@@ -667,7 +667,7 @@
 						<pen lineWidth="0.75" lineStyle="Solid"/>
 					</box>
 					<textElement textAlignment="Center">
-						<font fontName="Arial" size="10"/>
+						<font fontName="Arial" size="10" isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{v_conf_tric}]]></textFieldExpression>
 				</textField>
@@ -710,7 +710,7 @@
 						<pen lineWidth="0.75" lineStyle="Solid"/>
 					</box>
 					<textElement textAlignment="Center">
-						<font fontName="Arial" size="10"/>
+						<font fontName="Arial" size="10" isBold="true"/>
 					</textElement>
 					<textFieldExpression><![CDATA[$F{v_comp}]]></textFieldExpression>
 				</textField>
