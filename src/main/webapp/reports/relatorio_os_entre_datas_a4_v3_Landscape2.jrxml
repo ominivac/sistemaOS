@@ -235,16 +235,6 @@
 					</textElement>
 					<text><![CDATA[CLIENTE: BANCO DO NORDESTE DO BRASIL S/A]]></text>
 				</staticText>
-				<textField pattern="MMMM d, yyyy">
-					<reportElement mode="Opaque" x="607" y="60" width="114" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="a33fce3b-20c1-4696-873a-fe134d1e7d88"/>
-					<box>
-						<pen lineColor="#000000"/>
-					</box>
-					<textElement textAlignment="Right">
-						<font size="12"/>
-					</textElement>
-					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
-				</textField>
 				<staticText>
 					<reportElement x="377" y="44" width="208" height="20" uuid="b0b532cf-9c6a-440b-b94d-e34104dd65fb"/>
 					<textElement textAlignment="Center">
@@ -259,6 +249,17 @@
 					</textElement>
 					<text><![CDATA[PERÍODO]]></text>
 				</staticText>
+				<textField pattern="EEEEE dd MMMMM yyyy">
+					<reportElement style="Column header" mode="Opaque" x="640" y="65" width="143" height="20" forecolor="#000000" uuid="6fd9485b-10f1-47a4-aae7-262e0148f9b8"/>
+					<textElement verticalAlignment="Middle">
+						<font size="10" isBold="false"/>
+					</textElement>
+					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+				</textField>
+				<image>
+					<reportElement x="1" y="1" width="106" height="89" uuid="ef9b7061-f985-4df9-a5d7-fa3ad6d9c14d"/>
+					<imageExpression><![CDATA["src/main/webapp/resources/images/LOGO ita2.png"]]></imageExpression>
+				</image>
 			</frame>
 		</band>
 	</title>
@@ -715,13 +716,6 @@
 						<font size="10" isBold="false"/>
 					</textElement>
 					<textFieldExpression><![CDATA["Pág "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
-				</textField>
-				<textField pattern="EEEEE dd MMMMM yyyy">
-					<reportElement style="Column header" mode="Opaque" x="2" y="3" width="197" height="20" forecolor="#000000" uuid="40032d83-3b66-4eec-ae41-b01b17aee6b6"/>
-					<textElement verticalAlignment="Middle">
-						<font size="10" isBold="false"/>
-					</textElement>
-					<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
 				</textField>
 			</frame>
 		</band>
