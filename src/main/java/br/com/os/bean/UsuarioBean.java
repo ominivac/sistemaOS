@@ -67,10 +67,11 @@ public class UsuarioBean implements Serializable{
 	
 	
 	public void salvar() {
+		System.out.println("usuario em salvar " + usuario);
 		try {
 			UsuarioDAO usuarioDAO = new UsuarioDAO();
-			usuarioDAO.merge(usuario);
-			
+			//usuarioDAO.merge(usuario);
+			usuarioDAO.salvar(usuario);
 			usuario = new Usuario();
 			usuarios = usuarioDAO.listar();
 			

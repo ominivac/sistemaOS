@@ -21,6 +21,16 @@
     padding-top: 1px;
 }
 
+--novo
+.ui-panel .ui-panel-titlebar{
+	padding: 0px;
+    padding-bottom: opx;
+    padding-top: 0px;
+    font-size: 8px;
+    height:95%;
+    color: navy;
+}
+
 .ui-widget input,
 .ui-widget select,
 .ui-widget textarea,
@@ -30,10 +40,11 @@
 }
 .ui-widget-content {
 	border: 1px solid #555555;
-	background: #000000;
+	background: #00000;
 	color: #Fe760a;
-	padding-top: 1px;
-	padding-bottom: 1px;
+	padding-top: 0px;
+	padding-bottom: 0px;
+	margin: 0px;
 	
 }
 /* --para os dialogs --*/
