@@ -42,7 +42,7 @@ import net.sf.jasperreports.engine.JasperRunManager;
 
 @ManagedBean
 @ViewScoped
-public class OsBean2 implements Serializable {
+public class OsBeanNovo implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 	
@@ -215,7 +215,7 @@ public class OsBean2 implements Serializable {
 		this.produtosOS = produtosOS;
 	}
 
-	public OsBean2() {
+	public OsBeanNovo() {
 		
 	}
 
