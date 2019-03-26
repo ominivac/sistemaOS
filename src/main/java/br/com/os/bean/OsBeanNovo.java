@@ -685,9 +685,7 @@ public class OsBeanNovo implements Serializable {
 
 			ordemServico.setItensOs(itensOs);
 
-			ResponsavelOsDAO rdao = new ResponsavelOsDAO();
-			responsaveis = new ArrayList<ResponsavelOS>();
-			responsaveis = rdao.listar();
+			
 
 		} catch (RuntimeException e) {
 			Messages.addGlobalError("Erro ao preparar edição");
@@ -725,7 +723,8 @@ public class OsBeanNovo implements Serializable {
 				//casos os itens da OS tenham sido alterados
 				ordemServico.setItensOs(itensOs);
 				
-				osdao.editar(ordemServico);
+				//osdao.editar(ordemServico);
+				osdao.merge(ordemServico);
 				
 				
 				listaOs = osdao.listar();

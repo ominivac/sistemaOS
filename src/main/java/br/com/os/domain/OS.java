@@ -44,7 +44,7 @@ public class OS implements Serializable,SampleEntity{
 	@GeneratedValue(strategy= GenerationType.SEQUENCE ,generator="pk_sequence")
 	private Integer codigoOs;
 	
-	@OneToMany(fetch=FetchType.EAGER , mappedBy="os")
+	@OneToMany(fetch=FetchType.EAGER , cascade = CascadeType.ALL,mappedBy="os")
 	private List<Item> itensOs;
 
 	

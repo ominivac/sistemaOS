@@ -36,7 +36,7 @@ public class Item implements Serializable {
 	@Id
 	@SequenceGenerator(name="pk_sequence",sequenceName="entity_id_seq", allocationSize=1)
 	@Column(name = "cod_item", columnDefinition= "serial", unique=true, nullable=false)
-	@GeneratedValue(strategy= GenerationType.SEQUENCE ,generator="pk_sequence")
+	@GeneratedValue(strategy= GenerationType.AUTO ,generator="pk_sequence")
 	private Integer codigoItem;
 
 	public Integer getCodigo() {

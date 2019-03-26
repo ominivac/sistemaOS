@@ -24,7 +24,7 @@
 --novo
 .ui-panel .ui-panel-titlebar{
 	padding: 0px;
-    padding-bottom: opx;
+    padding-bottom: 0px;
     padding-top: 0px;
     font-size: 8px;
     height:95%;

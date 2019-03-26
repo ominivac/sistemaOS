@@ -100,14 +100,14 @@ WHERE
 		<groupFooter>
 			<band height="27">
 				<staticText>
-					<reportElement x="531" y="8" width="64" height="13" uuid="e55e15ea-1327-408b-beb2-430cfa52a88a"/>
+					<reportElement x="531" y="8" width="50" height="13" uuid="e55e15ea-1327-408b-beb2-430cfa52a88a"/>
 					<textElement textAlignment="Center">
 						<font fontName="Arial" size="8"/>
 					</textElement>
 					<text><![CDATA[TOTAL]]></text>
 				</staticText>
 				<textField pattern="¤ #,##0.00;¤-#,##0.00">
-					<reportElement x="602" y="8" width="62" height="16" uuid="cab9617b-aae6-4e22-b5f7-244c62645538"/>
+					<reportElement x="589" y="8" width="62" height="16" uuid="cab9617b-aae6-4e22-b5f7-244c62645538"/>
 					<textElement>
 						<font fontName="Arial" size="8" isBold="true"/>
 					</textElement>
@@ -226,6 +226,10 @@ WHERE
 					</textElement>
 					<text><![CDATA[Data da Solicitação]]></text>
 				</staticText>
+				<image>
+					<reportElement x="3" y="1" width="143" height="86" uuid="f9f412f9-7ab1-4c90-8a88-ca044d772037"/>
+					<imageExpression><![CDATA["src/main/webapp/resources/images/LOGO ita2.png"]]></imageExpression>
+				</image>
 			</frame>
 			<rectangle>
 				<reportElement x="0" y="119" width="757" height="30" uuid="7dc3b5d4-29b3-4313-9aa4-c58ed0be69a6"/>
@@ -242,7 +246,7 @@ WHERE
 				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{data_solicitacao}]]></textFieldExpression>
 			</textField>
-			<textField pattern="dd/MM/yyyy">
+			<textField pattern="dd/MM/yyyy" isBlankWhenNull="true">
 				<reportElement x="662" y="123" width="89" height="18" uuid="4b23f844-a798-44f7-8768-711b6c269df2"/>
 				<textElement textAlignment="Center"/>
 				<textFieldExpression><![CDATA[$F{data_previsao}]]></textFieldExpression>
@@ -264,7 +268,7 @@ WHERE
 				<textFieldExpression><![CDATA["  " + $F{atividade}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement style="Column header" mode="Opaque" x="0" y="148" width="400" height="20" forecolor="#000000" backcolor="#C5E0E0" uuid="1c55babe-6763-49d7-bb6e-492d2eaa0560">
+				<reportElement style="Column header" mode="Opaque" x="0" y="148" width="410" height="20" forecolor="#000000" backcolor="#C5E0E0" uuid="1c55babe-6763-49d7-bb6e-492d2eaa0560">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="581c6a03-a9ff-42a1-b3c0-30d89d904ce1"/>
 				</reportElement>
 				<box>
@@ -344,7 +348,7 @@ WHERE
 				<text><![CDATA[4. Configuração de plataforma Tricaster]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" mode="Opaque" x="320" y="169" width="80" height="22" forecolor="#000000" backcolor="#C5E0E0" uuid="5d43ca7d-cab5-4bb1-812d-a01a95c4971e">
+				<reportElement style="Column header" mode="Opaque" x="320" y="169" width="90" height="22" forecolor="#000000" backcolor="#C5E0E0" uuid="5d43ca7d-cab5-4bb1-812d-a01a95c4971e">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="581c6a03-a9ff-42a1-b3c0-30d89d904ce1"/>
 				</reportElement>
 				<box>
@@ -390,7 +394,7 @@ WHERE
 				<text><![CDATA[R$ 61,63]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" mode="Opaque" x="160" y="191" width="80" height="24" forecolor="#000000" backcolor="#C5E0E0" uuid="21be3932-f1e9-48c1-b8d7-14064faa8795">
+				<reportElement style="Column header" mode="Opaque" x="160" y="191" width="90" height="24" forecolor="#000000" backcolor="#C5E0E0" uuid="21be3932-f1e9-48c1-b8d7-14064faa8795">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="581c6a03-a9ff-42a1-b3c0-30d89d904ce1"/>
 				</reportElement>
 				<box>
@@ -405,7 +409,7 @@ WHERE
 				<text><![CDATA[R$ 48,01]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" mode="Opaque" x="240" y="191" width="80" height="24" forecolor="#000000" backcolor="#C5E0E0" uuid="7af22765-a18c-41a9-a0ca-14585180432a">
+				<reportElement style="Column header" mode="Opaque" x="240" y="191" width="90" height="24" forecolor="#000000" backcolor="#C5E0E0" uuid="7af22765-a18c-41a9-a0ca-14585180432a">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="581c6a03-a9ff-42a1-b3c0-30d89d904ce1"/>
 				</reportElement>
 				<box>
@@ -420,7 +424,7 @@ WHERE
 				<text><![CDATA[R$ 43,34]]></text>
 			</staticText>
 			<staticText>
-				<reportElement style="Column header" mode="Opaque" x="320" y="191" width="80" height="24" forecolor="#000000" backcolor="#C5E0E0" uuid="26e95023-efd0-40f7-987c-cf1717664cfe">
+				<reportElement style="Column header" mode="Opaque" x="320" y="191" width="90" height="24" forecolor="#000000" backcolor="#C5E0E0" uuid="26e95023-efd0-40f7-987c-cf1717664cfe">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="581c6a03-a9ff-42a1-b3c0-30d89d904ce1"/>
 				</reportElement>
 				<box>
@@ -435,7 +439,7 @@ WHERE
 				<text><![CDATA[R$ 130,90]]></text>
 			</staticText>
 			<textField isStretchWithOverflow="true">
-				<reportElement style="Detail" positionType="Float" x="400" y="149" width="126" height="66" uuid="2361fffb-1864-47b6-8dbb-3a0236c52e07">
+				<reportElement style="Detail" positionType="Float" x="410" y="149" width="116" height="66" uuid="2361fffb-1864-47b6-8dbb-3a0236c52e07">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c6fbfbf1-fa11-4419-a005-dc1937180360"/>
 				</reportElement>
 				<box>
@@ -562,7 +566,7 @@ WHERE
 				</textElement>
 				<textFieldExpression><![CDATA[$F{valor_parcial}]]></textFieldExpression>
 			</textField>
-			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy">
+			<textField isStretchWithOverflow="true" pattern="dd/MM/yyyy" isBlankWhenNull="true">
 				<reportElement style="Detail" positionType="Float" x="527" y="0" width="53" height="28" uuid="098bfa8e-1209-4d7c-9ce5-9bcc17104dc6">
 					<property name="com.jaspersoft.studio.spreadsheet.connectionID" value="c6fbfbf1-fa11-4419-a005-dc1937180360"/>
 				</reportElement>
