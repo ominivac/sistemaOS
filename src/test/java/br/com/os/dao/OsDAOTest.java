@@ -14,7 +14,6 @@ import org.junit.Test;
 import br.com.os.domain.Item;
 import br.com.os.domain.OS;
 import br.com.os.domain.ProdutoOS;
-import br.com.os.domain.ResponsavelOS;
 import br.com.os.domain.Usuario;
 import br.com.os.filter.OSFilter;
 
@@ -27,10 +26,6 @@ public class OsDAOTest {
 		os.setDataSolicitacao(new Date() );
 		os.setDataPrevisaoEntrega(new Date());
 		
-		ResponsavelOsDAO rdao = new ResponsavelOsDAO();
-		ResponsavelOS resp = rdao.buscarPorCodigo(82);
-		
-		os.setResponsavelOS(resp);
 		
 		UsuarioDAO udao = new UsuarioDAO();
 		Usuario u = udao.buscarPorCodigo(42);

@@ -28,12 +28,11 @@ import org.primefaces.event.SelectEvent;
 import br.com.os.dao.ItemDAO;
 import br.com.os.dao.OsDAO;
 import br.com.os.dao.ProdutoOsDAO;
-import br.com.os.dao.ResponsavelOsDAO;
 import br.com.os.dao.UsuarioDAO;
 import br.com.os.domain.Item;
 import br.com.os.domain.OS;
 import br.com.os.domain.ProdutoOS;
-import br.com.os.domain.ResponsavelOS;
+
 import br.com.os.domain.Usuario;
 import br.com.os.filter.OSFilter;
 import br.com.os.util.HibernateUtil;
@@ -50,7 +49,6 @@ public class OsBean implements Serializable {
 	
 	
 	private List<ProdutoOS> produtosOS;
-	private List<ResponsavelOS> responsaveis;
 	private List<Usuario> usuarios;
 
 	private List<Item> itensOs;
@@ -185,13 +183,7 @@ public class OsBean implements Serializable {
 		return itensOs;
 	}
 
-	public List<ResponsavelOS> getResponsaveis() {
-		return responsaveis;
-	}
-
-	public void setResponsaveis(List<ResponsavelOS> responsaveis) {
-		this.responsaveis = responsaveis;
-	}
+	
 	
 	
 	public List<Usuario> getUsuarios() {
@@ -368,10 +360,7 @@ public class OsBean implements Serializable {
 		produtosOS = produtoDAO.listar();
 	}
 
-	public void listarResponsaveis() {
-		ResponsavelOsDAO rdao = new ResponsavelOsDAO();
-		responsaveis = rdao.listar();
-	}
+	
 	
 	public void listarUsuarios() {
 		UsuarioDAO udao = new UsuarioDAO();
@@ -679,9 +668,7 @@ public class OsBean implements Serializable {
 
 			ordemServico.setItensOs(itensOs);
 
-			ResponsavelOsDAO rdao = new ResponsavelOsDAO();
-			responsaveis = new ArrayList<ResponsavelOS>();
-			responsaveis = rdao.listar();
+			
 
 		} catch (RuntimeException e) {
 			Messages.addGlobalError("Erro ao preparar edição");

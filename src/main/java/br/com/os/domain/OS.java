@@ -44,7 +44,7 @@ public class OS implements Serializable,SampleEntity{
 	@GeneratedValue(strategy= GenerationType.SEQUENCE ,generator="pk_sequence")
 	private Integer codigoOs;
 	
-	@OneToMany(fetch=FetchType.EAGER , cascade = CascadeType.ALL,mappedBy="os")
+	@OneToMany(fetch=FetchType.EAGER , cascade = {CascadeType.PERSIST, CascadeType.MERGE} ,mappedBy="os")
 	private List<Item> itensOs;
 
 	
@@ -68,9 +68,7 @@ public class OS implements Serializable,SampleEntity{
 	private Usuario usuario;
 	
 	
-	@ManyToOne(fetch = FetchType.EAGER)
-	@JoinColumn(name="responsavel_cod", referencedColumnName="cod_responsavel",columnDefinition="integer", nullable = true)
-	private ResponsavelOS responsavelOS;
+	
 	
 	@Column(name="aberta", nullable = true)
 	private Boolean aberta;
@@ -195,23 +193,19 @@ public class OS implements Serializable,SampleEntity{
 		this.usuario = usuario;
 	}
 
-	public ResponsavelOS getResponsavelOS() {
-		return responsavelOS;
-	}
 
-	public void setResponsavelOS(ResponsavelOS responsavelOS) {
-		this.responsavelOS = responsavelOS;
-	}
 
 
 	
+	
 
+	
 
 	@Override
 	public String toString() {
 		return "OS [codigoOs=" + codigoOs + ", itensOs=" + itensOs + ", dataSolicitacao=" + dataSolicitacao
 				+ ", dataPrevisaoEntrega=" + dataPrevisaoEntrega + ", valorTotal=" + valorTotal + ", usuario=" + usuario
-				+ ", responsavelOS=" + responsavelOS + ", aberta=" + aberta + ", atividade=" + atividade + "]";
+				+ ", aberta=" + aberta + ", atividade=" + atividade + "]";
 	}
 
 	@Override
