@@ -584,8 +584,6 @@ public class OsBeanNovo implements Serializable {
 				calcular();
 			}
 			
-			
-			
 			Messages.addGlobalInfo("Item da OS editado com sucesso !");
 			
 		}catch (RuntimeException e) {

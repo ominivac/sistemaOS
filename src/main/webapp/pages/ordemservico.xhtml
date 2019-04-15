@@ -335,7 +335,7 @@
 
 
 
-		<p:dialog header="Finalizar Ordem de Serviço"
+		<p:dialog header="Finalizar Edição Ordem de Serviço"
 			widgetVar="dlgFinalizarOS" draggable="false" resizable="false"
 			modal="true" closable="false">
 			<h:form id="formFinalizarOS">
@@ -384,7 +384,7 @@
 
 				<p:panelGrid columns="">
 					<p:commandButton value="Salvar" widgetVar="btnSalvar"
-						onclick="btnSalvar.disable()" actionListener="#{osBeanNovo.salvar}"
+						onclick="btnSalvar.disable()" actionListener="#{osBeanNovo.editar}"
 						update=":mensagem :form-consulta:dataTable-registros"
 						oncomplete="PF('dlgFinalizarOS').hide();PF('dialog-modal-novo').hide();" />
 					<p:commandButton value="Fechar" process="@this"
