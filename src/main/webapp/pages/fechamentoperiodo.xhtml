@@ -19,7 +19,7 @@
 					cellpadding="5">
 					<p:outputLabel for="opcao" value="Pesquisa por:" />
 
-					<p:selectOneRadio id="opcao" value="#{osBean2.tipoPesquisa}">
+					<p:selectOneRadio id="opcao" value="#{osBeanNovo.tipoPesquisa}">
 						<f:selectItem itemLabel="Por Código da  OS." itemValue="1" />
 						<f:selectItem itemLabel="Por Serviço" itemValue="2" />
 						<f:selectItem itemLabel="Intervalo de datas" itemValue="3" />
@@ -27,14 +27,14 @@
 
 					</p:selectOneRadio>
 
-					<p:panel id="pnl1" rendered="#{osBean2.tipoPesquisa == '1'}">
+					<p:panel id="pnl1" rendered="#{osBeanNovo.tipoPesquisa == '1'}">
 						<p:inputText id="txtCodigo"
 							value="#{osBean2.ordemServicoPesquisa.codigo}" />
 						<p:commandButton value="Pesquisar"
 							actionListener="#{osBean2.listarPorCodigo}"
 							update=":form-consulta:tabela-registros" />
 					</p:panel>
-					<p:panel id="pnl2" rendered="#{osBean2.tipoPesquisa == '2'}">
+					<p:panel id="pnl2" rendered="#{osBeanNovo.tipoPesquisa == '2'}">
 						<p:inputText id="txtAtividade"
 							value="#{osBean2.ordemServicoPesquisa.atividade}" />
 						<p:commandButton value="Pesquisar"
@@ -42,7 +42,7 @@
 							update=":form-consulta:tabela-registros" />
 
 					</p:panel>
-					<p:panel id="pnl3" rendered="#{osBean2.tipoPesquisa == '3'}">
+					<p:panel id="pnl3" rendered="#{osBeanNovo.tipoPesquisa == '3'}">
 						<p:outputLabel  value="Data Inicial:  " />
 						<p:calendar id="txtdata_inicial" title="Data Inicial" 
 							required="true" requiredMessage="È necessário um valor para Data Inicial !" />
