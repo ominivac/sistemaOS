@@ -87,7 +87,7 @@ public class OsDAOTest {
 		
 		for(int i=0 ; i <  itens.size() ; i++) {
 			
-			if( itemRemover.getCodigo() == itens.get(i).getCodigo() ) {
+			if( itemRemover.getCodigoItem() == itens.get(i).getCodigoItem() ) {
 				achou = i;
 				System.out.println("achou na posicao " + achou );
 				itens.remove(achou);

@@ -51,8 +51,8 @@
 					<p:commandButton icon="ui-icon-pencil" value="Editar"
 						
 						actionListener="#{osBeanNovo.prepararEdicao}"
-						oncomplete="PF('dialog-modal-novo').show();"
-						update="dialog-modal-novo">
+						oncomplete="PF('dialog-modal-editar').show();"
+						update="dialog-modal-editar">
 						<f:attribute name="osSelecionada" value="#{os}" />
 						<f:actionListener
 							type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
@@ -73,8 +73,8 @@
 
 		<!-- Modal para Editar OS -->
 		<p:dialog header="Editar Ordem de Serviço" styleClass="ui-panel-titlebar" style="font-size: 12px;"
-			id="dialog-modal-novo" resizable="true" closable="true"
-			dynamic="true" responsive="true" widgetVar="dialog-modal-novo"
+			id="dialog-modal-editar" resizable="true" closable="true"
+			dynamic="true" responsive="true" widgetVar="dialog-modal-editar"
 			modal="true">
 
 			<p:panel id="pnlMasterNova" header="Informações da O.S." style="font-size: 12px;">
@@ -110,7 +110,7 @@
 								<p:commandButton value="Finalizar" id="commandButton-salvar"
 									actionListener="#{osBeanNovo.editar}" icon="ui-icon-gear"
 									update=":mensagem :formFinalizarOS:painelFinalizarOS: form-finalizacao-nova:txt-valor-total"
-									oncomplete="PF('dialog-modal-novo').hide(); ">
+									oncomplete="PF('dialog-modal-editar').hide(); ">
 									<f:actionListener
 										type="org.omnifaces.eventlistener.ResetInputAjaxActionListener" />
 								</p:commandButton>
@@ -386,7 +386,7 @@
 					<p:commandButton value="Salvar" widgetVar="btnSalvar"
 						onclick="btnSalvar.disable()" actionListener="#{osBeanNovo.editar}"
 						update=":mensagem :form-consulta:dataTable-registros"
-						oncomplete="PF('dlgFinalizarOS').hide();PF('dialog-modal-novo').hide();" />
+						oncomplete="PF('dlgFinalizarOS').hide();PF('dialog-modal-editar').hide();" />
 					<p:commandButton value="Fechar" process="@this"
 						oncomplete="PF('dlgFinalizarOS').hide();" />
 

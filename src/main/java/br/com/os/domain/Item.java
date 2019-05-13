@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.Date;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -35,19 +34,21 @@ public class Item implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@SequenceGenerator(name="pk_sequence",sequenceName="entity_id_seq", allocationSize=1)
+	//@SequenceGenerator(name="pk_sequence",sequenceName="entity_id_seq", allocationSize=1)
 	@Column(name = "cod_item", columnDefinition= "serial", unique=true, nullable=false)
-	@GeneratedValue(strategy= GenerationType.SEQUENCE ,generator="pk_sequence")
-	private Integer codigoItem;
+	@GeneratedValue(strategy= GenerationType.IDENTITY)
+	private Long codigoItem;
 
-	public Integer getCodigo() {
+	
+	
+	public Long getCodigoItem() {
 		return codigoItem;
 	}
 
-	public void setCodigo(Integer codigo) {
-		this.codigoItem = codigo;
+	public void setCodigoItem(Long codigoItem) {
+		this.codigoItem = codigoItem;
 	}
-	
+
 	@Column(name="quantidade", nullable = false)
 	private Integer quantidade;
 	
@@ -73,7 +74,7 @@ public class Item implements Serializable {
 	@JoinColumn(name="produto_cod",  referencedColumnName="cod_produto", nullable = false)
 	private ProdutoOS produtoOS;
 	
-	@ManyToOne(fetch = FetchType.EAGER, cascade  = {CascadeType.PERSIST, CascadeType.MERGE} )
+	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name="os_cod", referencedColumnName="cod_os",  nullable = false)
 	private OS os;
 

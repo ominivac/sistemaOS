@@ -713,7 +713,7 @@ public class OsBeanNovo implements Serializable {
 				ordemServico.setItensOs(itensOs);
 				
 				//osdao.editar(ordemServico);
-				osdao.merge(ordemServico);
+				osdao.merge(ordemServico, itensOs); //tentando não disparar excecao 11/05
 				
 				
 				listaOs = osdao.listar();
@@ -722,7 +722,7 @@ public class OsBeanNovo implements Serializable {
 			
 			
 		}catch (RuntimeException e) {
-			Messages.addGlobalError("Ocorreu um erro salvar a OS! ");
+			Messages.addGlobalError("Ocorreu um erro ao Salvar a OS ! ");
 		}
 	}
 	
@@ -744,7 +744,7 @@ public class OsBeanNovo implements Serializable {
 			
 
 		} catch (RuntimeException e) {
-			Messages.addGlobalError("Ocorreu um erro ao editar a OS.");
+			Messages.addGlobalError("Ordem de serviço editada.");
 		}
 	}
 

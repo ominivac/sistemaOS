@@ -39,12 +39,12 @@ public class OS implements Serializable,SampleEntity{
 	private static final long serialVersionUID = 1L;
 	
 	@Id
-	@SequenceGenerator(name="pk_sequence",sequenceName="entity_id_seq", allocationSize=1)
+	//@SequenceGenerator(name="pk_sequence",sequenceName="entity_id_seq", allocationSize=1)
 	@Column(name = "cod_os", columnDefinition= "serial", unique=true, nullable=false)
-	@GeneratedValue(strategy= GenerationType.SEQUENCE ,generator="pk_sequence")
+	@GeneratedValue(strategy= GenerationType.IDENTITY )
 	private Integer codigoOs;
 	
-	@OneToMany(fetch=FetchType.EAGER , cascade = {CascadeType.PERSIST, CascadeType.MERGE} ,mappedBy="os")
+	@OneToMany(fetch=FetchType.EAGER , mappedBy="os")
 	private List<Item> itensOs;
 
 	
@@ -193,13 +193,8 @@ public class OS implements Serializable,SampleEntity{
 		this.usuario = usuario;
 	}
 
-
-
-
-	
 	
 
-	
 
 	@Override
 	public String toString() {

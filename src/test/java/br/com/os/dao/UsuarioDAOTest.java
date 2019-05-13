@@ -18,6 +18,7 @@ public class UsuarioDAOTest {
 	//@Ignore
 	public void salvar() {
 		// TESTADO  - OK
+		
 		Usuario usuario = new Usuario();
 		usuario.setNome("Roberto Sousa");
 		usuario.setRole(Role.ADMINISTRADOR);
@@ -27,10 +28,27 @@ public class UsuarioDAOTest {
 		SimpleHash hash = new SimpleHash("md5", usuario.getSenhaSemCripto());
 		usuario.setSenha(hash.toHex() );
 		
+		UsuarioDAO usuarioDAO = new UsuarioDAO();
+		usuarioDAO.salvar(usuario);
+		
+		
+		/*
+		Usuario usuario = new Usuario();
+		usuario.setNome("admin");
+		usuario.setRole(Role.ADMINISTRADOR);
+		usuario.setEmail("admin@gmail.com");
+		usuario.setSenhaSemCripto("admin");
+		
+		SimpleHash hash = new SimpleHash("md5", usuario.getSenhaSemCripto());
+		usuario.setSenha(hash.toHex() );
 		
 		UsuarioDAO usuarioDAO = new UsuarioDAO();
 		usuarioDAO.salvar(usuario);
+		*/
 	}
+	
+	
+	
 	
 	@Test
 	@Ignore
@@ -84,7 +102,7 @@ public class UsuarioDAOTest {
 	public void mergeIncluir() {
 		//TESTADO - OK
 		Usuario usuario = new Usuario();
-		usuario.setCodigo(1);
+	//	usuario.setCodigoUsuario(1);
 		usuario.setNome("Roberto Sousa");
 		usuario.setRole(Role.ADMINISTRADOR);
 		usuario.setSenha("admin123");
@@ -120,13 +138,13 @@ public class UsuarioDAOTest {
 	@Ignore
 	public void deletar() {
 	//TESTADO - OK	
-		int cod = 2;
+		Long cod = 2L;
 		UsuarioDAO usuarioDAO = new UsuarioDAO();
 		Usuario udeletado = new Usuario();
 		udeletado.setNome("rer");
 		udeletado.setSenha("jjds");
 		udeletado.setRole(Role.USUARIO);
-		udeletado.setCodigo(cod);
+		udeletado.setCodigoUsuario(cod);
 		
 		usuarioDAO.excluir(udeletado);
 	}

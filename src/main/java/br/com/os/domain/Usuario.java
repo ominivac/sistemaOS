@@ -27,19 +27,22 @@ import javax.persistence.Transient;
 public class Usuario  {
 	
 	@Id
-	@SequenceGenerator(name="pk_sequence",sequenceName="entity_id_seq", allocationSize=1)
-	@Column(name = "cod_usuario", columnDefinition= "serial", unique=true, nullable=false)
-	@GeneratedValue(strategy= GenerationType.SEQUENCE ,generator="pk_sequence")
-	private Integer codigoUsuario;
+	//@SequenceGenerator(name="pk_sequence",sequenceName="entity_id_seq", allocationSize=1)
+	//@Column(name = "cod_usuario", columnDefinition= "serial", unique=true, nullable=false)
+	@Column(name = "cod_usuario", nullable=false)
+	@GeneratedValue(strategy= GenerationType.IDENTITY)
+	private Long codigoUsuario;
 
-	public Integer getCodigo() {
+	
+	
+	public Long getCodigoUsuario() {
 		return codigoUsuario;
 	}
 
-	public void setCodigo(Integer codigo) {
-		this.codigoUsuario = codigo;
+	public void setCodigoUsuario(Long codigoUsuario) {
+		this.codigoUsuario = codigoUsuario;
 	}
-	
+
 	@Column(length=100, nullable = false)
 	private String nome;
 	@Column(length=32, nullable = false)

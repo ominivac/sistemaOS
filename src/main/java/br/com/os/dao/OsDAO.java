@@ -87,7 +87,7 @@ public class OsDAO {
 				//se for item novo deve salvar
 				
 				
-				if(itemCorrente.getCodigo() == null) {
+				if(itemCorrente.getCodigoItem() == null) {
 					idao.salvar(itemCorrente);
 				}else {
 					idao.update(os.getItensOs().get(posicao) );
