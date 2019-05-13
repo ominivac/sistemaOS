@@ -20,7 +20,7 @@ import br.com.os.filter.OSFilter;
 public class OsDAOTest {
 
 	@Test
-	@Ignore
+	//@Ignore
 	public void salvar() {
 		OS os = new OS();
 		os.setDataSolicitacao(new Date() );
@@ -28,13 +28,13 @@ public class OsDAOTest {
 		
 		
 		UsuarioDAO udao = new UsuarioDAO();
-		Usuario u = udao.buscarPorCodigo(42);
+		Usuario u = udao.buscarPorCodigo(2);
 		
 		os.setUsuario(u);
 		
 		ProdutoOsDAO pdao = new ProdutoOsDAO();
-		ProdutoOS p1 = pdao.buscarPorCodigo(86);
-		ProdutoOS p2 = pdao.buscarPorCodigo(85);
+		ProdutoOS p1 = pdao.buscarPorCodigo(1);
+		ProdutoOS p2 = pdao.buscarPorCodigo(2);
 		
 		Item i1 = new Item();
 		i1.setProdutoOS(p1);
@@ -56,11 +56,12 @@ public class OsDAOTest {
 		os.setItensOs(itens);
 		
 		
-		System.out.println(os.getValorTotal() );
+		System.out.println("valor total da os INSERT" + os.getValorTotal() );
 		
 		
 		OsDAO osDAO = new OsDAO();
 		osDAO.salvar(os, itens);
+		
 		
 		
 	}
@@ -151,7 +152,7 @@ public class OsDAOTest {
 	}
 	
 	@Test
-	//@Ignore
+	@Ignore
 	public void buscarPorCodigo() {
 		//TESTADO OK
 		OsDAO osDAO = new OsDAO();

@@ -17,34 +17,31 @@ public class UsuarioDAOTest {
 	@Test
 	//@Ignore
 	public void salvar() {
-		// TESTADO  - OK
+		// TESTADO SEM ID - BANCO GERANDO AUTOINCREMENTO COM TIPO LONG - 13/05  
 		
-		Usuario usuario = new Usuario();
-		usuario.setNome("Roberto Sousa");
-		usuario.setRole(Role.ADMINISTRADOR);
-		usuario.setEmail("robertokbs@gmail.com");
-		usuario.setSenhaSemCripto("1q2w3e");
+		Usuario u1 = new Usuario();
+		u1.setNome("Roberto Sousa");
+		u1.setRole(Role.ADMINISTRADOR);
+		u1.setEmail("robertokbs@gmail.com");
+		u1.setSenhaSemCripto("1q2w3e");
 		
-		SimpleHash hash = new SimpleHash("md5", usuario.getSenhaSemCripto());
-		usuario.setSenha(hash.toHex() );
+		SimpleHash hash1 = new SimpleHash("md5", u1.getSenhaSemCripto() );
+		u1.setSenha(hash1.toHex() );
 		
-		UsuarioDAO usuarioDAO = new UsuarioDAO();
-		usuarioDAO.salvar(usuario);
+
+		Usuario u2 = new Usuario();
+		u2.setNome("admin");
+		u2.setRole(Role.ADMINISTRADOR);
+		u2.setEmail("admin@gmail.com");
+		u2.setSenhaSemCripto("admin");
 		
-		
-		/*
-		Usuario usuario = new Usuario();
-		usuario.setNome("admin");
-		usuario.setRole(Role.ADMINISTRADOR);
-		usuario.setEmail("admin@gmail.com");
-		usuario.setSenhaSemCripto("admin");
-		
-		SimpleHash hash = new SimpleHash("md5", usuario.getSenhaSemCripto());
-		usuario.setSenha(hash.toHex() );
+		SimpleHash hash2 = new SimpleHash("md5", u2.getSenhaSemCripto() );
+		u2.setSenha(hash2.toHex() );
 		
 		UsuarioDAO usuarioDAO = new UsuarioDAO();
-		usuarioDAO.salvar(usuario);
-		*/
+		usuarioDAO.salvar(u1);
+		usuarioDAO.salvar(u2);
+		
 	}
 	
 	

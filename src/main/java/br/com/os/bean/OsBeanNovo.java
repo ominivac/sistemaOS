@@ -571,7 +571,7 @@ public class OsBeanNovo implements Serializable {
 			int achou = -1;
 
 			for (int posicao = 0; posicao < itensOs.size(); posicao++) {
-				if (itensOs.get(posicao).getProdutoOS().getCodigo() == itemCrudEdit.getProdutoOS().getCodigo()) {
+				if (itensOs.get(posicao).getProdutoOS().getCodigoProduto() == itemCrudEdit.getProdutoOS().getCodigoProduto()) {
 					achou = posicao;
 				}
 			}
@@ -603,7 +603,7 @@ public class OsBeanNovo implements Serializable {
 		int achou = -1;
 
 		for (int posicao = 0; posicao < itensOs.size(); posicao++) {
-			if (itensOs.get(posicao).getProdutoOS().getCodigo() == itemCrudEdit.getProdutoOS().getCodigo()) {
+			if (itensOs.get(posicao).getProdutoOS().getCodigoProduto() == itemCrudEdit.getProdutoOS().getCodigoProduto()) {
 				achou = posicao;
 				System.out.println("achou item a ser removido");
 			}

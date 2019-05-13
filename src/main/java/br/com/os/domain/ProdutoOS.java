@@ -30,14 +30,15 @@ public class ProdutoOS implements Serializable{
 	//@SequenceGenerator(name="pk_sequence",sequenceName="entity_id_seq", allocationSize=1)
 	@Column(name = "cod_produto", columnDefinition= "serial", unique=true, nullable=false)
 	@GeneratedValue(strategy= GenerationType.IDENTITY)
-	private Integer codigoProduto;
+	private Long codigoProduto;
 
-	public Integer getCodigo() {
+	
+
+	public Long getCodigoProduto() {
 		return codigoProduto;
 	}
-
-	public void setCodigo(Integer codigo) {
-		this.codigoProduto = codigo;
+	public void setCodigoProduto(Long codigoProduto) {
+		this.codigoProduto = codigoProduto;
 	}
 
 	@Column(length = 100, nullable=false)

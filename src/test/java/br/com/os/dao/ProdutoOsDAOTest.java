@@ -15,14 +15,23 @@ public class ProdutoOsDAOTest {
 	@Test
 	@Ignore
 	public void salvar() {
-		//TESTADO - OK
-		ProdutoOS produtoOS = new ProdutoOS();
-		produtoOS.setDescricao("produto p1 teste salvar");
-		produtoOS.setAnoReferencia("2011");
-		produtoOS.setValorPorHora(new BigDecimal("56.35"));
+		//TESTADO - OK  BANCO GERANDO AUTOINCREMENTO - 13/05  
 		
 		ProdutoOsDAO pdao = new ProdutoOsDAO();
-		pdao.salvar(produtoOS);
+		
+		ProdutoOS p1 = new ProdutoOS();
+		p1.setDescricao("produto p1 ");
+		p1.setAnoReferencia("2011");
+		p1.setValorPorHora(new BigDecimal("56.35"));
+		
+		pdao.salvar(p1);
+		
+		ProdutoOS p2 = new ProdutoOS();
+		p2.setDescricao("produto p2 ");
+		p2.setAnoReferencia("2011");
+		p2.setValorPorHora(new BigDecimal("104.21"));
+		
+		pdao.salvar(p2);
 	}
 	
 	@Test
@@ -43,7 +52,7 @@ public class ProdutoOsDAOTest {
 	public void editar() {
 		// TESTADO - OK 
 		ProdutoOS produtoOS = new ProdutoOS();
-		produtoOS.setCodigo(17);
+		produtoOS.setCodigoProduto(1L);
 		produtoOS.setDescricao("produto p1 teste editado");
 		produtoOS.setAnoReferencia("2012");
 		produtoOS.setValorPorHora(new BigDecimal("156.35"));
@@ -57,10 +66,7 @@ public class ProdutoOsDAOTest {
 	public void excluir() {
 		// TESTADO - OK 
 		ProdutoOS produtoOS = new ProdutoOS();
-		produtoOS.setCodigo(17);
-		produtoOS.setDescricao("produto p1 teste editado");
-		produtoOS.setAnoReferencia("2012");
-		produtoOS.setValorPorHora(new BigDecimal("156.35"));
+		produtoOS.setCodigoProduto(1L);
 		
 		ProdutoOsDAO pdao = new ProdutoOsDAO();
 		pdao.excluir(produtoOS);;
