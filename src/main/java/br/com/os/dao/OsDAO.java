@@ -23,7 +23,7 @@ import br.com.os.util.HibernateUtil;
 
 public class OsDAO {
 
-	@Deprecated
+	//@Deprecated
 	public void salvar(OS os) {
 		Session sessao = HibernateUtil.getSessionFactory().openSession();
 		Transaction transacao =  null ;

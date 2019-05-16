@@ -1,6 +1,7 @@
 package br.com.os.dao;
 
 
+import java.math.BigDecimal;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -31,7 +32,7 @@ public class OsDAOTest {
 		Usuario u = udao.buscarPorCodigo(2);
 		
 		os.setUsuario(u);
-		
+		/*
 		ProdutoOsDAO pdao = new ProdutoOsDAO();
 		ProdutoOS p1 = pdao.buscarPorCodigo(1);
 		ProdutoOS p2 = pdao.buscarPorCodigo(2);
@@ -57,10 +58,12 @@ public class OsDAOTest {
 		
 		
 		System.out.println("valor total da os INSERT" + os.getValorTotal() );
+		*/
 		
 		
 		OsDAO osDAO = new OsDAO();
-		osDAO.salvar(os, itens);
+		//osDAO.salvar(os, itens);
+		osDAO.salvar(os);
 		
 		
 		
